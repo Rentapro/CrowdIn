@@ -1,7 +1,7 @@
 # Roadmap de Tareas - Fase 3: Portal Inversor Privado (Full-Stack)
 
-- [ ] Seguridad: Configurar `.env` oculto y conexión segura a Neon Postgres.
-- [ ] Base de Datos: Crear script de inicialización para tablas `Usuarios` e `Inversiones`.
+- [x] Seguridad: Configurar `.env` oculto y conexión segura a Neon Postgres.
+- [x] Base de Datos: Crear script de inicialización para tablas `Usuarios` e `Inversiones`.
 - [ ] Backend (API): Crear Endpoints Serverless de Login y Registro de Contratos.
 - [ ] Frontend: Crear Vista de Login.
 - [ ] Frontend: Crear Panel "Superadmin" (Creación de Inversores y Generación de Contratos PDF).
