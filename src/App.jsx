@@ -1,10 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TrendingUp, ShieldCheck, RefreshCw, ChevronRight, BarChart3, Wallet, FileText, ArrowRight, CheckCircle2 } from 'lucide-react';
+import Login from './Login';
 
 function App() {
   const tierValues = [1000000, 5000000, 10000000, 20000000, 40000000, 100000000];
   const [sliderIndex, setSliderIndex] = useState(4); // Start at 40M Elite
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
+  const [currentRoute, setCurrentRoute] = useState(window.location.hash || '#home');
+  const [currentUser, setCurrentUser] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('crowdin_user'));
+    } catch {
+      return null;
+    }
+  });
+
+  useEffect(() => {
+    const handleHashChange = () => setCurrentRoute(window.location.hash || '#home');
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  if (currentRoute === '#login') {
+    return (
+      <Login 
+        onNavigate={(route) => { window.location.hash = route; }} 
+        onLoginSuccess={(user) => { 
+          setCurrentUser(user);
+          window.location.hash = user.role === 'SUPERADMIN' ? '#admin' : '#portal';
+        }} 
+      />
+    );
+  }
+
+  if (currentRoute === '#admin' || currentRoute === '#portal') {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--sage-900)' }}>
+        <h1 style={{ color: 'white' }}>Bienvenido, {currentUser?.name || 'Inversor'}</h1>
+        <p style={{ color: 'var(--sage-300)' }}>Rol: {currentUser?.role}</p>
+        <button 
+          onClick={() => { localStorage.removeItem('crowdin_token'); localStorage.removeItem('crowdin_user'); setCurrentUser(null); window.location.hash = '#home'; }} 
+          style={{ padding: '0.8rem 1.5rem', marginTop: '2rem', borderRadius: '12px', border: 'none', cursor: 'pointer', background: 'white', fontWeight: 600 }}
+        >
+          Cerrar Sesión
+        </button>
+      </div>
+    );
+  }
 
   // TODO: Reemplaza este número cuando compres el Chip nuevo. (Formato: código de país + número, sin el '+')
   const WHATSAPP_NUMBER = "56900000000"; 
@@ -61,7 +103,7 @@ function App() {
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
           <a href="#como-funciona" style={{ textDecoration: 'none', color: 'var(--charcoal)', fontWeight: 600, display: window.innerWidth > 768 ? 'block' : 'none' }}>Cómo Funciona</a>
           <a href="#calculadora" style={{ textDecoration: 'none', color: 'var(--charcoal)', fontWeight: 600, display: window.innerWidth > 768 ? 'block' : 'none' }}>Simulador</a>
-          <button onClick={handleWhatsAppRedirect} className="btn btn-primary" style={{ padding: '0.8rem 2.5rem' }}>Portal Inversor</button>
+          <button onClick={() => { window.location.hash = '#login'; }} className="btn btn-primary" style={{ padding: '0.8rem 2.5rem' }}>Portal Inversor</button>
         </div>
       </nav>
 
