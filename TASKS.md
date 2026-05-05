@@ -2,7 +2,7 @@
 
 - [x] Seguridad: Configurar `.env` oculto y conexión segura a Neon Postgres.
 - [x] Base de Datos: Crear script de inicialización para tablas `Usuarios` e `Inversiones`.
-- [ ] Backend (API): Crear Endpoints Serverless de Login y Registro de Contratos.
+- [x] Backend (API): Crear Endpoints Serverless de Login y Registro de Contratos.
 - [ ] Frontend: Crear Vista de Login.
 - [ ] Frontend: Crear Panel "Superadmin" (Creación de Inversores y Generación de Contratos PDF).
 - [ ] Frontend: Crear Panel "Cliente" (Dashboard de rentabilidad en vivo).
