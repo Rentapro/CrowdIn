@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TrendingUp, ShieldCheck, RefreshCw, ChevronRight, BarChart3, Wallet, FileText, ArrowRight, CheckCircle2 } from 'lucide-react';
 import Login from './Login';
 import AdminPanel from './AdminPanel';
+import ClientPortal from './ClientPortal';
 
 function App() {
   const tierValues = [1000000, 5000000, 10000000, 20000000, 40000000, 100000000];
@@ -48,17 +49,15 @@ function App() {
   }
 
   if (currentRoute === '#portal') {
+    if (currentUser?.role !== 'CLIENT') {
+      window.location.hash = '#login';
+      return null;
+    }
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--sage-900)' }}>
-        <h1 style={{ color: 'white' }}>Panel del Inversor</h1>
-        <p style={{ color: 'var(--sage-300)' }}>Su dashboard de rentabilidad estará disponible pronto.</p>
-        <button 
-          onClick={() => { localStorage.removeItem('crowdin_token'); localStorage.removeItem('crowdin_user'); setCurrentUser(null); window.location.hash = '#home'; }} 
-          style={{ padding: '0.8rem 1.5rem', marginTop: '2rem', borderRadius: '12px', border: 'none', cursor: 'pointer', background: 'white', fontWeight: 600 }}
-        >
-          Cerrar Sesión
-        </button>
-      </div>
+      <ClientPortal 
+        user={currentUser} 
+        onLogout={() => { localStorage.removeItem('crowdin_token'); localStorage.removeItem('crowdin_user'); setCurrentUser(null); window.location.hash = '#home'; }} 
+      />
     );
   }
 
