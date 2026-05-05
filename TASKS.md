@@ -8,5 +8,5 @@
 - [x] Construir "Calculadora de Flujo Mensual" dinámica (JS Logic).
 - [x] Construir "Tabla Comparativa: La Realidad del Mercado".
 - [x] Construir sección "Trust Factors & Reinversión" (Respaldos legales, pagos bullet, ciclo 12/6 meses).
-- [ ] Revisión de diseño premium, micro-animaciones y responsive design.
-- [ ] Auditar limpieza (quitar basura) y realizar primer Commit/Push automático a Git.
+- [x] Revisión de diseño premium, micro-animaciones y responsive design.
+- [x] Auditar limpieza (quitar basura) y realizar primer Commit/Push automático a Git.
