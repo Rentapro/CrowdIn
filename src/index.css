@@ -1,0 +1,330 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --sage-50: #f4f7f4;
+  --sage-100: #e3ebe3;
+  --sage-500: #7a9c7e;
+  --sage-800: #2d4a31;
+  --gold-muted: #d4af37;
+  --gold-light: #f3e5ab;
+  --charcoal: #1a1a1a;
+  --charcoal-light: #333333;
+  --white: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--sage-50);
+  color: var(--charcoal);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', sans-serif;
+  color: var(--charcoal);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+/* Premium Layout & Utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section {
+  padding: 5rem 0;
+}
+
+/* Hero */
+.hero {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, var(--sage-100) 0%, var(--white) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, var(--gold-light) 0%, transparent 70%);
+  opacity: 0.4;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+}
+
+.hero-title {
+  font-size: 4rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title span {
+  color: var(--sage-800);
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--charcoal-light);
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  font-size: 1.1rem;
+}
+
+.btn-primary {
+  background-color: var(--charcoal);
+  color: var(--gold-muted);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+  background-color: #000;
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Tiers Section */
+.tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.tier-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.tier-card.elite {
+  background: var(--charcoal);
+  color: var(--white);
+  border-color: var(--gold-muted);
+}
+
+.tier-card.elite h3, .tier-card.elite .roi-value {
+  color: var(--gold-muted);
+}
+
+.tier-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--gold-muted);
+  color: var(--charcoal);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.roi-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--sage-800);
+  margin: 1rem 0;
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Calculator */
+.calculator-section {
+  background-color: var(--charcoal);
+  color: var(--white);
+  padding: 6rem 0;
+}
+
+.calc-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.calc-input-group {
+  margin-bottom: 2rem;
+}
+
+.calc-input-group label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: var(--sage-100);
+}
+
+.calc-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 8px;
+  background: var(--charcoal-light);
+  border-radius: 4px;
+  outline: none;
+}
+
+.calc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--gold-muted);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.calc-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.calc-results {
+  background: rgba(255,255,255,0.05);
+  padding: 2.5rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.result-row:last-child {
+  border-bottom: none;
+  margin-top: 1rem;
+  padding-bottom: 0;
+}
+
+.result-row.highlight .result-val {
+  color: var(--gold-muted);
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.result-val {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+/* Comparison Table */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 3rem;
+  background: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.comparison-table th, .comparison-table td {
+  padding: 1.5rem;
+  text-align: left;
+  border-bottom: 1px solid var(--sage-100);
+}
+
+.comparison-table th {
+  background: var(--sage-50);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  color: var(--charcoal);
+}
+
+.comparison-table tr:last-child td {
+  border-bottom: none;
+}
+
+.td-banco {
+  color: var(--charcoal-light);
+}
+
+.td-elite {
+  color: var(--sage-800);
+  font-weight: 600;
+  background-color: var(--sage-50);
+}
+
+/* Trust Factors */
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.trust-item {
+  text-align: center;
+  padding: 2rem;
+}
+
+.trust-icon {
+  width: 64px;
+  height: 64px;
+  background: var(--sage-100);
+  color: var(--sage-800);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .hero-title { font-size: 2.5rem; }
+  .calc-container { grid-template-columns: 1fr; gap: 2rem; }
+  .comparison-table { display: block; overflow-x: auto; }
+}
