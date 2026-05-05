@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import { TrendingUp, ShieldCheck, RefreshCw, ChevronRight, BarChart3, Wallet } from 'lucide-react';
 
 function App() {
-  const [investment, setInvestment] = useState(10000000);
+  const tierValues = [1000000, 5000000, 10000000, 20000000, 40000000, 100000000];
+  const [sliderIndex, setSliderIndex] = useState(2); // 10M
+
+  const investment = tierValues[sliderIndex];
 
   const getTier = (amount) => {
+    if (amount >= 100000000) return { roi: 0.025, name: 'Institucional' };
     if (amount >= 40000000) return { roi: 0.025, name: 'Elite' };
     if (amount >= 20000000) return { roi: 0.020, name: 'Premium' };
     if (amount >= 10000000) return { roi: 0.016, name: 'Avanzado' };
@@ -124,11 +128,11 @@ function App() {
               <label>Capital a Invertir: <span style={{color: 'var(--gold-muted)', fontWeight: 800}}>{formatCurrency(investment)}</span></label>
               <input 
                 type="range" 
-                min="1000000" 
-                max="100000000" 
-                step="1000000"
-                value={investment}
-                onChange={(e) => setInvestment(Number(e.target.value))}
+                min="0" 
+                max={tierValues.length - 1} 
+                step="1"
+                value={sliderIndex}
+                onChange={(e) => setSliderIndex(Number(e.target.value))}
                 className="calc-slider"
               />
               <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem', color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem', fontWeight: 600 }}>
@@ -185,8 +189,8 @@ function App() {
               </tr>
               <tr>
                 <td><strong>Respaldo</strong></td>
-                <td className="td-banco">Papel Financiero</td>
-                <td className="td-elite">Activos Inmobiliarios (20 Años Exp.)</td>
+                <td className="td-banco">Papel Financiero (Pagaré)</td>
+                <td className="td-elite">Garantía Accionaria Real (SpA)</td>
               </tr>
               <tr>
                 <td><strong>Flexibilidad</strong></td>
@@ -200,8 +204,8 @@ function App() {
           <div className="trust-grid">
             <div className="trust-item">
               <div className="trust-icon"><ShieldCheck size={40} /></div>
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Contratos Legales</h3>
-              <p style={{ color: 'var(--charcoal-light)', fontSize: '1rem', lineHeight: 1.6 }}>Estructura legal robusta respaldando tu capital e intereses mensualmente.</p>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Pacto de Retroventa</h3>
+              <p style={{ color: 'var(--charcoal-light)', fontSize: '1rem', lineHeight: 1.6 }}>Obtienes acciones reales de la Sociedad dueña del proyecto como garantía tangible.</p>
             </div>
             <div className="trust-item">
               <div className="trust-icon"><TrendingUp size={40} /></div>
