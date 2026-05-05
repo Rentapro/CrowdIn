@@ -4,6 +4,7 @@ import { TrendingUp, ShieldCheck, RefreshCw, ChevronRight, BarChart3, Wallet, Fi
 function App() {
   const tierValues = [1000000, 5000000, 10000000, 20000000, 40000000, 100000000];
   const [sliderIndex, setSliderIndex] = useState(4); // Start at 40M Elite
+  const [openFaqIndex, setOpenFaqIndex] = useState(null);
 
   // TODO: Reemplaza este número cuando compres el Chip nuevo. (Formato: código de país + número, sin el '+')
   const WHATSAPP_NUMBER = "56900000000"; 
@@ -310,13 +311,24 @@ function App() {
             <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 4rem)', marginTop: '1rem', color: 'var(--charcoal)' }}>Preguntas Frecuentes</h2>
           </div>
           
-          <div style={{ maxWidth: '900px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-            {faqs.map((faq, idx) => (
-              <div key={idx} style={{ background: 'var(--sage-50)', padding: '2.5rem', borderRadius: '24px', border: '1px solid var(--sage-100)' }}>
-                <h3 style={{ fontSize: '1.4rem', color: 'var(--charcoal)', marginBottom: '1rem' }}>{faq.q}</h3>
-                <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.1rem', lineHeight: 1.6 }}>{faq.a}</p>
-              </div>
-            ))}
+          <div style={{ maxWidth: '900px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            {faqs.map((faq, idx) => {
+              const isOpen = openFaqIndex === idx;
+              return (
+                <div key={idx} style={{ background: 'var(--sage-50)', borderRadius: '24px', border: '1px solid var(--sage-100)', overflow: 'hidden', transition: 'all 0.3s ease' }}>
+                  <button 
+                    onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
+                    style={{ width: '100%', padding: '2rem 2.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left' }}
+                  >
+                    <h3 style={{ fontSize: '1.3rem', color: 'var(--charcoal)', margin: 0, fontWeight: 600 }}>{faq.q}</h3>
+                    <ChevronRight size={24} style={{ color: 'var(--sage-800)', transform: isOpen ? 'rotate(90deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease', minWidth: '24px' }} />
+                  </button>
+                  <div style={{ maxHeight: isOpen ? '500px' : '0', overflow: 'hidden', transition: 'max-height 0.4s ease-in-out' }}>
+                    <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.1rem', lineHeight: 1.6, padding: '0 2.5rem 2.5rem 2.5rem', margin: 0 }}>{faq.a}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
