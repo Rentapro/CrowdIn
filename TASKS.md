@@ -1,7 +1,9 @@
-# Roadmap de Tareas - Fase 2: Motor de Operatividad y Cierre (CrowdIn)
+# Roadmap de Tareas - Fase 3: Portal Inversor Privado (Full-Stack)
 
-- [x] Lógica de Cierre: Conectar "Calculadora" y "Hero" a una API dinámica de WhatsApp Business.
-- [x] Construir sección FAQ (Preguntas Frecuentes) para blindar objeciones legales y financieras.
-- [ ] Preparación de Modal de Onboarding (Los pasos para la firma y transferencia).
-- [x] Despliegue a Producción (Hosting global rápido).
-- [ ] Vinculación de Dominio Oficial.
+- [ ] Seguridad: Configurar `.env` oculto y conexión segura a Neon Postgres.
+- [ ] Base de Datos: Crear script de inicialización para tablas `Usuarios` e `Inversiones`.
+- [ ] Backend (API): Crear Endpoints Serverless de Login y Registro de Contratos.
+- [ ] Frontend: Crear Vista de Login.
+- [ ] Frontend: Crear Panel "Superadmin" (Creación de Inversores y Generación de Contratos PDF).
+- [ ] Frontend: Crear Panel "Cliente" (Dashboard de rentabilidad en vivo).
+- [ ] Producción: Subir variables de entorno a Vercel y desplegar Full-Stack.
