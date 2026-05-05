@@ -5,6 +5,9 @@ function App() {
   const tierValues = [1000000, 5000000, 10000000, 20000000, 40000000, 100000000];
   const [sliderIndex, setSliderIndex] = useState(4); // Start at 40M Elite
 
+  // TODO: Reemplaza este número cuando compres el Chip nuevo. (Formato: código de país + número, sin el '+')
+  const WHATSAPP_NUMBER = "56900000000"; 
+
   const investment = tierValues[sliderIndex];
 
   const getTier = (amount) => {
@@ -25,6 +28,12 @@ function App() {
     return new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 }).format(val);
   };
 
+  const handleWhatsAppRedirect = () => {
+    const message = `Hola equipo CrowdIn.\nQuiero estructurar un ticket de inversión por *${formatCurrency(investment)}* (Tramo ${currentTier.name}).\nEntiendo que el flujo mensual de intereses será de *${formatCurrency(monthlyPayment)}*.\n\nSolicito información sobre los proyectos actuales y el borrador del Pacto de Retroventa.`;
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
+  };
+
   return (
     <>
       <nav className="navbar">
@@ -35,7 +44,7 @@ function App() {
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
           <a href="#como-funciona" style={{ textDecoration: 'none', color: 'var(--charcoal)', fontWeight: 600, display: window.innerWidth > 768 ? 'block' : 'none' }}>Cómo Funciona</a>
           <a href="#calculadora" style={{ textDecoration: 'none', color: 'var(--charcoal)', fontWeight: 600, display: window.innerWidth > 768 ? 'block' : 'none' }}>Simulador</a>
-          <button className="btn btn-primary" style={{ padding: '0.8rem 2.5rem' }}>Portal Inversor</button>
+          <button onClick={handleWhatsAppRedirect} className="btn btn-primary" style={{ padding: '0.8rem 2.5rem' }}>Portal Inversor</button>
         </div>
       </nav>
 
@@ -270,9 +279,34 @@ function App() {
               <span className="result-val" style={{ color: 'var(--sage-500)', fontSize: '3rem' }}>{formatCurrency(totalReturn)}</span>
             </div>
             
-            <button className="btn btn-primary" style={{ width: '100%', marginTop: '3rem', fontSize: '1.3rem', padding: '1.5rem' }}>
+            <button onClick={handleWhatsAppRedirect} className="btn btn-primary" style={{ width: '100%', marginTop: '3rem', fontSize: '1.3rem', padding: '1.5rem' }}>
               Iniciar Estructuración Legal
             </button>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ SECTION */}
+      <section className="section bg-white">
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+            <span style={{ color: 'var(--charcoal-mid)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', fontSize: '1rem' }}>Transparencia Total</span>
+            <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 4rem)', marginTop: '1rem', color: 'var(--charcoal)' }}>Preguntas Frecuentes</h2>
+          </div>
+          
+          <div style={{ maxWidth: '900px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            <div style={{ background: 'var(--sage-50)', padding: '2.5rem', borderRadius: '24px', border: '1px solid var(--sage-100)' }}>
+              <h3 style={{ fontSize: '1.4rem', color: 'var(--charcoal)', marginBottom: '1rem' }}>¿Qué pasa si el proyecto inmobiliario fracasa o se retrasa?</h3>
+              <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.1rem', lineHeight: 1.6 }}>Al firmar un Contrato de Retroventa, no eres un prestamista, eres **dueño de acciones de la Sociedad**. En el peor escenario de liquidación de la empresa, los activos inmobiliarios (propiedades) se liquidan para cubrir el patrimonio de los accionistas, blindando el capital muy por encima de un crédito común.</p>
+            </div>
+            <div style={{ background: 'var(--sage-50)', padding: '2.5rem', borderRadius: '24px', border: '1px solid var(--sage-100)' }}>
+              <h3 style={{ fontSize: '1.4rem', color: 'var(--charcoal)', marginBottom: '1rem' }}>¿El pago de impuestos recae sobre mi flujo mensual?</h3>
+              <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.1rem', lineHeight: 1.6 }}>Las estructuras se diseñan según normativa de rentas de capital mobiliario. Entregamos los certificados correspondientes en la Operación Renta anual. Es el inversor quien declara su incremento patrimonial en su global complementario.</p>
+            </div>
+            <div style={{ background: 'var(--sage-50)', padding: '2.5rem', borderRadius: '24px', border: '1px solid var(--sage-100)' }}>
+              <h3 style={{ fontSize: '1.4rem', color: 'var(--charcoal)', marginBottom: '1rem' }}>¿Puedo retirar mi capital antes del Mes 12?</h3>
+              <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.1rem', lineHeight: 1.6 }}>El ciclo mínimo de bloqueo son 12 meses, ya que los fondos se materializan en hormigón y proyectos reales de flipping. La ventana de rescate se abre exclusivamente al cumplir el ciclo anual, donde puedes solicitar el pago Bullet o renovar.</p>
+            </div>
           </div>
         </div>
       </section>
