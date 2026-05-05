@@ -10,6 +10,22 @@ function App() {
 
   const investment = tierValues[sliderIndex];
 
+  const faqs = [
+    { q: "¿Qué pasa si el proyecto inmobiliario fracasa o se retrasa?", a: "Al firmar un Contrato de Retroventa, no eres un prestamista, eres dueño de acciones de la Sociedad. En el peor escenario de liquidación, los activos inmobiliarios se liquidan para cubrir el patrimonio de los accionistas, blindando el capital muy por encima de un crédito común." },
+    { q: "¿El pago de impuestos recae sobre mi flujo mensual?", a: "Las estructuras se diseñan según normativa de rentas de capital mobiliario. Entregamos los certificados correspondientes en la Operación Renta anual. Es el inversor quien declara su incremento patrimonial en su global complementario." },
+    { q: "¿Puedo retirar mi capital antes del Mes 12?", a: "El ciclo mínimo de bloqueo son 12 meses, ya que los fondos se materializan en hormigón y proyectos reales de flipping. La ventana de rescate se abre exclusivamente al cumplir el ciclo anual, donde puedes solicitar el pago Bullet o renovar." },
+    { q: "¿En qué tipo de propiedades invierte mi capital?", a: "Nos enfocamos en operaciones de 'Flipping' (compra, remodelación y venta) en zonas de alta demanda urbana, además de desarrollo de micro-barrios privados. Invertimos en activos de rápida liquidez con tasación comercial comprobada." },
+    { q: "¿Cómo me garantizan que el proyecto realmente existe?", a: "Transparencia radical. Antes de firmar, compartimos la carpeta legal del proyecto: Rol de avalúo, escrituras de compraventa de la matriz, planos aprobados y cronograma de obra." },
+    { q: "¿Puedo ir a visitar la obra o propiedad en la que invertí?", a: "Por supuesto. Nuestros socios capitalistas (tramos Avanzado en adelante) tienen línea directa con el equipo de obra y pueden coordinar visitas técnicas para verificar el avance físico de su inversión." },
+    { q: "¿Dónde se realiza la firma legal de las acciones?", a: "Todo el proceso notarial se realiza mediante firma presencial en Notaría o a través de plataformas certificadas de Firma Electrónica Avanzada (ej. Autentia), con plena validez legal." },
+    { q: "¿El interés mensual es fijo o depende de las ventas?", a: "Es 100% fijo y contractual. A diferencia del crowdfunding de utilidades, tú no asumes el riesgo comercial de la venta final. Nosotros pagamos tu flujo mensual con nuestro capital de trabajo mientras la obra madura." },
+    { q: "¿Quién administra el dinero transferido?", a: "Los fondos ingresan directamente a la cuenta corriente institucional de la Sociedad por Acciones (SpA) que desarrolla el proyecto. No utilizamos brokers ni intermediarios que diluyan el capital." },
+    { q: "¿Existen cobros ocultos o comisiones de administración?", a: "Cero. El retorno que ves en el simulador es exactamente el flujo neto que cae en tu cuenta. CrowdIn asume los gastos operacionales, notariales y de estructuración legal." },
+    { q: "Al finalizar el Mes 12, ¿puedo reinvertir usando el interés compuesto?", a: "Esa es la estrategia institucional por excelencia. Al término del contrato, puedes optar por no retirar el pago Bullet y 'rolearlo' junto a tus ganancias hacia un nuevo proyecto, saltando a tramos de rentabilidad mayores." },
+    { q: "¿Qué ocurre si el titular de las acciones fallece?", a: "Las acciones de una SpA son un activo patrimonial heredable. Pasan directamente a la masa hereditaria legal, manteniendo sus derechos a flujo mensual y al pago Bullet intactos." },
+    { q: "¿Hay un límite máximo de inversión por persona?", a: "Los cupos por proyecto son limitados para no sobre-apalancar la operación. Sin embargo, para los tramos Institucionales ($100M+), se pueden estructurar pactos exclusivos abarcando múltiples propiedades en paralelo." }
+  ];
+
   const getTier = (amount) => {
     if (amount >= 100000000) return { roi: 0.025, name: 'Institucional' };
     if (amount >= 40000000) return { roi: 0.025, name: 'Elite' };
@@ -295,18 +311,12 @@ function App() {
           </div>
           
           <div style={{ maxWidth: '900px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-            <div style={{ background: 'var(--sage-50)', padding: '2.5rem', borderRadius: '24px', border: '1px solid var(--sage-100)' }}>
-              <h3 style={{ fontSize: '1.4rem', color: 'var(--charcoal)', marginBottom: '1rem' }}>¿Qué pasa si el proyecto inmobiliario fracasa o se retrasa?</h3>
-              <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.1rem', lineHeight: 1.6 }}>Al firmar un Contrato de Retroventa, no eres un prestamista, eres **dueño de acciones de la Sociedad**. En el peor escenario de liquidación de la empresa, los activos inmobiliarios (propiedades) se liquidan para cubrir el patrimonio de los accionistas, blindando el capital muy por encima de un crédito común.</p>
-            </div>
-            <div style={{ background: 'var(--sage-50)', padding: '2.5rem', borderRadius: '24px', border: '1px solid var(--sage-100)' }}>
-              <h3 style={{ fontSize: '1.4rem', color: 'var(--charcoal)', marginBottom: '1rem' }}>¿El pago de impuestos recae sobre mi flujo mensual?</h3>
-              <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.1rem', lineHeight: 1.6 }}>Las estructuras se diseñan según normativa de rentas de capital mobiliario. Entregamos los certificados correspondientes en la Operación Renta anual. Es el inversor quien declara su incremento patrimonial en su global complementario.</p>
-            </div>
-            <div style={{ background: 'var(--sage-50)', padding: '2.5rem', borderRadius: '24px', border: '1px solid var(--sage-100)' }}>
-              <h3 style={{ fontSize: '1.4rem', color: 'var(--charcoal)', marginBottom: '1rem' }}>¿Puedo retirar mi capital antes del Mes 12?</h3>
-              <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.1rem', lineHeight: 1.6 }}>El ciclo mínimo de bloqueo son 12 meses, ya que los fondos se materializan en hormigón y proyectos reales de flipping. La ventana de rescate se abre exclusivamente al cumplir el ciclo anual, donde puedes solicitar el pago Bullet o renovar.</p>
-            </div>
+            {faqs.map((faq, idx) => (
+              <div key={idx} style={{ background: 'var(--sage-50)', padding: '2.5rem', borderRadius: '24px', border: '1px solid var(--sage-100)' }}>
+                <h3 style={{ fontSize: '1.4rem', color: 'var(--charcoal)', marginBottom: '1rem' }}>{faq.q}</h3>
+                <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.1rem', lineHeight: 1.6 }}>{faq.a}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
