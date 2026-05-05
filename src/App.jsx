@@ -107,7 +107,7 @@ function App() {
                   <span className="mockup-value" style={{ color: 'var(--gold-muted)' }}>2.50%</span>
                 </div>
                 <div className="mockup-item" style={{ paddingTop: '3rem' }}>
-                  <span style={{ fontSize: '1.3rem', color: 'var(--white)', fontWeight: 600 }}>Pago Bullet a tu Cuenta</span>
+                  <span style={{ fontSize: '1.3rem', color: 'var(--white)', fontWeight: 600 }}>Intereses Mensuales a tu Cuenta</span>
                   <span className="mockup-value" style={{ fontSize: '2.5rem', background: 'linear-gradient(90deg, var(--gold-light), var(--gold-muted))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>$1.000.000</span>
                 </div>
               </div>
@@ -119,36 +119,45 @@ function App() {
       {/* HOW IT WORKS SECTION */}
       <section className="section bg-dark" id="como-funciona">
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '6rem' }}>
+          <div style={{ textAlign: 'center' }}>
             <span style={{ color: 'var(--gold-muted)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', fontSize: '1rem' }}>Mecanismo de Inversión</span>
-            <h2 style={{ fontSize: 'clamp(3rem, 5vw, 4rem)', marginTop: '1rem' }}>Seguridad Institucional, paso a paso</h2>
+            <h2 style={{ fontSize: 'clamp(3rem, 5vw, 4rem)', marginTop: '1rem', color: 'var(--white)' }}>Seguridad Institucional, paso a paso</h2>
           </div>
 
-          <div className="steps-grid">
-            <div className="step-card">
-              <div className="step-number">01</div>
-              <div className="step-content">
-                <FileText size={48} color="var(--sage-800)" style={{ marginBottom: '2rem' }} />
-                <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem', color: 'var(--charcoal)' }}>Compra de Acción (SpA)</h3>
-                <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.1rem' }}>Eliges el volumen de tu ticket de inversión. Inmediatamente pasas a ser accionista formal de la Sociedad dueña del activo inmobiliario. Tu capital no está en el aire, está respaldado en metros cuadrados.</p>
+          <div className="mechanism-wrapper">
+            <div className="mechanism-image">
+              <div style={{ position: 'absolute', bottom: '2.5rem', left: '2.5rem', zIndex: 2 }}>
+                <h4 style={{ color: 'var(--gold-muted)', fontSize: '1.8rem', margin: 0, fontFamily: 'Outfit' }}>Auditoría Inmobiliaria</h4>
+                <p style={{ color: 'var(--white)', opacity: 0.8, margin: 0, fontSize: '1.1rem' }}>Respaldo tangible y planos de ejecución.</p>
               </div>
             </div>
-
-            <div className="step-card">
-              <div className="step-number">02</div>
-              <div className="step-content">
-                <TrendingUp size={48} color="var(--sage-800)" style={{ marginBottom: '2rem' }} />
-                <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem', color: 'var(--charcoal)' }}>Flujo Bullet Mensual</h3>
-                <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.1rem' }}>Mientras el proyecto inmobiliario madura (remodelación o flipping), tú recibes el interés pactado mes a mes directamente en tu cuenta bancaria. Sin retenciones ni letras chicas.</p>
+            
+            <div className="steps-grid">
+              <div className="step-card">
+                <div className="step-number">01</div>
+                <div className="step-content">
+                  <FileText size={40} color="var(--sage-800)" style={{ marginBottom: '1.5rem' }} />
+                  <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--charcoal)' }}>Compra de Acción (SpA)</h3>
+                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.05rem' }}>Eliges tu volumen de capital. Pasas a ser accionista formal de la Sociedad dueña del activo inmobiliario. Tu inversión está respaldada en metros cuadrados, no en aire.</p>
+                </div>
               </div>
-            </div>
 
-            <div className="step-card">
-              <div className="step-number">03</div>
-              <div className="step-content">
-                <RefreshCw size={48} color="var(--sage-800)" style={{ marginBottom: '2rem' }} />
-                <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem', color: 'var(--charcoal)' }}>Pacto de Retroventa</h3>
-                <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.1rem' }}>Al finalizar el periodo contractual (12 meses iniciales), recompramos tu acción devolviéndote el 100% del capital inicial, o puedes optar por reinvertir y mantener el flujo activo.</p>
+              <div className="step-card">
+                <div className="step-number">02</div>
+                <div className="step-content">
+                  <TrendingUp size={40} color="var(--sage-800)" style={{ marginBottom: '1.5rem' }} />
+                  <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--charcoal)' }}>Flujo de Intereses (Mensual)</h3>
+                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.05rem' }}>Mientras el proyecto madura mediante flipping o remodelación, tú recibes el pago de intereses pactado de forma ininterrumpida directamente en tu cuenta bancaria cada 30 días.</p>
+                </div>
+              </div>
+
+              <div className="step-card">
+                <div className="step-number">03</div>
+                <div className="step-content">
+                  <RefreshCw size={40} color="var(--sage-800)" style={{ marginBottom: '1.5rem' }} />
+                  <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--charcoal)' }}>Devolución Bullet (Mes 12)</h3>
+                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.05rem' }}>Al vencimiento del contrato (Mes 12), ejecutamos el pacto de retroventa para recuperar la acción. Recibes un pago Bullet que te <strong>devuelve el 100% de tu capital inicial</strong> íntegro.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -245,19 +254,19 @@ function App() {
             </div>
             
             <div className="result-row highlight">
-              <span>Pago Bullet Mensual</span>
+              <span>Intereses (Flujo Mensual)</span>
               <span className="result-val">{formatCurrency(monthlyPayment)}</span>
             </div>
             <div className="result-row">
-              <span>Intereses Totales (12 meses)</span>
+              <span>Rendimiento Anual Proyectado</span>
               <span className="result-val" style={{ color: 'var(--white)' }}>{formatCurrency(yearlyInterests)}</span>
             </div>
             <div className="result-row">
-              <span>Retorno de Capital (Mes 12)</span>
-              <span className="result-val" style={{ color: 'var(--white)' }}>{formatCurrency(investment)}</span>
+              <span style={{ color: 'var(--gold-light)' }}>Pago Bullet del Capital (Mes 12)</span>
+              <span className="result-val" style={{ color: 'var(--gold-light)' }}>{formatCurrency(investment)}</span>
             </div>
             <div className="result-row" style={{ borderTop: '2px solid rgba(255,255,255,0.1)', paddingTop: '3rem', marginTop: '2rem' }}>
-              <span style={{ fontWeight: 600, fontSize: '1.5rem', color: 'var(--sage-100)' }}>Capital + Intereses Generados</span>
+              <span style={{ fontWeight: 600, fontSize: '1.5rem', color: 'var(--sage-100)' }}>Liquidación Total Cierre de Ciclo</span>
               <span className="result-val" style={{ color: 'var(--sage-500)', fontSize: '3rem' }}>{formatCurrency(totalReturn)}</span>
             </div>
             
