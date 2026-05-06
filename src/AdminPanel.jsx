@@ -79,26 +79,61 @@ export default function AdminPanel({ user, onLogout }) {
     printWindow.document.write(`
       <html>
         <head>
-          <title>Borrador de Contrato - ${client.name}</title>
+          <title>Contrato Legal - ${client.name}</title>
           <style>
-            body { font-family: 'Times New Roman', serif; padding: 40px; line-height: 1.6; max-width: 800px; margin: 0 auto; color: #000; }
-            h1 { text-align: center; text-transform: uppercase; font-size: 18px; margin-bottom: 40px; }
-            p { text-align: justify; margin-bottom: 20px; }
-            .signature { margin-top: 80px; display: flex; justify-content: space-between; }
-            .line { border-top: 1px solid #000; width: 250px; text-align: center; padding-top: 10px; }
+            body { font-family: 'Times New Roman', serif; padding: 40px; line-height: 1.6; max-width: 850px; margin: 0 auto; color: #000; font-size: 11pt; text-align: justify; }
+            h1 { text-align: center; text-transform: uppercase; font-size: 14pt; margin-bottom: 30px; font-weight: bold; }
+            h2 { font-size: 12pt; margin-top: 20px; margin-bottom: 10px; text-transform: uppercase; }
+            p { margin-bottom: 15px; }
+            .signature-block { margin-top: 80px; display: flex; justify-content: space-around; page-break-inside: avoid; }
+            .line { border-top: 1px solid #000; width: 250px; text-align: center; padding-top: 10px; font-weight: bold; }
+            .page-break { page-break-before: always; }
           </style>
         </head>
         <body>
-          <h1>Contrato de Promesa de Compraventa y Mandato Especial</h1>
-          <p>En Santiago de Chile, a ${new Date().toLocaleDateString('es-CL')}, entre <strong>CrowdIn SpA</strong>, en adelante "La Sociedad", y don/doña <strong>${client.name}</strong>, correo electrónico <strong>${client.email}</strong>, en adelante "El Inversor", se acuerda lo siguiente:</p>
-          <p><strong>PRIMERO:</strong> El Inversor hace entrega en este acto de la suma de <strong>$${new Intl.NumberFormat('es-CL').format(client.amount)} CLP</strong> correspondientes al Tramo <strong>${client.tier_name}</strong>.</p>
-          <p><strong>SEGUNDO:</strong> La Sociedad garantiza un retorno fijo contractual correspondiente a un ROI mensual del <strong>${client.monthly_roi * 100}%</strong>, equivalente a <strong>$${new Intl.NumberFormat('es-CL').format(client.amount * client.monthly_roi)} CLP</strong> mensuales.</p>
-          <p><strong>TERCERO:</strong> El plazo de bloqueo del capital será de 12 meses, tras lo cual se ejecutará el pago Bullet o la reestructuración del mandato.</p>
-          <div class="signature">
-            <div class="line">CrowdIn SpA<br/>Representante Legal</div>
-            <div class="line">${client.name}<br/>El Inversor</div>
+          <h1>CONTRATO DE SUSCRIPCIÓN DE ACCIONES, PACTO DE RENTABILIDAD Y OPCIÓN DE COMPRA</h1>
+          
+          <p>En Santiago de Chile, a <strong>${new Date().toLocaleDateString('es-CL')}</strong>, entre <strong>CrowdIn SpA</strong> (en adelante "La Sociedad" o "El Desarrollador"), representada legalmente por su Gerente General, y don/doña <strong>${client.name}</strong>, cédula de identidad N° _______________, correo electrónico <strong>${client.email}</strong> (en adelante "El Inversor"), se ha convenido el siguiente contrato privado:</p>
+
+          <h2>PRIMERO: Antecedentes del Capital</h2>
+          <p>La Sociedad es una empresa dedicada al desarrollo, remodelación y comercialización de activos inmobiliarios. Para la estructuración de su capital de trabajo, La Sociedad emite acciones preferentes. El Inversor manifiesta su intención de aportar liquidez al modelo de negocios a cambio de una rentabilidad fija y garantizada.</p>
+
+          <h2>SEGUNDO: Aporte y Suscripción</h2>
+          <p>Por el presente acto, El Inversor suscribe e integra a la caja de La Sociedad la suma de <strong>$${new Intl.NumberFormat('es-CL').format(client.amount)} CLP</strong> (el "Capital Aportado"), correspondiente al plan institucional <strong>Tramo ${client.tier_name}</strong>. Dicho monto será transferido a la cuenta corriente institucional de la Sociedad. Contra recepción de los fondos, la Sociedad registrará a nombre del Inversor las acciones preferentes correspondientes en el Registro de Accionistas.</p>
+
+          <h2>TERCERO: Rentabilidad Garantizada (Condiciones de Pago)</h2>
+          <p>La Sociedad garantiza contractualmente al Inversor un flujo financiero mensual fijo (ROI) del <strong>${client.monthly_roi * 100}%</strong> sobre el Capital Aportado. Esto equivale a la suma de <strong>$${new Intl.NumberFormat('es-CL').format(client.amount * client.monthly_roi)} CLP</strong> mensuales, los cuales serán depositados en la cuenta bancaria designada por El Inversor los días 5 de cada mes calendario, devengándose desde la recepción del Capital Aportado.</p>
+
+          <h2>CUARTO: Plazo de Inversión y Pago Bullet</h2>
+          <p>El horizonte de inversión y bloqueo del capital será de exactamente <strong>12 meses</strong>. Al término de este período (Mes 12), La Sociedad ejecutará el "Pago Bullet", restituyendo el Capital Aportado ($${new Intl.NumberFormat('es-CL').format(client.amount)} CLP) de forma íntegra a la cuenta del Inversor, extinguiendo su participación accionaria, salvo que las partes acuerden por escrito la reinversión ("roll-over") en un nuevo ciclo.</p>
+
+          <h2>QUINTO: Opción de Compra Unilateral y Mandato Irrevocable (Call Option)</h2>
+          <p>Para asegurar el correcto funcionamiento del modelo de crowdfunding, El Inversor no podrá retener las acciones más allá del Plazo de Inversión estipulado, dado que su participación es netamente de rentabilidad financiera y no de control societario.</p>
+          <p>En este acto, El Inversor otorga de forma irrevocable e incondicional una <strong>Opción de Compra (Call Option)</strong> a favor de La Sociedad (o del Accionista Mayoritario que esta designe) para recomprar la totalidad de sus acciones suscritas, exactamente por el mismo valor nominal del Capital Aportado.</p>
+          <p><strong>Cláusula de Ejecución Forzosa:</strong> En caso de que, cumplido el Mes 12, El Inversor se niegue o retrase injustificadamente la firma del traspaso de acciones de vuelta a La Sociedad, El Inversor otorga en este acto un <strong>Mandato Especial, Gratuito e Irrevocable</strong>, en los términos del artículo 241 del Código de Comercio, al representante legal de La Sociedad. Este mandato faculta a la Sociedad a autocontratar, firmar el traspaso de acciones en representación del Inversor, e inscribirlo en el Registro de Accionistas, bastando para ello únicamente que La Sociedad demuestre haber transferido o depositado el Capital Aportado original a la cuenta bancaria del Inversor. Una vez fondeada la cuenta, la salida del Inversor será inmediata y legalmente perfeccionada.</p>
+
+          <h2>SEXTO: Riesgo, Liquidación y Garantías</h2>
+          <p>La Sociedad declara que el pago del flujo mensual establecido en la cláusula Tercera no depende del éxito o fracaso comercial de la venta de los inmuebles, asumiendo la Sociedad dicho riesgo comercial con su propio capital patrimonial y flujo de caja matriz.</p>
+
+          <h2>SÉPTIMO: Jurisdicción y Domicilio</h2>
+          <p>Para todos los efectos legales derivados de este contrato, las partes fijan su domicilio en la comuna y ciudad de Santiago, sometiéndose a la jurisdicción de sus Tribunales Ordinarios de Justicia.</p>
+
+          <p><br/>Se firma en dos ejemplares del mismo tenor y fecha, quedando uno en poder de cada parte.</p>
+
+          <div class="signature-block">
+            <div class="line">
+              <br/>CrowdIn SpA<br/>Representante Legal<br/>RUT: ____________
+            </div>
+            <div class="line">
+              <br/>${client.name}<br/>El Inversor<br/>RUT: ____________
+            </div>
           </div>
-          <script>window.onload = function() { window.print(); }</script>
+          
+          <script>
+            window.onload = function() { 
+              setTimeout(() => window.print(), 500);
+            }
+          </script>
         </body>
       </html>
     `);
