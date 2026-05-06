@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { TrendingUp, ShieldCheck, RefreshCw, ChevronRight, BarChart3, Wallet, FileText, ArrowRight, CheckCircle2, Lock, Scale, Building2, Landmark } from 'lucide-react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import Login from './Login';
 import AdminPanel from './AdminPanel';
 import ClientPortal from './ClientPortal';
@@ -114,8 +115,28 @@ function App() {
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
   };
 
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   return (
     <>
+      <motion.div
+        style={{
+          scaleX,
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '6px',
+          background: 'var(--gold-primary)',
+          transformOrigin: '0%',
+          zIndex: 2000
+        }}
+      />
       <ParallaxBackground />
 
       <nav className="navbar" style={{ position: 'fixed', width: '100%', zIndex: 1000, background: 'rgba(244, 247, 244, 0.85)', backdropFilter: 'blur(15px)', borderBottom: '1px solid rgba(0,0,0,0.05)', padding: '1rem 2rem', display: 'flex', justifyContent: 'space-between' }}>
