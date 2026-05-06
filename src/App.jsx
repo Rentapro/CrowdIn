@@ -126,9 +126,9 @@ function App() {
     <>
       <div style={{ background: 'var(--sage-900)', color: 'rgba(255,255,255,0.7)', padding: '0.6rem 0', fontSize: '0.75rem', fontWeight: 600, position: 'fixed', top: 0, width: '100%', zIndex: 3000, borderBottom: '1px solid var(--gold-primary)', backdropFilter: 'blur(10px)' }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'center', gap: '3rem', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}><Lock size={12} color="var(--gold-primary)"/> Conexión Cifrada de Grado Militar</span>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}><ShieldCheck size={12} color="var(--gold-primary)"/> Protocolizado bajo Ley 19.913</span>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}><Activity size={12} color="var(--gold-primary)"/> Auditoría de Activos 2026 Vigente</span>
+          <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}><Lock size={12} color="var(--gold-primary)"/> Acceso Cifrado SSL 256-bit</span>
+          <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}><ShieldCheck size={12} color="var(--gold-primary)"/> Cumplimiento Normativo Ley 19.913</span>
+          <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}><Activity size={12} color="var(--gold-primary)"/> Supervisión de Activos Vigente 2026</span>
         </div>
       </div>
 
