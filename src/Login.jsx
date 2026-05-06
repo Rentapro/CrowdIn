@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Lock, Mail, ArrowRight, ArrowLeft } from 'lucide-react';
+import ParallaxBackground from './ParallaxBackground';
 
 export default function Login({ onNavigate, onLoginSuccess }) {
   const [email, setEmail] = useState('');
@@ -39,7 +40,9 @@ export default function Login({ onNavigate, onLoginSuccess }) {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--sage-50)' }}>
+    <>
+      <ParallaxBackground />
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', zIndex: 1 }}>
       <button 
         onClick={() => onNavigate('#home')}
         style={{ position: 'absolute', top: '2rem', left: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'none', border: 'none', color: 'var(--sage-700)', cursor: 'pointer', fontSize: '1rem', fontWeight: 600 }}
@@ -101,5 +104,6 @@ export default function Login({ onNavigate, onLoginSuccess }) {
         </form>
       </div>
     </div>
+    </>
   );
 }

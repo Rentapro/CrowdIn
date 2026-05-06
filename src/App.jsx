@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { TrendingUp, ShieldCheck, RefreshCw, ChevronRight, BarChart3, Wallet, FileText, ArrowRight, CheckCircle2, Lock } from 'lucide-react';
+import { TrendingUp, ShieldCheck, RefreshCw, ChevronRight, BarChart3, Wallet, FileText, ArrowRight, CheckCircle2, Lock, Scale, Building2, Landmark } from 'lucide-react';
 import Login from './Login';
 import AdminPanel from './AdminPanel';
 import ClientPortal from './ClientPortal';
+import ParallaxBackground from './ParallaxBackground';
 
 function App() {
   const tierValues = [1000000, 5000000, 10000000, 20000000, 40000000, 100000000];
@@ -115,7 +116,7 @@ function App() {
 
   return (
     <>
-      <div className="parallax-bg"></div>
+      <ParallaxBackground />
 
       <nav className="navbar" style={{ position: 'fixed', width: '100%', zIndex: 1000, background: 'rgba(244, 247, 244, 0.85)', backdropFilter: 'blur(15px)', borderBottom: '1px solid rgba(0,0,0,0.05)', padding: '1rem 2rem', display: 'flex', justifyContent: 'space-between' }}>
         <div style={{ fontFamily: 'Outfit', fontWeight: 800, fontSize: '2rem', color: 'var(--sage-800)', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
@@ -340,6 +341,34 @@ function App() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* GUARANTEES SECTION */}
+      <section className="section" style={{ background: 'var(--sage-900)' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <span style={{ color: 'var(--gold-primary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', fontSize: '1rem' }}>Auditoría y Certificación</span>
+            <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 4rem)', marginTop: '1rem', color: 'var(--white)', fontFamily: 'Outfit' }}>Garantías Legales de tu Capital</h2>
+          </div>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+            <div style={{ background: 'rgba(255,255,255,0.05)', padding: '3rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <Scale size={48} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
+              <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Pacto de Retroventa Notarial</h3>
+              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>El capital no es un préstamo. Adquieres un % de la Sociedad Inmobiliaria con obligación legal de recompra (Bullet) por nuestra parte al mes 12. Protocolizado ante Notario Público.</p>
+            </div>
+            <div style={{ background: 'rgba(255,255,255,0.05)', padding: '3rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <Landmark size={48} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
+              <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Cumplimiento UAF</h3>
+              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>Operamos bajo la normativa de la Unidad de Análisis Financiero (Ley 19.913). Todos los retornos se depositan exclusivamente a tu cuenta corriente bancaria irrevocablemente ligada a tu RUT.</p>
+            </div>
+            <div style={{ background: 'rgba(255,255,255,0.05)', padding: '3rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <Building2 size={48} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
+              <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Respaldo en Activos Reales</h3>
+              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>La sociedad holding posee terrenos, condominios en desarrollo y propiedades de flipping. Si la empresa quebrase (Tasa default 0%), los activos físicos se liquidan cubriendo tu aporte en +150%.</p>
+            </div>
           </div>
         </div>
       </section>

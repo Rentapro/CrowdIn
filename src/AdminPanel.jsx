@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Users, FileText, Plus, LogOut, CheckCircle2, ShieldAlert, DollarSign, Activity, AlertCircle, Trash2, KeyRound, ArrowRightCircle, History, X } from 'lucide-react';
+import ParallaxBackground from './ParallaxBackground';
 
 export default function AdminPanel({ user, onLogout }) {
   const [clients, setClients] = useState([]);
@@ -189,7 +190,9 @@ export default function AdminPanel({ user, onLogout }) {
   const kycPendientes = clients.filter(c => c.kyc_status !== 'VERIFIED').length;
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: 'var(--sage-50)', color: 'var(--charcoal)', padding: '2rem' }}>
+    <>
+      <ParallaxBackground />
+      <div style={{ minHeight: '100vh', color: 'var(--charcoal)', padding: '2rem', position: 'relative', zIndex: 1 }}>
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', borderBottom: '1px solid var(--sage-300)', paddingBottom: '1rem' }}>
         <div>
           <h1 style={{ margin: 0, fontSize: '2rem', color: 'var(--sage-800)' }}>Portal Institucional (Backoffice)</h1>
@@ -345,5 +348,6 @@ export default function AdminPanel({ user, onLogout }) {
       )}
 
     </div>
+    </>
   );
 }

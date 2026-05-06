@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { LogOut, TrendingUp, Wallet, Calendar, ShieldCheck, Clock, CheckCircle2, LayoutDashboard, FileText, Settings, Bell, Download, Lock, Building, History, X } from 'lucide-react';
+import ParallaxBackground from './ParallaxBackground';
 
 export default function ClientPortal({ user, onLogout }) {
   const [contracts, setContracts] = useState([]);
@@ -96,7 +97,9 @@ export default function ClientPortal({ user, onLogout }) {
   };
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--sage-50)', color: 'var(--charcoal)' }}>
+    <>
+      <ParallaxBackground />
+      <div style={{ display: 'flex', minHeight: '100vh', color: 'var(--charcoal)', position: 'relative', zIndex: 1 }}>
       
       {/* Sidebar Lateral */}
       <aside style={{ width: '280px', borderRight: '1px solid var(--sage-300)', backgroundColor: 'var(--sage-100)', display: 'flex', flexDirection: 'column' }}>
@@ -359,5 +362,6 @@ export default function ClientPortal({ user, onLogout }) {
       )}
 
     </div>
+    </>
   );
 }
