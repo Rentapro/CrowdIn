@@ -124,22 +124,13 @@ function App() {
 
   return (
     <>
-      <div style={{ background: 'var(--sage-900)', color: 'var(--white)', padding: '0.5rem 0', fontSize: '0.8rem', fontWeight: 600, overflow: 'hidden', position: 'fixed', top: 0, width: '100%', zIndex: 3000, borderBottom: '1px solid var(--gold-primary)' }}>
-        <div style={{ display: 'flex', whiteSpace: 'nowrap', animation: 'ticker 30s linear infinite' }}>
-          <span style={{ marginRight: '3rem' }}><CheckCircle2 size={12} style={{ verticalAlign: 'middle', marginRight: '5px' }} color="var(--gold-primary)"/> Pago Bullet Confirmado: $40.000.000 a Inversor #829 (Notaría Labbé)</span>
-          <span style={{ marginRight: '3rem' }}><CheckCircle2 size={12} style={{ verticalAlign: 'middle', marginRight: '5px' }} color="var(--gold-primary)"/> ROI Mensual Ejecutado: $1.250.000 a Inversor #712</span>
-          <span style={{ marginRight: '3rem' }}><CheckCircle2 size={12} style={{ verticalAlign: 'middle', marginRight: '5px' }} color="var(--gold-primary)"/> Nuevo Contrato Tramo Elite: $40M (Condominio Los Olivos)</span>
-          <span style={{ marginRight: '3rem' }}><CheckCircle2 size={12} style={{ verticalAlign: 'middle', marginRight: '5px' }} color="var(--gold-primary)"/> Pago Bullet Confirmado: $40.000.000 a Inversor #829</span>
-          <span style={{ marginRight: '3rem' }}><CheckCircle2 size={12} style={{ verticalAlign: 'middle', marginRight: '5px' }} color="var(--gold-primary)"/> ROI Mensual Ejecutado: $1.250.000 a Inversor #712</span>
+      <div style={{ background: 'var(--sage-900)', color: 'rgba(255,255,255,0.7)', padding: '0.6rem 0', fontSize: '0.75rem', fontWeight: 600, position: 'fixed', top: 0, width: '100%', zIndex: 3000, borderBottom: '1px solid var(--gold-primary)', backdropFilter: 'blur(10px)' }}>
+        <div className="container" style={{ display: 'flex', justifyContent: 'center', gap: '3rem', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+          <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}><Lock size={12} color="var(--gold-primary)"/> Conexión Cifrada de Grado Militar</span>
+          <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}><ShieldCheck size={12} color="var(--gold-primary)"/> Protocolizado bajo Ley 19.913</span>
+          <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}><Activity size={12} color="var(--gold-primary)"/> Auditoría de Activos 2026 Vigente</span>
         </div>
       </div>
-
-      <style>{`
-        @keyframes ticker {
-          0% { transform: translateX(100%); }
-          100% { transform: translateX(-100%); }
-        }
-      `}</style>
 
       <motion.div
         style={{
