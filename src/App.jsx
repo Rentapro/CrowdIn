@@ -69,8 +69,8 @@ function App() {
   const faqs = [
     { q: "¿Qué pasa si el proyecto inmobiliario fracasa o se retrasa?", a: "Al firmar un Contrato de Retroventa, no eres un prestamista, eres dueño de acciones de la Sociedad. En el peor escenario de liquidación, los activos inmobiliarios se liquidan para cubrir el patrimonio de los accionistas, blindando el capital muy por encima de un crédito común." },
     { q: "¿El pago de impuestos recae sobre mi flujo mensual?", a: "Las estructuras se diseñan según normativa de rentas de capital mobiliario. Entregamos los certificados correspondientes en la Operación Renta anual. Es el inversor quien declara su incremento patrimonial en su global complementario." },
-    { q: "¿Puedo retirar mi capital antes del Mes 12?", a: "El ciclo mínimo de bloqueo son 12 meses, ya que los fondos se materializan en hormigón y proyectos reales de flipping. La ventana de rescate se abre exclusivamente al cumplir el ciclo anual, donde puedes solicitar el pago Bullet o renovar." },
-    { q: "¿En qué tipo de propiedades invierte mi capital?", a: "Nos enfocamos en operaciones de 'Flipping' (compra, remodelación y venta) en zonas de alta demanda urbana, además de desarrollo de micro-barrios privados. Invertimos en activos de rápida liquidez con tasación comercial comprobada." },
+    { q: "¿Puedo retirar mi capital antes del Mes 12?", a: "El ciclo mínimo de bloqueo son 12 meses, ya que los fondos se materializan en hormigón, condominios y proyectos reales de flipping. La ventana de rescate se abre exclusivamente al cumplir el ciclo anual, donde puedes solicitar el pago Bullet o renovar." },
+    { q: "¿En qué tipo de propiedades invierte mi capital?", a: "Nuestro portafolio abarca tres líneas: 1) 'Flipping' de alta velocidad en zonas urbanas, 2) Compra de terrenos y desarrollo de condominios privados, y 3) Construcción de cabañas para el rubro hotelero, generando rentabilidad fija a través de arriendos." },
     { q: "¿Qué garantía tengo sobre mi inversión inicial?", a: "Tu capital ingresa a una Sociedad por Acciones (SpA) diseñada específicamente como vehículo de adquisición. Primero levantamos el capital estructurado y luego la SpA ejecuta la compra del activo inmobiliario matriz, manteniendo el capital societario blindado bajo mandato legal." },
     { q: "¿Me mantendrán informado del progreso de las obras?", a: "Sí. Durante la fase inicial de levantamiento, la operación es administrativa. Una vez adquirido el activo y comenzada la fase de obra, enviamos reportes digitales de avance a nuestros accionistas. Por seguridad y eficiencia logística, no realizamos visitas a terreno." },
     { q: "¿Dónde se realiza la firma legal de las acciones?", a: "Todo el proceso notarial se realiza mediante firma presencial en Notaría o a través de plataformas certificadas de Firma Electrónica Avanzada (ej. Autentia), con plena validez legal." },
@@ -132,7 +132,7 @@ function App() {
                 Rentabilidad Asegurada mediante <span>Activos Inmobiliarios Reales.</span>
               </h1>
               <p className="hero-subtitle">
-                Supera los instrumentos tradicionales bancarios. Invierte en operaciones de flipping inmobiliario privado con retornos de hasta 30% anual, blindado con acciones notariales.
+                Supera los instrumentos tradicionales bancarios. Invierte en operaciones de flipping, desarrollo de condominios y renta hotelera privada con retornos de hasta 30% anual, blindado con acciones notariales.
               </p>
               
               <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
@@ -228,7 +228,7 @@ function App() {
                 <div className="step-content">
                   <TrendingUp size={40} color="var(--sage-800)" style={{ marginBottom: '1.5rem' }} />
                   <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--charcoal)' }}>Flujo de Intereses (Mensual)</h3>
-                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.05rem' }}>Mientras el proyecto madura mediante flipping o remodelación, tú recibes el pago de intereses pactado de forma ininterrumpida directamente en tu cuenta bancaria cada 30 días.</p>
+                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.05rem' }}>Mientras el proyecto madura mediante flipping, desarrollo de condominios o renta hotelera, tú recibes el pago de intereses pactado de forma ininterrumpida directamente en tu cuenta bancaria cada 30 días.</p>
                 </div>
               </div>
 
@@ -444,7 +444,7 @@ function App() {
             <div className="trust-item">
               <div className="trust-icon"><RefreshCw size={50} /></div>
               <h3 style={{ fontSize: '1.8rem', marginBottom: '1.5rem' }}>Interés Compuesto Real</h3>
-              <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.1rem', lineHeight: 1.7 }}>Puedes retirar tu flujo o reinvertirlo en nuevos proyectos de flipping, escalando tu capital a velocidad de mercado privado.</p>
+              <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.1rem', lineHeight: 1.7 }}>Puedes retirar tu flujo o reinvertirlo en nuevos desarrollos, cabañas o condominios, escalando tu capital a velocidad de mercado privado.</p>
             </div>
           </div>
         </div>
