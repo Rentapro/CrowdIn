@@ -1,11 +1,16 @@
 import { useState, useEffect } from 'react';
-import { LogOut, TrendingUp, Wallet, Calendar, ShieldCheck, Clock, CheckCircle2, LayoutDashboard, FileText, Settings, Bell, Download, Lock, Building } from 'lucide-react';
+import { LogOut, TrendingUp, Wallet, Calendar, ShieldCheck, Clock, CheckCircle2, LayoutDashboard, FileText, Settings, Bell, Download, Lock, Building, History, X } from 'lucide-react';
 
 export default function ClientPortal({ user, onLogout }) {
   const [contracts, setContracts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('dashboard');
   const [showNotifications, setShowNotifications] = useState(false);
+
+  // Modal Logs
+  const [logsModalOpen, setLogsModalOpen] = useState(false);
+  const [currentLogs, setCurrentLogs] = useState([]);
+  const [logLoading, setLogLoading] = useState(false);
 
   useEffect(() => {
     const fetchDashboard = async () => {
@@ -35,6 +40,21 @@ export default function ClientPortal({ user, onLogout }) {
     const today = new Date();
     const diffDays = Math.ceil(Math.abs(endDate - today) / (1000 * 60 * 60 * 24));
     return diffDays;
+  };
+
+  const handleOpenLogs = async (contractId) => {
+    setLogsModalOpen(true);
+    setLogLoading(true);
+    setCurrentLogs([]);
+    try {
+      const res = await fetch(`/api/admin/payment-logs?contract_id=${contractId}`, {
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` }
+      });
+      const data = await res.json();
+      if (res.ok) setCurrentLogs(data);
+    } catch (err) { console.error(err); } finally {
+      setLogLoading(false);
+    }
   };
 
   const navItems = [
@@ -213,6 +233,9 @@ export default function ClientPortal({ user, onLogout }) {
                              <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#34d399' }}></div> Rentando ({contract.payments_made || 0}/12)
                            </div>
                         )}
+                        <button onClick={() => handleOpenLogs(contract.id)} style={{ background: 'transparent', border: '1px solid var(--sage-600)', color: 'var(--sage-300)', padding: '0.3rem 0.6rem', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.8rem', marginTop: '0.5rem', fontWeight: 'bold' }}>
+                          <History size={12}/> Ver Historial
+                        </button>
                       </div>
                       <div style={{ textAlign: 'right' }}>
                         <div style={{ color: 'var(--sage-400)', fontSize: '0.8rem', marginBottom: '0.3rem', fontWeight: 'bold' }}>RESCATE FINAL (BULLET)</div>
@@ -304,6 +327,36 @@ export default function ClientPortal({ user, onLogout }) {
           </>
         )}
       </main>
+
+      {logsModalOpen && (
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+          <div style={{ background: 'var(--sage-800)', border: '1px solid var(--sage-700)', padding: '2rem', borderRadius: '16px', width: '90%', maxWidth: '600px', maxHeight: '80vh', overflowY: 'auto', position: 'relative' }}>
+            <button onClick={() => setLogsModalOpen(false)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'transparent', border: 'none', color: 'var(--sage-400)', cursor: 'pointer' }}><X size={24}/></button>
+            <h3 style={{ margin: '0 0 1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><History size={24}/> Historial de Pagos Recibidos</h3>
+            
+            {logLoading ? (
+              <p style={{ color: 'var(--sage-400)', textAlign: 'center' }}>Sincronizando con libro mayor...</p>
+            ) : currentLogs.length === 0 ? (
+              <p style={{ color: 'var(--sage-400)', textAlign: 'center' }}>No has recibido pagos aún.</p>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                {currentLogs.map(log => (
+                  <div key={log.id} style={{ background: 'var(--sage-900)', padding: '1rem 1.5rem', borderRadius: '12px', border: '1px solid var(--sage-700)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div>
+                      <div style={{ color: 'var(--sage-400)', fontSize: '0.8rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>CUOTA #{log.payment_number}</div>
+                      <div style={{ color: 'white', fontWeight: 'bold' }}>{new Date(log.executed_at).toLocaleDateString('es-CL')}</div>
+                      <div style={{ color: '#34d399', fontSize: '0.8rem', marginTop: '0.2rem', display: 'flex', alignItems: 'center', gap: '0.2rem' }}><CheckCircle2 size={12}/> Transacción Confirmada</div>
+                    </div>
+                    <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#34d399' }}>
+                      +${new Intl.NumberFormat('es-CL').format(log.payment_amount)}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
     </div>
   );

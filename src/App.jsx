@@ -154,7 +154,7 @@ function App() {
                   <p>Años de Experiencia</p>
                 </div>
                 <div className="stat-item">
-                  <h4>$12M+</h4>
+                  <h4>+$500M</h4>
                   <p>Gestionados Anual</p>
                 </div>
               </div>

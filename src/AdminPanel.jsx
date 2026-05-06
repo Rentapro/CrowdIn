@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Users, FileText, Plus, LogOut, CheckCircle2, ShieldAlert, DollarSign, Activity, AlertCircle, Trash2, KeyRound, ArrowRightCircle } from 'lucide-react';
+import { Users, FileText, Plus, LogOut, CheckCircle2, ShieldAlert, DollarSign, Activity, AlertCircle, Trash2, KeyRound, ArrowRightCircle, History, X } from 'lucide-react';
 
 export default function AdminPanel({ user, onLogout }) {
   const [clients, setClients] = useState([]);
@@ -13,6 +13,11 @@ export default function AdminPanel({ user, onLogout }) {
   const [amount, setAmount] = useState(10000000);
   const [bankAccount, setBankAccount] = useState('');
   const [newCredentials, setNewCredentials] = useState(null);
+
+  // Modal Logs
+  const [logsModalOpen, setLogsModalOpen] = useState(false);
+  const [currentLogs, setCurrentLogs] = useState([]);
+  const [logLoading, setLogLoading] = useState(false);
 
   const tiers = [
     { value: 1000000, name: 'Inicio', roi: 0.015 },
@@ -106,6 +111,21 @@ export default function AdminPanel({ user, onLogout }) {
       const data = await res.json();
       if (res.ok) setNewCredentials({ email, tempPassword: data.tempPassword });
     } catch (err) { console.error(err); }
+  };
+
+  const handleOpenLogs = async (contractId) => {
+    setLogsModalOpen(true);
+    setLogLoading(true);
+    setCurrentLogs([]);
+    try {
+      const res = await fetch(`/api/admin/payment-logs?contract_id=${contractId}`, {
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` }
+      });
+      const data = await res.json();
+      if (res.ok) setCurrentLogs(data);
+    } catch (err) { console.error(err); } finally {
+      setLogLoading(false);
+    }
   };
 
   const handleDelete = async (userId, name) => {
@@ -278,6 +298,9 @@ export default function AdminPanel({ user, onLogout }) {
                   <button onClick={() => handlePrintContract(client)} style={{ background: 'transparent', border: '1px solid var(--sage-500)', color: 'white', padding: '0.5rem 1rem', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem' }}>
                     <FileText size={14} /> PDF
                   </button>
+                  <button onClick={() => handleOpenLogs(client.contract_id)} style={{ background: 'rgba(52,211,153,0.1)', border: '1px solid rgba(52,211,153,0.3)', color: '#34d399', padding: '0.5rem', borderRadius: '6px', cursor: 'pointer' }} title="Historial de Pagos">
+                    <History size={16} />
+                  </button>
                   <button onClick={() => handleResetPassword(client.user_id, client.email)} style={{ background: 'rgba(212,175,55,0.1)', border: '1px solid rgba(212,175,55,0.3)', color: '#d4af37', padding: '0.5rem', borderRadius: '6px', cursor: 'pointer' }} title="Regenerar Clave">
                     <KeyRound size={16} />
                   </button>
@@ -290,6 +313,37 @@ export default function AdminPanel({ user, onLogout }) {
           </tbody>
         </table>
       </div>
+
+      {logsModalOpen && (
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+          <div style={{ background: 'var(--sage-800)', border: '1px solid var(--sage-700)', padding: '2rem', borderRadius: '16px', width: '90%', maxWidth: '600px', maxHeight: '80vh', overflowY: 'auto', position: 'relative' }}>
+            <button onClick={() => setLogsModalOpen(false)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'transparent', border: 'none', color: 'var(--sage-400)', cursor: 'pointer' }}><X size={24}/></button>
+            <h3 style={{ margin: '0 0 1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><History size={24}/> Historial de Pagos (Auditoría)</h3>
+            
+            {logLoading ? (
+              <p style={{ color: 'var(--sage-400)', textAlign: 'center' }}>Cargando logs del sistema...</p>
+            ) : currentLogs.length === 0 ? (
+              <p style={{ color: 'var(--sage-400)', textAlign: 'center' }}>No hay registros de pagos para este contrato aún.</p>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                {currentLogs.map(log => (
+                  <div key={log.id} style={{ background: 'var(--sage-900)', padding: '1rem 1.5rem', borderRadius: '12px', border: '1px solid var(--sage-700)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div>
+                      <div style={{ color: 'var(--sage-400)', fontSize: '0.8rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>CUOTA #{log.payment_number}</div>
+                      <div style={{ color: 'white', fontWeight: 'bold' }}>{new Date(log.executed_at).toLocaleString('es-CL')}</div>
+                      <div style={{ color: 'var(--sage-500)', fontSize: '0.8rem', marginTop: '0.2rem' }}>Audit: {log.executed_by}</div>
+                    </div>
+                    <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#34d399' }}>
+                      +${new Intl.NumberFormat('es-CL').format(log.payment_amount)}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
