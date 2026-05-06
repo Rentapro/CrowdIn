@@ -6,4 +6,4 @@
 - [x] Frontend: Crear Vista de Login.
 - [x] Frontend: Crear Panel "Superadmin" (Creación de Inversores y Generación de Contratos PDF).
 - [x] Frontend: Crear Panel "Cliente" (Dashboard de rentabilidad en vivo).
-- [ ] Producción: Subir variables de entorno a Vercel y desplegar Full-Stack.
+- [x] Producción: Subir variables de entorno a Vercel y desplegar Full-Stack.
