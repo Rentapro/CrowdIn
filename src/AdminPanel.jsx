@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Users, FileText, Plus, LogOut, CheckCircle2, ShieldAlert, DollarSign, Activity, AlertCircle, Check } from 'lucide-react';
+import { Users, FileText, Plus, LogOut, CheckCircle2, ShieldAlert, DollarSign, Activity, AlertCircle, Trash2 } from 'lucide-react';
 
 export default function AdminPanel({ user, onLogout }) {
   const [clients, setClients] = useState([]);
@@ -93,45 +93,94 @@ export default function AdminPanel({ user, onLogout }) {
     } catch (err) { console.error(err); }
   };
 
+  const handleDelete = async (userId, name) => {
+    if (!window.confirm(`¿Estás 100% seguro de eliminar al inversor ${name} y destruir sus contratos? Esta acción es irreversible.`)) return;
+    try {
+      const res = await fetch('/api/admin/delete-client', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` },
+        body: JSON.stringify({ user_id: userId })
+      });
+      if (res.ok) fetchClients();
+      else alert('Error al eliminar inversor');
+    } catch (err) { console.error(err); }
+  };
+
   const handlePrintContract = (client) => {
     const printWindow = window.open('', '_blank');
     printWindow.document.write(`
       <html>
         <head>
-          <title>Contrato Legal - ${client.name}</title>
+          <title>Contrato Institucional CrowdIn - ${client.name}</title>
           <style>
-            body { font-family: 'Times New Roman', serif; padding: 40px; line-height: 1.6; max-width: 850px; margin: 0 auto; color: #000; font-size: 11pt; text-align: justify; }
-            h1 { text-align: center; text-transform: uppercase; font-size: 14pt; margin-bottom: 30px; font-weight: bold; }
-            h2 { font-size: 12pt; margin-top: 20px; margin-bottom: 10px; text-transform: uppercase; }
-            p { margin-bottom: 15px; }
-            .signature-block { margin-top: 80px; display: flex; justify-content: space-around; page-break-inside: avoid; }
-            .line { border-top: 1px solid #000; width: 250px; text-align: center; padding-top: 10px; font-weight: bold; }
+            @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
+            body { font-family: 'Merriweather', serif; padding: 50px 70px; line-height: 1.8; max-width: 900px; margin: 0 auto; color: #1a1a1a; font-size: 11pt; text-align: justify; }
+            h1 { text-align: center; text-transform: uppercase; font-size: 16pt; margin-bottom: 40px; font-weight: 700; letter-spacing: 1px; border-bottom: 2px solid #000; padding-bottom: 15px; }
+            h2 { font-size: 12pt; margin-top: 35px; margin-bottom: 15px; text-transform: uppercase; border-bottom: 1px dotted #ccc; padding-bottom: 5px; font-weight: 700; }
+            p { margin-bottom: 20px; text-indent: 20px; }
+            .signature-block { margin-top: 100px; display: flex; justify-content: space-between; page-break-inside: avoid; }
+            .line { border-top: 1px solid #000; width: 300px; text-align: center; padding-top: 10px; font-weight: 700; font-size: 10pt; line-height: 1.4; }
+            .watermark { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 100pt; color: rgba(0,0,0,0.03); z-index: -1; white-space: nowrap; font-weight: bold; }
           </style>
         </head>
         <body>
-          <h1>CONTRATO DE SUSCRIPCIÓN DE ACCIONES, PACTO DE RENTABILIDAD Y OPCIÓN DE COMPRA</h1>
-          <p>En Santiago de Chile, a <strong>${new Date().toLocaleDateString('es-CL')}</strong>, entre <strong>CrowdIn SpA</strong> (en adelante "La Sociedad" o "El Desarrollador"), y don/doña <strong>${client.name}</strong>, correo electrónico <strong>${client.email}</strong>, ${client.bank_account_info ? 'Cuenta Bancaria de Origen/Destino: <strong>'+client.bank_account_info+'</strong>' : ''} (en adelante "El Inversor"), se ha convenido lo siguiente:</p>
+          <div class="watermark">CROWDIN INSTITUCIONAL</div>
+          <h1>CONTRATO DE SUSCRIPCIÓN DE ACCIONES, PACTO DE RENTABILIDAD GARANTIZADA, OPCIÓN DE COMPRA (CALL OPTION) Y MANDATO IRREVOCABLE</h1>
+          
+          <p>En la ciudad de Santiago de Chile, a <strong>${new Date().toLocaleDateString('es-CL', { year: 'numeric', month: 'long', day: 'numeric' })}</strong>, comparecen por una parte <strong>CrowdIn SpA</strong>, sociedad anónima cerrada constituida bajo las leyes de la República de Chile, del giro de inversiones y desarrollos inmobiliarios (en adelante "La Sociedad" o "El Desarrollador"), debidamente representada por su Gerente General; y por la otra parte don/doña <strong>${client.name}</strong>, de nacionalidad chilena, estado civil _______________, profesión/oficio _______________, cédula de identidad N° _______________, domiciliado/a en _______________, correo electrónico <strong>${client.email}</strong>, ${client.bank_account_info ? 'Cuenta Bancaria Registrada (UAF): <strong>'+client.bank_account_info+'</strong>' : ''} (en adelante "El Inversor"), quienes libre y espontáneamente han convenido en celebrar el siguiente contrato, que se regirá por las cláusulas que a continuación se exponen y en silencio de ellas por la legislación chilena aplicable:</p>
 
-          <h2>PRIMERO: Aporte y Suscripción</h2>
-          <p>El Inversor suscribe e integra a la caja de La Sociedad la suma de <strong>$${new Intl.NumberFormat('es-CL').format(client.amount)} CLP</strong> ("Capital Aportado").</p>
+          <h2>PRIMERO: Naturaleza y Antecedentes Societarios</h2>
+          <p>La Sociedad es una entidad con personalidad jurídica propia, cuyo objeto principal comprende el desarrollo, remodelación, gestión y comercialización estratégica de activos inmobiliarios de alto rendimiento (Proptech). Para efectos de la estructuración de su capital de trabajo (Working Capital) y la mitigación del apalancamiento bancario tradicional, La Sociedad ha resuelto emitir series de acciones preferentes, destinadas exclusivamente a levantar fondos de inversores institucionales y privados. El Inversor, conociendo íntegramente el modelo de negocios, manifiesta su intención irrevocable de aportar liquidez a La Caja de La Sociedad, asumiendo una posición financiera (no controladora) a cambio de una rentabilidad mensual fija y contractualmente garantizada.</p>
 
-          <h2>SEGUNDO: Rentabilidad Garantizada</h2>
-          <p>La Sociedad garantiza contractualmente al Inversor un ROI del <strong>${client.monthly_roi * 100}% mensual</strong>, equivalente a <strong>$${new Intl.NumberFormat('es-CL').format(client.amount * client.monthly_roi)} CLP</strong>.</p>
+          <h2>SEGUNDO: Aporte, Suscripción de Acciones y Toma de Razón</h2>
+          <p>Por el presente acto y escritura privada, El Inversor suscribe, paga e integra materialmente a la caja de La Sociedad la suma única y total de <strong>$${new Intl.NumberFormat('es-CL').format(client.amount)} CLP</strong> (en adelante, el "Capital Aportado"). Dicho monto será transferido mediante vale vista, transferencia electrónica o depósito directo a la cuenta corriente institucional de la Sociedad. Contra la acreditación formal de la recepción íntegra de los fondos, el Gerente General de La Sociedad procederá, dentro del plazo máximo de 5 días hábiles, a emitir el certificado provisorio y registrar las acciones preferentes correspondientes a nombre del Inversor en el Registro Oficial de Accionistas de CrowdIn SpA, momento a partir del cual se perfecciona la presente suscripción.</p>
 
-          <h2>TERCERO: Restricción UAF / Lavado de Activos y Medio de Pago</h2>
-          <p><strong>CUMPLIMIENTO ESTRICTO LEY N° 19.913:</strong> Las partes acuerdan irrevocablemente que todos los flujos de rentabilidad mensual, así como la devolución del Capital Aportado (Pago Bullet), serán transferidos <strong>estricta y exclusivamente a la cuenta bancaria de origen declarada por el Inversor en los antecedentes de este contrato</strong>. Bajo ninguna circunstancia, ni aun mediando solicitud expresa del Inversor, La Sociedad aceptará o ejecutará transferencias a cuentas de terceros u otras cuentas no verificadas, con el fin de prevenir delitos de lavado de activos y financiamiento del terrorismo. Si la cuenta de origen fuere cerrada, el Inversor deberá someterse a un estricto proceso de compliance corporativo para el registro de una nueva cuenta a su nombre.</p>
+          <h2>TERCERO: Rentabilidad Preferente Garantizada (ROI Mensual)</h2>
+          <p>Como contraprestación directa por la inyección de liquidez, La Sociedad garantiza contractualmente a favor del Inversor un flujo financiero mensual fijo, inalterable y preferente (Return on Investment) del <strong>${client.monthly_roi * 100}% mensual</strong> calculado sobre el Capital Aportado. Matemáticamente, esto equivale a la suma exacta de <strong>$${new Intl.NumberFormat('es-CL').format(client.amount * client.monthly_roi)} CLP</strong> mensuales.</p>
+          <p>Los pagos se devengarán a partir del mes calendario siguiente a la recepción de los fondos, y serán depositados directamente en la cuenta bancaria designada por El Inversor, a más tardar el día 5 de cada mes. En caso de recaer el día 5 en sábado, domingo o festivo bancario, el pago se anticipará o prorrogará al día hábil inmediatamente más próximo según lo determine la política contable de La Sociedad.</p>
 
-          <h2>CUARTO: Plazo de Inversión y Pago Bullet</h2>
-          <p>El horizonte de inversión es de <strong>12 meses</strong>. Al Mes 12, La Sociedad ejecutará el "Pago Bullet", restituyendo el Capital Aportado de forma íntegra a la cuenta bancaria oficial del Inversor.</p>
+          <h2>CUARTO: Restricciones Estrictas de Cumplimiento (UAF y Lavado de Activos)</h2>
+          <p><strong>CUMPLIMIENTO NORMATIVO (LEY N° 19.913):</strong> Las partes dejan expresa constancia y acuerdan irrevocablemente que todos y cada uno de los flujos de rentabilidad mensual (ROI), así como la devolución final del Capital Aportado (Pago Bullet), serán transferidos <strong>estricta, única y exclusivamente a la cuenta bancaria de origen</strong> declarada por el Inversor en la comparecencia de este instrumento.</p>
+          <p>Bajo ninguna circunstancia, excepción, ni aun mediando solicitud expresa, formal o notarial del Inversor, La Sociedad aceptará, procesará o ejecutará transferencias a cuentas de terceros, familiares, sociedades externas u otras cuentas no verificadas por el sistema de onboarding corporativo. Lo anterior, con el fin de prevenir de manera absoluta la comisión de delitos contemplados en la Ley N° 19.913 sobre Lavado de Activos y Financiamiento del Terrorismo, así como sus reglamentos asociados. En el evento en que la cuenta de origen fuere cerrada, embargada o inhabilitada, el Inversor deberá someterse a un estricto proceso de compliance corporativo (KYC Ampliado) para el registro de una nueva cuenta, asumiendo cualquier costo legal y retraso que dicho procedimiento amerite.</p>
 
-          <h2>QUINTO: Opción de Compra Unilateral y Mandato Irrevocable (Call Option)</h2>
-          <p>El Inversor otorga de forma irrevocable e incondicional una <strong>Opción de Compra (Call Option)</strong> a favor de La Sociedad para recomprar la totalidad de sus acciones suscritas, exactamente por el mismo valor nominal. Si al Mes 12 el Inversor se niega o retrasa el traspaso, este otorga un <strong>Mandato Especial e Irrevocable (Art. 241 C. Comercio)</strong> al representante de La Sociedad para autocontratar, firmar el traspaso y perfeccionar la salida, depositando los fondos en la cuenta bancaria del Inversor.</p>
+          <h2>QUINTO: Plazo de Inversión y Pago Bullet (Rescate)</h2>
+          <p>El horizonte temporal de esta inversión, así como el período de bloqueo y goce de la rentabilidad, será de exactamente <strong>doce (12) meses calendario</strong>, contados desde la firma de este documento. Al vencimiento de este período (Mes 12), La Sociedad ejecutará el mecanismo denominado "Pago Bullet", el cual consiste en la restitución íntegra e inmediata del Capital Aportado ($${new Intl.NumberFormat('es-CL').format(client.amount)} CLP) a la cuenta bancaria del Inversor. Una vez materializado este pago, se extinguirá ipso facto toda participación accionaria, derechos económicos y políticos del Inversor en La Sociedad, procediéndose a la cancelación de sus acciones en el Registro, salvo que ambas partes acuerden por anexo escrito la reinversión total o parcial (Roll-over) en un nuevo ciclo operativo.</p>
+
+          <h2>SEXTO: Opción de Compra Unilateral y Mandato Especial Irrevocable (Call Option Institucional)</h2>
+          <p>El Inversor reconoce y acepta que su participación societaria es de naturaleza netamente financiera y transitoria, careciendo de intenciones de control o permanencia más allá del Plazo de Inversión. Por consiguiente, con el exclusivo objeto de asegurar la estrategia de salida y liquidez de La Sociedad, <strong>El Inversor otorga en este acto, de forma pura, simple, incondicional e irrevocable, una Opción de Compra (Call Option) a favor de La Sociedad</strong> o de los accionistas mayoritarios que esta libremente designe.</p>
+          <p>Esta opción faculta a La Sociedad para recomprar la totalidad de las acciones suscritas por el Inversor, pagando exactamente el mismo valor nominal del Capital Aportado originalmente, sin recargos, reajustes ni primas adicionales.</p>
+          <p><strong>Cláusula de Ejecución Forzosa:</strong> En el evento en que, cumplido el Mes 12, El Inversor se negare, dilatare injustificadamente o estuviere inubicable para firmar la escritura de traspaso de acciones de vuelta a La Sociedad, <strong>El Inversor otorga desde ya, en los términos del artículo 241 del Código de Comercio y artículo 2169 del Código Civil, un Mandato Especial, Gratuito e Irrevocable al representante legal de CrowdIn SpA.</strong> Dicho mandato le faculta expresa y extensamente para autocontratar, representar al Inversor como vendedor, suscribir los instrumentos públicos y privados de traspaso de acciones, e inscribir dicha transferencia en el Registro de Accionistas. Para que La Sociedad pueda ejercer este mandato y perfeccionar la salida forzosa del Inversor, bastará única y exclusivamente que La Sociedad acredite mediante comprobante bancario haber transferido o depositado el Capital Aportado a la cuenta bancaria registrada del Inversor, sin necesidad de autorización adicional alguna, requerimiento judicial, ni intervención de terceros.</p>
+
+          <h2>SÉPTIMO: Asignación de Riesgos y Garantía de Matriz</h2>
+          <p>La Sociedad declara expresamente que la obligación de pago del flujo mensual (cláusula Tercera) constituye un pasivo directo de la empresa. Por tanto, el pago de dichos retornos es independiente de la fluctuación del mercado inmobiliario, el éxito de la venta final de las propiedades subyacentes, o retrasos en la obtención de recepciones municipales. La Sociedad asume íntegramente el riesgo comercial y operativo de los proyectos con su propio patrimonio, flujo de caja matriz y capital de trabajo, liberando al Inversor de contingencias operativas vinculadas al desarrollo de las obras.</p>
+
+          <h2>OCTAVO: Cláusula de Confidencialidad y Secreto Industrial</h2>
+          <p>El Inversor se obliga a mantener estricta reserva y confidencialidad respecto a la información financiera, estrategias de adquisición, planos, acuerdos comerciales, márgenes de intermediación, listados de proveedores, y cualquier otro dato o documentación al que tuviere acceso en su calidad de accionista preferente. El incumplimiento de esta cláusula habilitará a La Sociedad a ejercer acciones indemnizatorias, sin perjuicio de la ejecución inmediata de la Opción de Compra (Cláusula Sexta) por grave incumplimiento del pacto social.</p>
+
+          <h2>NOVENO: Domicilio, Jurisdicción y Resolución de Conflictos</h2>
+          <p>Para todos los efectos legales, contractuales y extrajudiciales que emanen del presente instrumento, las partes fijan su domicilio comercial en la comuna y ciudad de Santiago de Chile.</p>
+          <p>Cualquier duda, dificultad, controversia o reclamo que se suscite entre las partes con ocasión del presente contrato, su ejecución, cumplimiento, interpretación o validez, será resuelta de manera exclusiva por los Tribunales Ordinarios de Justicia competentes de la ciudad de Santiago, a cuya jurisdicción las partes se someten expresamente.</p>
+          
+          <p><br/><br/>En comprobante de total conformidad, aceptación incondicional de las cláusulas procedentes y obligándose a su fiel cumplimiento, se firma el presente contrato en dos (2) ejemplares de idéntico tenor, contenido y valor legal, quedando un ejemplar en poder de cada compareciente.</p>
 
           <div class="signature-block">
-            <div class="line"><br/>CrowdIn SpA<br/>Representante Legal</div>
-            <div class="line"><br/>${client.name}<br/>El Inversor</div>
+            <div class="line">
+              CrowdIn SpA<br/>
+              Representante Legal<br/>
+              P.p. El Desarrollador
+            </div>
+            <div class="line">
+              ${client.name}<br/>
+              El Inversor<br/>
+              RUT: ____________
+            </div>
           </div>
-          <script>window.onload = function() { setTimeout(() => window.print(), 500); }</script>
+          
+          <script>
+            window.onload = function() { 
+              setTimeout(() => window.print(), 1000);
+            }
+          </script>
         </body>
       </html>
     `);
@@ -206,7 +255,7 @@ export default function AdminPanel({ user, onLogout }) {
       )}
 
       <div style={{ background: 'var(--sage-800)', borderRadius: '16px', border: '1px solid var(--sage-700)', overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '900px' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '1000px' }}>
           <thead>
             <tr style={{ background: 'var(--sage-900)' }}>
               <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-300)', fontWeight: 500, fontSize: '0.85rem' }}>INVERSOR</th>
@@ -242,9 +291,12 @@ export default function AdminPanel({ user, onLogout }) {
                     <button onClick={() => handleAddPayment(client.contract_id)} disabled={(client.payments_made || 0) >= 12} style={{ background: 'var(--sage-700)', border: 'none', color: 'white', padding: '0.3rem 0.5rem', borderRadius: '4px', cursor: 'pointer', marginLeft: '0.5rem' }}>+1</button>
                   </div>
                 </td>
-                <td style={{ padding: '1rem 1.5rem', display: 'flex', gap: '0.5rem' }}>
+                <td style={{ padding: '1rem 1.5rem', display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                   <button onClick={() => handlePrintContract(client)} style={{ background: 'transparent', border: '1px solid var(--sage-500)', color: 'white', padding: '0.5rem 1rem', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem' }}>
                     <FileText size={14} /> PDF
+                  </button>
+                  <button onClick={() => handleDelete(client.user_id, client.name)} style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', color: '#fca5a5', padding: '0.5rem', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }} title="Eliminar Inversor">
+                    <Trash2 size={16} />
                   </button>
                 </td>
               </tr>
