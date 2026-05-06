@@ -176,11 +176,11 @@ function App() {
               <div style={{ display: 'inline-block', padding: '0.5rem 1.5rem', background: 'rgba(212, 175, 55, 0.1)', color: 'var(--gold-primary)', border: '1px solid rgba(212,175,55,0.2)', borderRadius: '50px', fontWeight: 800, marginBottom: '2rem', letterSpacing: '1px', textTransform: 'uppercase' }}>
                 <Lock size={14} style={{ display: 'inline', marginRight: '5px' }}/> Wealth Management
               </div>
-              <h1 className="hero-title">
-                Rentabilidad Asegurada en <span style={{ color: 'var(--gold-primary)' }}>Condominios Privados.</span>
+              <h1 className="hero-title" style={{ lineHeight: 1.1 }}>
+                Inversión en Casas con <span style={{ color: 'var(--gold-primary)' }}>Renta Fija Mensual.</span>
               </h1>
-              <p className="hero-subtitle" style={{ color: 'var(--charcoal-mid)' }}>
-                Supera los instrumentos bancarios. Invierte en el desarrollo de condominios de casas y renta hotelera con retornos de hasta 30% anual, blindado mediante Pacto de Retroventa Notarial.
+              <p className="hero-subtitle" style={{ color: 'var(--charcoal-mid)', fontSize: '1.4rem' }}>
+                Invierte en el desarrollo de condominios, recibe <strong>intereses mes a mes</strong> en tu cuenta y recupera el 100% de tu capital al mes 12. Blindado por Notaría.
               </p>
               
               <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', marginTop: '2rem' }}>
@@ -245,6 +245,48 @@ function App() {
               </div>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* TRUST BADGES SECTION */}
+      <section style={{ background: 'rgba(255,255,255,0.3)', padding: '2rem 0', borderTop: '1px solid rgba(0,0,0,0.05)', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
+        <div className="container">
+          <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap', gap: '2rem', opacity: 0.6, filter: 'grayscale(1)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--sage-800)' }}><Landmark size={24}/> TRANSACCIONES BCI / SANTANDER</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--sage-800)' }}><ShieldCheck size={24}/> PROTOCOLIZADO ANTE NOTARIO</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--sage-800)' }}><Activity size={24}/> CUMPLIMIENTO UAF CHILE</div>
+          </div>
+        </div>
+      </section>
+
+      {/* BUSINESS MODEL SECTION (CLARITY FOCUS) */}
+      <section id="modelo" style={{ padding: '8rem 0', background: 'white' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+            <h2 style={{ fontSize: '3rem', color: 'var(--sage-800)', fontFamily: 'Outfit', marginBottom: '1.5rem' }}>¿Cómo funciona el negocio?</h2>
+            <p style={{ fontSize: '1.2rem', color: 'var(--charcoal-mid)', maxWidth: '800px', margin: '0 auto' }}>Nuestro modelo es simple: Tú aportas la liquidez, nosotros construimos y operamos, y las utilidades se dividen mensualmente.</p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem', position: 'relative' }}>
+            {/* Steps with arrows logic (simplified with grid) */}
+            <div style={{ background: 'var(--sage-50)', padding: '3rem', borderRadius: '32px', border: '1px solid var(--sage-100)', textAlign: 'center' }}>
+              <div style={{ background: 'var(--gold-primary)', color: 'white', width: '60px', height: '60px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem auto', fontSize: '1.5rem', fontWeight: 800 }}>1</div>
+              <h3 style={{ color: 'var(--sage-800)', marginBottom: '1rem' }}>Aporte de Capital</h3>
+              <p style={{ color: 'var(--charcoal-mid)', lineHeight: 1.6 }}>Te conviertes en accionista de la SpA que es dueña del terreno y las casas. Tu dinero está respaldado por activos reales, no por papel.</p>
+            </div>
+            
+            <div style={{ background: 'var(--sage-50)', padding: '3rem', borderRadius: '32px', border: '1px solid var(--sage-100)', textAlign: 'center' }}>
+              <div style={{ background: 'var(--gold-primary)', color: 'white', width: '60px', height: '60px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem auto', fontSize: '1.5rem', fontWeight: 800 }}>2</div>
+              <h3 style={{ color: 'var(--sage-800)', marginBottom: '1rem' }}>Generación de Rentas</h3>
+              <p style={{ color: 'var(--charcoal-mid)', lineHeight: 1.6 }}>Las casas se construyen y se venden o arriendan. Ese flujo de caja se traduce en tu pago mensual del 1.5% al 2.5% de interés.</p>
+            </div>
+
+            <div style={{ background: 'var(--sage-50)', padding: '3rem', borderRadius: '32px', border: '1px solid var(--sage-100)', textAlign: 'center' }}>
+              <div style={{ background: 'var(--gold-primary)', color: 'white', width: '60px', height: '60px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem auto', fontSize: '1.5rem', fontWeight: 800 }}>3</div>
+              <h3 style={{ color: 'var(--sage-800)', marginBottom: '1rem' }}>Retiro con Garantía</h3>
+              <p style={{ color: 'var(--charcoal-mid)', lineHeight: 1.6 }}>A los 12 meses, por contrato notarial obligatorio (Pacto de Retroventa), te compramos tus acciones y recuperas tu inversión inicial completa.</p>
+            </div>
           </div>
         </div>
       </section>
