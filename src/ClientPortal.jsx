@@ -130,14 +130,15 @@ export default function ClientPortal({ user, onLogout }) {
           </nav>
         </div>
 
-        <div style={{ padding: '2rem', borderTop: '1px solid var(--sage-300)' }}>
+        <div style={{ padding: '2rem 1.5rem', borderBottom: '1px solid var(--sage-300)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-            <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: 'var(--sage-300)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.2rem', color: 'var(--sage-800)' }}>
-              {user.name.charAt(0).toUpperCase()}
-            </div>
+            <div style={{ width: '45px', height: '45px', background: 'var(--sage-800)', color: 'white', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.2rem' }}>{user.name[0]}</div>
             <div>
-              <p style={{ margin: 0, fontWeight: 'bold', fontSize: '0.9rem', color: 'var(--charcoal)' }}>{user.name}</p>
-              <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--charcoal-mid)' }}>Inversor Registrado</p>
+              <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--sage-800)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '160px' }}>{user.name}</div>
+              <div style={{ fontSize: '0.75rem', color: user.kyc_status === 'VERIFIED' ? 'var(--success)' : '#b45309', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 'bold' }}>
+                {user.kyc_status === 'VERIFIED' ? <CheckCircle2 size={12}/> : <ShieldAlert size={12}/>}
+                {user.kyc_status === 'VERIFIED' ? 'INVERSOR VERIFICADO' : 'KYC PENDIENTE'}
+              </div>
             </div>
           </div>
           <button onClick={onLogout} style={{ width: '100%', background: 'white', border: '1px solid var(--sage-300)', color: 'var(--sage-800)', padding: '0.8rem', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', fontWeight: 600 }}>
@@ -312,8 +313,27 @@ export default function ClientPortal({ user, onLogout }) {
             {activeTab === 'settings' && (
               <div style={{ animation: 'fadeIn 0.5s ease-in-out' }}>
                 <div style={{ background: 'white', padding: '3rem', borderRadius: '24px', border: '1px solid var(--sage-300)', maxWidth: '800px', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
-                  <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '0 0 2rem 0', color: 'var(--sage-800)' }}><Lock size={24} color="var(--gold-primary)"/> Protocolos de Seguridad UAF</h3>
+                  <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '0 0 2rem 0', color: 'var(--sage-800)' }}><Lock size={24} color="var(--gold-primary)"/> Protocolos de Seguridad y KYC</h3>
                   
+                  {user.kyc_status !== 'VERIFIED' && (
+                    <div style={{ background: '#fffbeb', border: '1px solid #fef3c7', padding: '2rem', borderRadius: '16px', marginBottom: '2rem' }}>
+                      <h4 style={{ margin: '0 0 1rem 0', color: '#b45309', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><ShieldAlert size={20}/> Validación de Identidad Requerida</h4>
+                      <p style={{ color: '#92400e', fontSize: '0.9rem', lineHeight: '1.6', marginBottom: '1.5rem' }}>Para procesar los pagos de rentabilidad del próximo ciclo, nuestro oficial de cumplimiento (Compliance) debe validar tu identidad digital. Por favor sube una foto de tu Cédula de Identidad (Ambos lados).</p>
+                      
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                        <div style={{ background: 'white', padding: '1.5rem', borderRadius: '12px', border: '2px dashed #d1d5db', textAlign: 'center', cursor: 'pointer' }}>
+                          <Download size={24} style={{ color: '#d1d5db', marginBottom: '0.5rem', transform: 'rotate(180deg)' }}/>
+                          <div style={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#6b7280' }}>ANVERSO (RUT)</div>
+                        </div>
+                        <div style={{ background: 'white', padding: '1.5rem', borderRadius: '12px', border: '2px dashed #d1d5db', textAlign: 'center', cursor: 'pointer' }}>
+                          <Download size={24} style={{ color: '#d1d5db', marginBottom: '0.5rem', transform: 'rotate(180deg)' }}/>
+                          <div style={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#6b7280' }}>REVERSO (RUT)</div>
+                        </div>
+                      </div>
+                      <button style={{ width: '100%', marginTop: '1.5rem', background: '#b45309', color: 'white', border: 'none', padding: '1rem', borderRadius: '12px', fontWeight: 'bold', cursor: 'pointer' }}>Enviar para Validación Notarial</button>
+                    </div>
+                  )}
+
                   <div style={{ background: 'var(--sage-50)', padding: '2rem', borderRadius: '16px', border: '1px dashed var(--danger)', marginBottom: '2rem' }}>
                     <h4 style={{ margin: '0 0 1rem 0', color: 'var(--danger)' }}>Cuenta Bancaria Irrevocable</h4>
                     <p style={{ color: 'var(--charcoal-mid)', fontSize: '0.9rem', lineHeight: '1.6' }}>En cumplimiento de la Ley N° 19.913 sobre Lavado de Activos, todos tus retornos (ROI) y tu capital final solo podrán ser transferidos a tu cuenta bancaria de origen registrada. No se admiten transferencias a terceros.</p>

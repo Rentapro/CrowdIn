@@ -253,7 +253,7 @@ function App() {
       <section style={{ background: 'rgba(255,255,255,0.3)', padding: '2rem 0', borderTop: '1px solid rgba(0,0,0,0.05)', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
         <div className="container">
           <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap', gap: '2rem', opacity: 0.6, filter: 'grayscale(1)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--sage-800)' }}><Landmark size={24}/> TRANSACCIONES BCI / SANTANDER</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--sage-800)' }}><Landmark size={24}/> BANCA NACIONAL INTEGRADA</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--sage-800)' }}><ShieldCheck size={24}/> PROTOCOLIZADO ANTE NOTARIO</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--sage-800)' }}><Activity size={24}/> CUMPLIMIENTO UAF CHILE</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--gold-primary)', background: 'rgba(212,175,55,0.1)', padding: '0.5rem 1rem', borderRadius: '12px' }}><Lock size={20}/> KYC OBLIGATORIO</div>
