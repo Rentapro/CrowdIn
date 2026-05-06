@@ -43,7 +43,7 @@ function App() {
     return (
       <AdminPanel 
         user={currentUser} 
-        onLogout={() => { localStorage.removeItem('crowdin_token'); localStorage.removeItem('crowdin_user'); setCurrentUser(null); window.location.hash = '#home'; }} 
+        onLogout={() => { localStorage.removeItem('crowdin_token'); localStorage.removeItem('crowdin_user'); setCurrentUser(null); window.location.href = '/'; }} 
       />
     );
   }
@@ -56,7 +56,7 @@ function App() {
     return (
       <ClientPortal 
         user={currentUser} 
-        onLogout={() => { localStorage.removeItem('crowdin_token'); localStorage.removeItem('crowdin_user'); setCurrentUser(null); window.location.hash = '#home'; }} 
+        onLogout={() => { localStorage.removeItem('crowdin_token'); localStorage.removeItem('crowdin_user'); setCurrentUser(null); window.location.href = '/'; }} 
       />
     );
   }
