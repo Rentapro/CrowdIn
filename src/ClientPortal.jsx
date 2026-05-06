@@ -195,24 +195,34 @@ export default function ClientPortal({ user, onLogout }) {
                 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                   {contracts.map(contract => (
-                    <div key={contract.id} style={{ background: 'var(--sage-800)', padding: '2rem', borderRadius: '16px', border: '1px solid var(--sage-700)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem' }}>
+                    <div key={contract.id} style={{ background: 'var(--sage-800)', padding: '2rem', borderRadius: '16px', border: '1px solid var(--sage-700)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem', opacity: contract.status === 'LIQUIDATED' ? 0.6 : 1 }}>
                       <div>
                         <div style={{ color: 'var(--sage-400)', fontSize: '0.8rem', marginBottom: '0.3rem', fontWeight: 'bold' }}>TRAMO INSTITUCIONAL</div>
-                        <div style={{ fontSize: '1.4rem', fontWeight: 'bold', color: 'white' }}>{contract.tier_name} <span style={{fontSize: '0.9rem', color: '#34d399'}}>({contract.monthly_roi * 100}%)</span></div>
+                        <div style={{ fontSize: '1.4rem', fontWeight: 'bold', color: 'white' }}>{contract.tier_name} <span style={{fontSize: '0.9rem', color: contract.status === 'LIQUIDATED' ? 'var(--sage-400)' : '#34d399'}}>({contract.monthly_roi * 100}%)</span></div>
                       </div>
                       <div>
                         <div style={{ color: 'var(--sage-400)', fontSize: '0.8rem', marginBottom: '0.3rem', fontWeight: 'bold' }}>APORTE INICIAL</div>
-                        <div style={{ fontSize: '1.2rem', fontWeight: 600, fontFamily: 'monospace' }}>${new Intl.NumberFormat('es-CL').format(contract.amount)}</div>
+                        <div style={{ fontSize: '1.2rem', fontWeight: 600, fontFamily: 'monospace', textDecoration: contract.status === 'LIQUIDATED' ? 'line-through' : 'none' }}>${new Intl.NumberFormat('es-CL').format(contract.amount)}</div>
                       </div>
                       <div>
-                        <div style={{ color: 'var(--sage-400)', fontSize: '0.8rem', marginBottom: '0.3rem', fontWeight: 'bold' }}>CUOTAS ABONADAS</div>
-                        <div style={{ fontSize: '1.2rem', fontWeight: 600, color: 'white' }}>{contract.payments_made || 0} de 12</div>
+                        <div style={{ color: 'var(--sage-400)', fontSize: '0.8rem', marginBottom: '0.3rem', fontWeight: 'bold' }}>ESTADO</div>
+                        {contract.status === 'LIQUIDATED' ? (
+                           <div style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', padding: '0.4rem 1rem', borderRadius: '8px', fontWeight: 600, fontSize: '0.9rem', display: 'inline-block' }}>Liquidado / Devuelto</div>
+                        ) : (
+                           <div style={{ background: 'rgba(52, 211, 153, 0.1)', color: '#34d399', padding: '0.4rem 1rem', borderRadius: '8px', fontWeight: 600, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                             <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#34d399' }}></div> Rentando ({contract.payments_made || 0}/12)
+                           </div>
+                        )}
                       </div>
                       <div style={{ textAlign: 'right' }}>
                         <div style={{ color: 'var(--sage-400)', fontSize: '0.8rem', marginBottom: '0.3rem', fontWeight: 'bold' }}>RESCATE FINAL (BULLET)</div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#d4af37', fontWeight: 'bold', background: 'rgba(212, 175, 55, 0.1)', padding: '0.5rem 1rem', borderRadius: '8px' }}>
-                          <Clock size={16} /> En {calculateDaysLeft(contract.created_at)} días
-                        </div>
+                        {contract.status === 'LIQUIDATED' ? (
+                          <div style={{ color: 'var(--sage-400)', fontWeight: 'bold' }}>Ejecutado Satisfactoriamente</div>
+                        ) : (
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#d4af37', fontWeight: 'bold', background: 'rgba(212, 175, 55, 0.1)', padding: '0.5rem 1rem', borderRadius: '8px' }}>
+                            <Clock size={16} /> En {calculateDaysLeft(contract.created_at)} días
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))}
