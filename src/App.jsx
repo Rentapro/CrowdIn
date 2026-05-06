@@ -184,7 +184,7 @@ function App() {
               </div>
 
               <div className="stats-bar" style={{ borderColor: 'rgba(0,0,0,0.1)' }}>
-                <div className="stat-item"><h4 style={{ color: 'var(--sage-800)' }}>0%</h4><p style={{ color: 'var(--charcoal-mid)' }}>Tasa de Default</p></div>
+                <div className="stat-item"><h4 style={{ color: 'var(--sage-800)' }}>0%</h4><p style={{ color: 'var(--charcoal-mid)' }}>Default Histórico</p></div>
                 <div className="stat-item"><h4 style={{ color: 'var(--sage-800)' }}>20+</h4><p style={{ color: 'var(--charcoal-mid)' }}>Años Experiencia</p></div>
                 <div className="stat-item"><h4 style={{ color: 'var(--gold-primary)' }}>+$500M</h4><p style={{ color: 'var(--charcoal-mid)' }}>Gestionados Anual</p></div>
               </div>
@@ -421,8 +421,8 @@ function App() {
       <section className="section" style={{ background: 'var(--sage-900)' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <span style={{ color: 'var(--gold-primary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', fontSize: '1rem' }}>Auditoría y Certificación</span>
-            <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 4rem)', marginTop: '1rem', color: 'var(--white)', fontFamily: 'Outfit' }}>Garantías Legales de tu Capital</h2>
+            <span style={{ color: 'var(--gold-primary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', fontSize: '1rem' }}>Seguridad y Cumplimiento</span>
+            <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 4rem)', marginTop: '1rem', color: 'var(--white)', fontFamily: 'Outfit' }}>Blindaje Jurídico de tu Capital</h2>
           </div>
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
@@ -438,8 +438,8 @@ function App() {
             </div>
             <div style={{ background: 'rgba(255,255,255,0.05)', padding: '3rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
               <Building2 size={48} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-              <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Respaldo en Activos Reales</h3>
-              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>La sociedad holding posee terrenos, condominios en desarrollo y propiedades de flipping. Si la empresa quebrase (Tasa default 0%), los activos físicos se liquidan cubriendo tu aporte en +150%.</p>
+              <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Respaldo en Activos Físicos</h3>
+              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>La sociedad posee terrenos y condominios. En caso de cese de operaciones, los activos inmobiliarios se liquidan prioritariamente para cubrir el capital aportado por los accionistas, según estatutos.</p>
             </div>
           </div>
         </div>
