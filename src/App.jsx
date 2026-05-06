@@ -256,6 +256,7 @@ function App() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--sage-800)' }}><Landmark size={24}/> TRANSACCIONES BCI / SANTANDER</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--sage-800)' }}><ShieldCheck size={24}/> PROTOCOLIZADO ANTE NOTARIO</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--sage-800)' }}><Activity size={24}/> CUMPLIMIENTO UAF CHILE</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--gold-primary)', background: 'rgba(212,175,55,0.1)', padding: '0.5rem 1rem', borderRadius: '12px' }}><Lock size={20}/> KYC OBLIGATORIO</div>
           </div>
         </div>
       </section>
@@ -354,7 +355,7 @@ function App() {
                 onChange={(e) => setSliderIndex(Number(e.target.value))}
                 className="calc-slider"
               />
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1.5rem', color: 'rgba(255,255,255,0.5)', fontSize: '1.1rem', fontWeight: 600 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1.5rem', color: 'var(--charcoal-mid)', fontSize: '1.1rem', fontWeight: 600 }}>
                 <span>Tramo 1 ($1M)</span>
                 <span>Institucional ($100M+)</span>
               </div>
