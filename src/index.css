@@ -1,12 +1,19 @@
 :root {
-  --black: #050505;
-  --dark-gray: #111111;
-  --mid-gray: #222222;
+  --sage-50: #f4f7f4;
+  --sage-100: #e3ebe3;
+  --sage-300: #c1d2c1;
+  --sage-500: #8ba78b;
+  --sage-700: #556c55;
+  --sage-800: #2d3b2d;
+  --sage-900: #1a251a;
+  
   --gold-primary: #D4AF37;
   --gold-light: #F3E5AB;
-  --gold-dark: #997A00;
-  --white: #FFFFFF;
-  --text-muted: rgba(255, 255, 255, 0.6);
+  
+  --charcoal: #1c1c1c;
+  --charcoal-mid: #4a4a4a;
+  --white: #ffffff;
+  
   --success: #10b981;
   --danger: #ef4444;
 }
@@ -14,8 +21,8 @@
 body {
   margin: 0;
   font-family: 'Inter', -apple-system, sans-serif;
-  background-color: var(--black);
-  color: var(--white);
+  background-color: var(--sage-50);
+  color: var(--charcoal);
   overflow-x: hidden;
 }
 
@@ -23,7 +30,7 @@ body {
   box-sizing: border-box;
 }
 
-/* Parallax Scrolling Background */
+/* Parallax Scrolling Background (Pastel/Light Version) */
 .parallax-bg {
   position: fixed;
   top: 0;
@@ -31,11 +38,11 @@ body {
   width: 100vw;
   height: 100vh;
   z-index: -1;
-  background-image: linear-gradient(to bottom, rgba(5,5,5,0.8), rgba(5,5,5,0.95)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop');
+  background-image: linear-gradient(to bottom, rgba(244, 247, 244, 0.8), rgba(227, 235, 227, 0.9)), url('https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2069&auto=format&fit=crop');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 .container {
@@ -51,10 +58,11 @@ body {
 }
 
 .glass-panel {
-  background: rgba(17, 17, 17, 0.7);
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
 .btn {
@@ -70,12 +78,12 @@ body {
 }
 
 .btn-primary {
-  background: var(--gold-primary);
-  color: var(--black);
+  background: var(--sage-800);
+  color: var(--white);
 }
 
 .btn-primary:hover {
-  background: var(--gold-light);
+  background: var(--sage-700);
   transform: translateY(-2px);
 }
 
@@ -104,7 +112,7 @@ body {
 .hero-title {
   font-size: clamp(3rem, 5vw, 4.5rem);
   line-height: 1.1;
-  color: var(--white);
+  color: var(--sage-800);
   font-family: 'Outfit', sans-serif;
   margin-bottom: 1.5rem;
 }
@@ -115,7 +123,7 @@ body {
 
 .hero-subtitle {
   font-size: 1.2rem;
-  color: var(--text-muted);
+  color: var(--charcoal-mid);
   line-height: 1.6;
   margin-bottom: 2.5rem;
 }
@@ -124,19 +132,19 @@ body {
   display: flex;
   gap: 3rem;
   margin-top: 4rem;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(0,0,0,0.1);
   padding-top: 2rem;
 }
 
 .stat-item h4 {
   font-size: 2rem;
-  color: var(--white);
+  color: var(--sage-800);
   margin: 0;
   font-family: 'Outfit', sans-serif;
 }
 
 .stat-item p {
-  color: var(--text-muted);
+  color: var(--charcoal-mid);
   margin: 0.5rem 0 0 0;
   font-size: 0.9rem;
 }
@@ -163,14 +171,14 @@ body {
   display: block;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: var(--text-muted);
+  color: var(--charcoal-mid);
 }
 
 .calc-slider {
   width: 100%;
   -webkit-appearance: none;
   height: 8px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.1);
   border-radius: 4px;
   outline: none;
 }
@@ -190,11 +198,12 @@ body {
 }
 
 .calc-results {
-  background: rgba(17,17,17,0.8);
+  background: rgba(255,255,255,0.8);
   backdrop-filter: blur(20px);
   padding: 3rem;
   border-radius: 24px;
   border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
 }
 
 .result-row {
@@ -202,7 +211,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
 .result-row:last-child {
@@ -212,7 +221,7 @@ body {
 .result-val {
   font-weight: 700;
   font-size: 1.2rem;
-  color: var(--white);
+  color: var(--sage-800);
 }
 
 .result-row.highlight .result-val {
@@ -232,23 +241,24 @@ body {
 }
 
 .step-card {
-  background: rgba(17,17,17,0.6);
+  background: rgba(255,255,255,0.6);
   backdrop-filter: blur(10px);
   padding: 3rem;
   border-radius: 24px;
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.4);
   transition: transform 0.3s ease;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.03);
 }
 
 .step-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(212, 175, 55, 0.3);
+  border-color: var(--sage-300);
 }
 
 .step-number {
   font-size: 3rem;
   font-weight: 800;
-  color: rgba(255,255,255,0.05);
+  color: rgba(0,0,0,0.03);
   position: absolute;
   top: 1rem;
   right: 2rem;

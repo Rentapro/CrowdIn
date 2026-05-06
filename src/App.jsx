@@ -117,14 +117,14 @@ function App() {
     <>
       <div className="parallax-bg"></div>
 
-      <nav className="navbar" style={{ position: 'fixed', width: '100%', zIndex: 1000, background: 'rgba(5, 5, 5, 0.8)', backdropFilter: 'blur(15px)', borderBottom: '1px solid rgba(255,255,255,0.05)', padding: '1rem 2rem', display: 'flex', justifyContent: 'space-between' }}>
-        <div style={{ fontFamily: 'Outfit', fontWeight: 800, fontSize: '2rem', color: 'white', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+      <nav className="navbar" style={{ position: 'fixed', width: '100%', zIndex: 1000, background: 'rgba(244, 247, 244, 0.85)', backdropFilter: 'blur(15px)', borderBottom: '1px solid rgba(0,0,0,0.05)', padding: '1rem 2rem', display: 'flex', justifyContent: 'space-between' }}>
+        <div style={{ fontFamily: 'Outfit', fontWeight: 800, fontSize: '2rem', color: 'var(--sage-800)', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
           <img src="/logo.png" alt="CrowdIn Logo" style={{ width: '40px', height: '40px', borderRadius: '8px' }} />
           CrowdIn<span style={{ color: 'var(--gold-primary)' }}>.</span>
         </div>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a href="#como-funciona" style={{ textDecoration: 'none', color: 'var(--text-muted)', fontWeight: 600, display: window.innerWidth > 768 ? 'block' : 'none' }}>Mecanismo</a>
-          <a href="#calculadora" style={{ textDecoration: 'none', color: 'var(--text-muted)', fontWeight: 600, display: window.innerWidth > 768 ? 'block' : 'none' }}>Simulador</a>
+          <a href="#como-funciona" style={{ textDecoration: 'none', color: 'var(--charcoal)', fontWeight: 600, display: window.innerWidth > 768 ? 'block' : 'none' }}>Mecanismo</a>
+          <a href="#calculadora" style={{ textDecoration: 'none', color: 'var(--charcoal)', fontWeight: 600, display: window.innerWidth > 768 ? 'block' : 'none' }}>Simulador</a>
           <button onClick={() => { window.location.hash = '#login'; }} className="btn btn-primary" style={{ padding: '0.6rem 2rem', fontSize: '1rem' }}>Ingresar</button>
         </div>
       </nav>
@@ -138,9 +138,9 @@ function App() {
                 <Lock size={14} style={{ display: 'inline', marginRight: '5px' }}/> Wealth Management
               </div>
               <h1 className="hero-title">
-                Rentabilidad Asegurada mediante <span>Activos Reales.</span>
+                Rentabilidad Asegurada mediante <span style={{ color: 'var(--gold-primary)' }}>Activos Reales.</span>
               </h1>
-              <p className="hero-subtitle">
+              <p className="hero-subtitle" style={{ color: 'var(--charcoal-mid)' }}>
                 Supera los instrumentos tradicionales bancarios. Invierte en operaciones de flipping, desarrollo de condominios y renta hotelera privada con retornos de hasta 30% anual, blindado con acciones notariales.
               </p>
               
@@ -148,15 +148,15 @@ function App() {
                 <a href="#calculadora" className="btn btn-primary" style={{ padding: '1rem 2rem', fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   Proyectar Retornos <ArrowRight size={20} />
                 </a>
-                <a href="#como-funciona" className="btn" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', padding: '1rem 2rem', fontSize: '1.1rem', backdropFilter: 'blur(10px)' }}>
+                <a href="#como-funciona" className="btn" style={{ background: 'rgba(255,255,255,0.5)', border: '1px solid rgba(0,0,0,0.1)', color: 'var(--sage-800)', padding: '1rem 2rem', fontSize: '1.1rem', backdropFilter: 'blur(10px)' }}>
                   Ver Mecanismo
                 </a>
               </div>
 
-              <div className="stats-bar">
-                <div className="stat-item"><h4>0%</h4><p>Tasa de Default</p></div>
-                <div className="stat-item"><h4>20+</h4><p>Años Experiencia</p></div>
-                <div className="stat-item"><h4 style={{ color: 'var(--gold-primary)' }}>+$500M</h4><p>Gestionados Anual</p></div>
+              <div className="stats-bar" style={{ borderColor: 'rgba(0,0,0,0.1)' }}>
+                <div className="stat-item"><h4 style={{ color: 'var(--sage-800)' }}>0%</h4><p style={{ color: 'var(--charcoal-mid)' }}>Tasa de Default</p></div>
+                <div className="stat-item"><h4 style={{ color: 'var(--sage-800)' }}>20+</h4><p style={{ color: 'var(--charcoal-mid)' }}>Años Experiencia</p></div>
+                <div className="stat-item"><h4 style={{ color: 'var(--gold-primary)' }}>+$500M</h4><p style={{ color: 'var(--charcoal-mid)' }}>Gestionados Anual</p></div>
               </div>
             </div>
             
@@ -171,10 +171,10 @@ function App() {
                 transition: 'transform 0.1s ease-out'
               }}>
                 {/* Back Glass Card */}
-                <div style={{ position: 'absolute', top: '20px', right: '-20px', width: '350px', height: '450px', background: 'rgba(255,255,255,0.02)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '24px', transform: 'translateZ(-50px)' }}></div>
+                <div style={{ position: 'absolute', top: '20px', right: '-20px', width: '350px', height: '450px', background: 'rgba(255,255,255,0.4)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.6)', borderRadius: '24px', transform: 'translateZ(-50px)' }}></div>
                 
                 {/* Main Glass Card */}
-                <div style={{ position: 'absolute', top: 0, right: 0, width: '380px', height: '480px', background: 'linear-gradient(135deg, rgba(20,20,20,0.8), rgba(10,10,10,0.9))', backdropFilter: 'blur(40px)', border: '1px solid rgba(212,175,55,0.3)', borderRadius: '24px', padding: '2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 30px 60px rgba(0,0,0,0.8)', transform: 'translateZ(20px)' }}>
+                <div style={{ position: 'absolute', top: 0, right: 0, width: '380px', height: '480px', background: 'linear-gradient(135deg, rgba(255,255,255,0.9), rgba(244,247,244,0.95))', backdropFilter: 'blur(40px)', border: '1px solid rgba(212,175,55,0.3)', borderRadius: '24px', padding: '2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 30px 60px rgba(0,0,0,0.1)', transform: 'translateZ(20px)' }}>
                   
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div style={{ background: 'rgba(212,175,55,0.1)', padding: '0.8rem', borderRadius: '12px', color: 'var(--gold-primary)' }}><ShieldCheck size={32}/></div>
@@ -182,23 +182,23 @@ function App() {
                   </div>
 
                   <div>
-                    <div style={{ color: 'var(--text-muted)', fontSize: '1rem', marginBottom: '0.5rem' }}>Valor Acción (SpA)</div>
-                    <div style={{ fontSize: '3rem', fontWeight: 800, color: 'white', letterSpacing: '-1px' }}>$40.000.000</div>
+                    <div style={{ color: 'var(--charcoal-mid)', fontSize: '1rem', marginBottom: '0.5rem' }}>Valor Acción (SpA)</div>
+                    <div style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--sage-800)', letterSpacing: '-1px' }}>$40.000.000</div>
                     
-                    <div style={{ marginTop: '2rem', background: 'rgba(255,255,255,0.03)', padding: '1.5rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                    <div style={{ marginTop: '2rem', background: 'rgba(255,255,255,0.5)', padding: '1.5rem', borderRadius: '16px', border: '1px solid rgba(0,0,0,0.05)' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                        <span style={{ color: 'var(--text-muted)' }}>ROI Mensual</span>
+                        <span style={{ color: 'var(--charcoal-mid)' }}>ROI Mensual</span>
                         <span style={{ color: 'var(--gold-primary)', fontWeight: 'bold' }}>2.50%</span>
                       </div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <span style={{ color: 'white', fontWeight: 600 }}>Flujo Intereses</span>
+                        <span style={{ color: 'var(--sage-800)', fontWeight: 600 }}>Flujo Intereses</span>
                         <span style={{ fontSize: '1.5rem', color: 'var(--success)', fontWeight: 800 }}>$1.000.000</span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Floating Action Button (Illusion of depth) */}
-                  <div style={{ position: 'absolute', bottom: '-20px', left: '50%', transform: 'translateX(-50%) translateZ(40px)', background: 'var(--gold-primary)', color: 'var(--black)', padding: '1rem 2rem', borderRadius: '50px', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', boxShadow: '0 20px 40px rgba(212,175,55,0.3)', width: 'max-content' }}>
+                  {/* Floating Action Button */}
+                  <div style={{ position: 'absolute', bottom: '-20px', left: '50%', transform: 'translateX(-50%) translateZ(40px)', background: 'var(--gold-primary)', color: 'white', padding: '1rem 2rem', borderRadius: '50px', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', boxShadow: '0 20px 40px rgba(212,175,55,0.3)', width: 'max-content' }}>
                     <CheckCircle2 size={20}/> Blindaje Notarial Activo
                   </div>
 
@@ -215,7 +215,7 @@ function App() {
         <div className="container">
           <div style={{ textAlign: 'center' }}>
             <span style={{ color: 'var(--gold-primary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', fontSize: '1rem' }}>Mecanismo de Inversión</span>
-            <h2 style={{ fontSize: 'clamp(3rem, 5vw, 4rem)', marginTop: '1rem', color: 'var(--white)', fontFamily: 'Outfit' }}>Seguridad Institucional</h2>
+            <h2 style={{ fontSize: 'clamp(3rem, 5vw, 4rem)', marginTop: '1rem', color: 'var(--sage-800)', fontFamily: 'Outfit' }}>Seguridad Institucional</h2>
           </div>
 
           <div className="mechanism-wrapper">
@@ -224,24 +224,24 @@ function App() {
                 <div className="step-number">01</div>
                 <div style={{ position: 'relative', zIndex: 2 }}>
                   <FileText size={40} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-                  <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--white)' }}>Compra de Acción (SpA)</h3>
-                  <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: 1.6 }}>Eliges tu volumen de capital. Pasas a ser accionista formal de la Sociedad dueña del activo inmobiliario. Tu inversión está respaldada en metros cuadrados, no en aire.</p>
+                  <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--sage-800)' }}>Compra de Acción (SpA)</h3>
+                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.05rem', lineHeight: 1.6 }}>Eliges tu volumen de capital. Pasas a ser accionista formal de la Sociedad dueña del activo inmobiliario. Tu inversión está respaldada en metros cuadrados, no en aire.</p>
                 </div>
               </div>
               <div className="step-card">
                 <div className="step-number">02</div>
                 <div style={{ position: 'relative', zIndex: 2 }}>
                   <TrendingUp size={40} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-                  <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--white)' }}>Flujo de Intereses (Mensual)</h3>
-                  <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: 1.6 }}>Mientras el proyecto madura mediante flipping, condominios o renta hotelera, recibes el pago de intereses pactado directamente en tu cuenta bancaria cada 30 días.</p>
+                  <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--sage-800)' }}>Flujo de Intereses (Mensual)</h3>
+                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.05rem', lineHeight: 1.6 }}>Mientras el proyecto madura mediante flipping, condominios o renta hotelera, recibes el pago de intereses pactado directamente en tu cuenta bancaria cada 30 días.</p>
                 </div>
               </div>
               <div className="step-card">
                 <div className="step-number">03</div>
                 <div style={{ position: 'relative', zIndex: 2 }}>
                   <RefreshCw size={40} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-                  <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--white)' }}>Devolución Bullet (Mes 12)</h3>
-                  <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: 1.6 }}>Al vencimiento del contrato (Mes 12), ejecutamos el pacto de retroventa. Recibes un pago Bullet que te <strong>devuelve el 100% de tu capital inicial</strong> íntegro.</p>
+                  <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--sage-800)' }}>Devolución Bullet (Mes 12)</h3>
+                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.05rem', lineHeight: 1.6 }}>Al vencimiento del contrato (Mes 12), ejecutamos el pacto de retroventa. Recibes un pago Bullet que te <strong>devuelve el 100% de tu capital inicial</strong> íntegro.</p>
                 </div>
               </div>
             </div>
@@ -253,8 +253,8 @@ function App() {
       <section className="section calculator-section" id="calculadora">
         <div className="container calc-container">
           <div>
-            <h2 style={{ fontSize: 'clamp(3rem, 5vw, 4.5rem)', marginBottom: '2rem', color: 'var(--white)', lineHeight: 1.1, fontFamily: 'Outfit' }}>Simula tu Flujo Financiero</h2>
-            <p style={{ color: 'var(--text-muted)', marginBottom: '5rem', fontSize: '1.3rem', maxWidth: '700px', lineHeight: 1.8 }}>
+            <h2 style={{ fontSize: 'clamp(3rem, 5vw, 4.5rem)', marginBottom: '2rem', color: 'var(--sage-800)', lineHeight: 1.1, fontFamily: 'Outfit' }}>Simula tu Flujo Financiero</h2>
+            <p style={{ color: 'var(--charcoal-mid)', marginBottom: '5rem', fontSize: '1.3rem', maxWidth: '700px', lineHeight: 1.8 }}>
               Mueve el deslizador a través de los bloques institucionales y descubre el flujo de caja exacto que depositaremos mes a mes en tu cuenta corriente.
             </p>
 
@@ -282,7 +282,7 @@ function App() {
 
           <div className="calc-results">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem' }}>
-              <h3 style={{ color: 'var(--white)', fontFamily: 'Outfit', fontSize: '2rem', margin: 0 }}>
+              <h3 style={{ color: 'var(--sage-800)', fontFamily: 'Outfit', fontSize: '2rem', margin: 0 }}>
                 {currentTier.name}
               </h3>
               <div style={{ background: 'rgba(212, 175, 55, 0.1)', color: 'var(--gold-primary)', border: '1px solid rgba(212,175,55,0.3)', padding: '0.5rem 1.5rem', borderRadius: '50px', fontWeight: 800, fontSize: '1.2rem' }}>
@@ -291,20 +291,20 @@ function App() {
             </div>
             
             <div className="result-row highlight">
-              <span style={{ color: 'var(--text-muted)' }}>Intereses (Flujo Mensual)</span>
+              <span style={{ color: 'var(--charcoal-mid)' }}>Intereses (Flujo Mensual)</span>
               <span className="result-val">{formatCurrency(monthlyPayment)}</span>
             </div>
             <div className="result-row">
-              <span style={{ color: 'var(--text-muted)' }}>Rendimiento Anual Proyectado</span>
-              <span className="result-val" style={{ color: 'var(--white)' }}>{formatCurrency(yearlyInterests)}</span>
+              <span style={{ color: 'var(--charcoal-mid)' }}>Rendimiento Anual Proyectado</span>
+              <span className="result-val" style={{ color: 'var(--sage-800)' }}>{formatCurrency(yearlyInterests)}</span>
             </div>
             <div className="result-row">
-              <span style={{ color: 'rgba(212,175,55,0.8)' }}>Pago Bullet del Capital (Mes 12)</span>
-              <span className="result-val" style={{ color: 'rgba(212,175,55,0.8)' }}>{formatCurrency(investment)}</span>
+              <span style={{ color: 'rgba(212,175,55,0.9)' }}>Pago Bullet del Capital (Mes 12)</span>
+              <span className="result-val" style={{ color: 'rgba(212,175,55,0.9)' }}>{formatCurrency(investment)}</span>
             </div>
-            <div className="result-row" style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '3rem', marginTop: '2rem' }}>
-              <span style={{ fontWeight: 600, fontSize: '1.2rem', color: 'var(--text-muted)' }}>Liquidación Total Cierre de Ciclo</span>
-              <span className="result-val" style={{ color: 'var(--white)', fontSize: '2.5rem' }}>{formatCurrency(totalReturn)}</span>
+            <div className="result-row" style={{ borderTop: '1px solid rgba(0,0,0,0.1)', paddingTop: '3rem', marginTop: '2rem' }}>
+              <span style={{ fontWeight: 600, fontSize: '1.2rem', color: 'var(--charcoal-mid)' }}>Liquidación Total Cierre de Ciclo</span>
+              <span className="result-val" style={{ color: 'var(--sage-800)', fontSize: '2.5rem' }}>{formatCurrency(totalReturn)}</span>
             </div>
             
             <button onClick={handleWhatsAppRedirect} className="btn btn-primary" style={{ width: '100%', marginTop: '3rem', fontSize: '1.2rem', padding: '1.2rem' }}>
@@ -315,27 +315,27 @@ function App() {
       </section>
 
       {/* FAQ SECTION */}
-      <section className="section" style={{ background: 'rgba(5,5,5,0.95)' }}>
+      <section className="section" style={{ background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(10px)' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
             <span style={{ color: 'var(--gold-primary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', fontSize: '1rem' }}>Transparencia Total</span>
-            <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 4rem)', marginTop: '1rem', color: 'var(--white)', fontFamily: 'Outfit' }}>Preguntas Frecuentes</h2>
+            <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 4rem)', marginTop: '1rem', color: 'var(--sage-800)', fontFamily: 'Outfit' }}>Preguntas Frecuentes</h2>
           </div>
           
           <div style={{ maxWidth: '900px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {faqs.map((faq, idx) => {
               const isOpen = openFaqIndex === idx;
               return (
-                <div key={idx} style={{ background: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)', overflow: 'hidden', transition: 'all 0.3s ease' }}>
+                <div key={idx} style={{ background: 'rgba(255,255,255,0.8)', borderRadius: '16px', border: '1px solid rgba(0,0,0,0.05)', overflow: 'hidden', transition: 'all 0.3s ease' }}>
                   <button 
                     onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
                     style={{ width: '100%', padding: '2rem 2.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left' }}
                   >
-                    <h3 style={{ fontSize: '1.2rem', color: 'var(--white)', margin: 0, fontWeight: 600 }}>{faq.q}</h3>
+                    <h3 style={{ fontSize: '1.2rem', color: 'var(--sage-800)', margin: 0, fontWeight: 600 }}>{faq.q}</h3>
                     <ChevronRight size={24} style={{ color: 'var(--gold-primary)', transform: isOpen ? 'rotate(90deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease', minWidth: '24px' }} />
                   </button>
                   <div style={{ maxHeight: isOpen ? '500px' : '0', overflow: 'hidden', transition: 'max-height 0.4s ease-in-out' }}>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', lineHeight: 1.6, padding: '0 2.5rem 2.5rem 2.5rem', margin: 0 }}>{faq.a}</p>
+                    <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.1rem', lineHeight: 1.6, padding: '0 2.5rem 2.5rem 2.5rem', margin: 0 }}>{faq.a}</p>
                   </div>
                 </div>
               );
@@ -344,7 +344,7 @@ function App() {
         </div>
       </section>
 
-      <footer style={{ background: '#020202', color: 'rgba(255,255,255,0.4)', padding: '5rem 0 2rem 0', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+      <footer style={{ background: 'var(--sage-800)', color: 'rgba(255,255,255,0.6)', padding: '5rem 0 2rem 0', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '4rem', marginBottom: '2rem' }}>
             <div>
@@ -352,17 +352,17 @@ function App() {
                 <img src="/logo.png" alt="CrowdIn Logo" style={{ width: '32px', height: '32px', borderRadius: '6px' }} />
                 CrowdIn<span style={{ color: 'var(--gold-primary)' }}>.</span>
               </div>
-              <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'var(--text-muted)' }}>Firma privada de inversión inmobiliaria. Rentabilidad fija mediante estructuras notariales.</p>
+              <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'rgba(255,255,255,0.8)' }}>Firma privada de inversión inmobiliaria. Rentabilidad fija mediante estructuras notariales.</p>
             </div>
             <div>
               <h4 style={{ color: 'var(--white)', fontSize: '1.2rem', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Contacto Institucional</h4>
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <li><a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer" style={{ color: 'var(--text-muted)', textDecoration: 'none', transition: 'color 0.3s' }}>Asesoría Privada</a></li>
-                <li><a href="#" style={{ color: 'var(--text-muted)', textDecoration: 'none', transition: 'color 0.3s' }}>Términos del Pacto de Retroventa</a></li>
+                <li><a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', transition: 'color 0.3s' }}>Asesoría Privada</a></li>
+                <li><a href="#" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', transition: 'color 0.3s' }}>Términos del Pacto de Retroventa</a></li>
               </ul>
             </div>
           </div>
-          <div style={{ textAlign: 'center', fontSize: '1rem', color: 'rgba(255,255,255,0.2)' }}>
+          <div style={{ textAlign: 'center', fontSize: '1rem', color: 'rgba(255,255,255,0.4)' }}>
             <p>&copy; 2026 CrowdIn Capital. La información aquí presentada constituye una simulación matemática; los retornos son contractuales tras la materialización de los mandatos.</p>
           </div>
         </div>
