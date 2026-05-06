@@ -124,14 +124,31 @@ function App() {
 
   return (
     <>
+      <div style={{ background: 'var(--sage-900)', color: 'var(--white)', padding: '0.5rem 0', fontSize: '0.8rem', fontWeight: 600, overflow: 'hidden', position: 'fixed', top: 0, width: '100%', zIndex: 3000, borderBottom: '1px solid var(--gold-primary)' }}>
+        <div style={{ display: 'flex', whiteSpace: 'nowrap', animation: 'ticker 30s linear infinite' }}>
+          <span style={{ marginRight: '3rem' }}><CheckCircle2 size={12} style={{ verticalAlign: 'middle', marginRight: '5px' }} color="var(--gold-primary)"/> Pago Bullet Confirmado: $40.000.000 a Inversor #829 (Notaría Labbé)</span>
+          <span style={{ marginRight: '3rem' }}><CheckCircle2 size={12} style={{ verticalAlign: 'middle', marginRight: '5px' }} color="var(--gold-primary)"/> ROI Mensual Ejecutado: $1.250.000 a Inversor #712</span>
+          <span style={{ marginRight: '3rem' }}><CheckCircle2 size={12} style={{ verticalAlign: 'middle', marginRight: '5px' }} color="var(--gold-primary)"/> Nuevo Contrato Tramo Elite: $40M (Condominio Los Olivos)</span>
+          <span style={{ marginRight: '3rem' }}><CheckCircle2 size={12} style={{ verticalAlign: 'middle', marginRight: '5px' }} color="var(--gold-primary)"/> Pago Bullet Confirmado: $40.000.000 a Inversor #829</span>
+          <span style={{ marginRight: '3rem' }}><CheckCircle2 size={12} style={{ verticalAlign: 'middle', marginRight: '5px' }} color="var(--gold-primary)"/> ROI Mensual Ejecutado: $1.250.000 a Inversor #712</span>
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes ticker {
+          0% { transform: translateX(100%); }
+          100% { transform: translateX(-100%); }
+        }
+      `}</style>
+
       <motion.div
         style={{
           scaleX,
           position: 'fixed',
-          top: 0,
+          top: '28px',
           left: 0,
           right: 0,
-          height: '6px',
+          height: '4px',
           background: 'var(--gold-primary)',
           transformOrigin: '0%',
           zIndex: 2000
@@ -139,7 +156,7 @@ function App() {
       />
       <ParallaxBackground />
 
-      <nav className="navbar" style={{ position: 'fixed', width: '100%', zIndex: 1000, background: 'rgba(244, 247, 244, 0.85)', backdropFilter: 'blur(15px)', borderBottom: '1px solid rgba(0,0,0,0.05)', padding: '1rem 2rem', display: 'flex', justifyContent: 'space-between' }}>
+      <nav className="navbar" style={{ position: 'fixed', top: '32px', width: '100%', zIndex: 1000, background: 'rgba(244, 247, 244, 0.9)', backdropFilter: 'blur(15px)', borderBottom: '1px solid rgba(0,0,0,0.05)', padding: '0.8rem 2rem', display: 'flex', justifyContent: 'space-between' }}>
         <div style={{ fontFamily: 'Outfit', fontWeight: 800, fontSize: '2rem', color: 'var(--sage-800)', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
           <img src="/logo.png" alt="CrowdIn Logo" style={{ width: '40px', height: '40px', borderRadius: '8px' }} />
           CrowdIn<span style={{ color: 'var(--gold-primary)' }}>.</span>
@@ -160,10 +177,10 @@ function App() {
                 <Lock size={14} style={{ display: 'inline', marginRight: '5px' }}/> Wealth Management
               </div>
               <h1 className="hero-title">
-                Rentabilidad Asegurada mediante <span style={{ color: 'var(--gold-primary)' }}>Activos Reales.</span>
+                Rentabilidad Asegurada en <span style={{ color: 'var(--gold-primary)' }}>Condominios Privados.</span>
               </h1>
               <p className="hero-subtitle" style={{ color: 'var(--charcoal-mid)' }}>
-                Supera los instrumentos tradicionales bancarios. Invierte en operaciones de flipping, desarrollo de condominios y renta hotelera privada con retornos de hasta 30% anual, blindado con acciones notariales.
+                Supera los instrumentos bancarios. Invierte en el desarrollo de condominios de casas y renta hotelera con retornos de hasta 30% anual, blindado mediante Pacto de Retroventa Notarial.
               </p>
               
               <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', marginTop: '2rem' }}>
@@ -262,8 +279,8 @@ function App() {
                 <div className="step-number">03</div>
                 <div style={{ position: 'relative', zIndex: 2 }}>
                   <RefreshCw size={40} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-                  <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--sage-800)' }}>Devolución Bullet (Mes 12)</h3>
-                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.05rem', lineHeight: 1.6 }}>Al vencimiento del contrato (Mes 12), ejecutamos el pacto de retroventa. Recibes un pago Bullet que te <strong>devuelve el 100% de tu capital inicial</strong> íntegro.</p>
+                  <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--sage-800)' }}>Devolución del Capital (Mes 12)</h3>
+                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.05rem', lineHeight: 1.6 }}>Al vencimiento del ciclo (Mes 12), ejecutamos el pacto de retroventa. Recibes un pago Bullet que te <strong>devuelve el 100% de tu capital inicial</strong> íntegro y sin comisiones.</p>
                 </div>
               </div>
             </div>
