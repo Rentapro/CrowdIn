@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { LogOut, TrendingUp, Wallet, Calendar, ShieldCheck, Clock } from 'lucide-react';
+import { LogOut, TrendingUp, Wallet, Calendar, ShieldCheck, Clock, CheckCircle2 } from 'lucide-react';
 
 export default function ClientPortal({ user, onLogout }) {
   const [contracts, setContracts] = useState([]);
