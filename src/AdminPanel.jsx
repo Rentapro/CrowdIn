@@ -189,29 +189,29 @@ export default function AdminPanel({ user, onLogout }) {
   const kycPendientes = clients.filter(c => c.kyc_status !== 'VERIFIED').length;
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: 'var(--sage-900)', color: 'white', padding: '2rem' }}>
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', borderBottom: '1px solid var(--sage-700)', paddingBottom: '1rem' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: 'var(--sage-50)', color: 'var(--charcoal)', padding: '2rem' }}>
+      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', borderBottom: '1px solid var(--sage-300)', paddingBottom: '1rem' }}>
         <div>
-          <h1 style={{ margin: 0, fontSize: '2rem' }}>Portal Institucional (Backoffice)</h1>
-          <p style={{ color: 'var(--sage-300)', margin: '0.5rem 0 0 0' }}>Superadmin • Dashboard de Control</p>
+          <h1 style={{ margin: 0, fontSize: '2rem', color: 'var(--sage-800)' }}>Portal Institucional (Backoffice)</h1>
+          <p style={{ color: 'var(--charcoal-mid)', margin: '0.5rem 0 0 0' }}>Superadmin • Dashboard de Control</p>
         </div>
-        <button onClick={onLogout} style={{ background: 'transparent', border: '1px solid var(--sage-600)', color: 'white', padding: '0.8rem 1.5rem', borderRadius: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <button onClick={onLogout} style={{ background: 'transparent', border: '1px solid var(--sage-500)', color: 'var(--sage-800)', padding: '0.8rem 1.5rem', borderRadius: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
           <LogOut size={18} /> Salir
         </button>
       </header>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
-        <div style={{ background: 'var(--sage-800)', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--sage-700)' }}>
-          <div style={{ color: 'var(--sage-300)', fontSize: '0.9rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><DollarSign size={16}/> AUM (Capital Activo)</div>
-          <div style={{ fontSize: '2rem', fontWeight: 800, color: 'white' }}>${new Intl.NumberFormat('es-CL').format(totalCapital)}</div>
+        <div style={{ background: 'white', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--sage-100)', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
+          <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}><DollarSign size={16} color="var(--sage-500)"/> AUM (Capital Activo)</div>
+          <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--charcoal)' }}>${new Intl.NumberFormat('es-CL').format(totalCapital)}</div>
         </div>
-        <div style={{ background: 'var(--sage-800)', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--sage-700)' }}>
-          <div style={{ color: 'var(--sage-300)', fontSize: '0.9rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Activity size={16}/> Retornos Pagados</div>
-          <div style={{ fontSize: '2rem', fontWeight: 800, color: '#34d399' }}>${new Intl.NumberFormat('es-CL').format(totalPagado)}</div>
+        <div style={{ background: 'white', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--sage-100)', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
+          <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}><Activity size={16} color="var(--sage-500)"/> Retornos Pagados</div>
+          <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--success)' }}>${new Intl.NumberFormat('es-CL').format(totalPagado)}</div>
         </div>
-        <div style={{ background: 'var(--sage-800)', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--sage-700)' }}>
-          <div style={{ color: 'var(--sage-300)', fontSize: '0.9rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Users size={16}/> KYC Pendientes</div>
-          <div style={{ fontSize: '2rem', fontWeight: 800, color: kycPendientes > 0 ? '#fbbf24' : '#34d399' }}>{kycPendientes}</div>
+        <div style={{ background: 'white', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--sage-100)', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
+          <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}><Users size={16} color="var(--sage-500)"/> KYC Pendientes</div>
+          <div style={{ fontSize: '2rem', fontWeight: 800, color: kycPendientes > 0 ? '#b45309' : 'var(--success)' }}>{kycPendientes}</div>
         </div>
       </div>
 
@@ -225,65 +225,65 @@ export default function AdminPanel({ user, onLogout }) {
       )}
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-        <h2 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Users size={24} /> Operaciones Activas</h2>
-        <button onClick={() => setShowForm(!showForm)} style={{ background: 'white', color: 'var(--sage-900)', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
+        <h2 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--sage-800)' }}><Users size={24} /> Operaciones Activas</h2>
+        <button onClick={() => setShowForm(!showForm)} style={{ background: 'var(--sage-800)', color: 'white', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
           <Plus size={18} /> Nuevo Contrato
         </button>
       </div>
 
       {showForm && (
-        <div style={{ background: 'var(--sage-800)', padding: '2rem', borderRadius: '16px', marginBottom: '2rem', border: '1px solid var(--sage-700)' }}>
-          <h3 style={{ marginTop: 0 }}>Onboarding Institucional</h3>
+        <div style={{ background: 'white', padding: '2rem', borderRadius: '16px', marginBottom: '2rem', border: '1px solid var(--sage-300)' }}>
+          <h3 style={{ marginTop: 0, color: 'var(--sage-800)' }}>Onboarding Institucional</h3>
           <form onSubmit={handleCreateClient} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', alignItems: 'end' }}>
-            <div><label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--sage-300)' }}>Nombre Completo</label><input type="text" value={name} onChange={e => setName(e.target.value)} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-600)', background: 'var(--sage-900)', color: 'white' }} /></div>
-            <div><label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--sage-300)' }}>RUT</label><input type="text" value={rut} onChange={e => setRut(e.target.value)} placeholder="12.345.678-9" style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-600)', background: 'var(--sage-900)', color: 'white' }} /></div>
-            <div><label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--sage-300)' }}>Correo (ID de Bóveda)</label><input type="email" required value={email} onChange={e => setEmail(e.target.value)} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-600)', background: 'var(--sage-900)', color: 'white' }} /></div>
-            <div><label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--sage-300)' }}>Cuenta Origen/Destino</label><input type="text" value={bankAccount} onChange={e => setBankAccount(e.target.value)} placeholder="Cta Corriente BCI 123..." style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-600)', background: 'var(--sage-900)', color: 'white' }} /></div>
+            <div><label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--charcoal-mid)', fontWeight: 600 }}>Nombre Completo</label><input type="text" value={name} onChange={e => setName(e.target.value)} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-300)', background: 'var(--sage-50)', color: 'var(--charcoal)' }} /></div>
+            <div><label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--charcoal-mid)', fontWeight: 600 }}>RUT</label><input type="text" value={rut} onChange={e => setRut(e.target.value)} placeholder="12.345.678-9" style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-300)', background: 'var(--sage-50)', color: 'var(--charcoal)' }} /></div>
+            <div><label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--charcoal-mid)', fontWeight: 600 }}>Correo (ID de Bóveda)</label><input type="email" required value={email} onChange={e => setEmail(e.target.value)} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-300)', background: 'var(--sage-50)', color: 'var(--charcoal)' }} /></div>
+            <div><label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--charcoal-mid)', fontWeight: 600 }}>Cuenta Origen/Destino</label><input type="text" value={bankAccount} onChange={e => setBankAccount(e.target.value)} placeholder="Cta Corriente BCI 123..." style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-300)', background: 'var(--sage-50)', color: 'var(--charcoal)' }} /></div>
             <div>
-              <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--sage-300)' }}>Tramo de Inversión</label>
-              <select value={amount} onChange={e => setAmount(e.target.value)} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-600)', background: 'var(--sage-900)', color: 'white' }}>
+              <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--charcoal-mid)', fontWeight: 600 }}>Tramo de Inversión</label>
+              <select value={amount} onChange={e => setAmount(e.target.value)} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-300)', background: 'var(--sage-50)', color: 'var(--charcoal)' }}>
                 {tiers.map(t => <option key={t.value} value={t.value}>{t.name} - ${new Intl.NumberFormat('es-CL').format(t.value)}</option>)}
               </select>
             </div>
-            <button type="submit" style={{ background: '#34d399', color: '#064e3b', border: 'none', padding: '0.8rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>Estructurar Posición</button>
+            <button type="submit" style={{ background: 'var(--sage-800)', color: 'white', border: 'none', padding: '0.8rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>Estructurar Posición</button>
           </form>
         </div>
       )}
 
-      <div style={{ background: 'var(--sage-800)', borderRadius: '16px', border: '1px solid var(--sage-700)', overflowX: 'auto' }}>
+      <div style={{ background: 'white', borderRadius: '16px', border: '1px solid var(--sage-300)', overflowX: 'auto', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '1100px' }}>
           <thead>
-            <tr style={{ background: 'var(--sage-900)' }}>
-              <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-300)', fontWeight: 500, fontSize: '0.85rem' }}>INVERSOR</th>
-              <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-300)', fontWeight: 500, fontSize: '0.85rem' }}>CAPITAL (TRAMO)</th>
-              <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-300)', fontWeight: 500, fontSize: '0.85rem' }}>KYC STATUS</th>
-              <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-300)', fontWeight: 500, fontSize: '0.85rem' }}>PAGOS (MESES)</th>
-              <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-300)', fontWeight: 500, fontSize: '0.85rem', textAlign: 'center' }}>ACCIONES LEGALES</th>
+            <tr style={{ background: 'var(--sage-100)' }}>
+              <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-800)', fontWeight: 600, fontSize: '0.85rem' }}>INVERSOR</th>
+              <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-800)', fontWeight: 600, fontSize: '0.85rem' }}>CAPITAL (TRAMO)</th>
+              <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-800)', fontWeight: 600, fontSize: '0.85rem' }}>KYC STATUS</th>
+              <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-800)', fontWeight: 600, fontSize: '0.85rem' }}>PAGOS (MESES)</th>
+              <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-800)', fontWeight: 600, fontSize: '0.85rem', textAlign: 'center' }}>ACCIONES LEGALES</th>
             </tr>
           </thead>
           <tbody>
             {loading ? <tr><td colSpan="5" style={{ padding: '2rem', textAlign: 'center' }}>Sincronizando Neon DB...</td></tr> : 
              clients.map(client => (
-              <tr key={client.contract_id} style={{ borderTop: '1px solid var(--sage-700)' }}>
+              <tr key={client.contract_id} style={{ borderTop: '1px solid var(--sage-100)' }}>
                 <td style={{ padding: '1rem 1.5rem' }}>
                   <div style={{ fontWeight: 600 }}>{client.name}</div>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--sage-400)' }}>{client.bank_account_info || client.email}</div>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--charcoal-mid)' }}>{client.bank_account_info || client.email}</div>
                 </td>
                 <td style={{ padding: '1rem 1.5rem' }}>
-                  <div style={{ fontWeight: 'bold', color: 'white' }}>${new Intl.NumberFormat('es-CL').format(client.amount)}</div>
-                  <div style={{ fontSize: '0.8rem', color: '#34d399' }}>{client.tier_name} ({client.monthly_roi * 100}%)</div>
+                  <div style={{ fontWeight: 'bold', color: 'var(--charcoal)' }}>${new Intl.NumberFormat('es-CL').format(client.amount)}</div>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--sage-700)' }}>{client.tier_name} ({client.monthly_roi * 100}%)</div>
                 </td>
                 <td style={{ padding: '1rem 1.5rem' }}>
-                  <button onClick={() => handleToggleKYC(client.user_id, client.kyc_status)} style={{ background: client.kyc_status === 'VERIFIED' ? 'rgba(52,211,153,0.1)' : 'rgba(251,191,36,0.1)', color: client.kyc_status === 'VERIFIED' ? '#34d399' : '#fbbf24', border: `1px solid ${client.kyc_status === 'VERIFIED' ? '#047857' : '#b45309'}`, padding: '0.3rem 0.8rem', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+                  <button onClick={() => handleToggleKYC(client.user_id, client.kyc_status)} style={{ background: client.kyc_status === 'VERIFIED' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(245, 158, 11, 0.1)', color: client.kyc_status === 'VERIFIED' ? 'var(--success)' : '#d97706', border: `1px solid ${client.kyc_status === 'VERIFIED' ? 'var(--success)' : '#d97706'}`, padding: '0.3rem 0.8rem', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
                     {client.kyc_status === 'VERIFIED' ? <><ShieldAlert size={14}/> KYC VERIFICADO</> : <><AlertCircle size={14}/> KYC PENDIENTE</>}
                   </button>
                 </td>
                 <td style={{ padding: '1rem 1.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <div style={{ background: 'var(--sage-900)', width: '100px', height: '8px', borderRadius: '4px', overflow: 'hidden' }}>
-                      <div style={{ background: '#34d399', width: `${((client.payments_made || 0) / 12) * 100}%`, height: '100%' }}></div>
+                    <div style={{ background: 'var(--sage-100)', width: '100px', height: '8px', borderRadius: '4px', overflow: 'hidden' }}>
+                      <div style={{ background: 'var(--success)', width: `${((client.payments_made || 0) / 12) * 100}%`, height: '100%' }}></div>
                     </div>
-                    <span style={{ fontSize: '0.85rem', color: 'var(--sage-300)', minWidth: '40px' }}>{client.payments_made || 0}/12</span>
+                    <span style={{ fontSize: '0.85rem', color: 'var(--charcoal-mid)', minWidth: '40px', fontWeight: 600 }}>{client.payments_made || 0}/12</span>
                     
                     {client.payments_made < 12 ? (
                       <button onClick={() => handleAddPayment(client.contract_id)} style={{ background: 'var(--sage-700)', border: 'none', color: 'white', padding: '0.3rem 0.5rem', borderRadius: '4px', cursor: 'pointer', marginLeft: '0.5rem' }}>+1</button>
@@ -295,16 +295,16 @@ export default function AdminPanel({ user, onLogout }) {
                   </div>
                 </td>
                 <td style={{ padding: '1rem 1.5rem', display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
-                  <button onClick={() => handlePrintContract(client)} style={{ background: 'transparent', border: '1px solid var(--sage-500)', color: 'white', padding: '0.5rem 1rem', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem' }}>
+                  <button onClick={() => handlePrintContract(client)} style={{ background: 'white', border: '1px solid var(--sage-300)', color: 'var(--charcoal)', padding: '0.5rem 1rem', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', fontWeight: 600 }}>
                     <FileText size={14} /> PDF
                   </button>
-                  <button onClick={() => handleOpenLogs(client.contract_id)} style={{ background: 'rgba(52,211,153,0.1)', border: '1px solid rgba(52,211,153,0.3)', color: '#34d399', padding: '0.5rem', borderRadius: '6px', cursor: 'pointer' }} title="Historial de Pagos">
+                  <button onClick={() => handleOpenLogs(client.contract_id)} style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', color: 'var(--success)', padding: '0.5rem', borderRadius: '6px', cursor: 'pointer' }} title="Historial de Pagos">
                     <History size={16} />
                   </button>
-                  <button onClick={() => handleResetPassword(client.user_id, client.email)} style={{ background: 'rgba(212,175,55,0.1)', border: '1px solid rgba(212,175,55,0.3)', color: '#d4af37', padding: '0.5rem', borderRadius: '6px', cursor: 'pointer' }} title="Regenerar Clave">
+                  <button onClick={() => handleResetPassword(client.user_id, client.email)} style={{ background: 'rgba(212,175,55,0.1)', border: '1px solid rgba(212,175,55,0.3)', color: 'var(--gold-dark)', padding: '0.5rem', borderRadius: '6px', cursor: 'pointer' }} title="Regenerar Clave">
                     <KeyRound size={16} />
                   </button>
-                  <button onClick={() => handleDelete(client.user_id, client.name)} style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', color: '#fca5a5', padding: '0.5rem', borderRadius: '6px', cursor: 'pointer' }} title="Eliminar Cliente Totalmente">
+                  <button onClick={() => handleDelete(client.user_id, client.name)} style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', color: 'var(--danger)', padding: '0.5rem', borderRadius: '6px', cursor: 'pointer' }} title="Eliminar Cliente Totalmente">
                     <Trash2 size={16} />
                   </button>
                 </td>
@@ -315,25 +315,25 @@ export default function AdminPanel({ user, onLogout }) {
       </div>
 
       {logsModalOpen && (
-        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
-          <div style={{ background: 'var(--sage-800)', border: '1px solid var(--sage-700)', padding: '2rem', borderRadius: '16px', width: '90%', maxWidth: '600px', maxHeight: '80vh', overflowY: 'auto', position: 'relative' }}>
-            <button onClick={() => setLogsModalOpen(false)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'transparent', border: 'none', color: 'var(--sage-400)', cursor: 'pointer' }}><X size={24}/></button>
-            <h3 style={{ margin: '0 0 1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><History size={24}/> Historial de Pagos (Auditoría)</h3>
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+          <div style={{ background: 'white', border: '1px solid var(--sage-100)', padding: '2rem', borderRadius: '16px', width: '90%', maxWidth: '600px', maxHeight: '80vh', overflowY: 'auto', position: 'relative', boxShadow: '0 25px 50px rgba(0,0,0,0.1)' }}>
+            <button onClick={() => setLogsModalOpen(false)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'transparent', border: 'none', color: 'var(--charcoal-mid)', cursor: 'pointer' }}><X size={24}/></button>
+            <h3 style={{ margin: '0 0 1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--sage-800)' }}><History size={24}/> Historial de Pagos (Auditoría)</h3>
             
             {logLoading ? (
-              <p style={{ color: 'var(--sage-400)', textAlign: 'center' }}>Cargando logs del sistema...</p>
+              <p style={{ color: 'var(--charcoal-mid)', textAlign: 'center' }}>Cargando logs del sistema...</p>
             ) : currentLogs.length === 0 ? (
-              <p style={{ color: 'var(--sage-400)', textAlign: 'center' }}>No hay registros de pagos para este contrato aún.</p>
+              <p style={{ color: 'var(--charcoal-mid)', textAlign: 'center' }}>No hay registros de pagos para este contrato aún.</p>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {currentLogs.map(log => (
-                  <div key={log.id} style={{ background: 'var(--sage-900)', padding: '1rem 1.5rem', borderRadius: '12px', border: '1px solid var(--sage-700)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div key={log.id} style={{ background: 'var(--sage-50)', padding: '1rem 1.5rem', borderRadius: '12px', border: '1px solid var(--sage-100)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div>
-                      <div style={{ color: 'var(--sage-400)', fontSize: '0.8rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>CUOTA #{log.payment_number}</div>
-                      <div style={{ color: 'white', fontWeight: 'bold' }}>{new Date(log.executed_at).toLocaleString('es-CL')}</div>
-                      <div style={{ color: 'var(--sage-500)', fontSize: '0.8rem', marginTop: '0.2rem' }}>Audit: {log.executed_by}</div>
+                      <div style={{ color: 'var(--sage-700)', fontSize: '0.8rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>CUOTA #{log.payment_number}</div>
+                      <div style={{ color: 'var(--charcoal)', fontWeight: 'bold' }}>{new Date(log.executed_at).toLocaleString('es-CL')}</div>
+                      <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.8rem', marginTop: '0.2rem' }}>Audit: {log.executed_by}</div>
                     </div>
-                    <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#34d399' }}>
+                    <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--success)' }}>
                       +${new Intl.NumberFormat('es-CL').format(log.payment_amount)}
                     </div>
                   </div>

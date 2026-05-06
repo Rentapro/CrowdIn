@@ -96,20 +96,20 @@ export default function ClientPortal({ user, onLogout }) {
   };
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--sage-900)', color: 'white' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--sage-50)', color: 'var(--charcoal)' }}>
       
       {/* Sidebar Lateral */}
-      <aside style={{ width: '280px', borderRight: '1px solid var(--sage-700)', backgroundColor: '#0d170f', display: 'flex', flexDirection: 'column' }}>
-        <div style={{ padding: '2rem', display: 'flex', alignItems: 'center', gap: '1rem', borderBottom: '1px solid var(--sage-700)' }}>
-          <ShieldCheck size={32} style={{ color: '#d4af37' }} />
+      <aside style={{ width: '280px', borderRight: '1px solid var(--sage-300)', backgroundColor: 'var(--sage-100)', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ padding: '2rem', display: 'flex', alignItems: 'center', gap: '1rem', borderBottom: '1px solid var(--sage-300)' }}>
+          <ShieldCheck size={32} style={{ color: 'var(--gold-primary)' }} />
           <div>
-            <h1 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 800, color: 'white' }}>CrowdIn</h1>
-            <p style={{ margin: 0, color: 'var(--sage-400)', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Institucional</p>
+            <h1 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 800, color: 'var(--sage-800)' }}>CrowdIn</h1>
+            <p style={{ margin: 0, color: 'var(--charcoal-mid)', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Institucional</p>
           </div>
         </div>
 
         <div style={{ padding: '2rem 1.5rem', flexGrow: 1 }}>
-          <p style={{ fontSize: '0.75rem', color: 'var(--sage-400)', fontWeight: 'bold', marginBottom: '1rem', paddingLeft: '1rem' }}>MENÚ PRINCIPAL</p>
+          <p style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)', fontWeight: 'bold', marginBottom: '1rem', paddingLeft: '1rem' }}>MENÚ PRINCIPAL</p>
           <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             {navItems.map(item => (
               <button
@@ -117,8 +117,8 @@ export default function ClientPortal({ user, onLogout }) {
                 onClick={() => setActiveTab(item.id)}
                 style={{
                   display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem', borderRadius: '12px', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.95rem', transition: 'all 0.2s',
-                  backgroundColor: activeTab === item.id ? 'var(--sage-800)' : 'transparent',
-                  color: activeTab === item.id ? 'white' : 'var(--sage-300)'
+                  backgroundColor: activeTab === item.id ? 'var(--sage-50)' : 'transparent',
+                  color: activeTab === item.id ? 'var(--sage-800)' : 'var(--charcoal-mid)'
                 }}
               >
                 {item.icon} {item.label}
@@ -127,17 +127,17 @@ export default function ClientPortal({ user, onLogout }) {
           </nav>
         </div>
 
-        <div style={{ padding: '2rem', borderTop: '1px solid var(--sage-700)' }}>
+        <div style={{ padding: '2rem', borderTop: '1px solid var(--sage-300)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-            <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: 'var(--sage-700)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.2rem', color: '#d4af37' }}>
+            <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: 'var(--sage-300)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.2rem', color: 'var(--sage-800)' }}>
               {user.name.charAt(0).toUpperCase()}
             </div>
             <div>
-              <p style={{ margin: 0, fontWeight: 'bold', fontSize: '0.9rem' }}>{user.name}</p>
-              <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--sage-400)' }}>Inversor Registrado</p>
+              <p style={{ margin: 0, fontWeight: 'bold', fontSize: '0.9rem', color: 'var(--charcoal)' }}>{user.name}</p>
+              <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--charcoal-mid)' }}>Inversor Registrado</p>
             </div>
           </div>
-          <button onClick={onLogout} style={{ width: '100%', background: 'transparent', border: '1px solid var(--sage-600)', color: 'white', padding: '0.8rem', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+          <button onClick={onLogout} style={{ width: '100%', background: 'white', border: '1px solid var(--sage-300)', color: 'var(--sage-800)', padding: '0.8rem', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', fontWeight: 600 }}>
             <LogOut size={16} /> Cerrar Sesión
           </button>
         </div>
@@ -148,32 +148,32 @@ export default function ClientPortal({ user, onLogout }) {
         
         <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem' }}>
           <div>
-            <h2 style={{ fontSize: '2rem', margin: '0 0 0.5rem 0' }}>{navItems.find(i => i.id === activeTab).label}</h2>
-            <p style={{ color: 'var(--sage-300)', fontSize: '1rem', margin: 0 }}>Información confidencial de tu portafolio.</p>
+            <h2 style={{ fontSize: '2rem', margin: '0 0 0.5rem 0', color: 'var(--sage-800)' }}>{navItems.find(i => i.id === activeTab).label}</h2>
+            <p style={{ color: 'var(--charcoal-mid)', fontSize: '1rem', margin: 0 }}>Información confidencial de tu portafolio.</p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', position: 'relative' }}>
-            <button onClick={() => setShowNotifications(!showNotifications)} style={{ background: 'var(--sage-800)', border: '1px solid var(--sage-700)', padding: '0.8rem', borderRadius: '50%', color: 'white', cursor: 'pointer', position: 'relative' }}>
+            <button onClick={() => setShowNotifications(!showNotifications)} style={{ background: 'white', border: '1px solid var(--sage-300)', padding: '0.8rem', borderRadius: '50%', color: 'var(--charcoal)', cursor: 'pointer', position: 'relative' }}>
               <Bell size={20} />
-              <span style={{ position: 'absolute', top: 0, right: 0, width: '10px', height: '10px', backgroundColor: '#ef4444', borderRadius: '50%', border: '2px solid var(--sage-800)' }}></span>
+              <span style={{ position: 'absolute', top: 0, right: 0, width: '10px', height: '10px', backgroundColor: 'var(--danger)', borderRadius: '50%', border: '2px solid white' }}></span>
             </button>
             
             {/* Dropdown de Notificaciones */}
             {showNotifications && (
-              <div style={{ position: 'absolute', top: '100%', right: 0, marginTop: '1rem', width: '300px', background: 'var(--sage-800)', border: '1px solid var(--sage-700)', borderRadius: '12px', boxShadow: '0 10px 25px rgba(0,0,0,0.5)', zIndex: 50 }}>
-                <div style={{ padding: '1rem', borderBottom: '1px solid var(--sage-700)', fontWeight: 'bold' }}>Notificaciones Institucionales</div>
+              <div style={{ position: 'absolute', top: '100%', right: 0, marginTop: '1rem', width: '300px', background: 'white', border: '1px solid var(--sage-100)', borderRadius: '12px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', zIndex: 50 }}>
+                <div style={{ padding: '1rem', borderBottom: '1px solid var(--sage-100)', fontWeight: 'bold', color: 'var(--sage-800)' }}>Notificaciones Institucionales</div>
                 <div style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                   <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-                    <div style={{ background: 'rgba(52,211,153,0.1)', color: '#34d399', padding: '0.5rem', borderRadius: '50%' }}><CheckCircle2 size={16}/></div>
+                    <div style={{ background: 'rgba(16,185,129,0.1)', color: 'var(--success)', padding: '0.5rem', borderRadius: '50%' }}><CheckCircle2 size={16}/></div>
                     <div>
-                      <p style={{ margin: '0 0 0.3rem 0', fontSize: '0.9rem', fontWeight: 'bold' }}>Capital Fondeado</p>
-                      <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--sage-400)' }}>Tu capital ha sido inyectado con éxito en La Caja.</p>
+                      <p style={{ margin: '0 0 0.3rem 0', fontSize: '0.9rem', fontWeight: 'bold', color: 'var(--charcoal)' }}>Capital Fondeado</p>
+                      <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--charcoal-mid)' }}>Tu capital ha sido inyectado con éxito en La Caja.</p>
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-                    <div style={{ background: 'rgba(212,175,55,0.1)', color: '#d4af37', padding: '0.5rem', borderRadius: '50%' }}><FileText size={16}/></div>
+                    <div style={{ background: 'rgba(212,175,55,0.1)', color: 'var(--gold-dark)', padding: '0.5rem', borderRadius: '50%' }}><FileText size={16}/></div>
                     <div>
-                      <p style={{ margin: '0 0 0.3rem 0', fontSize: '0.9rem', fontWeight: 'bold' }}>Bóveda Activa</p>
-                      <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--sage-400)' }}>Tus contratos están listos para descarga digital.</p>
+                      <p style={{ margin: '0 0 0.3rem 0', fontSize: '0.9rem', fontWeight: 'bold', color: 'var(--charcoal)' }}>Bóveda Activa</p>
+                      <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--charcoal-mid)' }}>Tus contratos están listos para descarga digital.</p>
                     </div>
                   </div>
                 </div>
@@ -183,66 +183,66 @@ export default function ClientPortal({ user, onLogout }) {
         </header>
 
         {loading ? (
-          <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--sage-400)' }}>Sincronizando con base de datos criptográfica...</div>
+          <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--charcoal-mid)' }}>Sincronizando con base de datos criptográfica...</div>
         ) : (
           <>
             {/* VIEW: DASHBOARD */}
             {activeTab === 'dashboard' && (
               <div style={{ animation: 'fadeIn 0.5s ease-in-out' }}>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
-                  <div style={{ background: 'linear-gradient(145deg, var(--sage-800) 0%, #0d170f 100%)', padding: '2rem', borderRadius: '24px', border: '1px solid var(--sage-700)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem', color: 'var(--sage-300)' }}>
+                  <div style={{ background: 'white', padding: '2rem', borderRadius: '24px', border: '1px solid var(--sage-100)', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem', color: 'var(--charcoal-mid)' }}>
                       <Wallet size={20} /> <span style={{ fontSize: '1rem', fontWeight: 600 }}>Capital en Custodia</span>
                     </div>
-                    <div style={{ fontSize: '3rem', fontWeight: 800, color: 'white', fontFamily: 'monospace' }}>
+                    <div style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--charcoal)', fontFamily: 'Outfit' }}>
                       ${new Intl.NumberFormat('es-CL').format(totalCapital)}
                     </div>
                   </div>
 
-                  <div style={{ background: 'var(--sage-800)', padding: '2rem', borderRadius: '24px', border: '1px solid var(--sage-700)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem', color: 'var(--sage-300)' }}>
+                  <div style={{ background: 'white', padding: '2rem', borderRadius: '24px', border: '1px solid var(--sage-100)', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem', color: 'var(--charcoal-mid)' }}>
                       <TrendingUp size={20} /> <span style={{ fontSize: '1rem', fontWeight: 600 }}>Flujo Mensual Generado (ROI)</span>
                     </div>
-                    <div style={{ fontSize: '3rem', fontWeight: 800, color: '#d4af37', fontFamily: 'monospace' }}>
+                    <div style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--gold-dark)', fontFamily: 'Outfit' }}>
                       ${new Intl.NumberFormat('es-CL').format(totalMonthlyROI)}
                     </div>
                   </div>
                 </div>
 
-                <h3 style={{ fontSize: '1.2rem', marginBottom: '1.5rem', color: 'white', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <h3 style={{ fontSize: '1.2rem', marginBottom: '1.5rem', color: 'var(--sage-800)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <LayoutDashboard size={20}/> Posiciones Estratégicas Activas
                 </h3>
                 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                   {contracts.map(contract => (
-                    <div key={contract.id} style={{ background: 'var(--sage-800)', padding: '2rem', borderRadius: '16px', border: '1px solid var(--sage-700)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem', opacity: contract.status === 'LIQUIDATED' ? 0.6 : 1 }}>
+                    <div key={contract.id} style={{ background: 'white', padding: '2rem', borderRadius: '16px', border: '1px solid var(--sage-300)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem', opacity: contract.status === 'LIQUIDATED' ? 0.6 : 1, boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
                       <div>
-                        <div style={{ color: 'var(--sage-400)', fontSize: '0.8rem', marginBottom: '0.3rem', fontWeight: 'bold' }}>TRAMO INSTITUCIONAL</div>
-                        <div style={{ fontSize: '1.4rem', fontWeight: 'bold', color: 'white' }}>{contract.tier_name} <span style={{fontSize: '0.9rem', color: contract.status === 'LIQUIDATED' ? 'var(--sage-400)' : '#34d399'}}>({contract.monthly_roi * 100}%)</span></div>
+                        <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.8rem', marginBottom: '0.3rem', fontWeight: 'bold' }}>TRAMO INSTITUCIONAL</div>
+                        <div style={{ fontSize: '1.4rem', fontWeight: 'bold', color: 'var(--charcoal)' }}>{contract.tier_name} <span style={{fontSize: '0.9rem', color: contract.status === 'LIQUIDATED' ? 'var(--sage-500)' : 'var(--success)'}}>({contract.monthly_roi * 100}%)</span></div>
                       </div>
                       <div>
-                        <div style={{ color: 'var(--sage-400)', fontSize: '0.8rem', marginBottom: '0.3rem', fontWeight: 'bold' }}>APORTE INICIAL</div>
-                        <div style={{ fontSize: '1.2rem', fontWeight: 600, fontFamily: 'monospace', textDecoration: contract.status === 'LIQUIDATED' ? 'line-through' : 'none' }}>${new Intl.NumberFormat('es-CL').format(contract.amount)}</div>
+                        <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.8rem', marginBottom: '0.3rem', fontWeight: 'bold' }}>APORTE INICIAL</div>
+                        <div style={{ fontSize: '1.2rem', fontWeight: 600, fontFamily: 'Outfit', color: 'var(--charcoal)', textDecoration: contract.status === 'LIQUIDATED' ? 'line-through' : 'none' }}>${new Intl.NumberFormat('es-CL').format(contract.amount)}</div>
                       </div>
                       <div>
-                        <div style={{ color: 'var(--sage-400)', fontSize: '0.8rem', marginBottom: '0.3rem', fontWeight: 'bold' }}>ESTADO</div>
+                        <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.8rem', marginBottom: '0.3rem', fontWeight: 'bold' }}>ESTADO</div>
                         {contract.status === 'LIQUIDATED' ? (
-                           <div style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', padding: '0.4rem 1rem', borderRadius: '8px', fontWeight: 600, fontSize: '0.9rem', display: 'inline-block' }}>Liquidado / Devuelto</div>
+                           <div style={{ background: 'rgba(239, 68, 68, 0.1)', color: 'var(--danger)', padding: '0.4rem 1rem', borderRadius: '8px', fontWeight: 600, fontSize: '0.9rem', display: 'inline-block' }}>Liquidado / Devuelto</div>
                         ) : (
-                           <div style={{ background: 'rgba(52, 211, 153, 0.1)', color: '#34d399', padding: '0.4rem 1rem', borderRadius: '8px', fontWeight: 600, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                             <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#34d399' }}></div> Rentando ({contract.payments_made || 0}/12)
+                           <div style={{ background: 'rgba(16, 185, 129, 0.1)', color: 'var(--success)', padding: '0.4rem 1rem', borderRadius: '8px', fontWeight: 600, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                             <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--success)' }}></div> Rentando ({contract.payments_made || 0}/12)
                            </div>
                         )}
-                        <button onClick={() => handleOpenLogs(contract.id)} style={{ background: 'transparent', border: '1px solid var(--sage-600)', color: 'var(--sage-300)', padding: '0.3rem 0.6rem', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.8rem', marginTop: '0.5rem', fontWeight: 'bold' }}>
+                        <button onClick={() => handleOpenLogs(contract.id)} style={{ background: 'transparent', border: '1px solid var(--sage-300)', color: 'var(--sage-700)', padding: '0.3rem 0.6rem', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.8rem', marginTop: '0.5rem', fontWeight: 'bold' }}>
                           <History size={12}/> Ver Historial
                         </button>
                       </div>
                       <div style={{ textAlign: 'right' }}>
-                        <div style={{ color: 'var(--sage-400)', fontSize: '0.8rem', marginBottom: '0.3rem', fontWeight: 'bold' }}>RESCATE FINAL (BULLET)</div>
+                        <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.8rem', marginBottom: '0.3rem', fontWeight: 'bold' }}>RESCATE FINAL (BULLET)</div>
                         {contract.status === 'LIQUIDATED' ? (
-                          <div style={{ color: 'var(--sage-400)', fontWeight: 'bold' }}>Ejecutado Satisfactoriamente</div>
+                          <div style={{ color: 'var(--sage-500)', fontWeight: 'bold' }}>Ejecutado Satisfactoriamente</div>
                         ) : (
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#d4af37', fontWeight: 'bold', background: 'rgba(212, 175, 55, 0.1)', padding: '0.5rem 1rem', borderRadius: '8px' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--gold-dark)', fontWeight: 'bold', background: 'rgba(212, 175, 55, 0.1)', padding: '0.5rem 1rem', borderRadius: '8px' }}>
                             <Clock size={16} /> En {calculateDaysLeft(contract.created_at)} días
                           </div>
                         )}
@@ -250,7 +250,7 @@ export default function ClientPortal({ user, onLogout }) {
                     </div>
                   ))}
                   {contracts.length === 0 && (
-                    <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--sage-400)', background: 'var(--sage-800)', borderRadius: '20px', border: '1px dashed var(--sage-600)' }}>
+                    <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--charcoal-mid)', background: 'white', borderRadius: '20px', border: '1px dashed var(--sage-300)' }}>
                       No tienes contratos activos en este momento.
                     </div>
                   )}
@@ -261,22 +261,22 @@ export default function ClientPortal({ user, onLogout }) {
             {/* VIEW: DOCUMENTS */}
             {activeTab === 'documents' && (
               <div style={{ animation: 'fadeIn 0.5s ease-in-out' }}>
-                <div style={{ background: 'var(--sage-800)', padding: '3rem', borderRadius: '24px', border: '1px solid var(--sage-700)', textAlign: 'center' }}>
-                  <ShieldCheck size={64} style={{ color: '#34d399', margin: '0 auto 1.5rem auto' }} />
-                  <h3 style={{ fontSize: '1.8rem', margin: '0 0 1rem 0' }}>Custodia Legal</h3>
-                  <p style={{ color: 'var(--sage-300)', maxWidth: '600px', margin: '0 auto 2rem auto', lineHeight: '1.6' }}>Tus contratos físicos y digitalizados están bajo custodia en notaría. Puedes descargar una copia certificada de tu pacto de accionistas aquí.</p>
+                <div style={{ background: 'white', padding: '3rem', borderRadius: '24px', border: '1px solid var(--sage-300)', textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
+                  <ShieldCheck size={64} style={{ color: 'var(--success)', margin: '0 auto 1.5rem auto' }} />
+                  <h3 style={{ fontSize: '1.8rem', margin: '0 0 1rem 0', color: 'var(--sage-800)' }}>Custodia Legal</h3>
+                  <p style={{ color: 'var(--charcoal-mid)', maxWidth: '600px', margin: '0 auto 2rem auto', lineHeight: '1.6' }}>Tus contratos físicos y digitalizados están bajo custodia en notaría. Puedes descargar una copia certificada de tu pacto de accionistas aquí.</p>
                   
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '600px', margin: '0 auto' }}>
                     {contracts.map((c, i) => (
-                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--sage-900)', padding: '1.5rem', borderRadius: '12px', border: '1px solid var(--sage-700)' }}>
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--sage-50)', padding: '1.5rem', borderRadius: '12px', border: '1px solid var(--sage-100)' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                          <FileText size={24} style={{ color: '#d4af37' }} />
+                          <FileText size={24} style={{ color: 'var(--gold-dark)' }} />
                           <div style={{ textAlign: 'left' }}>
-                            <div style={{ fontWeight: 'bold' }}>Contrato Tramo {c.tier_name}</div>
-                            <div style={{ fontSize: '0.8rem', color: 'var(--sage-400)' }}>Firmado y validado (UAF)</div>
+                            <div style={{ fontWeight: 'bold', color: 'var(--charcoal)' }}>Contrato Tramo {c.tier_name}</div>
+                            <div style={{ fontSize: '0.8rem', color: 'var(--sage-700)' }}>Firmado y validado (UAF)</div>
                           </div>
                         </div>
-                        <button onClick={() => handlePrintContract(c)} style={{ background: 'transparent', border: '1px solid #34d399', color: '#34d399', padding: '0.6rem 1.2rem', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 'bold' }}>
+                        <button onClick={() => handlePrintContract(c)} style={{ background: 'transparent', border: '1px solid var(--success)', color: 'var(--success)', padding: '0.6rem 1.2rem', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 'bold' }}>
                           <Download size={16} /> Ver Contrato
                         </button>
                       </div>
@@ -290,14 +290,14 @@ export default function ClientPortal({ user, onLogout }) {
             {activeTab === 'projects' && (
               <div style={{ animation: 'fadeIn 0.5s ease-in-out' }}>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
-                  <div style={{ background: 'var(--sage-800)', borderRadius: '24px', overflow: 'hidden', border: '1px solid var(--sage-700)' }}>
+                  <div style={{ background: 'white', borderRadius: '24px', overflow: 'hidden', border: '1px solid var(--sage-300)', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
                     <div style={{ height: '200px', background: 'url("https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80")', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
                     <div style={{ padding: '2rem' }}>
-                      <div style={{ display: 'inline-block', background: 'rgba(52,211,153,0.2)', color: '#34d399', padding: '0.3rem 0.8rem', borderRadius: '12px', fontSize: '0.8rem', fontWeight: 'bold', marginBottom: '1rem' }}>EN DESARROLLO</div>
-                      <h3 style={{ margin: '0 0 1rem 0', fontSize: '1.4rem' }}>Torre Zafiro - Las Condes</h3>
-                      <p style={{ color: 'var(--sage-300)', fontSize: '0.9rem', marginBottom: '1.5rem', lineHeight: '1.6' }}>Proyecto de desarrollo habitacional premium. 85% de avance en obra gruesa. Fecha estimada de recepción municipal: Noviembre 2026.</p>
-                      <div style={{ width: '100%', height: '6px', background: 'var(--sage-900)', borderRadius: '3px' }}>
-                        <div style={{ width: '85%', height: '100%', background: '#d4af37', borderRadius: '3px' }}></div>
+                      <div style={{ display: 'inline-block', background: 'rgba(16,185,129,0.1)', color: 'var(--success)', padding: '0.3rem 0.8rem', borderRadius: '12px', fontSize: '0.8rem', fontWeight: 'bold', marginBottom: '1rem' }}>EN DESARROLLO</div>
+                      <h3 style={{ margin: '0 0 1rem 0', fontSize: '1.4rem', color: 'var(--sage-800)' }}>Torre Zafiro - Las Condes</h3>
+                      <p style={{ color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginBottom: '1.5rem', lineHeight: '1.6' }}>Proyecto de desarrollo habitacional premium. 85% de avance en obra gruesa. Fecha estimada de recepción municipal: Noviembre 2026.</p>
+                      <div style={{ width: '100%', height: '6px', background: 'var(--sage-100)', borderRadius: '3px' }}>
+                        <div style={{ width: '85%', height: '100%', background: 'var(--gold-dark)', borderRadius: '3px' }}></div>
                       </div>
                     </div>
                   </div>
@@ -308,18 +308,18 @@ export default function ClientPortal({ user, onLogout }) {
             {/* VIEW: SETTINGS */}
             {activeTab === 'settings' && (
               <div style={{ animation: 'fadeIn 0.5s ease-in-out' }}>
-                <div style={{ background: 'var(--sage-800)', padding: '3rem', borderRadius: '24px', border: '1px solid var(--sage-700)', maxWidth: '800px' }}>
-                  <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '0 0 2rem 0' }}><Lock size={24} color="#d4af37"/> Protocolos de Seguridad UAF</h3>
+                <div style={{ background: 'white', padding: '3rem', borderRadius: '24px', border: '1px solid var(--sage-300)', maxWidth: '800px', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
+                  <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '0 0 2rem 0', color: 'var(--sage-800)' }}><Lock size={24} color="var(--gold-primary)"/> Protocolos de Seguridad UAF</h3>
                   
-                  <div style={{ background: 'var(--sage-900)', padding: '2rem', borderRadius: '16px', border: '1px dashed #ef4444', marginBottom: '2rem' }}>
-                    <h4 style={{ margin: '0 0 1rem 0', color: '#ef4444' }}>Cuenta Bancaria Irrevocable</h4>
-                    <p style={{ color: 'var(--sage-300)', fontSize: '0.9rem', lineHeight: '1.6' }}>En cumplimiento de la Ley N° 19.913 sobre Lavado de Activos, todos tus retornos (ROI) y tu capital final solo podrán ser transferidos a tu cuenta bancaria de origen registrada. No se admiten transferencias a terceros.</p>
-                    <div style={{ marginTop: '1.5rem', padding: '1rem', background: 'var(--sage-800)', borderRadius: '8px', color: 'white', fontFamily: 'monospace', fontWeight: 'bold' }}>
+                  <div style={{ background: 'var(--sage-50)', padding: '2rem', borderRadius: '16px', border: '1px dashed var(--danger)', marginBottom: '2rem' }}>
+                    <h4 style={{ margin: '0 0 1rem 0', color: 'var(--danger)' }}>Cuenta Bancaria Irrevocable</h4>
+                    <p style={{ color: 'var(--charcoal-mid)', fontSize: '0.9rem', lineHeight: '1.6' }}>En cumplimiento de la Ley N° 19.913 sobre Lavado de Activos, todos tus retornos (ROI) y tu capital final solo podrán ser transferidos a tu cuenta bancaria de origen registrada. No se admiten transferencias a terceros.</p>
+                    <div style={{ marginTop: '1.5rem', padding: '1rem', background: 'white', border: '1px solid var(--sage-300)', borderRadius: '8px', color: 'var(--charcoal)', fontFamily: 'Outfit', fontWeight: 'bold' }}>
                       {contracts.length > 0 ? (contracts[0].bank_account_info || "Cuenta en proceso de verificación por notaría.") : "No hay contratos activos."}
                     </div>
                   </div>
 
-                  <p style={{ color: 'var(--sage-400)', fontSize: '0.85rem' }}>Para modificar esta cuenta, debes solicitar una cita presencial con nuestro oficial de cumplimiento normativo (Compliance Officer).</p>
+                  <p style={{ color: 'var(--sage-700)', fontSize: '0.85rem' }}>Para modificar esta cuenta, debes solicitar una cita presencial con nuestro oficial de cumplimiento normativo (Compliance Officer).</p>
                 </div>
               </div>
             )}
@@ -329,25 +329,25 @@ export default function ClientPortal({ user, onLogout }) {
       </main>
 
       {logsModalOpen && (
-        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
-          <div style={{ background: 'var(--sage-800)', border: '1px solid var(--sage-700)', padding: '2rem', borderRadius: '16px', width: '90%', maxWidth: '600px', maxHeight: '80vh', overflowY: 'auto', position: 'relative' }}>
-            <button onClick={() => setLogsModalOpen(false)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'transparent', border: 'none', color: 'var(--sage-400)', cursor: 'pointer' }}><X size={24}/></button>
-            <h3 style={{ margin: '0 0 1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><History size={24}/> Historial de Pagos Recibidos</h3>
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+          <div style={{ background: 'white', border: '1px solid var(--sage-100)', padding: '2rem', borderRadius: '16px', width: '90%', maxWidth: '600px', maxHeight: '80vh', overflowY: 'auto', position: 'relative', boxShadow: '0 25px 50px rgba(0,0,0,0.1)' }}>
+            <button onClick={() => setLogsModalOpen(false)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'transparent', border: 'none', color: 'var(--charcoal-mid)', cursor: 'pointer' }}><X size={24}/></button>
+            <h3 style={{ margin: '0 0 1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--sage-800)' }}><History size={24}/> Historial de Pagos Recibidos</h3>
             
             {logLoading ? (
-              <p style={{ color: 'var(--sage-400)', textAlign: 'center' }}>Sincronizando con libro mayor...</p>
+              <p style={{ color: 'var(--charcoal-mid)', textAlign: 'center' }}>Sincronizando con libro mayor...</p>
             ) : currentLogs.length === 0 ? (
-              <p style={{ color: 'var(--sage-400)', textAlign: 'center' }}>No has recibido pagos aún.</p>
+              <p style={{ color: 'var(--charcoal-mid)', textAlign: 'center' }}>No has recibido pagos aún.</p>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {currentLogs.map(log => (
-                  <div key={log.id} style={{ background: 'var(--sage-900)', padding: '1rem 1.5rem', borderRadius: '12px', border: '1px solid var(--sage-700)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div key={log.id} style={{ background: 'var(--sage-50)', padding: '1rem 1.5rem', borderRadius: '12px', border: '1px solid var(--sage-100)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div>
-                      <div style={{ color: 'var(--sage-400)', fontSize: '0.8rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>CUOTA #{log.payment_number}</div>
-                      <div style={{ color: 'white', fontWeight: 'bold' }}>{new Date(log.executed_at).toLocaleDateString('es-CL')}</div>
-                      <div style={{ color: '#34d399', fontSize: '0.8rem', marginTop: '0.2rem', display: 'flex', alignItems: 'center', gap: '0.2rem' }}><CheckCircle2 size={12}/> Transacción Confirmada</div>
+                      <div style={{ color: 'var(--sage-700)', fontSize: '0.8rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>CUOTA #{log.payment_number}</div>
+                      <div style={{ color: 'var(--charcoal)', fontWeight: 'bold' }}>{new Date(log.executed_at).toLocaleDateString('es-CL')}</div>
+                      <div style={{ color: 'var(--success)', fontSize: '0.8rem', marginTop: '0.2rem', display: 'flex', alignItems: 'center', gap: '0.2rem' }}><CheckCircle2 size={12}/> Transacción Confirmada</div>
                     </div>
-                    <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#34d399' }}>
+                    <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--success)' }}>
                       +${new Intl.NumberFormat('es-CL').format(log.payment_amount)}
                     </div>
                   </div>
