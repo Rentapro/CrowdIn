@@ -3,8 +3,14 @@
 :root {
   --sage-50: #f4f7f4;
   --sage-100: #e3ebe3;
+  --sage-200: #c2d1c3;
+  --sage-300: #a1b8a3;
+  --sage-400: #819e83;
   --sage-500: #7a9c7e;
+  --sage-600: #243e29;
+  --sage-700: #1b2e1e;
   --sage-800: #2d4a31;
+  --sage-900: #0d170f;
   --gold-muted: #d4af37;
   --gold-light: #f3e5ab;
   --charcoal: #0a0a0a;
