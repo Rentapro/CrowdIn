@@ -16,8 +16,8 @@ export default async function handler(req, res) {
     
     const clients = await sql`
       SELECT 
-        u.id as user_id, u.name, u.email, u.created_at,
-        c.id as contract_id, c.amount, c.tier_name, c.monthly_roi, c.status
+        u.id as user_id, u.name, u.email, u.created_at, u.kyc_status,
+        c.id as contract_id, c.amount, c.tier_name, c.monthly_roi, c.status, c.payments_made, c.bank_account_info
       FROM users u
       LEFT JOIN contracts c ON u.id = c.user_id
       WHERE u.role = 'CLIENT'

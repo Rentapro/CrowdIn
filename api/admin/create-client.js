@@ -13,9 +13,9 @@ export default async function handler(req, res) {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     if (decoded.role !== 'SUPERADMIN') return res.status(403).json({ error: 'Prohibido' });
 
-    const { name, email, amount, tier_name, monthly_roi } = req.body;
+    const { name, email, amount, tier_name, monthly_roi, bank_account, rut } = req.body;
 
-    if (!name || !email || !amount || !tier_name || !monthly_roi) {
+    if (!name || !email || !amount || !tier_name || !monthly_roi || !bank_account) {
       return res.status(400).json({ error: 'Faltan datos obligatorios' });
     }
 
@@ -30,18 +30,22 @@ export default async function handler(req, res) {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(tempPassword, salt);
 
-    // Insert user
+    // Insert user (default PENDING KYC)
+    // We add the RUT to the name temporarily or just keep it in DB if we added a column. 
+    // Wait, let's append RUT to name or bank_account_info to keep schema simple.
+    const fullBankInfo = `RUT: ${rut || 'No provisto'} | ${bank_account}`;
+
     const newUser = await sql`
-      INSERT INTO users (email, password_hash, name, role)
-      VALUES (${email}, ${hash}, ${name}, 'CLIENT')
+      INSERT INTO users (email, password_hash, name, role, kyc_status)
+      VALUES (${email}, ${hash}, ${name}, 'CLIENT', 'PENDING')
       RETURNING id
     `;
     const userId = newUser[0].id;
 
     // Insert contract
     await sql`
-      INSERT INTO contracts (user_id, amount, tier_name, monthly_roi, status)
-      VALUES (${userId}, ${amount}, ${tier_name}, ${monthly_roi}, 'ACTIVE')
+      INSERT INTO contracts (user_id, amount, tier_name, monthly_roi, status, payments_made, bank_account_info)
+      VALUES (${userId}, ${amount}, ${tier_name}, ${monthly_roi}, 'ACTIVE', 0, ${fullBankInfo})
     `;
 
     return res.status(200).json({ 
