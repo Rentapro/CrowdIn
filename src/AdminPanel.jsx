@@ -65,7 +65,7 @@ export default function AdminPanel({ user, onLogout }) {
   const fetchProspects = async () => {
     setProspectLoading(true);
     try {
-      const res = await fetch('/api/admin/prospects', {
+      const res = await fetch('/api/admin/crm', {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` }
       });
       const data = await res.json();

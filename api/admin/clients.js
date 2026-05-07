@@ -19,7 +19,7 @@ export default async function handler(req, res) {
       const rows = await sql`
         SELECT u.id as user_id, u.name, u.email, u.kyc_status, c.id as contract_id, c.amount, c.monthly_roi, c.tier_name, c.payments_made, c.status, c.bank_account_info
         FROM users u
-        LEFT JOIN contratos c ON u.id = c.user_id
+        LEFT JOIN contracts c ON u.id = c.user_id
         WHERE u.role ILIKE 'CLIENT'
         ORDER BY u.created_at DESC
       `;
@@ -48,7 +48,7 @@ export default async function handler(req, res) {
       const tier = tiers.find(t => amount >= t.value) || tiers[tiers.length - 1];
 
       await sql`
-        INSERT INTO contratos (user_id, amount, monthly_roi, tier_name, bank_account_info) 
+        INSERT INTO contracts (user_id, amount, monthly_roi, tier_name, bank_account_info) 
         VALUES (${user.id}, ${amount}, ${tier.roi}, ${tier.name}, ${bankAccount})
       `;
       
