@@ -243,7 +243,7 @@ function App() {
       {/* TRUST BADGES SECTION */}
       <section style={{ background: 'rgba(255,255,255,0.3)', padding: '2rem 0', borderTop: '1px solid rgba(0,0,0,0.05)', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
         <div className="container">
-          <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap', gap: '2rem', opacity: 0.6, filter: 'grayscale(1)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap', gap: '2rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--sage-800)' }}><Landmark size={24}/> BANCA NACIONAL INTEGRADA</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--sage-800)' }}><ShieldCheck size={24}/> PROTOCOLIZADO ANTE NOTARIO</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--sage-800)' }}><Activity size={24}/> CUMPLIMIENTO UAF CHILE</div>
@@ -277,7 +277,7 @@ function App() {
             <div style={{ background: 'var(--sage-50)', padding: '3rem', borderRadius: '32px', border: '1px solid var(--sage-100)', textAlign: 'center' }}>
               <div style={{ background: 'var(--gold-primary)', color: 'white', width: '60px', height: '60px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem auto', fontSize: '1.5rem', fontWeight: 800 }}>3</div>
               <h3 style={{ color: 'var(--sage-800)', marginBottom: '1rem' }}>Retiro con Garantía</h3>
-              <p style={{ color: 'var(--charcoal-mid)', lineHeight: 1.6 }}>A los 12 meses, por contrato notarial obligatorio (Pacto de Retroventa), te compramos tus acciones y recuperas tu inversión inicial completa.</p>
+              <p style={{ color: 'var(--charcoal-mid)', lineHeight: 1.6 }}>Al cumplirse los 12 meses, ejecutas tu opción de salida (Bullet) o reinviertes en periodos de 6 o 12 meses, manteniendo tu rentabilidad pactada.</p>
             </div>
           </div>
         </div>
@@ -438,8 +438,8 @@ function App() {
             </div>
             <div style={{ background: 'rgba(255,255,255,0.05)', padding: '3rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
               <Building2 size={48} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-              <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Respaldo en Activos Físicos</h3>
-              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>La sociedad posee terrenos y condominios. En caso de cese de operaciones, los activos inmobiliarios se liquidan prioritariamente para cubrir el capital aportado por los accionistas, según estatutos.</p>
+              <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Respaldo en Activos Reales</h3>
+              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>El capital se materializa en activos inmobiliarios específicos (Terrenos y Construcción) bajo mandato de la SpA. Esto asegura que tu inversión esté respaldada por patrimonio tangible, no solo por documentos.</p>
             </div>
           </div>
         </div>
