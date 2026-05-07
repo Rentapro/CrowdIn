@@ -449,15 +449,15 @@ export default function AdminPanel({ user, onLogout }) {
                 <div style={{ display: 'flex', gap: '1rem' }}>
                   <button 
                     onClick={handleCaptureLeads}
-                    style={{ background: 'linear-gradient(135deg, var(--gold-primary), var(--gold-dark))', color: 'white', padding: '0.8rem 1.5rem', borderRadius: '12px', border: 'none', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}
+                    style={{ background: 'var(--gold-primary)', color: 'white', padding: '0.8rem 1.5rem', borderRadius: '12px', border: 'none', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.6rem', cursor: 'pointer', boxShadow: '0 4px 12px rgba(212, 175, 55, 0.3)' }}
                   >
-                    <Target size={20} /> Capturar Leads VIP
+                    <Target size={20} /> CAPTURAR LEADS VIP
                   </button>
                   <button 
                     onClick={() => setShowProspectForm(true)}
-                    style={{ background: 'var(--sage-800)', color: 'white', padding: '0.8rem 1.5rem', borderRadius: '12px', border: 'none', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}
+                    style={{ background: 'var(--sage-900)', color: 'white', padding: '0.8rem 1.5rem', borderRadius: '12px', border: 'none', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.6rem', cursor: 'pointer' }}
                   >
-                    <Users size={20} /> Registrar Prospecto
+                    <Users size={20} /> REGISTRAR PROSPECTO
                   </button>
                 </div>
               </div>
