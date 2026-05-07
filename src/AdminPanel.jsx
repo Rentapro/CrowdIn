@@ -486,7 +486,7 @@ export default function AdminPanel({ user, onLogout }) {
                     </tr>
                   </thead>
                   <tbody>
-                    {prospects.map(prospect => (
+                    {prospects && Array.isArray(prospects) && prospects.length > 0 ? prospects.map(prospect => (
                       <tr key={prospect.id} style={{ borderTop: '1px solid var(--sage-100)' }}>
                         <td style={{ padding: '1rem 1.5rem' }}>
                           <div style={{ fontWeight: 'bold' }}>{prospect.name}</div>
@@ -518,7 +518,13 @@ export default function AdminPanel({ user, onLogout }) {
                           {new Date(prospect.updated_at).toLocaleDateString('es-CL')}
                         </td>
                       </tr>
-                    ))}
+                    )) : (
+                      <tr>
+                        <td colSpan="5" style={{ padding: '3rem', textAlign: 'center', color: 'var(--charcoal-mid)' }}>
+                          No hay prospectos activos. Use el botón "Capturar Leads VIP" para iniciar.
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
