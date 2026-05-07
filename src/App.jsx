@@ -96,10 +96,10 @@ function App() {
   const getTier = (amount) => {
     if (amount >= 100000000) return { roi: 0.025, name: 'Institucional' };
     if (amount >= 40000000) return { roi: 0.025, name: 'Elite' };
-    if (amount >= 20000000) return { roi: 0.020, name: 'Premium' };
-    if (amount >= 10000000) return { roi: 0.016, name: 'Avanzado' };
-    if (amount >= 5000000) return { roi: 0.013, name: 'Crecimiento' };
-    return { roi: 0.010, name: 'Inicio' };
+    if (amount >= 20000000) return { roi: 0.022, name: 'Premium' };
+    if (amount >= 10000000) return { roi: 0.020, name: 'Avanzado' };
+    if (amount >= 5000000) return { roi: 0.017, name: 'Crecimiento' };
+    return { roi: 0.015, name: 'Inicio' };
   };
 
   const currentTier = getTier(investment);

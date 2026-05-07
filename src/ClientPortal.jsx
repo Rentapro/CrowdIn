@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { LogOut, TrendingUp, Wallet, Calendar, ShieldCheck, Clock, CheckCircle2, LayoutDashboard, FileText, Settings, Bell, Download, Lock, Building, History, X } from 'lucide-react';
+import { LogOut, TrendingUp, Wallet, Calendar, ShieldCheck, ShieldAlert, Clock, CheckCircle2, LayoutDashboard, FileText, Settings, Bell, Download, Lock, Building, History, X } from 'lucide-react';
 import ParallaxBackground from './ParallaxBackground';
 
 export default function ClientPortal({ user, onLogout }) {
