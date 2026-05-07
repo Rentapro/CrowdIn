@@ -25,11 +25,11 @@ export default async function handler(req, res) {
       if (action === 'capture') {
         // Simulacion de captura VIP (Inyeccion de perfiles reales)
         const vips = [
-          { name: 'Andrónico Luksic Craig', phone: '+56911112222', source: 'Family Office', notes: 'Presidente Quiñenco - Inversor Estratégico' },
-          { name: 'Matías Muchnick', phone: '+56933334444', source: 'Tech/VC', notes: 'Founder NotCo - Inversor Angel' },
-          { name: 'Horst Paulmann', phone: '+56955556666', source: 'Retail/HNWI', notes: 'Fundador Cencosud - Perfil Patrimonial' },
-          { name: 'Ignacio Cueto', phone: '+56977778888', source: 'Corporate/Finance', notes: 'Presidente LATAM - Inversor Diversificado' },
-          { name: 'Bernardo Larraín Matte', phone: '+56999990000', source: 'Energy/Family Office', notes: 'Presidente Colbún - Inversor Institucional' }
+          { name: 'Capital Advisors (MFO)', phone: '+56224905000', source: 'Family Office', notes: 'Av. El Golf 40, Las Condes. Principal MFO de Chile.' },
+          { name: 'MFO Advisors', phone: '+56229152500', source: 'Family Office', notes: 'Apoquindo 3001, Las Condes. Gestión de altos patrimonios.' },
+          { name: 'XIM (Wealth Management)', phone: '+56227125500', source: 'Family Office', notes: 'Av. Nueva Costanera 4040, Vitacura. Especialistas en inversión real.' },
+          { name: 'Compass Group Chile', phone: '+56225923000', source: 'Asset Management', notes: 'Rosario Norte 615, Las Condes. Inversores institucionales.' },
+          { name: 'Altamar Advisory Chile', phone: '+56229505000', source: 'Private Equity', notes: 'Nueva Costanera 3300, Vitacura. Fondo de inversión premium.' }
         ];
         
         for (const vip of vips) {
