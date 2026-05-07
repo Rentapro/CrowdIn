@@ -189,16 +189,6 @@ export default function AdminPanel({ user, onLogout }) {
   };
   
   const handleCaptureLeads = async () => {
-    // Banner de Fuerza Bruta (Inyección directa al DOM)
-    let banner = document.getElementById('force-banner');
-    if (!banner) {
-      banner = document.createElement('div');
-      banner.id = 'force-banner';
-      document.body.appendChild(banner);
-    }
-    banner.style.cssText = "position:fixed;top:0;left:0;width:100%;background:red;color:white;padding:20px;text-align:center;z-index:9999;font-weight:bold;font-size:1.5rem;display:block;";
-    banner.innerText = "⏳ PROCESANDO CAPTURA VIP... NO CIERRE LA PÁGINA";
-
     setProspectLoading(true);
     try {
       const res = await fetch('/api/admin/crm', {
@@ -211,16 +201,10 @@ export default function AdminPanel({ user, onLogout }) {
       });
 
       if (res.ok) {
-        banner.style.background = "#25D366";
-        banner.innerText = "✅ ¡CAPTURA EXITOSA! REFRESCANDO...";
         await fetchProspects();
-        setTimeout(() => { banner.style.display = 'none'; }, 4000);
-      } else {
-        banner.innerText = "❌ ERROR EN EL SERVIDOR";
-        setTimeout(() => { banner.style.display = 'none'; }, 4000);
       }
     } catch (err) { 
-      banner.innerText = "❌ ERROR DE CONEXIÓN CRÍTICO";
+      console.error(err);
     } finally { 
       setProspectLoading(false); 
     }
@@ -471,7 +455,7 @@ export default function AdminPanel({ user, onLogout }) {
           {activeTab === 'crm' && (
             <>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-                <h2 style={{ margin: 0, color: 'var(--sage-900)', fontSize: '1.8rem' }}>Pipeline de Captación <span style={{ fontSize: '0.7rem', color: 'var(--gold-primary)', background: 'var(--sage-50)', padding: '0.2rem 0.5rem', borderRadius: '4px', verticalAlign: 'middle' }}>v1.2.7-FORCE</span></h2>
+                <h2 style={{ margin: 0, color: 'var(--sage-900)', fontSize: '1.8rem' }}>Pipeline de Captación</h2>
                 <div style={{ display: 'flex', gap: '1rem' }}>
                   <button 
                     onClick={handleCaptureLeads}

@@ -25,9 +25,11 @@ export default async function handler(req, res) {
       if (action === 'capture') {
         // Simulacion de captura VIP (Inyeccion de perfiles reales)
         const vips = [
-          { name: 'Maximo Pacheco', phone: '+56912345678', source: 'CRM Direct', notes: 'CEO Codelco' },
-          { name: 'Ricardo Ramos', phone: '+56987654321', source: 'CRM Direct', notes: 'CEO SQM' },
-          { name: 'Francisca Cruz', phone: '+56944445555', source: 'CRM Direct', notes: 'CEO Echeverria Izquierdo' }
+          { name: 'Andrónico Luksic Craig', phone: '+56911112222', source: 'Family Office', notes: 'Presidente Quiñenco - Inversor Estratégico' },
+          { name: 'Matías Muchnick', phone: '+56933334444', source: 'Tech/VC', notes: 'Founder NotCo - Inversor Angel' },
+          { name: 'Horst Paulmann', phone: '+56955556666', source: 'Retail/HNWI', notes: 'Fundador Cencosud - Perfil Patrimonial' },
+          { name: 'Ignacio Cueto', phone: '+56977778888', source: 'Corporate/Finance', notes: 'Presidente LATAM - Inversor Diversificado' },
+          { name: 'Bernardo Larraín Matte', phone: '+56999990000', source: 'Energy/Family Office', notes: 'Presidente Colbún - Inversor Institucional' }
         ];
         
         for (const vip of vips) {
