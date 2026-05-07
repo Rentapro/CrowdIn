@@ -76,15 +76,14 @@ export default function AdminPanel({ user, onLogout }) {
     e.preventDefault();
     const tier = tiers.find(t => t.value === parseInt(amount));
     try {
-      const res = await fetch('/api/admin/create-client', {
+      const res = await fetch('/api/admin/clients', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` },
-        body: JSON.stringify({ name, rut, email, bank_account: bankAccount, amount: tier.value, tier_name: tier.name, monthly_roi: tier.roi })
+        body: JSON.stringify({ name, email, bankAccount, amount: parseInt(amount) })
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
-      if (data.credentials) setNewCredentials(data.credentials);
-      else alert(data.message);
+      if (data.tempPassword) setNewCredentials({ email, tempPassword: data.tempPassword });
       fetchClients();
       setShowForm(false);
       setName(''); setRut(''); setEmail(''); setBankAccount('');

@@ -25,6 +25,14 @@ async function initCRM() {
     `);
     
     console.log("[+] Tabla 'prospectos' creada exitosamente.");
+
+    // Opcional: Insertar un prospecto de prueba
+    await pool.query(`
+      INSERT INTO prospectos (name, phone, source, notes) 
+      VALUES ('Inversor de Prueba (LinkedIn)', '56912345678', 'LinkedIn', 'Interesado en tramos de 40M. Solicito info por Note.')
+      ON CONFLICT DO NOTHING;
+    `);
+    console.log("[+] Dato de prueba insertado.");
     await pool.end();
   } catch (err) {
     console.error("[!] Error:", err);
