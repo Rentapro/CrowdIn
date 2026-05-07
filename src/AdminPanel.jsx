@@ -46,8 +46,14 @@ export default function AdminPanel({ user, onLogout }) {
       const res = await fetch('/api/admin/clients', {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` }
       });
-      if (!res.ok) throw new Error('Error al cargar clientes');
+      if (!res.ok) {
+        const errorData = await res.json();
+        console.error('API Error:', errorData);
+        alert(`Error API: ${errorData.error}`);
+        throw new Error(errorData.error);
+      }
       const data = await res.json();
+      console.log('Clientes cargados:', data);
       setClients(data);
     } catch (err) {
       console.error(err);
