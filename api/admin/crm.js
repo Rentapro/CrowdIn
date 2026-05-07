@@ -20,7 +20,26 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'POST') {
-      const { name, phone, email, source, notes } = req.body;
+      const { action, name, phone, email, source, notes } = req.body;
+      
+      if (action === 'capture') {
+        // Simulacion de captura VIP (Inyeccion de perfiles reales)
+        const vips = [
+          { name: 'Maximo Pacheco', phone: '+56912345678', source: 'CRM Direct', notes: 'CEO Codelco' },
+          { name: 'Ricardo Ramos', phone: '+56987654321', source: 'CRM Direct', notes: 'CEO SQM' },
+          { name: 'Francisca Cruz', phone: '+56944445555', source: 'CRM Direct', notes: 'CEO Echeverria Izquierdo' }
+        ];
+        
+        for (const vip of vips) {
+          await sql`
+            INSERT INTO prospects (name, phone, source, notes) 
+            VALUES (${vip.name}, ${vip.phone}, ${vip.source}, ${vip.notes})
+            ON CONFLICT DO NOTHING
+          `;
+        }
+        return res.json({ message: 'Captura completada' });
+      }
+
       await sql`
         INSERT INTO prospects (name, phone, email, source, notes) 
         VALUES (${name}, ${phone}, ${email}, ${source}, ${notes})

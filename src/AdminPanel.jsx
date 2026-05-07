@@ -186,6 +186,19 @@ export default function AdminPanel({ user, onLogout }) {
       }
     } catch (err) { console.error(err); }
   };
+  
+  const handleCaptureLeads = async () => {
+    if (!window.confirm("¿Deseas iniciar la búsqueda automática de perfiles VIP en LinkedIn?")) return;
+    setProspectLoading(true);
+    try {
+      const res = await fetch('/api/admin/crm', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` },
+        body: JSON.stringify({ action: 'capture' })
+      });
+      if (res.ok) fetchProspects();
+    } catch (err) { console.error(err); } finally { setProspectLoading(false); }
+  };
 
   const handleUpdateProspectStatus = async (id, status) => {
     try {
@@ -431,6 +444,23 @@ export default function AdminPanel({ user, onLogout }) {
 
           {activeTab === 'crm' && (
             <>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+                <h2 style={{ margin: 0, color: 'var(--sage-900)', fontSize: '1.8rem' }}>Pipeline de Captación</h2>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                  <button 
+                    onClick={handleCaptureLeads}
+                    style={{ background: 'linear-gradient(135deg, var(--gold-primary), var(--gold-dark))', color: 'white', padding: '0.8rem 1.5rem', borderRadius: '12px', border: 'none', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}
+                  >
+                    <Target size={20} /> Capturar Leads VIP
+                  </button>
+                  <button 
+                    onClick={() => setShowProspectForm(true)}
+                    style={{ background: 'var(--sage-800)', color: 'white', padding: '0.8rem 1.5rem', borderRadius: '12px', border: 'none', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}
+                  >
+                    <Users size={20} /> Registrar Prospecto
+                  </button>
+                </div>
+              </div>
               {showProspectForm && (
                 <div style={{ background: 'white', padding: '2rem', borderRadius: '16px', marginBottom: '2rem', border: '1px solid var(--sage-300)', boxShadow: '0 20px 40px rgba(0,0,0,0.05)' }}>
                   <h3 style={{ marginTop: 0, color: 'var(--sage-800)' }}>Registrar Nuevo Prospecto</h3>
