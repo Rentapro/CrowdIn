@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
         SELECT u.id as user_id, u.name, u.email, u.kyc_status, c.id as contract_id, c.amount, c.monthly_roi, c.tier_name, c.payments_made, c.status, c.bank_account_info
         FROM users u
         LEFT JOIN contratos c ON u.id = c.user_id
-        WHERE u.role = 'CLIENT'
+        WHERE u.role ILIKE 'CLIENT'
         ORDER BY u.created_at DESC
       `);
       return res.json(result.rows);
