@@ -54,9 +54,15 @@ export default function AdminPanel({ user, onLogout }) {
       }
       const data = await res.json();
       console.log('Clientes cargados:', data);
-      setClients(data);
+      if (Array.isArray(data)) {
+        setClients(data);
+      } else {
+        console.error('Data is not an array:', data);
+        setClients([]);
+      }
     } catch (err) {
       console.error(err);
+      setClients([]);
     } finally {
       setLoading(false);
     }
@@ -69,8 +75,15 @@ export default function AdminPanel({ user, onLogout }) {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` }
       });
       const data = await res.json();
-      setProspects(data);
-    } catch (err) { console.error(err); } finally { setProspectLoading(false); }
+      if (Array.isArray(data)) {
+        setProspects(data);
+      } else {
+        setProspects([]);
+      }
+    } catch (err) {
+      console.error(err);
+      setProspects([]);
+    } finally { setProspectLoading(false); }
   };
 
   useEffect(() => {
