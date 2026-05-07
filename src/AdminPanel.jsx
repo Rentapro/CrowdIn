@@ -93,21 +93,22 @@ export default function AdminPanel({ user, onLogout }) {
 
   const handleToggleKYC = async (userId, currentStatus) => {
     try {
-      const res = await fetch('/api/admin/toggle-kyc', {
-        method: 'POST',
+      const res = await fetch('/api/admin/clients', {
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` },
-        body: JSON.stringify({ user_id: userId, current_status: currentStatus })
+        body: JSON.stringify({ action: 'kyc', userId, kycStatus: currentStatus })
       });
       if (res.ok) fetchClients();
     } catch (err) { console.error(err); }
   };
 
-  const handleAddPayment = async (contractId) => {
+  const handleAddPayment = async (contractId, amount, nextPaymentNumber) => {
+    if (!window.confirm(`¿Confirmar abono de $${new Intl.NumberFormat('es-CL').format(amount)}?`)) return;
     try {
-      const res = await fetch('/api/admin/add-payment', {
+      const res = await fetch('/api/admin/payments?action=add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` },
-        body: JSON.stringify({ contract_id: contractId })
+        body: JSON.stringify({ contract_id: contractId, amount, payment_number: nextPaymentNumber })
       });
       if (res.ok) fetchClients();
     } catch (err) { console.error(err); }
@@ -116,7 +117,7 @@ export default function AdminPanel({ user, onLogout }) {
   const handleLiquidate = async (contractId) => {
     if (!window.confirm("¿Confirmas que el Pago Bullet (Capital Original) ya fue transferido? Esta acción cerrará el contrato.")) return;
     try {
-      const res = await fetch('/api/admin/liquidate-contract', {
+      const res = await fetch('/api/admin/payments?action=liquidate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` },
         body: JSON.stringify({ contract_id: contractId })
@@ -125,16 +126,16 @@ export default function AdminPanel({ user, onLogout }) {
     } catch (err) { console.error(err); }
   };
 
-  const handleResetPassword = async (userId, email) => {
-    if (!window.confirm(`¿Generar nueva clave para ${email}? La antigua dejará de funcionar.`)) return;
+  const handleResetPassword = async (userId) => {
+    if (!window.confirm('¿Resetear contraseña a este inversor?')) return;
     try {
-      const res = await fetch('/api/admin/reset-password', {
-        method: 'POST',
+      const res = await fetch('/api/admin/clients', {
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` },
-        body: JSON.stringify({ user_id: userId })
+        body: JSON.stringify({ action: 'reset-password', userId })
       });
       const data = await res.json();
-      if (res.ok) setNewCredentials({ email, tempPassword: data.tempPassword });
+      if (res.ok) setNewCredentials(data);
     } catch (err) { console.error(err); }
   };
 
@@ -143,7 +144,7 @@ export default function AdminPanel({ user, onLogout }) {
     setLogLoading(true);
     setCurrentLogs([]);
     try {
-      const res = await fetch(`/api/admin/payment-logs?contract_id=${contractId}`, {
+      const res = await fetch(`/api/admin/payments?action=logs&contract_id=${contractId}`, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` }
       });
       const data = await res.json();
@@ -156,34 +157,33 @@ export default function AdminPanel({ user, onLogout }) {
   const handleCreateProspect = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('/api/admin/create-prospect', {
+      const res = await fetch('/api/admin/crm', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` },
         body: JSON.stringify({ name: pName, phone: pPhone, email: pEmail, source: pSource, notes: pNotes })
       });
       if (res.ok) {
+        setPName(''); setPPhone(''); setPEmail(''); setPNotes(''); setShowProspectForm(false);
         fetchProspects();
-        setShowProspectForm(false);
-        setPName(''); setPPhone(''); setPEmail(''); setPNotes('');
       }
     } catch (err) { console.error(err); }
   };
 
   const handleUpdateProspectStatus = async (id, status) => {
     try {
-      await fetch('/api/admin/update-prospect', {
+      const res = await fetch('/api/admin/crm', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` },
         body: JSON.stringify({ id, status })
       });
-      fetchProspects();
+      if (res.ok) fetchProspects();
     } catch (err) { console.error(err); }
   };
 
   const handleDeleteClient = async (userId, name) => {
     if (!window.confirm(`¿Estás 100% seguro de eliminar al inversor ${name} y destruir sus contratos?`)) return;
     try {
-      const res = await fetch('/api/admin/delete-client', {
+      const res = await fetch('/api/admin/clients', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` },
         body: JSON.stringify({ user_id: userId })
