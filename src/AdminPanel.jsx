@@ -188,26 +188,36 @@ export default function AdminPanel({ user, onLogout }) {
   };
   
   const handleCaptureLeads = async () => {
-    if (!window.confirm("¿Deseas iniciar la búsqueda automática de perfiles VIP en LinkedIn?")) return;
-    alert("Iniciando motor de búsqueda VIP... Por favor espere unos segundos.");
-    setProspectLoading(true);
+    console.log("Botón presionado");
     try {
+      const confirmacion = window.confirm("¿Deseas iniciar la búsqueda automática de perfiles VIP en LinkedIn?");
+      if (!confirmacion) return;
+      
+      alert("PASO 1: Conectando con el servidor de prospección...");
+      setProspectLoading(true);
+
       const res = await fetch('/api/admin/crm', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` },
+        headers: { 
+          'Content-Type': 'application/json', 
+          'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` 
+        },
         body: JSON.stringify({ action: 'capture' })
       });
+
       const data = await res.json();
+      
       if (res.ok) {
-        alert("¡ÉXITO! Se han capturado 3 perfiles VIP de alto nivel.");
-        fetchProspects();
+        alert("PASO 2: ¡ÉXITO! Se han inyectado 3 perfiles estratégicos.");
+        await fetchProspects();
       } else {
-        alert("Error en la captura: " + data.error);
+        alert("ERROR DEL SERVIDOR: " + (data.error || 'Fallo desconocido'));
       }
     } catch (err) { 
-      console.error(err); 
-      alert("Error de conexión con el servidor de captura.");
-    } finally { setProspectLoading(false); }
+      alert("ERROR DE CONEXIÓN: " + err.message);
+    } finally { 
+      setProspectLoading(false); 
+    }
   };
 
   const handleUpdateProspectStatus = async (id, status) => {
