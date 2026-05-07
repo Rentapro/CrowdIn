@@ -189,6 +189,7 @@ export default function AdminPanel({ user, onLogout }) {
   
   const handleCaptureLeads = async () => {
     if (!window.confirm("¿Deseas iniciar la búsqueda automática de perfiles VIP en LinkedIn?")) return;
+    alert("Iniciando motor de búsqueda VIP... Por favor espere unos segundos.");
     setProspectLoading(true);
     try {
       const res = await fetch('/api/admin/crm', {
@@ -196,8 +197,17 @@ export default function AdminPanel({ user, onLogout }) {
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` },
         body: JSON.stringify({ action: 'capture' })
       });
-      if (res.ok) fetchProspects();
-    } catch (err) { console.error(err); } finally { setProspectLoading(false); }
+      const data = await res.json();
+      if (res.ok) {
+        alert("¡ÉXITO! Se han capturado 3 perfiles VIP de alto nivel.");
+        fetchProspects();
+      } else {
+        alert("Error en la captura: " + data.error);
+      }
+    } catch (err) { 
+      console.error(err); 
+      alert("Error de conexión con el servidor de captura.");
+    } finally { setProspectLoading(false); }
   };
 
   const handleUpdateProspectStatus = async (id, status) => {
