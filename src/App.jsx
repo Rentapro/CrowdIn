@@ -12,6 +12,14 @@ function App() {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [currentRoute, setCurrentRoute] = useState(window.location.hash || '#home');
   
+  // Hooks de Framer Motion (Deben estar al inicio para evitar crash de reglas de hooks)
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+  
   // Mouse position for 3D effect
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const heroRef = useRef(null);
@@ -115,12 +123,7 @@ function App() {
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
   };
 
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
+
 
   return (
     <>

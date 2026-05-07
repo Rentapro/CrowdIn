@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Users, FileText, Plus, LogOut, CheckCircle2, ShieldAlert, DollarSign, Activity, AlertCircle, Trash2, KeyRound, ArrowRightCircle, History, X, LayoutDashboard, Database, Search, Lock } from 'lucide-react';
+import { Users, FileText, Plus, LogOut, CheckCircle2, ShieldAlert, DollarSign, Activity, AlertCircle, Trash2, KeyRound, ArrowRightCircle, History, X, LayoutDashboard, Database, Search, Lock, TrendingUp } from 'lucide-react';
 import ParallaxBackground from './ParallaxBackground';
 
 export default function AdminPanel({ user, onLogout }) {
@@ -239,6 +239,10 @@ export default function AdminPanel({ user, onLogout }) {
   const totalCapital = clients.reduce((acc, c) => acc + Number(c.amount), 0);
   const totalPagado = clients.reduce((acc, c) => acc + ((Number(c.amount) * Number(c.monthly_roi)) * (c.payments_made || 0)), 0);
   const kycPendientes = clients.filter(c => c.kyc_status !== 'VERIFIED').length;
+  
+  const totalProspectos = prospects.length;
+  const invertidos = prospects.filter(p => p.status === 'Invertido').length;
+  const conversionRate = totalProspectos > 0 ? ((invertidos / totalProspectos) * 100).toFixed(1) : 0;
 
   return (
     <>
@@ -308,6 +312,23 @@ export default function AdminPanel({ user, onLogout }) {
               <div style={{ background: 'white', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--sage-100)', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
                 <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}><AlertCircle size={16} color="var(--sage-500)"/> Alertas KYC</div>
                 <div style={{ fontSize: '2rem', fontWeight: 800, color: kycPendientes > 0 ? '#b45309' : 'var(--success)' }}>{kycPendientes}</div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'crm' && (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
+              <div style={{ background: 'white', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--sage-100)', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
+                <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}><Users size={16} color="var(--sage-500)"/> Total Prospectos</div>
+                <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--charcoal)' }}>{totalProspectos}</div>
+              </div>
+              <div style={{ background: 'white', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--sage-100)', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
+                <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}><TrendingUp size={16} color="var(--sage-500)"/> Tasa de Conversión</div>
+                <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--gold-primary)' }}>{conversionRate}%</div>
+              </div>
+              <div style={{ background: 'white', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--sage-100)', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
+                <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}><CheckCircle2 size={16} color="var(--sage-500)"/> Inversores Cerrados</div>
+                <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--success)' }}>{invertidos}</div>
               </div>
             </div>
           )}
