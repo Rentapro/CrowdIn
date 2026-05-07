@@ -455,7 +455,7 @@ export default function AdminPanel({ user, onLogout }) {
           {activeTab === 'crm' && (
             <>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-                <h2 style={{ margin: 0, color: 'var(--sage-900)', fontSize: '1.8rem' }}>Pipeline de Captación</h2>
+                <h2 style={{ margin: 0, color: 'var(--sage-900)', fontSize: '1.8rem' }}>Pipeline de Captación <span style={{ fontSize: '0.7rem', color: 'var(--gold-primary)', background: 'var(--sage-50)', padding: '0.2rem 0.5rem', borderRadius: '4px', verticalAlign: 'middle' }}>v1.2.6-HOTFIX</span></h2>
                 <div style={{ display: 'flex', gap: '1rem' }}>
                   <button 
                     onClick={handleCaptureLeads}
