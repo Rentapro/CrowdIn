@@ -31,9 +31,8 @@ async function importFile(filePath, type) {
               : `${lead.position} | ${lead.notes}`;
 
             await sql`
-              INSERT INTO prospectos (name, phone, source, notes, status)
+              INSERT INTO prospects (name, phone, source, notes, status)
               VALUES (${name}, ${phone}, ${source}, ${notes}, 'Prospecto')
-              ON CONFLICT DO NOTHING
             `;
             imported++;
           } catch (err) {

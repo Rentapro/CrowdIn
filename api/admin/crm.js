@@ -15,14 +15,14 @@ export default async function handler(req, res) {
     const sql = neon(process.env.DATABASE_URL);
 
     if (req.method === 'GET') {
-      const rows = await sql`SELECT * FROM prospectos ORDER BY created_at DESC`;
+      const rows = await sql`SELECT * FROM prospects ORDER BY created_at DESC`;
       return res.json(rows);
     }
 
     if (req.method === 'POST') {
       const { name, phone, email, source, notes } = req.body;
       await sql`
-        INSERT INTO prospectos (name, phone, email, source, notes) 
+        INSERT INTO prospects (name, phone, email, source, notes) 
         VALUES (${name}, ${phone}, ${email}, ${source}, ${notes})
       `;
       return res.json({ message: 'Prospecto creado' });
@@ -30,7 +30,7 @@ export default async function handler(req, res) {
 
     if (req.method === 'PATCH') {
       const { id, status } = req.body;
-      await sql`UPDATE prospectos SET status = ${status}, updated_at = CURRENT_TIMESTAMP WHERE id = ${id}`;
+      await sql`UPDATE prospects SET status = ${status}, updated_at = CURRENT_TIMESTAMP WHERE id = ${id}`;
       return res.json({ message: 'Estado actualizado' });
     }
 
