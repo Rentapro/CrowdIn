@@ -3,12 +3,17 @@ from playwright.async_api import async_playwright
 import csv
 import os
 
-# Configuracion de busqueda
-KEYWORDS = ["Gerente General Chile", "Socio Fundador Chile", "CEO Chile Inversion"]
+# Estrategia Sniper v3: DDG HTML (Bypass Anti-Bot)
+KEYWORDS = [
+    'site:linkedin.com/in/ "Gerente General" Chile',
+    'site:linkedin.com/in/ "Gerente de Finanzas" Chile',
+    'site:linkedin.com/in/ "Socio Fundador" Chile',
+    'site:linkedin.com/in/ "Inversiones" Chile'
+]
 
-async def google_sniper():
+async def sniper_v3():
     async with async_playwright() as p:
-        print("[*] Iniciando Google Sniper (Modo Resiliente)...")
+        print("[*] Iniciando Google Sniper v3 (Estrategia DDG-HTML)...")
         browser = await p.chromium.launch(headless=True)
         context = await browser.new_context(
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
@@ -18,61 +23,50 @@ async def google_sniper():
         leads = []
         
         for query in KEYWORDS:
-            # Usaremos DuckDuckGo como fuente mas permisiva que Google
-            search_query = f'site:linkedin.com/in/ "{query}"'
-            print(f"[*] Escaneando para: {search_query}")
-            
+            print(f"[*] Buscando: {query}")
             try:
-                await page.goto(f"https://duckduckgo.com/?q={search_query.replace(' ', '+')}")
-                await asyncio.sleep(4)
+                # Usamos la version HTML de DDG que no tiene bloqueos de JS/Bot agresivos
+                url = f"https://html.duckduckgo.com/html/?q={query.replace(' ', '+')}"
+                await page.goto(url)
+                await asyncio.sleep(3)
                 
-                # Selector de DuckDuckGo para resultados
-                results = await page.query_selector_all("article")
+                # En DDG HTML los resultados estan en .result__body
+                results = await page.query_selector_all(".result__body")
                 
-                if not results:
-                    # Intento con Google si DDG falla
-                    await page.goto(f"https://www.google.com/search?q={search_query.replace(' ', '+')}")
-                    await asyncio.sleep(5)
-                    results = await page.query_selector_all("div.g")
-
                 for res in results:
                     try:
-                        title_el = await res.query_selector("h2, h3")
-                        title_text = await title_el.inner_text() if title_el else "N/A"
+                        title_el = await res.query_selector(".result__title a")
+                        title = await title_el.inner_text() if title_el else ""
                         
-                        if "N/A" in title_text or "LinkedIn" not in title_text:
-                            continue
-
-                        snippet_el = await res.query_selector("div")
-                        snippet_text = await snippet_el.inner_text() if snippet_el else "N/A"
+                        snippet_el = await res.query_selector(".result__snippet")
+                        snippet = await snippet_el.inner_text() if snippet_el else ""
                         
-                        parts = title_text.split(" - ")
-                        name = parts[0].replace(" | LinkedIn", "").replace(" - LinkedIn", "")
-                        position = parts[1] if len(parts) > 1 else query
-                        
-                        leads.append({
-                            "name": name.strip(),
-                            "position": position.strip(),
-                            "source": "Google Sniper",
-                            "notes": snippet_text[:200].strip()
-                        })
-                        print(f"    [+] Encontrado: {name} ({position})")
+                        if "LinkedIn" in title or "linkedin.com" in title:
+                            # Limpieza rapida
+                            name = title.split(" - ")[0].replace(" | LinkedIn", "").strip()
+                            leads.append({
+                                "name": name,
+                                "position": query.replace('site:linkedin.com/in/ ', '').replace('"', ''),
+                                "source": "Google Sniper",
+                                "notes": snippet[:200].strip()
+                            })
+                            print(f"    [+] Encontrado: {name}")
                     except:
                         continue
             except Exception as e:
-                print(f"[!] Error en query '{query}': {e}")
+                print(f"[!] Error en query: {e}")
             
             await asyncio.sleep(2)
 
-        # Guardar en CSV
+        # Guardar resultados
         os.makedirs('marketing', exist_ok=True)
         with open('marketing/leads_sniper.csv', 'w', newline='', encoding='utf-8') as f:
             writer = csv.DictWriter(f, fieldnames=["name", "position", "source", "notes"])
             writer.writeheader()
             writer.writerows(leads)
             
-        print(f"[*] Sniper finalizado. {len(leads)} leads guardados en marketing/leads_sniper.csv")
+        print(f"[*] Sniper v3 finalizado. {len(leads)} leads capturados.")
         await browser.close()
 
 if __name__ == "__main__":
-    asyncio.run(google_sniper())
+    asyncio.run(sniper_v3())

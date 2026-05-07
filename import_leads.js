@@ -6,34 +6,51 @@ dotenv.config();
 
 const sql = neon(process.env.DATABASE_URL);
 
-async function importLeads() {
-  const leads = [];
-  const filePath = './marketing/leads_sniper.csv';
-
+async function importFile(filePath, type) {
   if (!fs.existsSync(filePath)) {
-    console.error("[!] No se encontro el archivo leads_sniper.csv. Corra el sniper primero.");
+    console.log(`[!] Saltando ${filePath} (no existe).`);
     return;
   }
 
-  console.log("[*] Importando prospectos a la DB...");
+  const leads = [];
+  console.log(`[*] Procesando ${filePath}...`);
 
-  fs.createReadStream(filePath)
-    .pipe(csv())
-    .on('data', (data) => leads.push(data))
-    .on('end', async () => {
-      for (const lead of leads) {
-        try {
-          await sql`
-            INSERT INTO prospectos (name, notes, source, status)
-            VALUES (${lead.name}, ${lead.position + ' | ' + lead.notes}, ${lead.source}, 'Prospecto')
-          `;
-        } catch (err) {
-          // Ignorar duplicados o errores menores
+  return new Promise((resolve) => {
+    fs.createReadStream(filePath)
+      .pipe(csv())
+      .on('data', (data) => leads.push(data))
+      .on('end', async () => {
+        let imported = 0;
+        for (const lead of leads) {
+          try {
+            const name = lead.name || 'N/A';
+            const phone = lead.phone || '';
+            const source = type === 'maps' ? 'Google Maps' : 'Google Sniper';
+            const notes = type === 'maps' 
+              ? `Tipo: ${lead.type} | Locacion: ${lead.location}` 
+              : `${lead.position} | ${lead.notes}`;
+
+            await sql`
+              INSERT INTO prospectos (name, phone, source, notes, status)
+              VALUES (${name}, ${phone}, ${source}, ${notes}, 'Prospecto')
+              ON CONFLICT DO NOTHING
+            `;
+            imported++;
+          } catch (err) {
+            // Error silencioso para duplicados
+          }
         }
-      }
-      console.log(`[+] Importacion completada: ${leads.length} registros.`);
-      process.exit(0);
-    });
+        console.log(`[+] Importados ${imported} registros desde ${filePath}.`);
+        resolve();
+      });
+  });
 }
 
-importLeads();
+async function start() {
+  await importFile('./marketing/leads_sniper.csv', 'sniper');
+  await importFile('./marketing/leads_maps.csv', 'maps');
+  console.log("[!] Proceso finalizado.");
+  process.exit(0);
+}
+
+start();
