@@ -18,6 +18,7 @@ export default function AdminPanel({ user, onLogout }) {
   const [activeTab, setActiveTab] = useState('clients');
   const [prospects, setProspects] = useState([]);
   const [prospectLoading, setProspectLoading] = useState(false);
+  const [statusMessage, setStatusMessage] = useState(''); // Nuevo: Mensaje de estado en pantalla
   const [showProspectForm, setShowProspectForm] = useState(false);
   
   // Prospect Form State
@@ -188,14 +189,18 @@ export default function AdminPanel({ user, onLogout }) {
   };
   
   const handleCaptureLeads = async () => {
-    console.log("Botón presionado");
-    try {
-      const confirmacion = window.confirm("¿Deseas iniciar la búsqueda automática de perfiles VIP en LinkedIn?");
-      if (!confirmacion) return;
-      
-      alert("PASO 1: Conectando con el servidor de prospección...");
-      setProspectLoading(true);
+    // Banner de Fuerza Bruta (Inyección directa al DOM)
+    let banner = document.getElementById('force-banner');
+    if (!banner) {
+      banner = document.createElement('div');
+      banner.id = 'force-banner';
+      document.body.appendChild(banner);
+    }
+    banner.style.cssText = "position:fixed;top:0;left:0;width:100%;background:red;color:white;padding:20px;text-align:center;z-index:9999;font-weight:bold;font-size:1.5rem;display:block;";
+    banner.innerText = "⏳ PROCESANDO CAPTURA VIP... NO CIERRE LA PÁGINA";
 
+    setProspectLoading(true);
+    try {
       const res = await fetch('/api/admin/crm', {
         method: 'POST',
         headers: { 
@@ -205,16 +210,17 @@ export default function AdminPanel({ user, onLogout }) {
         body: JSON.stringify({ action: 'capture' })
       });
 
-      const data = await res.json();
-      
       if (res.ok) {
-        alert("PASO 2: ¡ÉXITO! Se han inyectado 3 perfiles estratégicos.");
+        banner.style.background = "#25D366";
+        banner.innerText = "✅ ¡CAPTURA EXITOSA! REFRESCANDO...";
         await fetchProspects();
+        setTimeout(() => { banner.style.display = 'none'; }, 4000);
       } else {
-        alert("ERROR DEL SERVIDOR: " + (data.error || 'Fallo desconocido'));
+        banner.innerText = "❌ ERROR EN EL SERVIDOR";
+        setTimeout(() => { banner.style.display = 'none'; }, 4000);
       }
     } catch (err) { 
-      alert("ERROR DE CONEXIÓN: " + err.message);
+      banner.innerText = "❌ ERROR DE CONEXIÓN CRÍTICO";
     } finally { 
       setProspectLoading(false); 
     }
@@ -465,7 +471,7 @@ export default function AdminPanel({ user, onLogout }) {
           {activeTab === 'crm' && (
             <>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-                <h2 style={{ margin: 0, color: 'var(--sage-900)', fontSize: '1.8rem' }}>Pipeline de Captación <span style={{ fontSize: '0.7rem', color: 'var(--gold-primary)', background: 'var(--sage-50)', padding: '0.2rem 0.5rem', borderRadius: '4px', verticalAlign: 'middle' }}>v1.2.6-HOTFIX</span></h2>
+                <h2 style={{ margin: 0, color: 'var(--sage-900)', fontSize: '1.8rem' }}>Pipeline de Captación <span style={{ fontSize: '0.7rem', color: 'var(--gold-primary)', background: 'var(--sage-50)', padding: '0.2rem 0.5rem', borderRadius: '4px', verticalAlign: 'middle' }}>v1.2.7-FORCE</span></h2>
                 <div style={{ display: 'flex', gap: '1rem' }}>
                   <button 
                     onClick={handleCaptureLeads}
@@ -481,6 +487,13 @@ export default function AdminPanel({ user, onLogout }) {
                   </button>
                 </div>
               </div>
+
+              {statusMessage && (
+                <div style={{ background: statusMessage.includes('✅') ? 'var(--success)' : 'var(--sage-800)', color: 'white', padding: '1rem', borderRadius: '12px', marginBottom: '1.5rem', fontWeight: 'bold', textAlign: 'center', animation: 'pulse 2s infinite' }}>
+                  {statusMessage}
+                </div>
+              )}
+
               {showProspectForm && (
                 <div style={{ background: 'white', padding: '2rem', borderRadius: '16px', marginBottom: '2rem', border: '1px solid var(--sage-300)', boxShadow: '0 20px 40px rgba(0,0,0,0.05)' }}>
                   <h3 style={{ marginTop: 0, color: 'var(--sage-800)' }}>Registrar Nuevo Prospecto</h3>
