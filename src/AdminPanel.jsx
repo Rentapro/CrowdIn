@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Users, FileText, Plus, LogOut, CheckCircle2, ShieldAlert, DollarSign, Activity, AlertCircle, Trash2, KeyRound, ArrowRightCircle, History, X, LayoutDashboard, Database, Search, Lock, TrendingUp } from 'lucide-react';
+import { Users, FileText, Plus, LogOut, CheckCircle2, ShieldAlert, DollarSign, Activity, AlertCircle, Trash2, KeyRound, ArrowRightCircle, History, X, LayoutDashboard, Database, Search, Lock, TrendingUp, Target } from 'lucide-react';
 import ParallaxBackground from './ParallaxBackground';
 
 export default function AdminPanel({ user, onLogout }) {
