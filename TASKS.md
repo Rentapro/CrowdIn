@@ -8,5 +8,12 @@
 - [x] Frontend: Crear Panel "Cliente" (Dashboard de rentabilidad en vivo).
 - [x] Producción: Subir variables de entorno a Vercel y desplegar Full-Stack.
 - [x] Operaciones: Implementación de Historial y Auditoría de Pagos (+1 Cuota, Logs Legales).
-- [x] UX/UI: Rediseño Premium de la Landing Page (Parallax, Identidad Visual y limpieza de Mockups falsos).
+- [x] UX/UI: Rediseño Premium de la Landing Page (Fondo Condominio, Identidad Visual y Limpieza de Tickers).
 - [ ] Opcional: Integración de notificaciones por Email reales (SendGrid/Resend) para avisos de transferencias de rentabilidad.
+
+## Fase 4: Automatización de Captación (Lead Gen) 🎯
+- [ ] **LinkedIn Sniper**: Bot de prospección para Gerentes/Médicos (Valparaíso/RM).
+- [ ] **Maps Scraper**: Extracción de dueños de negocios locales (Puchuncaví/Concón).
+- [ ] **FB Monitor**: Alertas de Telegram para palabras clave (invertir, capital).
+- [ ] **WhatsApp Bulk**: Sistema de salida masiva (Baileys/Node.js).
+

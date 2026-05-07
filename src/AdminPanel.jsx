@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Users, FileText, Plus, LogOut, CheckCircle2, ShieldAlert, DollarSign, Activity, AlertCircle, Trash2, KeyRound, ArrowRightCircle, History, X } from 'lucide-react';
+import { Users, FileText, Plus, LogOut, CheckCircle2, ShieldAlert, DollarSign, Activity, AlertCircle, Trash2, KeyRound, ArrowRightCircle, History, X, LayoutDashboard, Database, Search, Lock } from 'lucide-react';
 import ParallaxBackground from './ParallaxBackground';
 
 export default function AdminPanel({ user, onLogout }) {
@@ -14,6 +14,18 @@ export default function AdminPanel({ user, onLogout }) {
   const [amount, setAmount] = useState(10000000);
   const [bankAccount, setBankAccount] = useState('');
   const [newCredentials, setNewCredentials] = useState(null);
+
+  const [activeTab, setActiveTab] = useState('clients');
+  const [prospects, setProspects] = useState([]);
+  const [prospectLoading, setProspectLoading] = useState(false);
+  const [showProspectForm, setShowProspectForm] = useState(false);
+  
+  // Prospect Form State
+  const [pName, setPName] = useState('');
+  const [pPhone, setPPhone] = useState('');
+  const [pEmail, setPEmail] = useState('');
+  const [pSource, setPSource] = useState('Manual');
+  const [pNotes, setPNotes] = useState('');
 
   // Modal Logs
   const [logsModalOpen, setLogsModalOpen] = useState(false);
@@ -44,8 +56,20 @@ export default function AdminPanel({ user, onLogout }) {
     }
   };
 
+  const fetchProspects = async () => {
+    setProspectLoading(true);
+    try {
+      const res = await fetch('/api/admin/prospects', {
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` }
+      });
+      const data = await res.json();
+      setProspects(data);
+    } catch (err) { console.error(err); } finally { setProspectLoading(false); }
+  };
+
   useEffect(() => {
     fetchClients();
+    fetchProspects();
   }, []);
 
   const handleCreateClient = async (e) => {
@@ -60,7 +84,7 @@ export default function AdminPanel({ user, onLogout }) {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
       if (data.credentials) setNewCredentials(data.credentials);
-      else alert(data.message); // Inversor ya existía
+      else alert(data.message);
       fetchClients();
       setShowForm(false);
       setName(''); setRut(''); setEmail(''); setBankAccount('');
@@ -129,7 +153,34 @@ export default function AdminPanel({ user, onLogout }) {
     }
   };
 
-  const handleDelete = async (userId, name) => {
+  const handleCreateProspect = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch('/api/admin/create-prospect', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` },
+        body: JSON.stringify({ name: pName, phone: pPhone, email: pEmail, source: pSource, notes: pNotes })
+      });
+      if (res.ok) {
+        fetchProspects();
+        setShowProspectForm(false);
+        setPName(''); setPPhone(''); setPEmail(''); setPNotes('');
+      }
+    } catch (err) { console.error(err); }
+  };
+
+  const handleUpdateProspectStatus = async (id, status) => {
+    try {
+      await fetch('/api/admin/update-prospect', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('crowdin_token')}` },
+        body: JSON.stringify({ id, status })
+      });
+      fetchProspects();
+    } catch (err) { console.error(err); }
+  };
+
+  const handleDeleteClient = async (userId, name) => {
     if (!window.confirm(`¿Estás 100% seguro de eliminar al inversor ${name} y destruir sus contratos?`)) return;
     try {
       const res = await fetch('/api/admin/delete-client', {
@@ -192,162 +243,244 @@ export default function AdminPanel({ user, onLogout }) {
   return (
     <>
       <ParallaxBackground />
-      <div style={{ minHeight: '100vh', color: 'var(--charcoal)', padding: '2rem', position: 'relative', zIndex: 1 }}>
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', borderBottom: '1px solid var(--sage-300)', paddingBottom: '1rem' }}>
-        <div>
-          <h1 style={{ margin: 0, fontSize: '2rem', color: 'var(--sage-800)' }}>Portal Institucional (Backoffice)</h1>
-          <p style={{ color: 'var(--charcoal-mid)', margin: '0.5rem 0 0 0' }}>Superadmin • Dashboard de Control</p>
-        </div>
-        <button onClick={onLogout} style={{ background: 'transparent', border: '1px solid var(--sage-500)', color: 'var(--sage-800)', padding: '0.8rem 1.5rem', borderRadius: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
-          <LogOut size={18} /> Salir
-        </button>
-      </header>
-
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
-        <div style={{ background: 'white', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--sage-100)', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
-          <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}><DollarSign size={16} color="var(--sage-500)"/> AUM (Capital Activo)</div>
-          <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--charcoal)' }}>${new Intl.NumberFormat('es-CL').format(totalCapital)}</div>
-        </div>
-        <div style={{ background: 'white', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--sage-100)', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
-          <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}><Activity size={16} color="var(--sage-500)"/> Retornos Pagados</div>
-          <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--success)' }}>${new Intl.NumberFormat('es-CL').format(totalPagado)}</div>
-        </div>
-        <div style={{ background: 'white', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--sage-100)', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
-          <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}><Users size={16} color="var(--sage-500)"/> KYC Pendientes</div>
-          <div style={{ fontSize: '2rem', fontWeight: 800, color: kycPendientes > 0 ? '#b45309' : 'var(--success)' }}>{kycPendientes}</div>
-        </div>
-      </div>
-
-      {newCredentials && (
-        <div style={{ background: '#064e3b', border: '1px solid #047857', padding: '1.5rem', borderRadius: '12px', marginBottom: '2rem' }}>
-          <h3 style={{ margin: '0 0 1rem 0', color: '#34d399' }}>¡Atención: Credenciales Temporales!</h3>
-          <p style={{ margin: '0 0 0.5rem 0' }}>Usuario: {newCredentials.email}</p>
-          <div style={{ background: '#022c22', padding: '1rem', borderRadius: '8px', fontFamily: 'monospace', color: 'white', fontSize: '1.2rem', fontWeight: 'bold' }}>{newCredentials.tempPassword}</div>
-          <button onClick={() => setNewCredentials(null)} style={{ marginTop: '1rem', background: '#34d399', color: '#064e3b', border: 'none', padding: '0.5rem 1rem', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}>Cerrar y Limpiar</button>
-        </div>
-      )}
-
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-        <h2 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--sage-800)' }}><Users size={24} /> Operaciones Activas</h2>
-        <button onClick={() => setShowForm(!showForm)} style={{ background: 'var(--sage-800)', color: 'white', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
-          <Plus size={18} /> Nuevo Contrato
-        </button>
-      </div>
-
-      {showForm && (
-        <div style={{ background: 'white', padding: '2rem', borderRadius: '16px', marginBottom: '2rem', border: '1px solid var(--sage-300)' }}>
-          <h3 style={{ marginTop: 0, color: 'var(--sage-800)' }}>Onboarding Institucional</h3>
-          <form onSubmit={handleCreateClient} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', alignItems: 'end' }}>
-            <div><label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--charcoal-mid)', fontWeight: 600 }}>Nombre Completo</label><input type="text" value={name} onChange={e => setName(e.target.value)} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-300)', background: 'var(--sage-50)', color: 'var(--charcoal)' }} /></div>
-            <div><label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--charcoal-mid)', fontWeight: 600 }}>RUT</label><input type="text" value={rut} onChange={e => setRut(e.target.value)} placeholder="12.345.678-9" style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-300)', background: 'var(--sage-50)', color: 'var(--charcoal)' }} /></div>
-            <div><label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--charcoal-mid)', fontWeight: 600 }}>Correo (ID de Bóveda)</label><input type="email" required value={email} onChange={e => setEmail(e.target.value)} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-300)', background: 'var(--sage-50)', color: 'var(--charcoal)' }} /></div>
-            <div><label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--charcoal-mid)', fontWeight: 600 }}>Cuenta Origen/Destino</label><input type="text" value={bankAccount} onChange={e => setBankAccount(e.target.value)} placeholder="Cta Corriente BCI 123..." style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-300)', background: 'var(--sage-50)', color: 'var(--charcoal)' }} /></div>
-            <div>
-              <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--charcoal-mid)', fontWeight: 600 }}>Tramo de Inversión</label>
-              <select value={amount} onChange={e => setAmount(e.target.value)} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-300)', background: 'var(--sage-50)', color: 'var(--charcoal)' }}>
-                {tiers.map(t => <option key={t.value} value={t.value}>{t.name} - ${new Intl.NumberFormat('es-CL').format(t.value)}</option>)}
-              </select>
+      <div style={{ display: 'flex', minHeight: '100vh' }}>
+        {/* Sidebar */}
+        <aside style={{ width: '280px', background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(10px)', borderRight: '1px solid var(--sage-300)', padding: '2rem 1.5rem', display: 'flex', flexDirection: 'column', position: 'sticky', top: 0, height: '100vh', zIndex: 10 }}>
+          <div style={{ marginBottom: '3rem' }}>
+            <div style={{ fontFamily: 'Outfit', fontWeight: 800, fontSize: '1.8rem', color: 'var(--sage-800)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <img src="/logo.png" alt="Logo" style={{ width: '24px', height: '24px', borderRadius: '4px' }} />
+              CrowdIn<span style={{ color: 'var(--gold-primary)' }}>.</span>
             </div>
-            <button type="submit" style={{ background: 'var(--sage-800)', color: 'white', border: 'none', padding: '0.8rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>Estructurar Posición</button>
-          </form>
-        </div>
-      )}
+            <p style={{ margin: 0, color: 'var(--charcoal-mid)', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold' }}>Panel Administrativo</p>
+          </div>
 
-      <div style={{ background: 'white', borderRadius: '16px', border: '1px solid var(--sage-300)', overflowX: 'auto', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '1100px' }}>
-          <thead>
-            <tr style={{ background: 'var(--sage-100)' }}>
-              <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-800)', fontWeight: 600, fontSize: '0.85rem' }}>INVERSOR</th>
-              <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-800)', fontWeight: 600, fontSize: '0.85rem' }}>CAPITAL (TRAMO)</th>
-              <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-800)', fontWeight: 600, fontSize: '0.85rem' }}>KYC STATUS</th>
-              <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-800)', fontWeight: 600, fontSize: '0.85rem' }}>PAGOS (MESES)</th>
-              <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-800)', fontWeight: 600, fontSize: '0.85rem', textAlign: 'center' }}>ACCIONES LEGALES</th>
-            </tr>
-          </thead>
-          <tbody>
-            {loading ? <tr><td colSpan="5" style={{ padding: '2rem', textAlign: 'center' }}>Sincronizando Neon DB...</td></tr> : 
-             clients.map(client => (
-              <tr key={client.contract_id} style={{ borderTop: '1px solid var(--sage-100)' }}>
-                <td style={{ padding: '1rem 1.5rem' }}>
-                  <div style={{ fontWeight: 600 }}>{client.name}</div>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--charcoal-mid)' }}>{client.bank_account_info || client.email}</div>
-                </td>
-                <td style={{ padding: '1rem 1.5rem' }}>
-                  <div style={{ fontWeight: 'bold', color: 'var(--charcoal)' }}>${new Intl.NumberFormat('es-CL').format(client.amount)}</div>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--sage-700)' }}>{client.tier_name} ({client.monthly_roi * 100}%)</div>
-                </td>
-                <td style={{ padding: '1rem 1.5rem' }}>
-                  <button onClick={() => handleToggleKYC(client.user_id, client.kyc_status)} style={{ background: client.kyc_status === 'VERIFIED' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(245, 158, 11, 0.1)', color: client.kyc_status === 'VERIFIED' ? 'var(--success)' : '#d97706', border: `1px solid ${client.kyc_status === 'VERIFIED' ? 'var(--success)' : '#d97706'}`, padding: '0.3rem 0.8rem', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
-                    {client.kyc_status === 'VERIFIED' ? <><ShieldAlert size={14}/> KYC VERIFICADO</> : <><AlertCircle size={14}/> KYC PENDIENTE</>}
-                  </button>
-                </td>
-                <td style={{ padding: '1rem 1.5rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <div style={{ background: 'var(--sage-100)', width: '100px', height: '8px', borderRadius: '4px', overflow: 'hidden' }}>
-                      <div style={{ background: 'var(--success)', width: `${((client.payments_made || 0) / 12) * 100}%`, height: '100%' }}></div>
+          <nav style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <button onClick={() => setActiveTab('clients')} style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem', borderRadius: '12px', border: 'none', cursor: 'pointer', fontWeight: 600, transition: 'all 0.2s', backgroundColor: activeTab === 'clients' ? 'var(--sage-50)' : 'transparent', color: activeTab === 'clients' ? 'var(--sage-800)' : 'var(--charcoal-mid)' }}>
+              <LayoutDashboard size={20} /> Inversores Activos
+            </button>
+            <button onClick={() => setActiveTab('crm')} style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem', borderRadius: '12px', border: 'none', cursor: 'pointer', fontWeight: 600, transition: 'all 0.2s', backgroundColor: activeTab === 'crm' ? 'var(--sage-50)' : 'transparent', color: activeTab === 'crm' ? 'var(--sage-800)' : 'var(--charcoal-mid)' }}>
+              <Database size={20} /> CRM Prospectos
+            </button>
+            <button onClick={() => setActiveTab('settings')} style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem', borderRadius: '12px', border: 'none', cursor: 'pointer', fontWeight: 600, transition: 'all 0.2s', backgroundColor: activeTab === 'settings' ? 'var(--sage-50)' : 'transparent', color: activeTab === 'settings' ? 'var(--sage-800)' : 'var(--charcoal-mid)' }}>
+              <KeyRound size={20} /> Configuración
+            </button>
+          </nav>
+
+          <button onClick={onLogout} style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem', borderRadius: '12px', border: '1px solid var(--sage-300)', cursor: 'pointer', fontWeight: 600, color: 'var(--sage-800)', background: 'white' }}>
+            <LogOut size={20} /> Cerrar Sesión
+          </button>
+        </aside>
+
+        {/* Main Content */}
+        <main style={{ flexGrow: 1, padding: '2rem 3rem', position: 'relative', zIndex: 1 }}>
+          <header style={{ marginBottom: '3rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div>
+              <h2 style={{ margin: 0, fontSize: '2rem', color: 'var(--sage-800)', fontFamily: 'Outfit' }}>
+                {activeTab === 'clients' ? 'Gestión de Capital Activo' : activeTab === 'crm' ? 'Pipeline de Captación' : 'Configuración del Sistema'}
+              </h2>
+              <p style={{ color: 'var(--charcoal-mid)', margin: '0.5rem 0 0 0' }}>Superadmin • Control de Operaciones</p>
+            </div>
+            
+            {activeTab === 'clients' && (
+              <button onClick={() => setShowForm(!showForm)} style={{ background: 'var(--sage-800)', color: 'white', border: 'none', padding: '1rem 2rem', borderRadius: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, boxShadow: '0 10px 20px rgba(45, 66, 45, 0.2)' }}>
+                <Plus size={20} /> Nuevo Contrato
+              </button>
+            )}
+            
+            {activeTab === 'crm' && (
+              <button onClick={() => setShowProspectForm(!showProspectForm)} style={{ background: 'var(--gold-primary)', color: 'white', border: 'none', padding: '1rem 2rem', borderRadius: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, boxShadow: '0 10px 20px rgba(212,175,55,0.2)' }}>
+                <Search size={20} /> Registrar Prospecto
+              </button>
+            )}
+          </header>
+
+          {/* KPI Bar */}
+          {activeTab === 'clients' && (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
+              <div style={{ background: 'white', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--sage-100)', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
+                <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}><DollarSign size={16} color="var(--sage-500)"/> AUM Activo</div>
+                <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--charcoal)' }}>${new Intl.NumberFormat('es-CL').format(totalCapital)}</div>
+              </div>
+              <div style={{ background: 'white', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--sage-100)', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
+                <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}><Activity size={16} color="var(--sage-500)"/> ROI Pagado</div>
+                <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--success)' }}>${new Intl.NumberFormat('es-CL').format(totalPagado)}</div>
+              </div>
+              <div style={{ background: 'white', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--sage-100)', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
+                <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}><AlertCircle size={16} color="var(--sage-500)"/> Alertas KYC</div>
+                <div style={{ fontSize: '2rem', fontWeight: 800, color: kycPendientes > 0 ? '#b45309' : 'var(--success)' }}>{kycPendientes}</div>
+              </div>
+            </div>
+          )}
+
+          {/* TABS CONTENT */}
+          {activeTab === 'clients' && (
+            <>
+              {newCredentials && (
+                <div style={{ background: '#064e3b', border: '1px solid #047857', padding: '1.5rem', borderRadius: '12px', marginBottom: '2rem' }}>
+                  <h3 style={{ margin: '0 0 1rem 0', color: '#34d399' }}>¡Atención: Credenciales Temporales!</h3>
+                  <div style={{ background: '#022c22', padding: '1rem', borderRadius: '8px', fontFamily: 'monospace', color: 'white', fontSize: '1.2rem', fontWeight: 'bold' }}>{newCredentials.tempPassword}</div>
+                  <button onClick={() => setNewCredentials(null)} style={{ marginTop: '1rem', background: '#34d399', color: '#064e3b', border: 'none', padding: '0.5rem 1rem', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}>Entendido</button>
+                </div>
+              )}
+
+              {showForm && (
+                <div style={{ background: 'white', padding: '2rem', borderRadius: '16px', marginBottom: '2rem', border: '1px solid var(--sage-300)', boxShadow: '0 20px 40px rgba(0,0,0,0.05)' }}>
+                  <h3 style={{ marginTop: 0, color: 'var(--sage-800)' }}>Estructuración de Nueva Posición</h3>
+                  <form onSubmit={handleCreateClient} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', alignItems: 'end' }}>
+                    <div><label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--charcoal-mid)', fontWeight: 600 }}>Nombre Inversor</label><input type="text" value={name} onChange={e => setName(e.target.value)} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-300)', background: 'var(--sage-50)' }} /></div>
+                    <div><label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--charcoal-mid)', fontWeight: 600 }}>RUT</label><input type="text" value={rut} onChange={e => setRut(e.target.value)} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-300)', background: 'var(--sage-50)' }} /></div>
+                    <div><label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--charcoal-mid)', fontWeight: 600 }}>Email Institucional</label><input type="email" required value={email} onChange={e => setEmail(e.target.value)} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-300)', background: 'var(--sage-50)' }} /></div>
+                    <div><label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--charcoal-mid)', fontWeight: 600 }}>Cuenta Bancaria</label><input type="text" value={bankAccount} onChange={e => setBankAccount(e.target.value)} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-300)', background: 'var(--sage-50)' }} /></div>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--charcoal-mid)', fontWeight: 600 }}>Tramo ROI</label>
+                      <select value={amount} onChange={e => setAmount(e.target.value)} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-300)', background: 'var(--sage-50)' }}>
+                        {tiers.map(t => <option key={t.value} value={t.value}>{t.name} ({t.roi * 100}%)</option>)}
+                      </select>
                     </div>
-                    <span style={{ fontSize: '0.85rem', color: 'var(--charcoal-mid)', minWidth: '40px', fontWeight: 600 }}>{client.payments_made || 0}/12</span>
-                    
-                    {client.payments_made < 12 ? (
-                      <button onClick={() => handleAddPayment(client.contract_id)} style={{ background: 'var(--sage-700)', border: 'none', color: 'white', padding: '0.3rem 0.5rem', borderRadius: '4px', cursor: 'pointer', marginLeft: '0.5rem' }}>+1</button>
-                    ) : (
-                      <button onClick={() => handleLiquidate(client.contract_id)} style={{ background: '#ef4444', border: 'none', color: 'white', padding: '0.3rem 0.6rem', borderRadius: '4px', cursor: 'pointer', marginLeft: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.8rem', fontWeight: 'bold' }}>
-                        <ArrowRightCircle size={14}/> LIQUIDAR
-                      </button>
-                    )}
-                  </div>
-                </td>
-                <td style={{ padding: '1rem 1.5rem', display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
-                  <button onClick={() => handlePrintContract(client)} style={{ background: 'white', border: '1px solid var(--sage-300)', color: 'var(--charcoal)', padding: '0.5rem 1rem', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', fontWeight: 600 }}>
-                    <FileText size={14} /> PDF
-                  </button>
-                  <button onClick={() => handleOpenLogs(client.contract_id)} style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', color: 'var(--success)', padding: '0.5rem', borderRadius: '6px', cursor: 'pointer' }} title="Historial de Pagos">
-                    <History size={16} />
-                  </button>
-                  <button onClick={() => handleResetPassword(client.user_id, client.email)} style={{ background: 'rgba(212,175,55,0.1)', border: '1px solid rgba(212,175,55,0.3)', color: 'var(--gold-dark)', padding: '0.5rem', borderRadius: '6px', cursor: 'pointer' }} title="Regenerar Clave">
-                    <KeyRound size={16} />
-                  </button>
-                  <button onClick={() => handleDelete(client.user_id, client.name)} style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', color: 'var(--danger)', padding: '0.5rem', borderRadius: '6px', cursor: 'pointer' }} title="Eliminar Cliente Totalmente">
-                    <Trash2 size={16} />
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                    <button type="submit" style={{ background: 'var(--sage-800)', color: 'white', border: 'none', padding: '0.8rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>Registrar</button>
+                  </form>
+                </div>
+              )}
+
+              <div style={{ background: 'white', borderRadius: '16px', border: '1px solid var(--sage-300)', overflow: 'hidden' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+                  <thead style={{ background: 'var(--sage-50)' }}>
+                    <tr>
+                      <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-800)', fontSize: '0.85rem' }}>INVERSOR</th>
+                      <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-800)', fontSize: '0.85rem' }}>CAPITAL</th>
+                      <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-800)', fontSize: '0.85rem' }}>KYC</th>
+                      <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-800)', fontSize: '0.85rem' }}>PAGOS</th>
+                      <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-800)', fontSize: '0.85rem', textAlign: 'center' }}>ACCIONES</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {clients.map(client => (
+                      <tr key={client.contract_id} style={{ borderTop: '1px solid var(--sage-100)' }}>
+                        <td style={{ padding: '1rem 1.5rem' }}>
+                          <div style={{ fontWeight: 'bold' }}>{client.name}</div>
+                          <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)' }}>{client.email}</div>
+                        </td>
+                        <td style={{ padding: '1rem 1.5rem' }}>
+                          <div style={{ fontWeight: 'bold' }}>${new Intl.NumberFormat('es-CL').format(client.amount)}</div>
+                          <div style={{ fontSize: '0.75rem', color: 'var(--gold-dark)' }}>{client.tier_name}</div>
+                        </td>
+                        <td style={{ padding: '1rem 1.5rem' }}>
+                          <button onClick={() => handleToggleKYC(client.user_id, client.kyc_status)} style={{ background: client.kyc_status === 'VERIFIED' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(245, 158, 11, 0.1)', color: client.kyc_status === 'VERIFIED' ? 'var(--success)' : '#d97706', border: 'none', padding: '0.3rem 0.6rem', borderRadius: '20px', fontSize: '0.7rem', fontWeight: 'bold', cursor: 'pointer' }}>
+                            {client.kyc_status === 'VERIFIED' ? 'VERIFICADO' : 'PENDIENTE'}
+                          </button>
+                        </td>
+                        <td style={{ padding: '1rem 1.5rem' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <span style={{ fontSize: '0.85rem', fontWeight: 'bold' }}>{client.payments_made || 0}/12</span>
+                            <button onClick={() => handleAddPayment(client.contract_id)} style={{ background: 'var(--sage-100)', border: 'none', padding: '0.2rem 0.5rem', borderRadius: '4px', cursor: 'pointer' }}>+1</button>
+                          </div>
+                        </td>
+                        <td style={{ padding: '1rem 1.5rem', textAlign: 'center' }}>
+                          <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
+                            <button onClick={() => handlePrintContract(client)} style={{ background: 'white', border: '1px solid var(--sage-300)', padding: '0.4rem', borderRadius: '6px', cursor: 'pointer' }}><FileText size={16}/></button>
+                            <button onClick={() => handleOpenLogs(client.contract_id)} style={{ background: 'white', border: '1px solid var(--sage-300)', padding: '0.4rem', borderRadius: '6px', cursor: 'pointer' }}><History size={16}/></button>
+                            <button onClick={() => handleDeleteClient(client.user_id, client.name)} style={{ background: 'white', border: '1px solid #fee2e2', color: '#ef4444', padding: '0.4rem', borderRadius: '6px', cursor: 'pointer' }}><Trash2 size={16}/></button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
+          )}
+
+          {activeTab === 'crm' && (
+            <>
+              {showProspectForm && (
+                <div style={{ background: 'white', padding: '2rem', borderRadius: '16px', marginBottom: '2rem', border: '1px solid var(--sage-300)', boxShadow: '0 20px 40px rgba(0,0,0,0.05)' }}>
+                  <h3 style={{ marginTop: 0, color: 'var(--sage-800)' }}>Registrar Nuevo Prospecto</h3>
+                  <form onSubmit={handleCreateProspect} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', alignItems: 'end' }}>
+                    <div><label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600 }}>Nombre / Empresa</label><input type="text" value={pName} onChange={e => setPName(e.target.value)} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-300)' }} /></div>
+                    <div><label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600 }}>WhatsApp / Teléfono</label><input type="text" value={pPhone} onChange={e => setPPhone(e.target.value)} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-300)' }} /></div>
+                    <div><label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600 }}>Origen</label><select value={pSource} onChange={e => setPSource(e.target.value)} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-300)' }}><option>LinkedIn</option><option>Google Maps</option><option>Manual</option><option>Referido</option></select></div>
+                    <div style={{ gridColumn: 'span 2' }}><label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600 }}>Notas Iniciales</label><input type="text" value={pNotes} onChange={e => setPNotes(e.target.value)} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--sage-300)' }} /></div>
+                    <button type="submit" style={{ background: 'var(--gold-primary)', color: 'white', border: 'none', padding: '0.8rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>Guardar Prospecto</button>
+                  </form>
+                </div>
+              )}
+
+              <div style={{ background: 'white', borderRadius: '16px', border: '1px solid var(--sage-300)', overflow: 'hidden' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+                  <thead style={{ background: 'var(--sage-50)' }}>
+                    <tr>
+                      <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-800)', fontSize: '0.85rem' }}>PROSPECTO</th>
+                      <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-800)', fontSize: '0.85rem' }}>CONTACTO</th>
+                      <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-800)', fontSize: '0.85rem' }}>ORIGEN</th>
+                      <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-800)', fontSize: '0.85rem' }}>ESTADO</th>
+                      <th style={{ padding: '1rem 1.5rem', color: 'var(--sage-800)', fontSize: '0.85rem' }}>ULT. ACTUALIZACIÓN</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {prospects.map(prospect => (
+                      <tr key={prospect.id} style={{ borderTop: '1px solid var(--sage-100)' }}>
+                        <td style={{ padding: '1rem 1.5rem' }}>
+                          <div style={{ fontWeight: 'bold' }}>{prospect.name}</div>
+                          <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)' }}>{prospect.notes}</div>
+                        </td>
+                        <td style={{ padding: '1rem 1.5rem' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <span style={{ fontWeight: 'bold' }}>{prospect.phone}</span>
+                            <a href={`https://wa.me/${prospect.phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noreferrer" style={{ color: '#25D366' }}><ArrowRightCircle size={18}/></a>
+                          </div>
+                        </td>
+                        <td style={{ padding: '1rem 1.5rem' }}>
+                          <span style={{ fontSize: '0.8rem', background: 'var(--sage-100)', padding: '0.2rem 0.5rem', borderRadius: '4px' }}>{prospect.source}</span>
+                        </td>
+                        <td style={{ padding: '1rem 1.5rem' }}>
+                          <select 
+                            value={prospect.status} 
+                            onChange={(e) => handleUpdateProspectStatus(prospect.id, e.target.value)}
+                            style={{ padding: '0.4rem', borderRadius: '6px', border: '1px solid var(--sage-300)', fontSize: '0.85rem', background: prospect.status === 'Invertido' ? 'var(--success)' : prospect.status === 'Contactado' ? 'var(--gold-primary)' : 'white', color: prospect.status === 'Invertido' || prospect.status === 'Contactado' ? 'white' : 'black' }}
+                          >
+                            <option>Prospecto</option>
+                            <option>Contactado</option>
+                            <option>Seguimiento</option>
+                            <option>Invertido</option>
+                            <option>Rechazado</option>
+                          </select>
+                        </td>
+                        <td style={{ padding: '1rem 1.5rem', fontSize: '0.85rem', color: 'var(--charcoal-mid)' }}>
+                          {new Date(prospect.updated_at).toLocaleDateString('es-CL')}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
+          )}
+
+          {activeTab === 'settings' && (
+            <div style={{ background: 'white', padding: '3rem', borderRadius: '24px', border: '1px solid var(--sage-300)', textAlign: 'center' }}>
+              <Lock size={64} color="var(--sage-300)" style={{ marginBottom: '1.5rem' }} />
+              <h3 style={{ color: 'var(--sage-800)' }}>Configuración de Bóveda</h3>
+              <p style={{ color: 'var(--charcoal-mid)' }}>Mantenimiento programado de claves maestras y logs de auditoría global.</p>
+            </div>
+          )}
+        </main>
       </div>
 
+      {/* Logs Modal */}
       {logsModalOpen && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
-          <div style={{ background: 'white', border: '1px solid var(--sage-100)', padding: '2rem', borderRadius: '16px', width: '90%', maxWidth: '600px', maxHeight: '80vh', overflowY: 'auto', position: 'relative', boxShadow: '0 25px 50px rgba(0,0,0,0.1)' }}>
-            <button onClick={() => setLogsModalOpen(false)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'transparent', border: 'none', color: 'var(--charcoal-mid)', cursor: 'pointer' }}><X size={24}/></button>
-            <h3 style={{ margin: '0 0 1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--sage-800)' }}><History size={24}/> Historial de Pagos (Auditoría)</h3>
-            
-            {logLoading ? (
-              <p style={{ color: 'var(--charcoal-mid)', textAlign: 'center' }}>Cargando logs del sistema...</p>
-            ) : currentLogs.length === 0 ? (
-              <p style={{ color: 'var(--charcoal-mid)', textAlign: 'center' }}>No hay registros de pagos para este contrato aún.</p>
-            ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                {currentLogs.map(log => (
-                  <div key={log.id} style={{ background: 'var(--sage-50)', padding: '1rem 1.5rem', borderRadius: '12px', border: '1px solid var(--sage-100)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div>
-                      <div style={{ color: 'var(--sage-700)', fontSize: '0.8rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>CUOTA #{log.payment_number}</div>
-                      <div style={{ color: 'var(--charcoal)', fontWeight: 'bold' }}>{new Date(log.executed_at).toLocaleString('es-CL')}</div>
-                      <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.8rem', marginTop: '0.2rem' }}>Audit: {log.executed_by}</div>
-                    </div>
-                    <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--success)' }}>
-                      +${new Intl.NumberFormat('es-CL').format(log.payment_amount)}
-                    </div>
-                  </div>
-                ))}
+          <div style={{ background: 'white', padding: '2rem', borderRadius: '16px', width: '90%', maxWidth: '600px', maxHeight: '80vh', overflowY: 'auto', position: 'relative' }}>
+            <button onClick={() => setLogsModalOpen(false)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'transparent', border: 'none', cursor: 'pointer' }}><X size={24}/></button>
+            <h3 style={{ margin: '0 0 1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><History size={24}/> Auditoría de Pagos</h3>
+            {logLoading ? <p>Cargando...</p> : currentLogs.map(log => (
+              <div key={log.id} style={{ background: 'var(--sage-50)', padding: '1rem', borderRadius: '12px', marginBottom: '1rem', display: 'flex', justifyContent: 'space-between' }}>
+                <span>Cuota #{log.payment_number} - {new Date(log.executed_at).toLocaleDateString()}</span>
+                <span style={{ fontWeight: 'bold', color: 'var(--success)' }}>+${new Intl.NumberFormat('es-CL').format(log.payment_amount)}</span>
               </div>
-            )}
+            ))}
           </div>
         </div>
       )}
-
-    </div>
     </>
   );
 }

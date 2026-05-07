@@ -271,7 +271,7 @@ function App() {
             <div style={{ background: 'var(--sage-50)', padding: '3rem', borderRadius: '32px', border: '1px solid var(--sage-100)', textAlign: 'center' }}>
               <div style={{ background: 'var(--gold-primary)', color: 'white', width: '60px', height: '60px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem auto', fontSize: '1.5rem', fontWeight: 800 }}>2</div>
               <h3 style={{ color: 'var(--sage-800)', marginBottom: '1rem' }}>Generación de Rentas</h3>
-              <p style={{ color: 'var(--charcoal-mid)', lineHeight: 1.6 }}>Las casas se construyen y se venden o arriendan. Ese flujo de caja se traduce en tu pago mensual del 1.5% al 2.5% de interés.</p>
+              <p style={{ color: 'var(--charcoal-mid)', lineHeight: 1.6 }}>Las casas se construyen y se venden o arriendan. Ese flujo de caja se traduce en tu pago mensual de hasta un 2.5% de interés, superando ampliamente cualquier tasa de la banca tradicional.</p>
             </div>
 
             <div style={{ background: 'var(--sage-50)', padding: '3rem', borderRadius: '32px', border: '1px solid var(--sage-100)', textAlign: 'center' }}>
