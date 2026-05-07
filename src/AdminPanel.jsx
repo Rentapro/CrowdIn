@@ -382,8 +382,8 @@ export default function AdminPanel({ user, onLogout }) {
                           <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)' }}>{client.email}</div>
                         </td>
                         <td style={{ padding: '1rem 1.5rem' }}>
-                          <div style={{ fontWeight: 'bold' }}>${new Intl.NumberFormat('es-CL').format(client.amount)}</div>
-                          <div style={{ fontSize: '0.75rem', color: 'var(--gold-dark)' }}>{client.tier_name}</div>
+                          <div style={{ fontWeight: 'bold', color: 'var(--charcoal)' }}>${new Intl.NumberFormat('es-CL').format(client.amount)}</div>
+                          <div style={{ fontSize: '0.8rem', color: 'var(--sage-700)' }}>{client.tier_name} ({(client.monthly_roi * 100).toFixed(1)}%)</div>
                         </td>
                         <td style={{ padding: '1rem 1.5rem' }}>
                           <button onClick={() => handleToggleKYC(client.user_id, client.kyc_status)} style={{ background: client.kyc_status === 'VERIFIED' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(245, 158, 11, 0.1)', color: client.kyc_status === 'VERIFIED' ? 'var(--success)' : '#d97706', border: 'none', padding: '0.3rem 0.6rem', borderRadius: '20px', fontSize: '0.7rem', fontWeight: 'bold', cursor: 'pointer' }}>
