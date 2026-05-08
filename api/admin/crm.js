@@ -25,11 +25,12 @@ export default async function handler(req, res) {
       if (action === 'capture') {
         // Simulacion de captura VIP (Inyeccion de perfiles reales)
         const vips = [
-          { name: 'Dr. Sebastián Valdés', phone: '+56988887777', source: 'LinkedIn Sniper', notes: 'Médico Cirujano, Clínica Reñaca. Interesado en diversificación inmobiliaria.' },
-          { name: 'María José Castro', phone: '+56977776666', source: 'LinkedIn Sniper', notes: 'Gerente Logística, Puerto Valparaíso. Perfil de inversión conservadora.' },
-          { name: 'Andrés Iturra', phone: '+56999995555', source: 'Maps Scraper', notes: 'Dueño de Cadena Gastronómica en Concón. Liquidez inmediata para proyectos locales.' },
-          { name: 'Dra. Elena Zúñiga', phone: '+56955554444', source: 'LinkedIn Sniper', notes: 'Especialista Clínica Ciudad del Mar. Buscando refugio de capital en la V Región.' },
-          { name: 'Roberto Espinoza', phone: '+56944443333', source: 'Maps Scraper', notes: 'Dueño de Empresa de Transportes (Puchuncaví). Inversor recurrente en tierra.' }
+          { name: 'Dr. Francisco Larraín', phone: '+56911223344', source: 'Vitacura/RM', notes: 'Especialista Clínica Alemana. Inversor en activos reales.' },
+          { name: 'Carolina Schmidt', phone: '+56944556677', source: 'Zapallar/V', notes: 'Empresaria sector turismo lujo. Interés en copropiedad.' },
+          { name: 'Ignacio Walker', phone: '+56977889900', source: 'Machalí/VI', notes: 'Gerente Operaciones Minería. Alta liquidez mensual.' },
+          { name: 'Mariana Elsztain', phone: '+56922334455', source: 'San Pedro/VIII', notes: 'Dueña de constructora industrial (Biobío). Buscando diversificación.' },
+          { name: 'Gustavo Fischer', phone: '+56966778899', source: 'Puerto Varas/X', notes: 'Exportador sector Salmonero. Inversor patrimonial de largo plazo.' },
+          { name: 'Andrés Londoño', phone: '+56933445566', source: 'Antofagasta/II', notes: 'Consultor estratégico minero. Interesado en renta inmobiliaria.' }
         ];
         
         for (const vip of vips) {
