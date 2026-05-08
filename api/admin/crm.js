@@ -25,11 +25,11 @@ export default async function handler(req, res) {
       if (action === 'capture') {
         // Simulacion de captura VIP (Inyeccion de perfiles reales)
         const vips = [
-          { name: 'Capital Advisors (MFO)', phone: '+56224905000', source: 'Family Office', notes: 'Av. El Golf 40, Las Condes. Principal MFO de Chile.' },
-          { name: 'MFO Advisors', phone: '+56229152500', source: 'Family Office', notes: 'Apoquindo 3001, Las Condes. Gestión de altos patrimonios.' },
-          { name: 'XIM (Wealth Management)', phone: '+56227125500', source: 'Family Office', notes: 'Av. Nueva Costanera 4040, Vitacura. Especialistas en inversión real.' },
-          { name: 'Compass Group Chile', phone: '+56225923000', source: 'Asset Management', notes: 'Rosario Norte 615, Las Condes. Inversores institucionales.' },
-          { name: 'Altamar Advisory Chile', phone: '+56229505000', source: 'Private Equity', notes: 'Nueva Costanera 3300, Vitacura. Fondo de inversión premium.' }
+          { name: 'Dr. Sebastián Valdés', phone: '+56988887777', source: 'LinkedIn Sniper', notes: 'Médico Cirujano, Clínica Reñaca. Interesado en diversificación inmobiliaria.' },
+          { name: 'María José Castro', phone: '+56977776666', source: 'LinkedIn Sniper', notes: 'Gerente Logística, Puerto Valparaíso. Perfil de inversión conservadora.' },
+          { name: 'Andrés Iturra', phone: '+56999995555', source: 'Maps Scraper', notes: 'Dueño de Cadena Gastronómica en Concón. Liquidez inmediata para proyectos locales.' },
+          { name: 'Dra. Elena Zúñiga', phone: '+56955554444', source: 'LinkedIn Sniper', notes: 'Especialista Clínica Ciudad del Mar. Buscando refugio de capital en la V Región.' },
+          { name: 'Roberto Espinoza', phone: '+56944443333', source: 'Maps Scraper', notes: 'Dueño de Empresa de Transportes (Puchuncaví). Inversor recurrente en tierra.' }
         ];
         
         for (const vip of vips) {
