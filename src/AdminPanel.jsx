@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Users, FileText, Plus, LogOut, CheckCircle2, ShieldAlert, DollarSign, Activity, AlertCircle, Trash2, KeyRound, ArrowRightCircle, History, X, LayoutDashboard, Database, Search, Lock, TrendingUp, Target } from 'lucide-react';
+import { Users, FileText, Plus, LogOut, CheckCircle2, ShieldAlert, DollarSign, Activity, AlertCircle, Trash2, KeyRound, ArrowRightCircle, History, X, LayoutDashboard, Database, Search, Lock, TrendingUp, Target, LayoutGrid, MapPin, Clock, Zap } from 'lucide-react';
 import ParallaxBackground from './ParallaxBackground';
 
 export default function AdminPanel({ user, onLogout }) {
@@ -306,6 +306,9 @@ export default function AdminPanel({ user, onLogout }) {
             <button onClick={() => setActiveTab('crm')} style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem', borderRadius: '12px', border: 'none', cursor: 'pointer', fontWeight: 600, transition: 'all 0.2s', backgroundColor: activeTab === 'crm' ? 'var(--sage-50)' : 'transparent', color: activeTab === 'crm' ? 'var(--sage-800)' : 'var(--charcoal-mid)' }}>
               <Database size={20} /> CRM Prospectos
             </button>
+            <button onClick={() => setActiveTab('projects')} style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem', borderRadius: '12px', border: 'none', cursor: 'pointer', fontWeight: 600, transition: 'all 0.2s', backgroundColor: activeTab === 'projects' ? 'var(--sage-50)' : 'transparent', color: activeTab === 'projects' ? 'var(--sage-800)' : 'var(--charcoal-mid)' }}>
+              <LayoutGrid size={20} /> Vitrina de Proyectos
+            </button>
             <button onClick={() => setActiveTab('settings')} style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem', borderRadius: '12px', border: 'none', cursor: 'pointer', fontWeight: 600, transition: 'all 0.2s', backgroundColor: activeTab === 'settings' ? 'var(--sage-50)' : 'transparent', color: activeTab === 'settings' ? 'var(--sage-800)' : 'var(--charcoal-mid)' }}>
               <KeyRound size={20} /> Configuración
             </button>
@@ -321,7 +324,7 @@ export default function AdminPanel({ user, onLogout }) {
           <header style={{ marginBottom: '3rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
               <h2 style={{ margin: 0, fontSize: '2rem', color: 'var(--sage-800)', fontFamily: 'Outfit' }}>
-                {activeTab === 'clients' ? 'Gestión de Capital Activo' : activeTab === 'crm' ? 'Pipeline de Captación' : 'Configuración del Sistema'}
+                {activeTab === 'clients' ? 'Gestión de Capital Activo' : activeTab === 'crm' ? 'Pipeline de Captación' : activeTab === 'projects' ? 'Vitrina de Proyectos' : 'Configuración del Sistema'}
               </h2>
               <p style={{ color: 'var(--charcoal-mid)', margin: '0.5rem 0 0 0' }}>Superadmin • Control de Operaciones</p>
             </div>
@@ -546,6 +549,58 @@ export default function AdminPanel({ user, onLogout }) {
                 </table>
               </div>
             </>
+          )}
+
+          {activeTab === 'projects' && (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '2rem' }}>
+              {/* Proyecto 1: Zapallar Luxury Resort */}
+              <div style={{ background: 'white', borderRadius: '24px', overflow: 'hidden', border: '1px solid var(--sage-200)', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}>
+                <div style={{ height: '250px', background: `url('/zapallar_luxury_resort_1778542588092.png') center/cover`, position: 'relative' }}>
+                  <div style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'var(--gold-primary)', color: 'white', padding: '0.5rem 1rem', borderRadius: '50px', fontWeight: 'bold', fontSize: '0.8rem' }}>ALTA RENTABILIDAD</div>
+                </div>
+                <div style={{ padding: '2rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1rem' }}>
+                    <div>
+                      <h3 style={{ margin: 0, color: 'var(--sage-900)', fontSize: '1.5rem' }}>Laguna de Zapallar: Resort & Spa</h3>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginTop: '0.4rem' }}>
+                        <MapPin size={14} /> Zapallar, Quinta Región
+                      </div>
+                    </div>
+                    <div style={{ textAlign: 'right' }}>
+                      <div style={{ fontSize: '0.8rem', color: 'var(--charcoal-mid)', fontWeight: 'bold' }}>MODELO</div>
+                      <div style={{ color: 'var(--sage-800)', fontWeight: 800 }}>PAGO ÚNICO</div>
+                    </div>
+                  </div>
+                  
+                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '1.5rem' }}>
+                    Diseño circular exclusivo con laguna central, isla-bar y 19 cabañas de lujo. Cada unidad cuenta con tinaja y sauna privados. Hito arquitectónico en la zona más exclusiva de Chile.
+                  </p>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
+                    <div style={{ background: 'var(--sage-50)', padding: '1rem', borderRadius: '12px' }}>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)', fontWeight: 'bold', textTransform: 'uppercase' }}>Inversión Meta</div>
+                      <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--sage-900)' }}>$350.000.000</div>
+                    </div>
+                    <div style={{ background: 'var(--gold-primary)', padding: '1rem', borderRadius: '12px', color: 'white' }}>
+                      <div style={{ fontSize: '0.75rem', opacity: 0.8, fontWeight: 'bold', textTransform: 'uppercase' }}>Retorno Final</div>
+                      <div style={{ fontSize: '1.2rem', fontWeight: 800 }}>+25% ($437.5M)</div>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--charcoal-mid)', fontSize: '0.9rem', borderTop: '1px solid var(--sage-100)', paddingTop: '1.5rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Clock size={16}/> 18 Meses de Plazo</div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Zap size={16}/> 100% Capital + Premio</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Espacio para futuros proyectos */}
+              <div style={{ border: '3px dashed var(--sage-200)', borderRadius: '24px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '3rem', textAlign: 'center', color: 'var(--sage-400)' }}>
+                <Plus size={48} style={{ marginBottom: '1rem' }} />
+                <h4 style={{ margin: 0 }}>Añadir Nuevo Proyecto</h4>
+                <p style={{ fontSize: '0.9rem' }}>Limache Edificios, Urban Flipping o Rentas AirBnB</p>
+              </div>
+            </div>
           )}
 
           {activeTab === 'settings' && (
