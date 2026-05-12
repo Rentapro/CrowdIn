@@ -144,7 +144,13 @@ function App() {
     { q: "¿Y si el proyecto inmobiliario no se vende como esperaban?", a: "Tu rentabilidad es fija y garantizada por el Pacto de Retroventa. No depende de las ventas finales. CrowdIn tiene la obligación legal de recomprar tus acciones al precio pactado (Capital + Premio), independientemente del resultado comercial del proyecto." },
     { q: "¿Qué seguridad tengo si CrowdIn llegara a tener problemas financieros?", a: "La SpA donde inviertes es un vehículo independiente (Asset-Backed). El capital se materializa en el terreno y la construcción. Como accionista, tienes derecho preferente sobre el activo físico; si el proyecto se detiene, el patrimonio inmobiliario respalda tu devolución." },
     { q: "¿Qué pasa si no se llega a la meta de recaudación total?", a: "Contamos con Capital Puente propio y líneas de crédito constructor aprobadas. El inicio de obra no depende exclusivamente del Crowdfunding; tu inversión solo ingresa una vez que el proyecto tiene 'Luz Verde' garantizada." },
-    { q: "¿Cómo se gestiona el riesgo de desvío de fondos?", a: "Operamos con cuentas segregadas y auditoría de estados de pago. Cada peso invertido tiene un destino específico: Adquisición o Construcción, visado por el mandato de la SpA." }
+    { q: "¿Cómo se gestiona el riesgo de desvío de fondos?", a: "Operamos con cuentas segregadas y auditoría de estados de pago. Cada peso invertido tiene un destino específico: Adquisición o Construcción, visado por el mandato de la SpA." },
+    { q: "¿El pago de impuestos recae sobre mi utilidad final?", a: "Las estructuras se diseñan según normativa de rentas de capital mobiliario. Entregamos los certificados correspondientes al finalizar el ciclo del proyecto para su declaración en la Operación Renta anual." },
+    { q: "¿Puedo retirar mi capital antes del vencimiento?", a: "El capital se materializa en activos reales. La ventana de rescate se abre exclusivamente al cumplir el ciclo pactado (12 o 24 meses), donde recibes el capital más el premio acumulado." },
+    { q: "¿En qué tipo de propiedades invierte mi capital?", a: "Nuestro portafolio abarca: 1) Flipping de alta velocidad, 2) Desarrollo de complejos turísticos (Resort Zapallar), y 3) Edificios residenciales. Tú eliges en qué proyecto participar." },
+    { q: "¿Me mantendrán informado del progreso de las obras?", a: "Sí. Enviamos reportes digitales de avance a nuestros accionistas mensualmente durante la fase de obra." },
+    { q: "¿Dónde se realiza la firma legal de las acciones?", a: "Todo el proceso notarial se realiza mediante firma presencial en Notaría o a través de plataformas certificadas de Firma Electrónica Avanzada." },
+    { q: "¿Quién administra el dinero transferido?", a: "Los fondos ingresan directamente a la cuenta corriente institucional de la Sociedad por Acciones (SpA) que desarrolla el proyecto." }
   ];
 
   const [selectedPlan, setSelectedPlan] = useState('patrimonial'); // 'liquidez' o 'patrimonial'
