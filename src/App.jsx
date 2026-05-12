@@ -277,7 +277,7 @@ function App() {
               <div style={{ height: '250px', background: `url('/zapallar_luxury_resort_1778542588092.png') center/cover`, position: 'relative' }}>
                 <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'var(--gold-primary)', color: 'white', padding: '0.6rem 1.2rem', borderRadius: '50px', fontWeight: 800, fontSize: '0.8rem', boxShadow: '0 10px 20px rgba(212,175,55,0.3)' }}>ALTA RENTABILIDAD</div>
               </div>
-              <div style={{ padding: '2.5rem' }}>
+                  <div style={{ padding: '2.5rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1.5rem' }}>
                   <div>
                     <h3 style={{ margin: 0, color: 'var(--sage-900)', fontSize: '1.8rem', fontFamily: 'Outfit' }}>Laguna de Zapallar</h3>
@@ -298,16 +298,16 @@ function App() {
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
                   <div style={{ background: 'var(--sage-50)', padding: '1.2rem', borderRadius: '16px', border: '1px solid var(--sage-100)' }}>
                     <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)', fontWeight: 800, textTransform: 'uppercase' }}>Ticket Inversión</div>
-                    <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--sage-900)' }}>$350M</div>
+                    <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--sage-900)' }}>$400M</div>
                   </div>
                   <div style={{ background: 'var(--sage-900)', padding: '1.2rem', borderRadius: '16px', color: 'white' }}>
                     <div style={{ fontSize: '0.75rem', opacity: 0.8, fontWeight: 800, textTransform: 'uppercase' }}>Plazo Retorno</div>
-                    <div style={{ fontSize: '1.4rem', fontWeight: 800 }}>4 MESES</div>
+                    <div style={{ fontSize: '1.4rem', fontWeight: 800 }}>12 MESES</div>
                   </div>
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1.5rem', borderTop: '1px solid var(--sage-100)' }}>
-                  <div style={{ color: 'var(--success)', fontWeight: 800, fontSize: '1.2rem' }}>+25% ROI Final</div>
+                  <div style={{ color: 'var(--success)', fontWeight: 800, fontSize: '1.2rem' }}>+15% ROI Final</div>
                   <button onClick={handleWhatsAppRedirect} style={{ background: 'var(--gold-primary)', color: 'white', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '12px', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     Postular <ChevronRight size={18}/>
                   </button>
@@ -351,7 +351,7 @@ function App() {
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1.5rem', borderTop: '1px solid var(--sage-100)' }}>
-                  <div style={{ color: 'var(--success)', fontWeight: 800, fontSize: '1.2rem' }}>30-40% Margen</div>
+                  <div style={{ color: 'var(--success)', fontWeight: 800, fontSize: '1.2rem' }}>+10% ROI Ciclo</div>
                   <button onClick={handleWhatsAppRedirect} style={{ background: 'var(--sage-800)', color: 'white', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '12px', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     Ver Pool <ChevronRight size={18}/>
                   </button>
@@ -395,7 +395,7 @@ function App() {
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1.5rem', borderTop: '1px solid var(--sage-100)' }}>
-                  <div style={{ color: 'var(--gold-primary)', fontWeight: 800, fontSize: '1.2rem' }}>Plusvalía Proyectada</div>
+                  <div style={{ color: 'var(--gold-primary)', fontWeight: 800, fontSize: '1.2rem' }}>+25% ROI Total</div>
                   <button onClick={handleWhatsAppRedirect} style={{ background: 'var(--sage-800)', color: 'white', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '12px', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     Info Técnica <ChevronRight size={18}/>
                   </button>
