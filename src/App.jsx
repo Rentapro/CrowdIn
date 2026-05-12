@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { TrendingUp, ShieldCheck, RefreshCw, ChevronRight, BarChart3, Wallet, FileText, ArrowRight, CheckCircle2, Lock, Scale, Building2, Landmark, Activity } from 'lucide-react';
+import { TrendingUp, ShieldCheck, RefreshCw, ChevronRight, BarChart3, Wallet, FileText, ArrowRight, CheckCircle2, Lock, Scale, Building2, Landmark, Activity, MapPin, Clock, Zap, LayoutGrid } from 'lucide-react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import Login from './Login';
 import AdminPanel from './AdminPanel';
@@ -251,6 +251,157 @@ function App() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--sage-800)' }}><ShieldCheck size={24}/> PROTOCOLIZADO ANTE NOTARIO</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--sage-800)' }}><Activity size={24}/> CUMPLIMIENTO UAF CHILE</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--gold-primary)', background: 'rgba(212,175,55,0.1)', padding: '0.5rem 1rem', borderRadius: '12px' }}><Lock size={20}/> KYC OBLIGATORIO</div>
+          </div>
+        </div>
+      </section>
+
+      {/* PROJECTS PORTFOLIO SECTION (THE VITRINE) */}
+      <section id="proyectos" style={{ padding: '8rem 0', background: 'var(--sage-50)' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+            <span style={{ color: 'var(--gold-primary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', fontSize: '1rem' }}>Oportunidades Activas</span>
+            <h2 style={{ fontSize: '3.5rem', color: 'var(--sage-800)', fontFamily: 'Outfit', marginTop: '1rem' }}>Portafolio de Inversión 2026</h2>
+            <p style={{ fontSize: '1.2rem', color: 'var(--charcoal-mid)', maxWidth: '800px', margin: '1rem auto' }}>
+              Proyectos seleccionados por su alta rentabilidad y velocidad de ejecución. Respaldados por activos inmobiliarios tangibles.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2.5rem' }}>
+            {/* 1. ZAPALLAR RESORT */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              style={{ background: 'white', borderRadius: '32px', overflow: 'hidden', border: '1px solid var(--sage-200)', boxShadow: '0 20px 50px rgba(0,0,0,0.05)' }}
+            >
+              <div style={{ height: '250px', background: `url('/zapallar_luxury_resort_1778542588092.png') center/cover`, position: 'relative' }}>
+                <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'var(--gold-primary)', color: 'white', padding: '0.6rem 1.2rem', borderRadius: '50px', fontWeight: 800, fontSize: '0.8rem', boxShadow: '0 10px 20px rgba(212,175,55,0.3)' }}>ALTA RENTABILIDAD</div>
+              </div>
+              <div style={{ padding: '2.5rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1.5rem' }}>
+                  <div>
+                    <h3 style={{ margin: 0, color: 'var(--sage-900)', fontSize: '1.8rem', fontFamily: 'Outfit' }}>Laguna de Zapallar</h3>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginTop: '0.5rem' }}>
+                      <MapPin size={16} /> Resort & Spa de Lujo
+                    </div>
+                  </div>
+                  <div style={{ textAlign: 'right', background: 'var(--sage-50)', padding: '0.5rem 1rem', borderRadius: '12px' }}>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--charcoal-mid)', fontWeight: 800, textTransform: 'uppercase' }}>Modelo</div>
+                    <div style={{ color: 'var(--sage-800)', fontWeight: 800, fontSize: '0.9rem' }}>PAGO ÚNICO</div>
+                  </div>
+                </div>
+                
+                <p style={{ color: 'var(--charcoal-mid)', fontSize: '1rem', lineHeight: '1.6', marginBottom: '2rem' }}>
+                  Desarrollo de 19 cabañas de lujo con spa privado dispuestas en semicírculo alrededor de una laguna cristalina con isla-bar central.
+                </p>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
+                  <div style={{ background: 'var(--sage-50)', padding: '1.2rem', borderRadius: '16px', border: '1px solid var(--sage-100)' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)', fontWeight: 800, textTransform: 'uppercase' }}>Ticket Inversión</div>
+                    <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--sage-900)' }}>$350M</div>
+                  </div>
+                  <div style={{ background: 'var(--sage-900)', padding: '1.2rem', borderRadius: '16px', color: 'white' }}>
+                    <div style={{ fontSize: '0.75rem', opacity: 0.8, fontWeight: 800, textTransform: 'uppercase' }}>Plazo Retorno</div>
+                    <div style={{ fontSize: '1.4rem', fontWeight: 800 }}>4 MESES</div>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1.5rem', borderTop: '1px solid var(--sage-100)' }}>
+                  <div style={{ color: 'var(--success)', fontWeight: 800, fontSize: '1.2rem' }}>+25% ROI Final</div>
+                  <button onClick={handleWhatsAppRedirect} style={{ background: 'var(--gold-primary)', color: 'white', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '12px', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    Postular <ChevronRight size={18}/>
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* 2. FLIPPING */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              style={{ background: 'white', borderRadius: '32px', overflow: 'hidden', border: '1px solid var(--sage-200)', boxShadow: '0 20px 50px rgba(0,0,0,0.05)' }}
+            >
+              <div style={{ height: '250px', background: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&q=80&w=800') center/cover`, position: 'relative' }}>
+                <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: '#3b82f6', color: 'white', padding: '0.6rem 1.2rem', borderRadius: '50px', fontWeight: 800, fontSize: '0.8rem' }}>ALTA ROTACIÓN</div>
+              </div>
+              <div style={{ padding: '2.5rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1.5rem' }}>
+                  <div>
+                    <h3 style={{ margin: 0, color: 'var(--sage-900)', fontSize: '1.8rem', fontFamily: 'Outfit' }}>Pool de Flipping</h3>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginTop: '0.5rem' }}>
+                      <TrendingUp size={16} /> Remate y Venta Rápida
+                    </div>
+                  </div>
+                </div>
+                
+                <p style={{ color: 'var(--charcoal-mid)', fontSize: '1rem', lineHeight: '1.6', marginBottom: '2rem' }}>
+                  Adquisición de propiedades en remate o bajo valor de mercado, remodelación express y venta en tiempo récord. Ciclos cortos de capital.
+                </p>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
+                  <div style={{ background: 'var(--sage-50)', padding: '1.2rem', borderRadius: '16px', border: '1px solid var(--sage-100)' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)', fontWeight: 800, textTransform: 'uppercase' }}>Ticket Sugerido</div>
+                    <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--sage-900)' }}>$500M</div>
+                  </div>
+                  <div style={{ background: 'var(--sage-900)', padding: '1.2rem', borderRadius: '16px', color: 'white' }}>
+                    <div style={{ fontSize: '0.75rem', opacity: 0.8, fontWeight: 800, textTransform: 'uppercase' }}>Plazo Ciclo</div>
+                    <div style={{ fontSize: '1.4rem', fontWeight: 800 }}>6 MESES</div>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1.5rem', borderTop: '1px solid var(--sage-100)' }}>
+                  <div style={{ color: 'var(--success)', fontWeight: 800, fontSize: '1.2rem' }}>30-40% Margen</div>
+                  <button onClick={handleWhatsAppRedirect} style={{ background: 'var(--sage-800)', color: 'white', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '12px', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    Ver Pool <ChevronRight size={18}/>
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* 3. LIMACHE */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              style={{ background: 'white', borderRadius: '32px', overflow: 'hidden', border: '1px solid var(--sage-200)', boxShadow: '0 20px 50px rgba(0,0,0,0.05)' }}
+            >
+              <div style={{ height: '250px', background: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800') center/cover`, position: 'relative' }}>
+                <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'var(--charcoal)', color: 'white', padding: '0.6rem 1.2rem', borderRadius: '50px', fontWeight: 800, fontSize: '0.8rem' }}>INSTITUCIONAL</div>
+              </div>
+              <div style={{ padding: '2.5rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1.5rem' }}>
+                  <div>
+                    <h3 style={{ margin: 0, color: 'var(--sage-900)', fontSize: '1.8rem', fontFamily: 'Outfit' }}>Altura Limache</h3>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginTop: '0.5rem' }}>
+                      <Building2 size={16} /> Condominio Vertical
+                    </div>
+                  </div>
+                </div>
+                
+                <p style={{ color: 'var(--charcoal-mid)', fontSize: '1rem', lineHeight: '1.6', marginBottom: '2rem' }}>
+                  Desarrollo de edificios de departamentos en zona de alta demanda habitacional. CIP aprobado para construcción de alta densidad.
+                </p>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
+                  <div style={{ background: 'var(--sage-50)', padding: '1.2rem', borderRadius: '16px', border: '1px solid var(--sage-100)' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)', fontWeight: 800, textTransform: 'uppercase' }}>Ticket Mínimo</div>
+                    <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--sage-900)' }}>$1.000M</div>
+                  </div>
+                  <div style={{ background: 'var(--sage-900)', padding: '1.2rem', borderRadius: '16px', color: 'white' }}>
+                    <div style={{ fontSize: '0.75rem', opacity: 0.8, fontWeight: 800, textTransform: 'uppercase' }}>Plazo Obra</div>
+                    <div style={{ fontSize: '1.4rem', fontWeight: 800 }}>24 MESES</div>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1.5rem', borderTop: '1px solid var(--sage-100)' }}>
+                  <div style={{ color: 'var(--gold-primary)', fontWeight: 800, fontSize: '1.2rem' }}>Plusvalía Proyectada</div>
+                  <button onClick={handleWhatsAppRedirect} style={{ background: 'var(--sage-800)', color: 'white', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '12px', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    Info Técnica <ChevronRight size={18}/>
+                  </button>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
