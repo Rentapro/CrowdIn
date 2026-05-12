@@ -465,8 +465,6 @@ function App() {
         </div>
       )}
 
-      {/* BUSINESS MODEL SECTION (CLARITY FOCUS) */}
-      <section id="modelo" style={{ padding: '8rem 0', background: 'white' }}>
       {/* EXIT STRATEGY & LIQUIDITY SECTION */}
       <section id="estrategia-salida" style={{ padding: '100px 0', background: 'var(--white)' }}>
         <div className="container">
