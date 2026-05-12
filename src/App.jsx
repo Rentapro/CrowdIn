@@ -467,31 +467,40 @@ function App() {
 
       {/* BUSINESS MODEL SECTION (CLARITY FOCUS) */}
       <section id="modelo" style={{ padding: '8rem 0', background: 'white' }}>
+      {/* EXIT STRATEGY & LIQUIDITY SECTION */}
+      <section id="estrategia-salida" style={{ padding: '100px 0', background: 'var(--white)' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-            <h2 style={{ fontSize: '3rem', color: 'var(--sage-800)', fontFamily: 'Outfit', marginBottom: '1.5rem' }}>¿Cómo funciona el negocio?</h2>
-            <p style={{ fontSize: '1.2rem', color: 'var(--charcoal-mid)', maxWidth: '800px', margin: '0 auto' }}>Nuestro modelo es simple: Tú aportas la liquidez, nosotros construimos y operamos, y las utilidades se dividen mensualmente.</p>
+          <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto 4rem' }}>
+            <span style={{ color: 'var(--gold-primary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', fontSize: '1rem' }}>Ciclo de Inversión</span>
+            <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', marginTop: '1rem', color: 'var(--sage-800)', fontFamily: 'Outfit' }}>Liquidez y Estrategia de Salida</h2>
+            <p style={{ fontSize: '1.2rem', color: 'var(--charcoal-mid)', marginTop: '1rem' }}>No invertimos en papel volátil, invertimos en ciclos de activos reales. Tu capital tiene una fecha de retorno contractual, blindada por el Pacto de Retroventa.</p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem', position: 'relative' }}>
-            {/* Steps with arrows logic (simplified with grid) */}
-            <div style={{ background: 'var(--sage-50)', padding: '3rem', borderRadius: '32px', border: '1px solid var(--sage-100)', textAlign: 'center' }}>
-              <div style={{ background: 'var(--gold-primary)', color: 'white', width: '60px', height: '60px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem auto', fontSize: '1.5rem', fontWeight: 800 }}>1</div>
-              <h3 style={{ color: 'var(--sage-800)', marginBottom: '1rem' }}>Aporte de Capital</h3>
-              <p style={{ color: 'var(--charcoal-mid)', lineHeight: 1.6 }}>Te conviertes en accionista de la SpA que es dueña del terreno y las casas. Tu dinero está respaldado por activos reales, no por papel.</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem' }}>
+            <div style={{ background: 'var(--sage-50)', padding: '3rem', borderRadius: '32px', border: '1px solid var(--sage-100)', position: 'relative' }}>
+              <div style={{ position: 'absolute', top: '-15px', left: '3rem', background: 'var(--gold-primary)', color: 'white', padding: '0.4rem 1.2rem', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 800 }}>FASE 1: INGRESO</div>
+              <h3 style={{ color: 'var(--sage-800)', marginBottom: '1.5rem', fontSize: '1.4rem' }}>Suscripción de Acciones</h3>
+              <p style={{ color: 'var(--charcoal-mid)', lineHeight: 1.8 }}>Te conviertes en accionista formal de la SpA dueña del proyecto. Tu inversión se registra legalmente y se protocoliza el valor de salida desde el día uno.</p>
             </div>
             
-            <div style={{ background: 'var(--sage-50)', padding: '3rem', borderRadius: '32px', border: '1px solid var(--sage-100)', textAlign: 'center' }}>
-              <div style={{ background: 'var(--gold-primary)', color: 'white', width: '60px', height: '60px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem auto', fontSize: '1.5rem', fontWeight: 800 }}>2</div>
-              <h3 style={{ color: 'var(--sage-800)', marginBottom: '1rem' }}>Desarrollo y Plusvalía</h3>
-              <p style={{ color: 'var(--charcoal-mid)', lineHeight: 1.6 }}>El capital se inyecta en el proyecto elegido. El valor del activo aumenta durante el ciclo de obra o flipping, generando el premio acumulado que recibirás al finalizar.</p>
+            <div style={{ background: 'var(--sage-50)', padding: '3rem', borderRadius: '32px', border: '1px solid var(--sage-100)', position: 'relative' }}>
+              <div style={{ position: 'absolute', top: '-15px', left: '3rem', background: 'var(--gold-primary)', color: 'white', padding: '0.4rem 1.2rem', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 800 }}>FASE 2: MADURACIÓN</div>
+              <h3 style={{ color: 'var(--sage-800)', marginBottom: '1.5rem', fontSize: '1.4rem' }}>Valorización del Activo</h3>
+              <p style={{ color: 'var(--charcoal-mid)', lineHeight: 1.8 }}>El capital trabaja en la construcción o flipping inmobiliario. El valor de tu participación no fluctúa por noticias, solo crece con el avance real de la obra.</p>
             </div>
 
-            <div style={{ background: 'var(--sage-50)', padding: '3rem', borderRadius: '32px', border: '1px solid var(--sage-100)', textAlign: 'center' }}>
-              <div style={{ background: 'var(--gold-primary)', color: 'white', width: '60px', height: '60px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem auto', fontSize: '1.5rem', fontWeight: 800 }}>3</div>
-              <h3 style={{ color: 'var(--sage-800)', marginBottom: '1rem' }}>Liquidación de Salida</h3>
-              <p style={{ color: 'var(--charcoal-mid)', lineHeight: 1.6 }}>Al cumplirse el plazo pactado, ejecutamos el pacto de retroventa. Recibes en un solo pago tu capital inicial más el premio de rentabilidad acordado.</p>
+            <div style={{ background: 'var(--sage-900)', padding: '3rem', borderRadius: '32px', border: '1px solid var(--sage-900)', position: 'relative', color: 'white' }}>
+              <div style={{ position: 'absolute', top: '-15px', left: '3rem', background: 'var(--success)', color: 'white', padding: '0.4rem 1.2rem', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 800 }}>FASE 3: LIQUIDEZ</div>
+              <h3 style={{ color: 'white', marginBottom: '1.5rem', fontSize: '1.4rem' }}>Retroventa Pactada</h3>
+              <p style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.8 }}>Al cumplirse el ciclo, CrowdIn recompra tus acciones. Recibes tu <strong>Capital + Premio Acumulado</strong> en un solo pago. Sin buscar compradores, sin esperas.</p>
             </div>
+          </div>
+
+          <div style={{ marginTop: '4rem', padding: '2rem', background: 'rgba(212,175,55,0.05)', borderRadius: '24px', border: '1px dashed var(--gold-primary)', textAlign: 'center' }}>
+            <p style={{ margin: 0, color: 'var(--sage-800)', fontWeight: 600 }}>
+              <ShieldCheck size={24} style={{ verticalAlign: 'middle', marginRight: '0.8rem', color: 'var(--gold-primary)' }} />
+              <strong>Seguridad Patrimonial:</strong> Al ser Private Equity, tu capital es inmune a las caídas de la bolsa y crisis financieras externas.
+            </p>
           </div>
         </div>
       </section>
