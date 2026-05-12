@@ -157,10 +157,11 @@ function App() {
     if (selectedPlan === 'liquidez') {
       return val >= 40000000 ? { name: 'Elite', roi: 0.012 } : { name: 'Standard', roi: 0.009 };
     }
-    // Plan Patrimonial (Premios al vencimiento - Tasas ajustadas para sostenibilidad)
-    if (val >= 100000000) return { name: 'Ultra Platinum', roi: 0.018 };
-    if (val >= 40000000) return { name: 'Elite 40M+', roi: 0.015 };
-    return { name: 'Premium', roi: 0.012 };
+    // Plan Patrimonial (Tasas escaladas hasta 2.5% para tickets altos)
+    if (val >= 500000000) return { name: 'Institutional Max', roi: 0.025 };
+    if (val >= 100000000) return { name: 'Ultra Platinum', roi: 0.022 };
+    if (val >= 40000000) return { name: 'Elite 40M+', roi: 0.018 };
+    return { name: 'Premium', roi: 0.015 };
   };
 
   const currentTier = getTier(investment);
@@ -624,14 +625,18 @@ function App() {
                     { name: 'CrowdIn', gain: investment * currentTier.roi * 12, highlight: true },
                     { name: 'Banco Estado (DAP)', gain: investment * 0.0045 * 12 },
                     { name: 'Banco BICE', gain: investment * 0.0048 * 12 },
+                    { name: 'Banco Santander', gain: investment * 0.0047 * 12 },
                     { name: 'Itaú Personal Bank', gain: investment * 0.0050 * 12 }
                   ].map((bank, i) => (
-                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 0', borderBottom: i === 3 ? 'none' : '1px solid var(--sage-50)' }}>
+                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 0', borderBottom: i === 4 ? 'none' : '1px solid var(--sage-50)' }}>
                       <span style={{ fontWeight: bank.highlight ? 800 : 500, color: bank.highlight ? (selectedPlan === 'liquidez' ? '#3b82f6' : 'var(--gold-primary)') : 'var(--charcoal-mid)' }}>{bank.name}</span>
                       <span style={{ fontWeight: 700, color: bank.highlight ? 'var(--success)' : 'var(--sage-800)' }}>{formatCurrency(bank.gain)}</span>
                     </div>
                   ))}
                 </div>
+                <p style={{ marginTop: '1.5rem', fontSize: '0.75rem', color: 'rgba(0,0,0,0.4)', fontStyle: 'italic', lineHeight: 1.4 }}>
+                  * Valores referenciales proyectados a 12 meses. Información obtenida de los simuladores web oficiales de cada institución al 12/05/2026. La rentabilidad de CrowdIn es fija y garantizada contractualmente.
+                </p>
               </div>
             </div>
           </div>
