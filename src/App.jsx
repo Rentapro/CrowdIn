@@ -37,10 +37,10 @@ function App() {
       image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800',
       ticket: 500000000,
       plazo: '6 MESES',
-      roi: 0.015, 
+      roi: 0.012, 
       type: 'PAGO MENSUAL',
-      description: 'Modelo diseñado para inversionistas que buscan flujo de caja inmediato. Recibe intereses mensuales garantizados y recupera tu capital en solo 6 meses.',
-      tag: 'LIQUIDEZ INMEDIATA'
+      description: 'Modelo diseñado para inversionistas que buscan flujo de caja inmediato. Recibe intereses mensuales y recupera tu capital en solo 6 meses.',
+      tag: 'LIQUIDEZ PREFERENTE'
     },
     {
       id: 'zapallar',
@@ -49,10 +49,10 @@ function App() {
       image: '/zapallar.png',
       ticket: 500000000,
       plazo: '12 MESES',
-      roi: 0.15,
+      roi: 0.12,
       type: 'PAGO ÚNICO',
-      description: 'Desarrollo de 10 casas de lujo con spa privado dispuestas en semicírculo alrededor de una laguna cristalina con isla-bar central.',
-      tag: 'MÁXIMO RETORNO'
+      description: 'Desarrollo de 10 casas de lujo con spa privado. Modelo patrimonial de alta plusvalía con respaldo en tierra premium.',
+      tag: 'RESGUARDO VALOR'
     },
     {
       id: 'limache',
@@ -61,9 +61,9 @@ function App() {
       image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800',
       ticket: 2000000000,
       plazo: '24 MESES',
-      roi: 0.25,
+      roi: 0.18,
       type: 'PAGO ÚNICO',
-      description: 'Desarrollo de edificios de departamentos en zona de alta demanda habitacional. CIP aprobado para construcción de alta densidad.',
+      description: 'Desarrollo de edificios residenciales en zona de expansión. Proyecto institucional de largo aliento con CIP aprobado.',
       tag: 'INSTITUCIONAL'
     }
   ];
@@ -157,14 +157,14 @@ function App() {
 
   const getTier = (val) => {
     if (selectedPlan === 'liquidez') {
-      if (val >= 500000000) return { name: 'Tramo Institucional', roi: 0.015 };
-      return { name: 'Estrategia Mensual', roi: val >= 40000000 ? 0.012 : 0.009 };
+      if (val >= 100000000) return { name: 'Tramo Preferente', roi: 0.012 };
+      return { name: 'Tramo Inicial', roi: 0.009 };
     }
-    // Plan Patrimonial (Escala técnica de premios por volumen)
-    if (val >= 500000000) return { name: 'Tramo Institucional', roi: 0.025 };
-    if (val >= 100000000) return { name: 'Tramo Preferente', roi: 0.022 };
-    if (val >= 40000000) return { name: 'Tramo Senior', roi: 0.018 };
-    return { name: 'Tramo Inicial', roi: 0.015 };
+    // Plan Patrimonial (Escala técnica ajustada para protección de utilidad)
+    if (val >= 500000000) return { name: 'Tramo Institucional', roi: 0.022 };
+    if (val >= 100000000) return { name: 'Tramo Senior', roi: 0.018 };
+    if (val >= 40000000) return { name: 'Tramo Base', roi: 0.015 };
+    return { name: 'Tramo Entrada', roi: 0.012 };
   };
 
   const currentTier = getTier(investment);
@@ -443,7 +443,7 @@ function App() {
                   </div>
                   <div style={{ fontSize: '1.8rem', fontWeight: 800, color: selectedProject.type === 'PAGO MENSUAL' ? '#3b82f6' : 'var(--success)' }}>
                     {selectedProject.type === 'PAGO MENSUAL' 
-                      ? formatCurrency(modalAmount * (modalAmount >= 500000000 ? 0.015 : (modalAmount >= 40000000 ? 0.012 : 0.009)))
+                      ? formatCurrency(modalAmount * (modalAmount >= 100000000 ? 0.012 : 0.009))
                       : formatCurrency(modalAmount * selectedProject.roi)}
                   </div>
                 </div>
@@ -453,7 +453,7 @@ function App() {
                   </div>
                   <div style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--sage-900)' }}>
                     {selectedProject.type === 'PAGO MENSUAL' 
-                      ? formatCurrency(modalAmount + (modalAmount * (modalAmount >= 500000000 ? 0.015 : (modalAmount >= 40000000 ? 0.012 : 0.009)) * 6))
+                      ? formatCurrency(modalAmount + (modalAmount * (modalAmount >= 100000000 ? 0.012 : 0.009) * 6))
                       : formatCurrency(modalAmount + (modalAmount * selectedProject.roi))}
                   </div>
                 </div>
@@ -615,7 +615,7 @@ function App() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                 <h3 style={{ fontSize: '1.5rem', margin: 0, color: 'var(--sage-800)' }}>Proyección Detallada</h3>
                 <div style={{ background: selectedPlan === 'liquidez' ? 'rgba(59,130,246,0.1)' : 'rgba(212,175,55,0.1)', color: selectedPlan === 'liquidez' ? '#3b82f6' : 'var(--gold-primary)', padding: '0.4rem 1rem', borderRadius: '50px', fontWeight: 800, fontSize: '0.9rem' }}>
-                  {currentTier.name} • {((investment >= 500000000 ? 0.015 : (investment >= 40000000 ? 0.012 : 0.009)) * 100).toFixed(1)}% Mes
+                  {currentTier.name} • {((investment >= 100000000 ? 0.012 : 0.009) * 100).toFixed(1)}% Mes
                 </div>
               </div>
 
@@ -623,13 +623,13 @@ function App() {
                 <div style={{ background: 'var(--sage-50)', padding: '1.5rem', borderRadius: '16px' }}>
                   <div style={{ fontSize: '0.8rem', color: 'var(--charcoal-mid)', textTransform: 'uppercase', marginBottom: '0.5rem', fontWeight: 700 }}>{selectedPlan === 'liquidez' ? 'Flujo Mensual' : 'Utilidad al Cierre'}</div>
                   <div style={{ fontSize: '1.5rem', fontWeight: 800, color: selectedPlan === 'liquidez' ? '#3b82f6' : 'var(--gold-primary)' }}>
-                    {selectedPlan === 'liquidez' ? formatCurrency(investment * (investment >= 500000000 ? 0.015 : (investment >= 40000000 ? 0.012 : 0.009))) : formatCurrency(investment * currentTier.roi * 12)}
+                    {selectedPlan === 'liquidez' ? formatCurrency(investment * (investment >= 100000000 ? 0.012 : 0.009)) : formatCurrency(investment * currentTier.roi * 12)}
                   </div>
                 </div>
                 <div style={{ background: 'var(--sage-900)', padding: '1.5rem', borderRadius: '16px', color: 'white' }}>
                   <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', marginBottom: '0.5rem', fontWeight: 700 }}>Liquidación Total</div>
                   <div style={{ fontSize: '1.5rem', fontWeight: 800 }}>
-                    {selectedPlan === 'liquidez' ? formatCurrency(investment + (investment * (investment >= 500000000 ? 0.015 : (investment >= 40000000 ? 0.012 : 0.009)) * 6)) : formatCurrency(investment + (investment * currentTier.roi * 12))}
+                    {selectedPlan === 'liquidez' ? formatCurrency(investment + (investment * (investment >= 100000000 ? 0.012 : 0.009) * 6)) : formatCurrency(investment + (investment * currentTier.roi * 12))}
                   </div>
                 </div>
               </div>
