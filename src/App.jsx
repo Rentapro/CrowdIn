@@ -157,6 +157,7 @@ function App() {
 
   const getTier = (val) => {
     if (selectedPlan === 'liquidez') {
+      if (val >= 500000000) return { name: 'Tramo Institucional', roi: 0.015 };
       return { name: 'Estrategia Mensual', roi: val >= 40000000 ? 0.012 : 0.009 };
     }
     // Plan Patrimonial (Escala técnica de premios por volumen)
@@ -291,6 +292,10 @@ function App() {
                     <div style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--sage-800)', letterSpacing: '-1px', lineHeight: 1.1 }}>Sociedad por Acciones</div>
                     
                     <div style={{ marginTop: '2rem', background: 'rgba(255,255,255,0.5)', padding: '1.5rem', borderRadius: '16px', border: '1px solid rgba(0,0,0,0.05)' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '0.8rem' }}>
+                        <span style={{ color: 'var(--charcoal-mid)' }}>Flujo Mensual</span>
+                        <span style={{ fontWeight: 800, color: 'var(--success)' }}>{formatCurrency(investment * (investment >= 40000000 ? 0.012 : 0.009))}</span>
+                      </div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
                         <span style={{ color: 'var(--charcoal-mid)' }}>Respaldo Directo</span>
                         <span style={{ color: 'var(--gold-primary)', fontWeight: 'bold' }}>Activos Reales</span>
@@ -437,7 +442,9 @@ function App() {
                     {selectedProject.type === 'PAGO MENSUAL' ? 'Flujo Mensual' : 'Premio Acumulado'}
                   </div>
                   <div style={{ fontSize: '1.8rem', fontWeight: 800, color: selectedProject.type === 'PAGO MENSUAL' ? '#3b82f6' : 'var(--success)' }}>
-                    {selectedProject.type === 'PAGO MENSUAL' ? formatCurrency(modalAmount * selectedProject.roi) : formatCurrency(modalAmount * selectedProject.roi)}
+                    {selectedProject.type === 'PAGO MENSUAL' 
+                      ? formatCurrency(modalAmount * (modalAmount >= 500000000 ? 0.015 : (modalAmount >= 40000000 ? 0.012 : 0.009)))
+                      : formatCurrency(modalAmount * selectedProject.roi)}
                   </div>
                 </div>
                 <div style={{ textAlign: 'center' }}>
@@ -445,7 +452,9 @@ function App() {
                     {selectedProject.type === 'PAGO MENSUAL' ? 'Retorno Total (6m)' : 'Retorno Total'}
                   </div>
                   <div style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--sage-900)' }}>
-                    {selectedProject.type === 'PAGO MENSUAL' ? formatCurrency(modalAmount + (modalAmount * selectedProject.roi * 6)) : formatCurrency(modalAmount + (modalAmount * selectedProject.roi))}
+                    {selectedProject.type === 'PAGO MENSUAL' 
+                      ? formatCurrency(modalAmount + (modalAmount * (modalAmount >= 500000000 ? 0.015 : (modalAmount >= 40000000 ? 0.012 : 0.009)) * 6))
+                      : formatCurrency(modalAmount + (modalAmount * selectedProject.roi))}
                   </div>
                 </div>
               </div>
@@ -606,7 +615,7 @@ function App() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                 <h3 style={{ fontSize: '1.5rem', margin: 0, color: 'var(--sage-800)' }}>Proyección Detallada</h3>
                 <div style={{ background: selectedPlan === 'liquidez' ? 'rgba(59,130,246,0.1)' : 'rgba(212,175,55,0.1)', color: selectedPlan === 'liquidez' ? '#3b82f6' : 'var(--gold-primary)', padding: '0.4rem 1rem', borderRadius: '50px', fontWeight: 800, fontSize: '0.9rem' }}>
-                  {currentTier.name} • {(currentTier.roi * 100).toFixed(1)}% Mes
+                  {currentTier.name} • {((investment >= 500000000 ? 0.015 : (investment >= 40000000 ? 0.012 : 0.009)) * 100).toFixed(1)}% Mes
                 </div>
               </div>
 
@@ -614,13 +623,13 @@ function App() {
                 <div style={{ background: 'var(--sage-50)', padding: '1.5rem', borderRadius: '16px' }}>
                   <div style={{ fontSize: '0.8rem', color: 'var(--charcoal-mid)', textTransform: 'uppercase', marginBottom: '0.5rem', fontWeight: 700 }}>{selectedPlan === 'liquidez' ? 'Flujo Mensual' : 'Utilidad al Cierre'}</div>
                   <div style={{ fontSize: '1.5rem', fontWeight: 800, color: selectedPlan === 'liquidez' ? '#3b82f6' : 'var(--gold-primary)' }}>
-                    {selectedPlan === 'liquidez' ? formatCurrency(investment * currentTier.roi) : formatCurrency(investment * currentTier.roi * 12)}
+                    {selectedPlan === 'liquidez' ? formatCurrency(investment * (investment >= 500000000 ? 0.015 : (investment >= 40000000 ? 0.012 : 0.009))) : formatCurrency(investment * currentTier.roi * 12)}
                   </div>
                 </div>
                 <div style={{ background: 'var(--sage-900)', padding: '1.5rem', borderRadius: '16px', color: 'white' }}>
                   <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', marginBottom: '0.5rem', fontWeight: 700 }}>Liquidación Total</div>
                   <div style={{ fontSize: '1.5rem', fontWeight: 800 }}>
-                    {selectedPlan === 'liquidez' ? formatCurrency(investment + (investment * currentTier.roi * 6)) : formatCurrency(investment + (investment * currentTier.roi * 12))}
+                    {selectedPlan === 'liquidez' ? formatCurrency(investment + (investment * (investment >= 500000000 ? 0.015 : (investment >= 40000000 ? 0.012 : 0.009)) * 6)) : formatCurrency(investment + (investment * currentTier.roi * 12))}
                   </div>
                 </div>
               </div>
