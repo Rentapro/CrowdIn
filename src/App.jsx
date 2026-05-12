@@ -74,7 +74,7 @@ function App() {
     setIsModalOpen(true);
   };
 
-  const handleMouseMove = (e) => {
+  const [currentUser, setCurrentUser] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem('crowdin_user'));
     } catch {
