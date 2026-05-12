@@ -307,6 +307,10 @@ function App() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--sage-800)' }}><ShieldCheck size={24}/> PROTOCOLIZADO ANTE NOTARIO</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--sage-800)' }}><Activity size={24}/> CUMPLIMIENTO UAF CHILE</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--gold-primary)', background: 'rgba(212,175,55,0.1)', padding: '0.5rem 1rem', borderRadius: '12px' }}><Lock size={20}/> KYC OBLIGATORIO</div>
+          </div>
+        </div>
+      </section>
+
       {/* PROJECTS PORTFOLIO SECTION (THE VITRINE) */}
       <section id="proyectos" style={{ padding: '8rem 0', background: 'var(--sage-50)' }}>
         <div className="container">
@@ -435,8 +439,6 @@ function App() {
           </motion.div>
         </div>
       )}
-
-      {/* BUSINESS MODEL SECTION (CLARITY FOCUS) */}</section>
 
       {/* BUSINESS MODEL SECTION (CLARITY FOCUS) */}
       <section id="modelo" style={{ padding: '8rem 0', background: 'white' }}>
