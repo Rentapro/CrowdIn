@@ -141,13 +141,13 @@ function App() {
 
   const faqs = [
     { q: "¿Qué pasa si el proyecto inmobiliario fracasa o se retrasa?", a: "Al firmar un Contrato de Retroventa, no eres un prestamista, eres dueño de acciones de la Sociedad. En el peor escenario de liquidación, los activos inmobiliarios se liquidan para cubrir el patrimonio de los accionistas, blindando el capital muy por encima de un crédito común." },
-    { q: "¿El pago de impuestos recae sobre mi flujo mensual?", a: "Las estructuras se diseñan según normativa de rentas de capital mobiliario. Entregamos los certificados correspondientes en la Operación Renta anual. Es el inversor quien declara su incremento patrimonial en su global complementario." },
-    { q: "¿Puedo retirar mi capital antes del Mes 12?", a: "El ciclo mínimo de bloqueo son 12 meses, ya que los fondos se materializan en hormigón, condominios y proyectos reales de flipping. La ventana de rescate se abre exclusivamente al cumplir el ciclo anual, donde puedes solicitar el pago Bullet o renovar." },
-    { q: "¿En qué tipo de propiedades invierte mi capital?", a: "Nuestro portafolio abarca tres líneas: 1) 'Flipping' de alta velocidad en zonas urbanas, 2) Compra de terrenos y desarrollo de condominios privados, y 3) Construcción de cabañas para el rubro hotelero, generando rentabilidad fija a través de arriendos." },
-    { q: "¿Qué garantía tengo sobre mi inversión inicial?", a: "Tu capital ingresa a una Sociedad por Acciones (SpA) diseñada específicamente como vehículo de adquisición. Primero levantamos el capital estructurado y luego la SpA ejecuta la compra del activo inmobiliario matriz, manteniendo el capital societario blindado bajo mandato legal." },
-    { q: "¿Me mantendrán informado del progreso de las obras?", a: "Sí. Durante la fase inicial de levantamiento, la operación es administrativa. Una vez adquirido el activo y comenzada la fase de obra, enviamos reportes digitales de avance a nuestros accionistas." },
+    { q: "¿El pago de impuestos recae sobre mi utilidad final?", a: "Las estructuras se diseñan según normativa de rentas de capital mobiliario. Entregamos los certificados correspondientes al finalizar el ciclo del proyecto para su declaración en la Operación Renta anual." },
+    { q: "¿Puedo retirar mi capital antes del vencimiento?", a: "El capital se materializa en activos reales (casas, edificios o terrenos). La ventana de rescate se abre exclusivamente al cumplir el ciclo pactado del proyecto (4, 6, 12 o 24 meses), donde recibes el capital más el premio acumulado." },
+    { q: "¿En qué tipo de propiedades invierte mi capital?", a: "Nuestro portafolio abarca tres líneas: 1) 'Flipping' de alta velocidad, 2) Desarrollo de complejos turísticos de lujo (Resort Zapallar), y 3) Edificios residenciales de alta densidad. Tú eliges en qué proyecto participar." },
+    { q: "¿Qué garantía tengo sobre mi inversión inicial?", a: "Tu capital ingresa a una Sociedad por Acciones (SpA) diseñada específicamente como vehículo de adquisición. La SpA ejecuta la compra del activo inmobiliario matriz, manteniendo el capital societario blindado bajo mandato legal." },
+    { q: "¿Me mantendrán informado del progreso de las obras?", a: "Sí. Durante la fase inicial de levantamiento, la operación es administrativa. Una vez comenzada la fase de obra, enviamos reportes digitales de avance a nuestros accionistas." },
     { q: "¿Dónde se realiza la firma legal de las acciones?", a: "Todo el proceso notarial se realiza mediante firma presencial en Notaría o a través de plataformas certificadas de Firma Electrónica Avanzada." },
-    { q: "¿El interés mensual es fijo o depende de las ventas?", a: "Es 100% fijo y contractual. Nosotros pagamos tu flujo mensual con nuestro capital de trabajo mientras la obra madura." },
+    { q: "¿La rentabilidad es fija o depende de las ventas?", a: "Es 100% fija y contractual (Capital + Premio). Nosotros garantizamos tu retorno mediante el pacto de retroventa, independiente de la velocidad de venta final del activo." },
     { q: "¿Quién administra el dinero transferido?", a: "Los fondos ingresan directamente a la cuenta corriente institucional de la Sociedad por Acciones (SpA) que desarrolla el proyecto." }
   ];
 
@@ -161,20 +161,13 @@ function App() {
   };
 
   const currentTier = getTier(investment);
-  const monthlyPayment = investment * currentTier.roi;
-  const yearlyInterests = monthlyPayment * 12;
-  const totalReturn = investment + yearlyInterests;
+  const totalReturnPremium = investment * (currentTier.roi * 6); // Estimado a 6 meses para la calculadora general
+  const totalReturn = investment + totalReturnPremium;
 
   const formatCurrency = (val) => new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 }).format(val);
 
   const handleWhatsAppRedirect = (amount = investment, project = null) => {
-    let message = "";
-    if (project) {
-      const gain = amount * project.roi;
-      message = `Hola equipo CrowdIn.\n\nHe simulado una inversión para el proyecto *${project.title}*.\n\n*Monto:* ${formatCurrency(amount)}\n*Plazo:* ${project.plazo}\n*Ganancia Proyectada:* ${formatCurrency(gain)}\n*Total a recibir:* ${formatCurrency(amount + gain)}\n\nSolicito el borrador del Pacto de Retroventa y validación de cupo.`;
-    } else {
-      message = `Hola equipo CrowdIn.\nQuiero estructurar un ticket de inversión por *${formatCurrency(amount)}* (Tramo ${currentTier.name}).\nEntiendo que el flujo mensual de intereses será de *${formatCurrency(monthlyPayment)}*.\n\nSolicito información sobre los proyectos actuales y el borrador del Pacto de Retroventa.`;
-    }
+    const message = `Hola equipo CrowdIn.\nQuiero estructurar un ticket de inversión por *${formatCurrency(investment)}*.\n\nSolicito información sobre los proyectos actuales y el borrador del Pacto de Retroventa para capital + premio acumulado.`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
   };
@@ -227,10 +220,10 @@ function App() {
                 <Lock size={14} style={{ display: 'inline', marginRight: '5px' }}/> Wealth Management
               </div>
               <h1 className="hero-title" style={{ lineHeight: 1.1 }}>
-                Inversión en Casas con <span style={{ color: 'var(--gold-primary)' }}>Renta Fija Mensual.</span>
+                Inversión Inmobiliaria con <span style={{ color: 'var(--gold-primary)' }}>Retorno Único Garantizado.</span>
               </h1>
               <p className="hero-subtitle" style={{ color: 'var(--charcoal-mid)', fontSize: '1.4rem' }}>
-                Invierte en el desarrollo de condominios, recibe <strong>intereses mes a mes</strong> en tu cuenta y recupera el 100% de tu capital al mes 12. Blindado por Notaría.
+                Invierte en el desarrollo de complejos turísticos y flipping, recibe tu <strong>capital + premio</strong> al finalizar el proyecto. Blindado por Notaría.
               </p>
               
               <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', marginTop: '2rem' }}>
@@ -276,12 +269,12 @@ function App() {
                     
                     <div style={{ marginTop: '2rem', background: 'rgba(255,255,255,0.5)', padding: '1.5rem', borderRadius: '16px', border: '1px solid rgba(0,0,0,0.05)' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                        <span style={{ color: 'var(--charcoal-mid)' }}>ROI Mensual</span>
-                        <span style={{ color: 'var(--gold-primary)', fontWeight: 'bold' }}>2.50%</span>
+                        <span style={{ color: 'var(--charcoal-mid)' }}>Retorno Proyectado</span>
+                        <span style={{ color: 'var(--gold-primary)', fontWeight: 'bold' }}>+15% - 25%</span>
                       </div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <span style={{ color: 'var(--sage-800)', fontWeight: 600 }}>Flujo Intereses</span>
-                        <span style={{ fontSize: '1.5rem', color: 'var(--success)', fontWeight: 800 }}>$1.000.000</span>
+                        <span style={{ color: 'var(--sage-800)', fontWeight: 600 }}>Pago al Vencimiento</span>
+                        <span style={{ fontSize: '1.5rem', color: 'var(--success)', fontWeight: 800 }}>Capital + Premio</span>
                       </div>
                     </div>
                   </div>
@@ -458,14 +451,14 @@ function App() {
             
             <div style={{ background: 'var(--sage-50)', padding: '3rem', borderRadius: '32px', border: '1px solid var(--sage-100)', textAlign: 'center' }}>
               <div style={{ background: 'var(--gold-primary)', color: 'white', width: '60px', height: '60px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem auto', fontSize: '1.5rem', fontWeight: 800 }}>2</div>
-              <h3 style={{ color: 'var(--sage-800)', marginBottom: '1rem' }}>Generación de Rentas</h3>
-              <p style={{ color: 'var(--charcoal-mid)', lineHeight: 1.6 }}>Las casas se construyen y se venden o arriendan. Ese flujo de caja se traduce en tu pago mensual de hasta un 2.5% de interés, superando ampliamente cualquier tasa de la banca tradicional.</p>
+              <h3 style={{ color: 'var(--sage-800)', marginBottom: '1rem' }}>Desarrollo y Plusvalía</h3>
+              <p style={{ color: 'var(--charcoal-mid)', lineHeight: 1.6 }}>El capital se inyecta en el proyecto elegido. El valor del activo aumenta durante el ciclo de obra o flipping, generando el premio acumulado que recibirás al finalizar.</p>
             </div>
 
             <div style={{ background: 'var(--sage-50)', padding: '3rem', borderRadius: '32px', border: '1px solid var(--sage-100)', textAlign: 'center' }}>
               <div style={{ background: 'var(--gold-primary)', color: 'white', width: '60px', height: '60px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem auto', fontSize: '1.5rem', fontWeight: 800 }}>3</div>
-              <h3 style={{ color: 'var(--sage-800)', marginBottom: '1rem' }}>Retiro con Garantía</h3>
-              <p style={{ color: 'var(--charcoal-mid)', lineHeight: 1.6 }}>Al cumplirse los 12 meses, ejecutas tu opción de salida (Bullet) o reinviertes en periodos de 6 o 12 meses, manteniendo tu rentabilidad pactada.</p>
+              <h3 style={{ color: 'var(--sage-800)', marginBottom: '1rem' }}>Liquidación de Salida</h3>
+              <p style={{ color: 'var(--charcoal-mid)', lineHeight: 1.6 }}>Al cumplirse el plazo pactado, ejecutamos el pacto de retroventa. Recibes en un solo pago tu capital inicial más el premio de rentabilidad acordado.</p>
             </div>
           </div>
         </div>
@@ -493,16 +486,16 @@ function App() {
                 <div className="step-number">02</div>
                 <div style={{ position: 'relative', zIndex: 2 }}>
                   <TrendingUp size={40} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-                  <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--sage-800)' }}>Flujo de Intereses (Mensual)</h3>
-                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.05rem', lineHeight: 1.6 }}>Mientras el proyecto madura mediante flipping, condominios o renta hotelera, recibes el pago de intereses pactado directamente en tu cuenta bancaria cada 30 días.</p>
+                  <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--sage-800)' }}>Maduración del Activo</h3>
+                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.05rem', lineHeight: 1.6 }}>Tu capital trabaja en la construcción o adquisición estratégica. No hay retiros intermedios, lo que permite maximizar el interés compuesto y la eficiencia tributaria del proyecto.</p>
                 </div>
               </div>
               <div className="step-card">
                 <div className="step-number">03</div>
                 <div style={{ position: 'relative', zIndex: 2 }}>
                   <RefreshCw size={40} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-                  <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--sage-800)' }}>Devolución del Capital (Mes 12)</h3>
-                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.05rem', lineHeight: 1.6 }}>Al vencimiento del ciclo (Mes 12), ejecutamos el pacto de retroventa. Recibes un pago Bullet que te <strong>devuelve el 100% de tu capital inicial</strong> íntegro y sin comisiones.</p>
+                  <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--sage-800)' }}>Devolución (Capital + Premio)</h3>
+                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.05rem', lineHeight: 1.6 }}>Al vencimiento del ciclo elegido (4, 6, 12 o 24 meses), ejecutamos la recompra de tus acciones. Recibes tu <strong>capital íntegro más el premio acumulado</strong> en un solo pago.</p>
                 </div>
               </div>
             </div>
@@ -552,19 +545,11 @@ function App() {
             </div>
             
             <div className="result-row highlight">
-              <span style={{ color: 'var(--charcoal-mid)' }}>Intereses (Flujo Mensual)</span>
-              <span className="result-val">{formatCurrency(monthlyPayment)}</span>
+              <span style={{ color: 'var(--charcoal-mid)' }}>Premio Acumulado Proyectado</span>
+              <span className="result-val">{formatCurrency(totalReturnPremium)}</span>
             </div>
-            <div className="result-row">
-              <span style={{ color: 'var(--charcoal-mid)' }}>Rendimiento Anual Proyectado</span>
-              <span className="result-val" style={{ color: 'var(--sage-800)' }}>{formatCurrency(yearlyInterests)}</span>
-            </div>
-            <div className="result-row">
-              <span style={{ color: 'rgba(212,175,55,0.9)' }}>Pago Bullet del Capital (Mes 12)</span>
-              <span className="result-val" style={{ color: 'rgba(212,175,55,0.9)' }}>{formatCurrency(investment)}</span>
-            </div>
-            <div className="result-row" style={{ borderTop: '1px solid rgba(0,0,0,0.1)', paddingTop: '3rem', marginTop: '2rem' }}>
-              <span style={{ fontWeight: 600, fontSize: '1.2rem', color: 'var(--charcoal-mid)' }}>Liquidación Total Cierre de Ciclo</span>
+            <div style={{ borderTop: '1px solid rgba(0,0,0,0.1)', paddingTop: '3rem', marginTop: '2rem' }}>
+              <span style={{ fontWeight: 600, fontSize: '1.2rem', color: 'var(--charcoal-mid)' }}>Liquidación Total al Vencimiento</span>
               <span className="result-val" style={{ color: 'var(--sage-800)', fontSize: '2.5rem' }}>{formatCurrency(totalReturn)}</span>
             </div>
             
@@ -615,9 +600,9 @@ function App() {
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
             <div style={{ background: 'rgba(255,255,255,0.05)', padding: '3rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
-              <Scale size={48} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-              <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Pacto de Retroventa Notarial</h3>
-              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>El capital no es un préstamo. Adquieres un % de la Sociedad Inmobiliaria con obligación legal de recompra (Bullet) por nuestra parte al mes 12. Protocolizado ante Notario Público.</p>
+            <Scale size={48} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
+            <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Pacto de Retroventa Notarial</h3>
+            <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>El capital no es un préstamo. Adquieres acciones con obligación legal de recompra (Bullet) por nuestra parte al finalizar el ciclo del proyecto. Protocolizado ante Notario Público.</p>
             </div>
             <div style={{ background: 'rgba(255,255,255,0.05)', padding: '3rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
               <Landmark size={48} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
