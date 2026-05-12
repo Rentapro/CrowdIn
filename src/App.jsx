@@ -31,6 +31,18 @@ function App() {
 
   const projects = [
     {
+      id: 'flipping-express',
+      title: 'Flipping Express',
+      subtitle: 'Liquidez de Corto Plazo',
+      image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800',
+      ticket: 300000000,
+      plazo: '6 MESES',
+      roi: 0.015, // 1.5% mensual
+      type: 'PAGO MENSUAL',
+      description: 'Modelo diseñado para inversionistas que buscan flujo de caja inmediato. Recibe intereses mensuales garantizados y recupera tu capital en solo 6 meses.',
+      tag: 'LIQUIDEZ INMEDIATA'
+    },
+    {
       id: 'zapallar',
       title: 'Laguna de Zapallar',
       subtitle: 'Resort & Spa de Lujo',
@@ -40,19 +52,7 @@ function App() {
       roi: 0.15,
       type: 'PAGO ÚNICO',
       description: 'Desarrollo de 10 casas de lujo con spa privado dispuestas en semicírculo alrededor de una laguna cristalina con isla-bar central.',
-      tag: 'ALTA RENTABILIDAD'
-    },
-    {
-      id: 'flipping',
-      title: 'Pool de Flipping',
-      subtitle: 'Remate y Venta Rápida',
-      image: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&q=80&w=800',
-      ticket: 500000000,
-      plazo: '12 MESES',
-      roi: 0.12,
-      type: 'ALTA ROTACIÓN',
-      description: 'Adquisición de activos en remate, remodelación express y venta estratégica. Ciclos de capital con respaldo inmobiliario directo.',
-      tag: 'LIQUIDEZ'
+      tag: 'MÁXIMO RETORNO'
     },
     {
       id: 'limache',
@@ -62,9 +62,9 @@ function App() {
       ticket: 1000000000,
       plazo: '24 MESES',
       roi: 0.25,
-      type: 'INSTITUCIONAL',
+      type: 'PAGO ÚNICO',
       description: 'Desarrollo de edificios de departamentos en zona de alta demanda habitacional. CIP aprobado para construcción de alta densidad.',
-      tag: 'PLUSVALÍA'
+      tag: 'INSTITUCIONAL'
     }
   ];
 
@@ -167,7 +167,18 @@ function App() {
   const formatCurrency = (val) => new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 }).format(val);
 
   const handleWhatsAppRedirect = (amount = investment, project = null) => {
-    const message = `Hola equipo CrowdIn.\nQuiero estructurar un ticket de inversión por *${formatCurrency(investment)}*.\n\nSolicito información sobre los proyectos actuales y el borrador del Pacto de Retroventa para capital + premio acumulado.`;
+    let message = "";
+    if (project) {
+      if (project.type === 'PAGO MENSUAL') {
+        const monthly = amount * project.roi;
+        message = `Hola equipo CrowdIn.\n\nHe simulado una inversión de *LIQUIDEZ* para el proyecto *${project.title}*.\n\n*Monto:* ${formatCurrency(amount)}\n*Plazo:* ${project.plazo}\n*Flujo Mensual:* ${formatCurrency(monthly)}\n*Retorno Total:* ${formatCurrency(amount + (monthly * 6))}\n\nSolicito validación de cupo para pago mensual.`;
+      } else {
+        const gain = amount * project.roi;
+        message = `Hola equipo CrowdIn.\n\nHe simulado una inversión *PREMIUM* para el proyecto *${project.title}*.\n\n*Monto:* ${formatCurrency(amount)}\n*Plazo:* ${project.plazo}\n*Ganancia Proyectada:* ${formatCurrency(gain)}\n*Total a recibir:* ${formatCurrency(amount + gain)}\n\nSolicito el borrador del Pacto de Retroventa para pago único.`;
+      }
+    } else {
+      message = `Hola equipo CrowdIn.\nQuiero estructurar un ticket de inversión por *${formatCurrency(investment)}*.\n\nSolicito información sobre los proyectos actuales y el borrador del Pacto de Retroventa para capital + premio acumulado.`;
+    }
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
   };
@@ -357,8 +368,10 @@ function App() {
                   </div>
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1.5rem', borderTop: '1px solid var(--sage-100)' }}>
-                    <div style={{ color: 'var(--success)', fontWeight: 800, fontSize: '1.2rem' }}>+{(project.roi * 100).toFixed(0)}% ROI {project.id === 'flipping' ? 'Ciclo' : 'Final'}</div>
-                    <button onClick={() => handleOpenModal(project)} style={{ background: project.id === 'zapallar' ? 'var(--gold-primary)' : 'var(--sage-800)', color: 'white', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '12px', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <div style={{ color: project.type === 'PAGO MENSUAL' ? '#3b82f6' : 'var(--success)', fontWeight: 800, fontSize: '1.2rem' }}>
+                      {project.type === 'PAGO MENSUAL' ? `+${(project.roi * 100).toFixed(1)}% Mensual` : `+${(project.roi * 100).toFixed(0)}% Final`}
+                    </div>
+                    <button onClick={() => handleOpenModal(project)} style={{ background: project.id === 'zapallar' ? 'var(--gold-primary)' : (project.type === 'PAGO MENSUAL' ? '#3b82f6' : 'var(--sage-800)'), color: 'white', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '12px', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                       Simular <ArrowRight size={18}/>
                     </button>
                   </div>
@@ -409,12 +422,20 @@ function App() {
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2.5rem' }}>
                 <div style={{ textAlign: 'center' }}>
-                  <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.85rem', fontWeight: 600 }}>Ganancia Pactada</div>
-                  <div style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--success)' }}>+{formatCurrency(modalAmount * selectedProject.roi)}</div>
+                  <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.85rem', fontWeight: 600 }}>
+                    {selectedProject.type === 'PAGO MENSUAL' ? 'Flujo Mensual' : 'Premio Acumulado'}
+                  </div>
+                  <div style={{ fontSize: '1.8rem', fontWeight: 800, color: selectedProject.type === 'PAGO MENSUAL' ? '#3b82f6' : 'var(--success)' }}>
+                    {selectedProject.type === 'PAGO MENSUAL' ? formatCurrency(modalAmount * selectedProject.roi) : formatCurrency(modalAmount * selectedProject.roi)}
+                  </div>
                 </div>
                 <div style={{ textAlign: 'center' }}>
-                  <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.85rem', fontWeight: 600 }}>Retorno Total</div>
-                  <div style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--sage-900)' }}>{formatCurrency(modalAmount + (modalAmount * selectedProject.roi))}</div>
+                  <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.85rem', fontWeight: 600 }}>
+                    {selectedProject.type === 'PAGO MENSUAL' ? 'Retorno Total (6m)' : 'Retorno Total'}
+                  </div>
+                  <div style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--sage-900)' }}>
+                    {selectedProject.type === 'PAGO MENSUAL' ? formatCurrency(modalAmount + (modalAmount * selectedProject.roi * 6)) : formatCurrency(modalAmount + (modalAmount * selectedProject.roi))}
+                  </div>
                 </div>
               </div>
 
