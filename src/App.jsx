@@ -7,8 +7,8 @@ import ClientPortal from './ClientPortal';
 import ParallaxBackground from './ParallaxBackground';
 
 function App() {
-  const tierValues = [1000000, 5000000, 10000000, 20000000, 40000000, 100000000];
-  const [sliderIndex, setSliderIndex] = useState(4); // Start at 40M Elite
+  const tierValues = [5000000, 10000000, 20000000, 40000000, 100000000, 250000000, 500000000];
+  const [sliderIndex, setSliderIndex] = useState(1); // Empezar en 10M para mostrar tracción
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [currentRoute, setCurrentRoute] = useState(window.location.hash || '#home');
   
@@ -35,9 +35,9 @@ function App() {
       title: 'Flipping Express',
       subtitle: 'Liquidez de Corto Plazo',
       image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800',
-      ticket: 300000000,
+      ticket: 500000000,
       plazo: '6 MESES',
-      roi: 0.015, // 1.5% mensual
+      roi: 0.015, 
       type: 'PAGO MENSUAL',
       description: 'Modelo diseñado para inversionistas que buscan flujo de caja inmediato. Recibe intereses mensuales garantizados y recupera tu capital en solo 6 meses.',
       tag: 'LIQUIDEZ INMEDIATA'
@@ -59,7 +59,7 @@ function App() {
       title: 'Altura Limache',
       subtitle: 'Condominio Vertical',
       image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800',
-      ticket: 1000000000,
+      ticket: 2000000000,
       plazo: '24 MESES',
       roi: 0.25,
       type: 'PAGO ÚNICO',
@@ -150,6 +150,7 @@ function App() {
     { q: "¿La rentabilidad es fija o depende de las ventas?", a: "Es 100% fija y contractual (Capital + Premio). Nosotros garantizamos tu retorno mediante el pacto de retroventa, independiente de la velocidad de venta final del activo." },
     { q: "¿Quién administra el dinero transferido?", a: "Los fondos ingresan directamente a la cuenta corriente institucional de la Sociedad por Acciones (SpA) que desarrolla el proyecto." }
   ];
+
   const [selectedPlan, setSelectedPlan] = useState('patrimonial'); // 'liquidez' o 'patrimonial'
 
   const getTier = (val) => {
@@ -170,6 +171,7 @@ function App() {
     ? (investment * monthlyEquivalent * 6) 
     : (investment * monthlyEquivalent * 12);
   const totalReturn = investment + totalReturnPremium;
+
 
   const formatCurrency = (val) => new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 }).format(val);
 
@@ -343,14 +345,14 @@ function App() {
                 style={{ background: 'white', borderRadius: '32px', overflow: 'hidden', border: '1px solid var(--sage-200)', boxShadow: '0 20px 50px rgba(0,0,0,0.05)' }}
               >
                 <div style={{ height: '250px', background: `url('${project.image}') center/cover`, position: 'relative' }}>
-                  <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: project.id === 'zapallar' ? 'var(--gold-primary)' : (project.id === 'flipping' ? '#3b82f6' : 'var(--charcoal)'), color: 'white', padding: '0.6rem 1.2rem', borderRadius: '50px', fontWeight: 800, fontSize: '0.8rem', boxShadow: '0 10px 20px rgba(0,0,0,0.1)' }}>{project.tag}</div>
+                  <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: project.id === 'zapallar' ? 'var(--gold-primary)' : (project.id === 'flipping-express' ? '#3b82f6' : 'var(--charcoal)'), color: 'white', padding: '0.6rem 1.2rem', borderRadius: '50px', fontWeight: 800, fontSize: '0.8rem', boxShadow: '0 10px 20px rgba(0,0,0,0.1)' }}>{project.tag}</div>
                 </div>
                 <div style={{ padding: '2.5rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1.5rem' }}>
                     <div>
                       <h3 style={{ margin: 0, color: 'var(--sage-900)', fontSize: '1.8rem', fontFamily: 'Outfit' }}>{project.title}</h3>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginTop: '0.5rem' }}>
-                        {project.id === 'zapallar' ? <MapPin size={16} /> : (project.id === 'flipping' ? <TrendingUp size={16} /> : <Building2 size={16} />)} {project.subtitle}
+                        {project.id === 'zapallar' ? <MapPin size={16} /> : (project.id === 'flipping-express' ? <TrendingUp size={16} /> : <Building2 size={16} />)} {project.subtitle}
                       </div>
                     </div>
                     <div style={{ textAlign: 'right', background: 'var(--sage-50)', padding: '0.5rem 1rem', borderRadius: '12px' }}>
