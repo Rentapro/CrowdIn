@@ -552,53 +552,120 @@ export default function AdminPanel({ user, onLogout }) {
           )}
 
           {activeTab === 'projects' && (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '2rem' }}>
-              {/* Proyecto 1: Zapallar Luxury Resort */}
-              <div style={{ background: 'white', borderRadius: '24px', overflow: 'hidden', border: '1px solid var(--sage-200)', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}>
-                <div style={{ height: '250px', background: `url('/zapallar_luxury_resort_1778542588092.png') center/cover`, position: 'relative' }}>
-                  <div style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'var(--gold-primary)', color: 'white', padding: '0.5rem 1rem', borderRadius: '50px', fontWeight: 'bold', fontSize: '0.8rem' }}>ALTA RENTABILIDAD</div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))', gap: '2rem' }}>
+              {/* 1. ZAPALLAR RESORT */}
+              <div style={{ background: 'white', borderRadius: '24px', overflow: 'hidden', border: '1px solid var(--sage-200)', boxShadow: '0 15px 35px rgba(0,0,0,0.08)' }}>
+                <div style={{ height: '200px', background: `url('/zapallar_luxury_resort_1778542588092.png') center/cover`, position: 'relative' }}>
+                  <div style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'var(--gold-primary)', color: 'white', padding: '0.4rem 0.8rem', borderRadius: '50px', fontWeight: 'bold', fontSize: '0.7rem' }}>RETORNO RÁPIDO</div>
                 </div>
-                <div style={{ padding: '2rem' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1rem' }}>
-                    <div>
-                      <h3 style={{ margin: 0, color: 'var(--sage-900)', fontSize: '1.5rem' }}>Laguna de Zapallar: Resort & Spa</h3>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginTop: '0.4rem' }}>
-                        <MapPin size={14} /> Zapallar, Quinta Región
-                      </div>
+                <div style={{ padding: '1.5rem' }}>
+                  <h3 style={{ margin: 0, color: 'var(--sage-900)', fontSize: '1.3rem' }}>Zapallar Luxury Resort</h3>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: 'var(--charcoal-mid)', fontSize: '0.8rem', margin: '0.5rem 0 1rem 0' }}>
+                    <MapPin size={14} /> Laguna y Semicírculo de Cabañas
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
+                    <div style={{ background: 'var(--sage-50)', padding: '0.8rem', borderRadius: '12px' }}>
+                      <div style={{ fontSize: '0.7rem', color: 'var(--charcoal-mid)', fontWeight: 'bold' }}>TICKET</div>
+                      <div style={{ fontSize: '1.1rem', fontWeight: 800 }}>$350M</div>
                     </div>
-                    <div style={{ textAlign: 'right' }}>
-                      <div style={{ fontSize: '0.8rem', color: 'var(--charcoal-mid)', fontWeight: 'bold' }}>MODELO</div>
-                      <div style={{ color: 'var(--sage-800)', fontWeight: 800 }}>PAGO ÚNICO</div>
+                    <div style={{ background: 'var(--sage-900)', padding: '0.8rem', borderRadius: '12px', color: 'white' }}>
+                      <div style={{ fontSize: '0.7rem', opacity: 0.8, fontWeight: 'bold' }}>PLAZO</div>
+                      <div style={{ fontSize: '1.1rem', fontWeight: 800 }}>4 MESES</div>
                     </div>
                   </div>
-                  
-                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '1.5rem' }}>
-                    Diseño circular exclusivo con laguna central, isla-bar y 19 cabañas de lujo. Cada unidad cuenta con tinaja y sauna privados. Hito arquitectónico en la zona más exclusiva de Chile.
-                  </p>
-
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
-                    <div style={{ background: 'var(--sage-50)', padding: '1rem', borderRadius: '12px' }}>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)', fontWeight: 'bold', textTransform: 'uppercase' }}>Inversión Meta</div>
-                      <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--sage-900)' }}>$350.000.000</div>
+                  <div style={{ marginBottom: '1.5rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', marginBottom: '0.5rem' }}>
+                      <span>Avance de Fondos</span>
+                      <span style={{ fontWeight: 'bold' }}>25%</span>
                     </div>
-                    <div style={{ background: 'var(--gold-primary)', padding: '1rem', borderRadius: '12px', color: 'white' }}>
-                      <div style={{ fontSize: '0.75rem', opacity: 0.8, fontWeight: 'bold', textTransform: 'uppercase' }}>Retorno Final</div>
-                      <div style={{ fontSize: '1.2rem', fontWeight: 800 }}>+25% ($437.5M)</div>
+                    <div style={{ height: '8px', background: 'var(--sage-100)', borderRadius: '10px', overflow: 'hidden' }}>
+                      <div style={{ width: '25%', height: '100%', background: 'var(--gold-primary)' }}></div>
                     </div>
                   </div>
-
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--charcoal-mid)', fontSize: '0.9rem', borderTop: '1px solid var(--sage-100)', paddingTop: '1.5rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Clock size={16}/> 18 Meses de Plazo</div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Zap size={16}/> 100% Capital + Premio</div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ color: 'var(--success)', fontWeight: 'bold', fontSize: '1rem' }}>+25% ROI Estimado</div>
+                    <button style={{ background: 'var(--sage-800)', color: 'white', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', cursor: 'pointer', fontSize: '0.85rem' }}>Ver Detalles</button>
                   </div>
                 </div>
               </div>
 
-              {/* Espacio para futuros proyectos */}
-              <div style={{ border: '3px dashed var(--sage-200)', borderRadius: '24px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '3rem', textAlign: 'center', color: 'var(--sage-400)' }}>
-                <Plus size={48} style={{ marginBottom: '1rem' }} />
-                <h4 style={{ margin: 0 }}>Añadir Nuevo Proyecto</h4>
-                <p style={{ fontSize: '0.9rem' }}>Limache Edificios, Urban Flipping o Rentas AirBnB</p>
+              {/* 2. FLIPPING INMOBILIARIO */}
+              <div style={{ background: 'white', borderRadius: '24px', overflow: 'hidden', border: '1px solid var(--sage-200)', boxShadow: '0 15px 35px rgba(0,0,0,0.08)' }}>
+                <div style={{ height: '200px', background: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&q=80&w=800') center/cover`, position: 'relative' }}>
+                  <div style={{ position: 'absolute', top: '1rem', right: '1rem', background: '#3b82f6', color: 'white', padding: '0.4rem 0.8rem', borderRadius: '50px', fontWeight: 'bold', fontSize: '0.7rem' }}>ALTA ROTACIÓN</div>
+                </div>
+                <div style={{ padding: '1.5rem' }}>
+                  <h3 style={{ margin: 0, color: 'var(--sage-900)', fontSize: '1.3rem' }}>Pool de Flipping V Región</h3>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: 'var(--charcoal-mid)', fontSize: '0.8rem', margin: '0.5rem 0 1rem 0' }}>
+                    <TrendingUp size={14} /> Remate, Remodelación y Venta
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
+                    <div style={{ background: 'var(--sage-50)', padding: '0.8rem', borderRadius: '12px' }}>
+                      <div style={{ fontSize: '0.7rem', color: 'var(--charcoal-mid)', fontWeight: 'bold' }}>TICKET</div>
+                      <div style={{ fontSize: '1.1rem', fontWeight: 800 }}>$500M</div>
+                    </div>
+                    <div style={{ background: 'var(--sage-900)', padding: '0.8rem', borderRadius: '12px', color: 'white' }}>
+                      <div style={{ fontSize: '0.7rem', opacity: 0.8, fontWeight: 'bold' }}>PLAZO</div>
+                      <div style={{ fontSize: '1.1rem', fontWeight: 800 }}>6 MESES</div>
+                    </div>
+                  </div>
+                  <div style={{ marginBottom: '1.5rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', marginBottom: '0.5rem' }}>
+                      <span>Avance de Fondos</span>
+                      <span style={{ fontWeight: 'bold' }}>10%</span>
+                    </div>
+                    <div style={{ height: '8px', background: 'var(--sage-100)', borderRadius: '10px', overflow: 'hidden' }}>
+                      <div style={{ width: '10%', height: '100%', background: '#3b82f6' }}></div>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ color: 'var(--success)', fontWeight: 'bold', fontSize: '1rem' }}>30% - 40% Margen</div>
+                    <button style={{ background: 'var(--sage-800)', color: 'white', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', cursor: 'pointer', fontSize: '0.85rem' }}>Ver Detalles</button>
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. EDIFICIO LIMACHE */}
+              <div style={{ background: 'white', borderRadius: '24px', overflow: 'hidden', border: '1px solid var(--sage-200)', boxShadow: '0 15px 35px rgba(0,0,0,0.08)' }}>
+                <div style={{ height: '200px', background: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800') center/cover`, position: 'relative' }}>
+                  <div style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'var(--charcoal)', color: 'white', padding: '0.4rem 0.8rem', borderRadius: '50px', fontWeight: 'bold', fontSize: '0.7rem' }}>INSTITUCIONAL</div>
+                </div>
+                <div style={{ padding: '1.5rem' }}>
+                  <h3 style={{ margin: 0, color: 'var(--sage-900)', fontSize: '1.3rem' }}>Condominio Altura Limache</h3>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: 'var(--charcoal-mid)', fontSize: '0.8rem', margin: '0.5rem 0 1rem 0' }}>
+                    <MapPin size={14} /> Desarrollo Vertical con CIP Aprobado
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
+                    <div style={{ background: 'var(--sage-50)', padding: '0.8rem', borderRadius: '12px' }}>
+                      <div style={{ fontSize: '0.7rem', color: 'var(--charcoal-mid)', fontWeight: 'bold' }}>TICKET</div>
+                      <div style={{ fontSize: '1.1rem', fontWeight: 800 }}>$1.000M</div>
+                    </div>
+                    <div style={{ background: 'var(--sage-900)', padding: '0.8rem', borderRadius: '12px', color: 'white' }}>
+                      <div style={{ fontSize: '0.7rem', opacity: 0.8, fontWeight: 'bold' }}>PLAZO</div>
+                      <div style={{ fontSize: '1.1rem', fontWeight: 800 }}>24 MESES</div>
+                    </div>
+                  </div>
+                  <div style={{ marginBottom: '1.5rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', marginBottom: '0.5rem' }}>
+                      <span>Avance de Fondos</span>
+                      <span style={{ fontWeight: 'bold' }}>0%</span>
+                    </div>
+                    <div style={{ height: '8px', background: 'var(--sage-100)', borderRadius: '10px', overflow: 'hidden' }}>
+                      <div style={{ width: '0%', height: '100%', background: 'var(--charcoal)' }}></div>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ color: 'var(--gold-primary)', fontWeight: 'bold', fontSize: '1rem' }}>Alta Plusvalía</div>
+                    <button style={{ background: 'var(--sage-800)', color: 'white', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', cursor: 'pointer', fontSize: '0.85rem' }}>Ver Detalles</button>
+                  </div>
+                </div>
+              </div>
+
+              {/* 4. OPORTUNIDAD DE MERCADO */}
+              <div style={{ border: '3px dashed var(--sage-200)', borderRadius: '24px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem', textAlign: 'center', color: 'var(--sage-400)' }}>
+                <Plus size={40} style={{ marginBottom: '1rem' }} />
+                <h4 style={{ margin: 0 }}>Nueva Oportunidad</h4>
+                <p style={{ fontSize: '0.8rem' }}>Terrenos, Remates o Inversión Inmediata</p>
               </div>
             </div>
           )}
