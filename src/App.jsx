@@ -150,18 +150,25 @@ function App() {
     { q: "¿La rentabilidad es fija o depende de las ventas?", a: "Es 100% fija y contractual (Capital + Premio). Nosotros garantizamos tu retorno mediante el pacto de retroventa, independiente de la velocidad de venta final del activo." },
     { q: "¿Quién administra el dinero transferido?", a: "Los fondos ingresan directamente a la cuenta corriente institucional de la Sociedad por Acciones (SpA) que desarrolla el proyecto." }
   ];
+  const [selectedPlan, setSelectedPlan] = useState('patrimonial'); // 'liquidez' o 'patrimonial'
 
-  const getTier = (amount) => {
-    if (amount >= 100000000) return { roi: 0.025, name: 'Institucional' };
-    if (amount >= 40000000) return { roi: 0.025, name: 'Elite' };
-    if (amount >= 20000000) return { roi: 0.022, name: 'Premium' };
-    if (amount >= 10000000) return { roi: 0.020, name: 'Avanzado' };
-    if (amount >= 5000000) return { roi: 0.017, name: 'Crecimiento' };
-    return { roi: 0.015, name: 'Inicio' };
+  const getTier = (val) => {
+    if (selectedPlan === 'liquidez') {
+      return val >= 40000000 ? { name: 'Elite', roi: 0.012 } : { name: 'Standard', roi: 0.009 };
+    }
+    // Plan Patrimonial (Premios al vencimiento)
+    if (val >= 100000000) return { name: 'Ultra Platinum', roi: 0.025 };
+    if (val >= 40000000) return { name: 'Elite 40M+', roi: 0.02 };
+    return { name: 'Premium', roi: 0.015 };
   };
 
   const currentTier = getTier(investment);
-  const totalReturnPremium = investment * (currentTier.roi * 12); // Calculado a 12 meses como base estándar
+  
+  // Calculo de retornos
+  const monthlyEquivalent = currentTier.roi;
+  const totalReturnPremium = selectedPlan === 'liquidez' 
+    ? (investment * monthlyEquivalent * 6) 
+    : (investment * monthlyEquivalent * 12);
   const totalReturn = investment + totalReturnPremium;
 
   const formatCurrency = (val) => new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 }).format(val);
@@ -171,13 +178,13 @@ function App() {
     if (project) {
       if (project.type === 'PAGO MENSUAL') {
         const monthly = amount * project.roi;
-        message = `Hola equipo CrowdIn.\n\nHe simulado una inversión de *LIQUIDEZ* para el proyecto *${project.title}*.\n\n*Monto:* ${formatCurrency(amount)}\n*Plazo:* ${project.plazo}\n*Flujo Mensual:* ${formatCurrency(monthly)}\n*Retorno Total:* ${formatCurrency(amount + (monthly * 6))}\n\nSolicito validación de cupo para pago mensual.`;
+        message = `Hola equipo CrowdIn.\n\nHe simulado una inversión de *LIQUIDEZ* (0.9%-1.2% mensual) para el proyecto *${project.title}*.\n\n*Monto:* ${formatCurrency(amount)}\n*Plazo:* ${project.plazo}\n*Flujo Mensual:* ${formatCurrency(monthly)}\n*Retorno Total:* ${formatCurrency(amount + (monthly * 6))}\n\nSolicito validación de cupo.`;
       } else {
         const gain = amount * project.roi;
-        message = `Hola equipo CrowdIn.\n\nHe simulado una inversión *PREMIUM* para el proyecto *${project.title}*.\n\n*Monto:* ${formatCurrency(amount)}\n*Plazo:* ${project.plazo}\n*Ganancia Proyectada:* ${formatCurrency(gain)}\n*Total a recibir:* ${formatCurrency(amount + gain)}\n\nSolicito el borrador del Pacto de Retroventa para pago único.`;
+        message = `Hola equipo CrowdIn.\n\nHe simulado una inversión *PREMIUM* para el proyecto *${project.title}*.\n\n*Monto:* ${formatCurrency(amount)}\n*Plazo:* ${project.plazo}\n*Ganancia Proyectada:* ${formatCurrency(gain)}\n*Total a recibir:* ${formatCurrency(amount + gain)}\n\nSolicito el borrador del Pacto de Retroventa.`;
       }
     } else {
-      message = `Hola equipo CrowdIn.\nQuiero estructurar un ticket de inversión por *${formatCurrency(investment)}*.\n\nSolicito información sobre los proyectos actuales y el borrador del Pacto de Retroventa para capital + premio acumulado.`;
+      message = `Hola equipo CrowdIn.\nQuiero estructurar un ticket bajo el *PLAN ${selectedPlan.toUpperCase()}* por *${formatCurrency(investment)}*.\n\nEntiendo que mi ${selectedPlan === 'liquidez' ? 'flujo mensual' : 'premio final'} será de aproximadamente *${formatCurrency(selectedPlan === 'liquidez' ? investment * currentTier.roi : totalReturnPremium)}*.\n\nSolicito información de cupos.`;
     }
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
@@ -565,12 +572,16 @@ function App() {
               </div>
             </div>
             
-            <div className="result-row highlight">
-              <span style={{ color: 'var(--charcoal-mid)' }}>Premio Acumulado Proyectado</span>
-              <span className="result-val">{formatCurrency(totalReturnPremium)}</span>
+            <div className="result-row highlight" style={{ background: selectedPlan === 'liquidez' ? 'rgba(59, 130, 246, 0.05)' : 'rgba(212, 175, 55, 0.05)' }}>
+              <span style={{ color: 'var(--charcoal-mid)' }}>{selectedPlan === 'liquidez' ? 'Flujo Mensual Garantizado' : 'Premio Acumulado Proyectado'}</span>
+              <span className="result-val" style={{ color: selectedPlan === 'liquidez' ? '#3b82f6' : 'var(--gold-primary)' }}>
+                {selectedPlan === 'liquidez' ? formatCurrency(investment * currentTier.roi) : formatCurrency(totalReturnPremium)}
+              </span>
             </div>
             <div style={{ borderTop: '1px solid rgba(0,0,0,0.1)', paddingTop: '3rem', marginTop: '2rem' }}>
-              <span style={{ fontWeight: 600, fontSize: '1.2rem', color: 'var(--charcoal-mid)' }}>Liquidación Total al Vencimiento</span>
+              <span style={{ fontWeight: 600, fontSize: '1.2rem', color: 'var(--charcoal-mid)' }}>
+                {selectedPlan === 'liquidez' ? 'Retorno Total (6 meses)' : 'Retorno Total (Al Cierre)'}
+              </span>
               <span className="result-val" style={{ color: 'var(--sage-800)', fontSize: '2.5rem' }}>{formatCurrency(totalReturn)}</span>
             </div>
             
