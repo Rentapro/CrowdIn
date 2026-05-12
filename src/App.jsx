@@ -587,6 +587,9 @@ function App() {
               </h3>
               <div style={{ background: 'rgba(212, 175, 55, 0.1)', color: 'var(--gold-primary)', border: '1px solid rgba(212,175,55,0.3)', padding: '0.5rem 1.5rem', borderRadius: '50px', fontWeight: 800, fontSize: '1.2rem' }}>
                 {(currentTier.roi * 100).toFixed(1)}% Mensual
+              </div>
+            </div>
+            
             <div className="result-row highlight" style={{ background: selectedPlan === 'liquidez' ? 'rgba(59, 130, 246, 0.08)' : 'rgba(212, 175, 55, 0.08)', borderRadius: '24px', padding: '2rem' }}>
               <div style={{ width: '100%' }}>
                 <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginBottom: '0.5rem', fontWeight: 600 }}>
