@@ -277,32 +277,31 @@ function App() {
                 <div style={{ position: 'absolute', top: '20px', right: '-20px', width: '350px', height: '450px', background: 'rgba(255,255,255,0.4)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.6)', borderRadius: '24px', transform: 'translateZ(-50px)' }}></div>
                 
                 {/* Main Glass Card */}
-                <div style={{ position: 'absolute', top: 0, right: 0, width: '380px', height: '480px', background: 'linear-gradient(135deg, rgba(255,255,255,0.9), rgba(244,247,244,0.95))', backdropFilter: 'blur(40px)', border: '1px solid rgba(212,175,55,0.3)', borderRadius: '24px', padding: '2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 30px 60px rgba(0,0,0,0.1)', transform: 'translateZ(20px)' }}>
+                <div style={{ position: 'absolute', top: 0, right: 0, width: '380px', height: '480px', background: 'linear-gradient(135deg, rgba(255,255,255,0.9), rgba(244,247,244,0.95))', backdropFilter: 'blur(40px)', border: '1px solid rgba(212,175,55,0.3)', borderRadius: '24px', padding: '2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 30px 60px rgba(0,0,0,0.1)', transform: 'translateZ(20px)', overflow: 'hidden' }}>
                   
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div style={{ background: 'rgba(212,175,55,0.1)', padding: '0.8rem', borderRadius: '12px', color: 'var(--gold-primary)' }}><ShieldCheck size={32}/></div>
-                    <span style={{ border: '1px solid var(--gold-primary)', color: 'var(--gold-primary)', padding: '0.3rem 0.8rem', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 'bold' }}>RESPALDO PATRIMONIAL</span>
+                    <span style={{ border: '1px solid var(--gold-primary)', color: 'var(--gold-primary)', padding: '0.3rem 0.8rem', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 'bold' }}>CERTIFICADO LEGAL</span>
                   </div>
 
-                  <div>
-                    <div style={{ color: 'var(--charcoal-mid)', fontSize: '1rem', marginBottom: '0.5rem' }}>Activos en Resguardo (2026)</div>
-                    <div style={{ fontSize: '2.8rem', fontWeight: 800, color: 'var(--sage-800)', letterSpacing: '-1px' }}>$2.450.000.000</div>
+                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                    <div style={{ color: 'var(--charcoal-mid)', fontSize: '1rem', marginBottom: '0.5rem' }}>Estructura Societaria</div>
+                    <div style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--sage-800)', letterSpacing: '-1px', lineHeight: 1.1 }}>Sociedad por Acciones</div>
                     
                     <div style={{ marginTop: '2rem', background: 'rgba(255,255,255,0.5)', padding: '1.5rem', borderRadius: '16px', border: '1px solid rgba(0,0,0,0.05)' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                        <span style={{ color: 'var(--charcoal-mid)' }}>Margen de Seguridad</span>
-                        <span style={{ color: 'var(--gold-primary)', fontWeight: 'bold' }}>120% LTV</span>
+                        <span style={{ color: 'var(--charcoal-mid)' }}>Respaldo Directo</span>
+                        <span style={{ color: 'var(--gold-primary)', fontWeight: 'bold' }}>Activos Reales</span>
                       </div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <span style={{ color: 'var(--sage-800)', fontWeight: 600 }}>Estrategia de Salida</span>
-                        <span style={{ fontSize: '1.2rem', color: 'var(--success)', fontWeight: 800 }}>Retroventa Pactada</span>
+                        <span style={{ color: 'var(--sage-800)', fontWeight: 600 }}>Garantía</span>
+                        <span style={{ fontSize: '1.1rem', color: 'var(--success)', fontWeight: 800 }}>Pacto Retroventa</span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Floating Action Button */}
-                  <div style={{ position: 'absolute', bottom: '-20px', left: '50%', transform: 'translateX(-50%) translateZ(40px)', background: 'var(--gold-primary)', color: 'white', padding: '1rem 2rem', borderRadius: '50px', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', boxShadow: '0 20px 40px rgba(212,175,55,0.3)', width: 'max-content' }}>
-                    <CheckCircle2 size={20}/> Blindaje Notarial Activo
+                  <div style={{ background: 'var(--gold-primary)', color: 'white', padding: '0.8rem 1.5rem', borderRadius: '50px', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center', fontSize: '0.9rem' }}>
+                    <CheckCircle2 size={18}/> Blindaje Notarial Activo
                   </div>
 
                 </div>
@@ -543,13 +542,13 @@ function App() {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '3rem', alignItems: 'start' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '3rem', alignItems: 'stretch' }}>
             
             {/* PANEL IZQUIERDO: CONFIGURACIÓN */}
-            <div style={{ background: 'white', padding: '3rem', borderRadius: '32px', boxShadow: '0 20px 50px rgba(0,0,0,0.05)', border: '1px solid var(--sage-100)' }}>
+            <div style={{ background: 'white', padding: '3rem', borderRadius: '32px', boxShadow: '0 20px 50px rgba(0,0,0,0.05)', border: '1px solid var(--sage-100)', display: 'flex', flexDirection: 'column' }}>
               <h3 style={{ fontSize: '1.5rem', marginBottom: '2rem', color: 'var(--sage-800)', borderBottom: '1px solid var(--sage-50)', paddingBottom: '1rem' }}>Configuración de Ticket</h3>
               
-              <div style={{ marginBottom: '3rem' }}>
+              <div style={{ marginBottom: '3rem', flex: 1 }}>
                 <label style={{ display: 'block', color: 'var(--charcoal-mid)', fontWeight: 600, marginBottom: '1rem', fontSize: '0.9rem', textTransform: 'uppercase' }}>Estrategia de Retorno</label>
                 <div style={{ display: 'flex', background: 'var(--sage-50)', padding: '0.4rem', borderRadius: '16px', gap: '0.4rem' }}>
                   <button 
@@ -594,7 +593,7 @@ function App() {
             </div>
 
             {/* PANEL DERECHO: RESULTADOS Y BENCHMARK */}
-            <div style={{ background: 'white', padding: '3rem', borderRadius: '32px', boxShadow: '0 20px 50px rgba(0,0,0,0.05)', border: '1px solid var(--sage-100)' }}>
+            <div style={{ background: 'white', padding: '3rem', borderRadius: '32px', boxShadow: '0 20px 50px rgba(0,0,0,0.05)', border: '1px solid var(--sage-100)', display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                 <h3 style={{ fontSize: '1.5rem', margin: 0, color: 'var(--sage-800)' }}>Proyección Detallada</h3>
                 <div style={{ background: selectedPlan === 'liquidez' ? 'rgba(59,130,246,0.1)' : 'rgba(212,175,55,0.1)', color: selectedPlan === 'liquidez' ? '#3b82f6' : 'var(--gold-primary)', padding: '0.4rem 1rem', borderRadius: '50px', fontWeight: 800, fontSize: '0.9rem' }}>
@@ -618,7 +617,7 @@ function App() {
               </div>
 
               {/* BENCHMARK INTEGRADO */}
-              <div style={{ borderTop: '1px solid var(--sage-50)', paddingTop: '2rem' }}>
+              <div style={{ borderTop: '1px solid var(--sage-50)', paddingTop: '2rem', flex: 1 }}>
                 <h4 style={{ fontSize: '1rem', color: 'var(--sage-800)', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700 }}>Comparativa Bancaria (12 Meses)</h4>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                   {[
