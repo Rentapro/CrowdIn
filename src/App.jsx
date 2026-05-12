@@ -48,10 +48,10 @@ function App() {
       subtitle: 'Remate y Venta Rápida',
       image: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&q=80&w=800',
       ticket: 500000000,
-      plazo: '6 MESES',
-      roi: 0.10,
+      plazo: '12 MESES',
+      roi: 0.12,
       type: 'ALTA ROTACIÓN',
-      description: 'Adquisición de activos en remate, remodelación express y venta en tiempo récord. Ciclos cortos de capital con respaldo inmobiliario.',
+      description: 'Adquisición de activos en remate, remodelación express y venta estratégica. Ciclos de capital con respaldo inmobiliario directo.',
       tag: 'LIQUIDEZ'
     },
     {
@@ -142,7 +142,7 @@ function App() {
   const faqs = [
     { q: "¿Qué pasa si el proyecto inmobiliario fracasa o se retrasa?", a: "Al firmar un Contrato de Retroventa, no eres un prestamista, eres dueño de acciones de la Sociedad. En el peor escenario de liquidación, los activos inmobiliarios se liquidan para cubrir el patrimonio de los accionistas, blindando el capital muy por encima de un crédito común." },
     { q: "¿El pago de impuestos recae sobre mi utilidad final?", a: "Las estructuras se diseñan según normativa de rentas de capital mobiliario. Entregamos los certificados correspondientes al finalizar el ciclo del proyecto para su declaración en la Operación Renta anual." },
-    { q: "¿Puedo retirar mi capital antes del vencimiento?", a: "El capital se materializa en activos reales (casas, edificios o terrenos). La ventana de rescate se abre exclusivamente al cumplir el ciclo pactado del proyecto (4, 6, 12 o 24 meses), donde recibes el capital más el premio acumulado." },
+    { q: "¿Puedo retirar mi capital antes del vencimiento?", a: "El capital se materializa en activos reales (casas, edificios o terrenos). La ventana de rescate se abre exclusivamente al cumplir el ciclo pactado del proyecto (12 o 24 meses), donde recibes el capital más el premio acumulado." },
     { q: "¿En qué tipo de propiedades invierte mi capital?", a: "Nuestro portafolio abarca tres líneas: 1) 'Flipping' de alta velocidad, 2) Desarrollo de complejos turísticos de lujo (Resort Zapallar), y 3) Edificios residenciales de alta densidad. Tú eliges en qué proyecto participar." },
     { q: "¿Qué garantía tengo sobre mi inversión inicial?", a: "Tu capital ingresa a una Sociedad por Acciones (SpA) diseñada específicamente como vehículo de adquisición. La SpA ejecuta la compra del activo inmobiliario matriz, manteniendo el capital societario blindado bajo mandato legal." },
     { q: "¿Me mantendrán informado del progreso de las obras?", a: "Sí. Durante la fase inicial de levantamiento, la operación es administrativa. Una vez comenzada la fase de obra, enviamos reportes digitales de avance a nuestros accionistas." },
@@ -161,7 +161,7 @@ function App() {
   };
 
   const currentTier = getTier(investment);
-  const totalReturnPremium = investment * (currentTier.roi * 6); // Estimado a 6 meses para la calculadora general
+  const totalReturnPremium = investment * (currentTier.roi * 12); // Calculado a 12 meses como base estándar
   const totalReturn = investment + totalReturnPremium;
 
   const formatCurrency = (val) => new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 }).format(val);
@@ -495,7 +495,7 @@ function App() {
                 <div style={{ position: 'relative', zIndex: 2 }}>
                   <RefreshCw size={40} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
                   <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--sage-800)' }}>Devolución (Capital + Premio)</h3>
-                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.05rem', lineHeight: 1.6 }}>Al vencimiento del ciclo elegido (4, 6, 12 o 24 meses), ejecutamos la recompra de tus acciones. Recibes tu <strong>capital íntegro más el premio acumulado</strong> en un solo pago.</p>
+                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.05rem', lineHeight: 1.6 }}>Al vencimiento del ciclo elegido (12 o 24 meses), ejecutamos la recompra de tus acciones. Recibes tu <strong>capital íntegro más el premio acumulado</strong> en un solo pago.</p>
                 </div>
               </div>
             </div>
