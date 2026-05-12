@@ -140,15 +140,11 @@ function App() {
   const investment = tierValues[sliderIndex];
 
   const faqs = [
-    { q: "¿Qué pasa si el proyecto inmobiliario fracasa o se retrasa?", a: "Al firmar un Contrato de Retroventa, no eres un prestamista, eres dueño de acciones de la Sociedad. En el peor escenario de liquidación, los activos inmobiliarios se liquidan para cubrir el patrimonio de los accionistas, blindando el capital muy por encima de un crédito común." },
-    { q: "¿El pago de impuestos recae sobre mi utilidad final?", a: "Las estructuras se diseñan según normativa de rentas de capital mobiliario. Entregamos los certificados correspondientes al finalizar el ciclo del proyecto para su declaración en la Operación Renta anual." },
-    { q: "¿Puedo retirar mi capital antes del vencimiento?", a: "El capital se materializa en activos reales (casas, edificios o terrenos). La ventana de rescate se abre exclusivamente al cumplir el ciclo pactado del proyecto (12 o 24 meses), donde recibes el capital más el premio acumulado." },
-    { q: "¿En qué tipo de propiedades invierte mi capital?", a: "Nuestro portafolio abarca tres líneas: 1) 'Flipping' de alta velocidad, 2) Desarrollo de complejos turísticos de lujo (Resort Zapallar), y 3) Edificios residenciales de alta densidad. Tú eliges en qué proyecto participar." },
-    { q: "¿Qué garantía tengo sobre mi inversión inicial?", a: "Tu capital ingresa a una Sociedad por Acciones (SpA) diseñada específicamente como vehículo de adquisición. La SpA ejecuta la compra del activo inmobiliario matriz, manteniendo el capital societario blindado bajo mandato legal." },
-    { q: "¿Me mantendrán informado del progreso de las obras?", a: "Sí. Durante la fase inicial de levantamiento, la operación es administrativa. Una vez comenzada la fase de obra, enviamos reportes digitales de avance a nuestros accionistas." },
-    { q: "¿Dónde se realiza la firma legal de las acciones?", a: "Todo el proceso notarial se realiza mediante firma presencial en Notaría o a través de plataformas certificadas de Firma Electrónica Avanzada." },
-    { q: "¿La rentabilidad es fija o depende de las ventas?", a: "Es 100% fija y contractual (Capital + Premio). Nosotros garantizamos tu retorno mediante el pacto de retroventa, independiente de la velocidad de venta final del activo." },
-    { q: "¿Quién administra el dinero transferido?", a: "Los fondos ingresan directamente a la cuenta corriente institucional de la Sociedad por Acciones (SpA) que desarrolla el proyecto." }
+    { q: "¿Qué pasa si el proyecto se retrasa más allá del plazo pactado?", a: "Nuestros contratos incluyen una Cláusula de Penalización por Mora. Si el ciclo se extiende, CrowdIn asume una multa mensual a favor del inversionista, asegurando que tu capital siga rentando por cada día de retraso." },
+    { q: "¿Y si el proyecto inmobiliario no se vende como esperaban?", a: "Tu rentabilidad es fija y garantizada por el Pacto de Retroventa. No depende de las ventas finales. CrowdIn tiene la obligación legal de recomprar tus acciones al precio pactado (Capital + Premio), independientemente del resultado comercial del proyecto." },
+    { q: "¿Qué seguridad tengo si CrowdIn llegara a tener problemas financieros?", a: "La SpA donde inviertes es un vehículo independiente (Asset-Backed). El capital se materializa en el terreno y la construcción. Como accionista, tienes derecho preferente sobre el activo físico; si el proyecto se detiene, el patrimonio inmobiliario respalda tu devolución." },
+    { q: "¿Qué pasa si no se llega a la meta de recaudación total?", a: "Contamos con Capital Puente propio y líneas de crédito constructor aprobadas. El inicio de obra no depende exclusivamente del Crowdfunding; tu inversión solo ingresa una vez que el proyecto tiene 'Luz Verde' garantizada." },
+    { q: "¿Cómo se gestiona el riesgo de desvío de fondos?", a: "Operamos con cuentas segregadas y auditoría de estados de pago. Cada peso invertido tiene un destino específico: Adquisición o Construcción, visado por el mandato de la SpA." }
   ];
 
   const [selectedPlan, setSelectedPlan] = useState('patrimonial'); // 'liquidez' o 'patrimonial'
@@ -683,18 +679,18 @@ function App() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
             <div style={{ background: 'rgba(255,255,255,0.05)', padding: '3rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
             <Scale size={48} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-            <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Pacto de Retroventa Notarial</h3>
-            <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>El capital no es un préstamo. Adquieres acciones con obligación legal de recompra (Bullet) por nuestra parte al finalizar el ciclo del proyecto. Protocolizado ante Notario Público.</p>
+            <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Pacto de Retroventa & Multas</h3>
+            <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>Obligación legal de recompra (Bullet) al finalizar el ciclo. Si existe retraso, se activa una penalización mensual en favor del inversionista protocolizada ante Notario.</p>
             </div>
             <div style={{ background: 'rgba(255,255,255,0.05)', padding: '3rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
               <Landmark size={48} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-              <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Cumplimiento UAF</h3>
-              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>Operamos bajo la normativa de la Unidad de Análisis Financiero (Ley 19.913). Todos los retornos se depositan exclusivamente a tu cuenta corriente bancaria irrevocablemente ligada a tu RUT.</p>
+              <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Garantía Patrimonial SpA</h3>
+              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>El capital está respaldado por el activo inmobiliario físico (Tierra/Obra). Ante cualquier eventualidad, el accionista tiene prelación sobre el activo matriz de la SpA.</p>
             </div>
             <div style={{ background: 'rgba(255,255,255,0.05)', padding: '3rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
               <Building2 size={48} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-              <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Respaldo en Activos Reales</h3>
-              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>El capital se materializa en activos inmobiliarios específicos (Terrenos y Construcción) bajo mandato de la SpA. Esto asegura que tu inversión esté respaldada por patrimonio tangible, no solo por documentos.</p>
+              <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Retorno Fijo Contractual</h3>
+              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>Tu ganancia es inamovible. No depende de preventas, UF o IPC. Se define al ingresar y se garantiza mediante la estructura de salida pactada en el acta de accionistas.</p>
             </div>
           </div>
         </div>
