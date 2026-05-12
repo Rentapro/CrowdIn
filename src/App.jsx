@@ -157,13 +157,13 @@ function App() {
 
   const getTier = (val) => {
     if (selectedPlan === 'liquidez') {
-      return val >= 40000000 ? { name: 'Elite', roi: 0.012 } : { name: 'Standard', roi: 0.009 };
+      return { name: 'Estrategia Mensual', roi: val >= 40000000 ? 0.012 : 0.009 };
     }
-    // Plan Patrimonial (Tasas escaladas hasta 2.5% para tickets altos)
-    if (val >= 500000000) return { name: 'Institutional Max', roi: 0.025 };
-    if (val >= 100000000) return { name: 'Ultra Platinum', roi: 0.022 };
-    if (val >= 40000000) return { name: 'Elite 40M+', roi: 0.018 };
-    return { name: 'Premium', roi: 0.015 };
+    // Plan Patrimonial (Escala técnica de premios por volumen)
+    if (val >= 500000000) return { name: 'Tramo Institucional', roi: 0.025 };
+    if (val >= 100000000) return { name: 'Tramo Preferente', roi: 0.022 };
+    if (val >= 40000000) return { name: 'Tramo Senior', roi: 0.018 };
+    return { name: 'Tramo Inicial', roi: 0.015 };
   };
 
   const currentTier = getTier(investment);
@@ -535,8 +535,8 @@ function App() {
                 <div className="step-number">03</div>
                 <div style={{ position: 'relative', zIndex: 2 }}>
                   <RefreshCw size={40} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-                  <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--sage-800)' }}>Devolución (Capital + Premio)</h3>
-                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.05rem', lineHeight: 1.6 }}>Al vencimiento del ciclo elegido (12 o 24 meses), ejecutamos la recompra de tus acciones. Recibes tu <strong>capital íntegro más el premio acumulado</strong> en un solo pago.</p>
+                  <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--sage-800)' }}>Liquidación y Salida</h3>
+                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.05rem', lineHeight: 1.6 }}>Al venderse el activo o cumplirse el plazo (lo que ocurra primero), se ejecuta la retroventa. Recibes tu capital + premio. Si el proyecto se vende en 8 meses, recuperas tu plata en 8 meses.</p>
                 </div>
               </div>
             </div>
