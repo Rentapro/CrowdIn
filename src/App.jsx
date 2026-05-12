@@ -537,10 +537,26 @@ function App() {
       <section className="section calculator-section" id="calculadora">
         <div className="container calc-container">
           <div>
-            <h2 style={{ fontSize: 'clamp(3rem, 5vw, 4.5rem)', marginBottom: '2rem', color: 'var(--sage-800)', lineHeight: 1.1, fontFamily: 'Outfit' }}>Simula tu Flujo Financiero</h2>
-            <p style={{ color: 'var(--charcoal-mid)', marginBottom: '5rem', fontSize: '1.3rem', maxWidth: '700px', lineHeight: 1.8 }}>
-              Mueve el deslizador a través de los bloques institucionales y descubre el flujo de caja exacto que depositaremos mes a mes en tu cuenta corriente.
+            <h2 style={{ fontSize: 'clamp(3rem, 5vw, 4.5rem)', marginBottom: '2rem', color: 'var(--sage-800)', lineHeight: 1.1, fontFamily: 'Outfit' }}>Simula tu Futuro Económico</h2>
+            <p style={{ color: 'var(--charcoal-mid)', marginBottom: '4rem', fontSize: '1.3rem', maxWidth: '700px', lineHeight: 1.8 }}>
+              Nuestros proyectos de 2026 superan ampliamente a la banca tradicional. Elige tu estrategia y compara en tiempo real.
             </p>
+
+            {/* SELECTOR DE PLAN (NUEVO) */}
+            <div style={{ display: 'flex', background: 'var(--sage-50)', padding: '0.5rem', borderRadius: '24px', marginBottom: '4rem', maxWidth: '500px', border: '1px solid var(--sage-100)' }}>
+              <button 
+                onClick={() => setSelectedPlan('liquidez')}
+                style={{ flex: 1, padding: '1.2rem', borderRadius: '20px', border: 'none', background: selectedPlan === 'liquidez' ? '#3b82f6' : 'transparent', color: selectedPlan === 'liquidez' ? 'white' : 'var(--charcoal-mid)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)', fontSize: '1rem' }}
+              >
+                Plan Liquidez
+              </button>
+              <button 
+                onClick={() => setSelectedPlan('patrimonial')}
+                style={{ flex: 1, padding: '1.2rem', borderRadius: '20px', border: 'none', background: selectedPlan === 'patrimonial' ? 'var(--gold-primary)' : 'transparent', color: selectedPlan === 'patrimonial' ? 'white' : 'var(--charcoal-mid)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)', fontSize: '1rem' }}
+              >
+                Plan Patrimonial
+              </button>
+            </div>
 
             <div className="calc-input-group">
               <label>Volumen de Inversión Seleccionado</label>
@@ -558,8 +574,8 @@ function App() {
                 className="calc-slider"
               />
               <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1.5rem', color: 'var(--charcoal-mid)', fontSize: '1.1rem', fontWeight: 600 }}>
-                <span>Tramo 1 ($1M)</span>
-                <span>Institucional ($100M+)</span>
+                <span>Mínimo ($5M)</span>
+                <span>Institucional ($500M)</span>
               </div>
             </div>
           </div>
@@ -574,22 +590,80 @@ function App() {
               </div>
             </div>
             
-            <div className="result-row highlight" style={{ background: selectedPlan === 'liquidez' ? 'rgba(59, 130, 246, 0.05)' : 'rgba(212, 175, 55, 0.05)' }}>
-              <span style={{ color: 'var(--charcoal-mid)' }}>{selectedPlan === 'liquidez' ? 'Flujo Mensual Garantizado' : 'Premio Acumulado Proyectado'}</span>
-              <span className="result-val" style={{ color: selectedPlan === 'liquidez' ? '#3b82f6' : 'var(--gold-primary)' }}>
-                {selectedPlan === 'liquidez' ? formatCurrency(investment * currentTier.roi) : formatCurrency(totalReturnPremium)}
-              </span>
+            <div className="result-row highlight" style={{ background: selectedPlan === 'liquidez' ? 'rgba(59, 130, 246, 0.08)' : 'rgba(212, 175, 55, 0.08)', borderRadius: '24px', padding: '2rem' }}>
+              <div style={{ width: '100%' }}>
+                <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginBottom: '0.5rem', fontWeight: 600 }}>
+                  {selectedPlan === 'liquidez' ? 'Utilidad Mensual Estimada' : 'Ganancia Neta (12 Meses)'}
+                </div>
+                <div className="result-val" style={{ color: selectedPlan === 'liquidez' ? '#3b82f6' : 'var(--gold-primary)', fontSize: '3rem' }}>
+                  {selectedPlan === 'liquidez' ? formatCurrency(investment * currentTier.roi) : formatCurrency(totalReturnPremium)}
+                </div>
+              </div>
             </div>
-            <div style={{ borderTop: '1px solid rgba(0,0,0,0.1)', paddingTop: '3rem', marginTop: '2rem' }}>
-              <span style={{ fontWeight: 600, fontSize: '1.2rem', color: 'var(--charcoal-mid)' }}>
-                {selectedPlan === 'liquidez' ? 'Retorno Total (6 meses)' : 'Retorno Total (Al Cierre)'}
-              </span>
-              <span className="result-val" style={{ color: 'var(--sage-800)', fontSize: '2.5rem' }}>{formatCurrency(totalReturn)}</span>
+            <div style={{ borderTop: '1px solid rgba(0,0,0,0.1)', paddingTop: '2rem', marginTop: '1rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+                <span style={{ fontWeight: 600, fontSize: '1.1rem', color: 'var(--charcoal-mid)' }}>
+                  {selectedPlan === 'liquidez' ? 'Plazo del Ciclo' : 'Ventana de Pago'}
+                </span>
+                <span style={{ fontWeight: 800, color: 'var(--sage-800)', fontSize: '1.2rem' }}>
+                  {selectedPlan === 'liquidez' ? '6 MESES' : '12 MESES'}
+                </span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontWeight: 600, fontSize: '1.1rem', color: 'var(--charcoal-mid)' }}>
+                  Liquidación Total
+                </span>
+                <span className="result-val" style={{ color: 'var(--sage-800)', fontSize: '2.5rem' }}>{formatCurrency(totalReturn)}</span>
+              </div>
             </div>
             
-            <button onClick={handleWhatsAppRedirect} className="btn btn-primary" style={{ width: '100%', marginTop: '3rem', fontSize: '1.2rem', padding: '1.2rem' }}>
+            <button onClick={() => handleWhatsAppRedirect()} className="btn btn-primary" style={{ width: '100%', marginTop: '3rem', fontSize: '1.2rem', padding: '1.2rem', background: selectedPlan === 'liquidez' ? '#3b82f6' : 'var(--gold-primary)' }}>
               Iniciar Estructuración Legal
             </button>
+          </div>
+        </div>
+
+        {/* TABLA COMPARATIVA (NUEVO) */}
+        <div className="container" style={{ marginTop: '8rem' }}>
+          <div style={{ background: 'white', borderRadius: '40px', padding: '4rem', border: '1px solid var(--sage-100)', boxShadow: '0 20px 60px rgba(0,0,0,0.03)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem', flexWrap: 'wrap', gap: '2rem' }}>
+              <div>
+                <h3 style={{ fontSize: '2.5rem', color: 'var(--sage-800)', fontFamily: 'Outfit' }}>Benchmark Bancario 2026</h3>
+                <p style={{ color: 'var(--charcoal-mid)', marginTop: '0.5rem' }}>Fuente: Reportes Públicos Bancarios actualizados a Mayo 2026.</p>
+              </div>
+              <div style={{ background: 'var(--success-light)', color: 'var(--success)', padding: '0.8rem 1.5rem', borderRadius: '50px', fontWeight: 800 }}>
+                Ventaja CrowdIn: +210%
+              </div>
+            </div>
+
+            <div style={{ overflowX: 'auto' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '800px' }}>
+                <thead>
+                  <tr style={{ borderBottom: '2px solid var(--sage-100)' }}>
+                    <th style={{ textAlign: 'left', padding: '1.5rem', color: 'var(--charcoal-mid)', fontWeight: 600 }}>Institución</th>
+                    <th style={{ textAlign: 'center', padding: '1.5rem', color: 'var(--charcoal-mid)', fontWeight: 600 }}>Tasa Mensual</th>
+                    <th style={{ textAlign: 'center', padding: '1.5rem', color: 'var(--charcoal-mid)', fontWeight: 600 }}>Utilidad {formatCurrency(investment)} (12m)</th>
+                    <th style={{ textAlign: 'right', padding: '1.5rem', color: 'var(--charcoal-mid)', fontWeight: 600 }}>Seguridad</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { name: 'CrowdIn Plan Patrimonial', rate: (currentTier.roi * 100).toFixed(1) + '%', gain: totalReturnPremium, security: 'Activo Fijo Real', highlight: true },
+                    { name: 'Banco Estado (DAP)', rate: '0.45%', gain: investment * 0.0045 * 12, security: 'Estatal' },
+                    { name: 'Banco BICE', rate: '0.48%', gain: investment * 0.0048 * 12, security: 'Privado' },
+                    { name: 'Itaú Personal Bank', rate: '0.50%', gain: investment * 0.0050 * 12, security: 'Privado' },
+                    { name: 'Fondo Mutuo Conservador', rate: '0.42%', gain: investment * 0.0042 * 12, security: 'Cartera Mixta' }
+                  ].map((bank, i) => (
+                    <tr key={i} style={{ borderBottom: '1px solid var(--sage-50)', background: bank.highlight ? 'rgba(212,175,55,0.05)' : 'transparent' }}>
+                      <td style={{ padding: '1.5rem', fontWeight: bank.highlight ? 800 : 500, color: bank.highlight ? 'var(--gold-primary)' : 'var(--sage-800)' }}>{bank.name}</td>
+                      <td style={{ padding: '1.5rem', textAlign: 'center', fontWeight: 700 }}>{bank.rate}</td>
+                      <td style={{ padding: '1.5rem', textAlign: 'center', color: bank.highlight ? 'var(--success)' : 'var(--charcoal-mid)', fontWeight: 700 }}>{formatCurrency(bank.gain)}</td>
+                      <td style={{ padding: '1.5rem', textAlign: 'right', color: 'var(--charcoal-mid)', fontSize: '0.9rem' }}>{bank.security}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>
