@@ -281,21 +281,21 @@ function App() {
                   
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div style={{ background: 'rgba(212,175,55,0.1)', padding: '0.8rem', borderRadius: '12px', color: 'var(--gold-primary)' }}><ShieldCheck size={32}/></div>
-                    <span style={{ border: '1px solid var(--gold-primary)', color: 'var(--gold-primary)', padding: '0.3rem 0.8rem', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 'bold' }}>CONTRATO INTELIGENTE</span>
+                    <span style={{ border: '1px solid var(--gold-primary)', color: 'var(--gold-primary)', padding: '0.3rem 0.8rem', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 'bold' }}>RESPALDO PATRIMONIAL</span>
                   </div>
 
                   <div>
-                    <div style={{ color: 'var(--charcoal-mid)', fontSize: '1rem', marginBottom: '0.5rem' }}>Valor Acción (SpA)</div>
-                    <div style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--sage-800)', letterSpacing: '-1px' }}>$40.000.000</div>
+                    <div style={{ color: 'var(--charcoal-mid)', fontSize: '1rem', marginBottom: '0.5rem' }}>Activos en Resguardo (2026)</div>
+                    <div style={{ fontSize: '2.8rem', fontWeight: 800, color: 'var(--sage-800)', letterSpacing: '-1px' }}>$2.450.000.000</div>
                     
                     <div style={{ marginTop: '2rem', background: 'rgba(255,255,255,0.5)', padding: '1.5rem', borderRadius: '16px', border: '1px solid rgba(0,0,0,0.05)' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                        <span style={{ color: 'var(--charcoal-mid)' }}>Retorno Proyectado</span>
-                        <span style={{ color: 'var(--gold-primary)', fontWeight: 'bold' }}>+15% - 25%</span>
+                        <span style={{ color: 'var(--charcoal-mid)' }}>Margen de Seguridad</span>
+                        <span style={{ color: 'var(--gold-primary)', fontWeight: 'bold' }}>120% LTV</span>
                       </div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <span style={{ color: 'var(--sage-800)', fontWeight: 600 }}>Pago al Vencimiento</span>
-                        <span style={{ fontSize: '1.5rem', color: 'var(--success)', fontWeight: 800 }}>Capital + Premio</span>
+                        <span style={{ color: 'var(--sage-800)', fontWeight: 600 }}>Estrategia de Salida</span>
+                        <span style={{ fontSize: '1.2rem', color: 'var(--success)', fontWeight: 800 }}>Retroventa Pactada</span>
                       </div>
                     </div>
                   </div>
