@@ -200,11 +200,11 @@ function App() {
 
   return (
     <>
-      <div style={{ background: 'var(--sage-900)', color: 'rgba(255,255,255,0.7)', padding: '0.6rem 0', fontSize: '0.75rem', fontWeight: 600, position: 'fixed', top: 0, width: '100%', zIndex: 3000, borderBottom: '1px solid var(--gold-primary)', backdropFilter: 'blur(10px)' }}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'center', gap: '3rem', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}><Lock size={12} color="var(--gold-primary)"/> Acceso Cifrado SSL 256-bit</span>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}><ShieldCheck size={12} color="var(--gold-primary)"/> Cumplimiento Normativo Ley 19.913</span>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}><Activity size={12} color="var(--gold-primary)"/> Supervisión de Activos Vigente 2026</span>
+      <div className="top-banner" style={{ background: 'var(--sage-900)', color: 'rgba(255,255,255,0.7)', padding: '0.6rem 0', fontSize: '0.75rem', fontWeight: 600, position: 'fixed', top: 0, width: '100%', zIndex: 3000, borderBottom: '1px solid var(--gold-primary)', backdropFilter: 'blur(10px)' }}>
+        <div className="container" style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', letterSpacing: '0.5px', textTransform: 'uppercase', flexWrap: 'wrap' }}>
+          <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}><Lock size={12} color="var(--gold-primary)"/> Cifrado SSL</span>
+          <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}><ShieldCheck size={12} color="var(--gold-primary)"/> Ley 19.913</span>
+          <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}><Activity size={12} color="var(--gold-primary)"/> Activos 2026</span>
         </div>
       </div>
 
@@ -223,9 +223,9 @@ function App() {
       />
       <ParallaxBackground />
 
-      <nav className="navbar" style={{ position: 'fixed', top: '32px', width: '100%', zIndex: 1000, background: 'rgba(244, 247, 244, 0.9)', backdropFilter: 'blur(15px)', borderBottom: '1px solid rgba(0,0,0,0.05)', padding: '0.8rem 2rem', display: 'flex', justifyContent: 'space-between' }}>
-        <div style={{ fontFamily: 'Outfit', fontWeight: 800, fontSize: '2rem', color: 'var(--sage-800)', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-          <img src="/logo.png" alt="CrowdIn Logo" style={{ width: '40px', height: '40px', borderRadius: '8px' }} />
+      <nav className="navbar" style={{ position: 'fixed', top: '32px', width: '100%', zIndex: 1000, background: 'rgba(244, 247, 244, 0.9)', backdropFilter: 'blur(15px)', borderBottom: '1px solid rgba(0,0,0,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="navbar-logo" style={{ fontFamily: 'Outfit', fontWeight: 800, color: 'var(--sage-800)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <img src="/logo.png" alt="CrowdIn Logo" style={{ borderRadius: '8px' }} />
           CrowdIn<span style={{ color: 'var(--gold-primary)' }}>.</span>
         </div>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
@@ -243,10 +243,10 @@ function App() {
               <div style={{ display: 'inline-block', padding: '0.5rem 1.5rem', background: 'rgba(212, 175, 55, 0.1)', color: 'var(--gold-primary)', border: '1px solid rgba(212,175,55,0.2)', borderRadius: '50px', fontWeight: 800, marginBottom: '2rem', letterSpacing: '1px', textTransform: 'uppercase' }}>
                 <Lock size={14} style={{ display: 'inline', marginRight: '5px' }}/> Wealth Management
               </div>
-              <h1 className="hero-title" style={{ lineHeight: 1.1 }}>
+              <h1 className="hero-title">
                 Inversión Inmobiliaria con <span style={{ color: 'var(--gold-primary)' }}>Retorno Único Garantizado.</span>
               </h1>
-              <p className="hero-subtitle" style={{ color: 'var(--charcoal-mid)', fontSize: '1.4rem' }}>
+              <p className="hero-subtitle">
                 Invierte en el desarrollo de complejos turísticos y flipping, recibe tu <strong>capital + premio</strong> al finalizar el proyecto. Blindado por Notaría.
               </p>
               
@@ -342,7 +342,7 @@ function App() {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2.5rem' }}>
+          <div className="projects-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2.5rem' }}>
             {projects.map((project) => (
               <motion.div 
                 key={project.id}
@@ -560,10 +560,10 @@ function App() {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '3rem', alignItems: 'stretch' }}>
+          <div className="calculator-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '3rem', alignItems: 'stretch' }}>
             
             {/* PANEL IZQUIERDO: CONFIGURACIÓN */}
-            <div style={{ background: 'white', padding: '3rem', borderRadius: '32px', boxShadow: '0 20px 50px rgba(0,0,0,0.05)', border: '1px solid var(--sage-100)', display: 'flex', flexDirection: 'column' }}>
+            <div className="calculator-card" style={{ background: 'white', padding: '3rem', borderRadius: '32px', boxShadow: '0 20px 50px rgba(0,0,0,0.05)', border: '1px solid var(--sage-100)', display: 'flex', flexDirection: 'column' }}>
               <h3 style={{ fontSize: '1.5rem', marginBottom: '2rem', color: 'var(--sage-800)', borderBottom: '1px solid var(--sage-50)', paddingBottom: '1rem' }}>Configuración de Ticket</h3>
               
               <div style={{ marginBottom: '3rem', flex: 1 }}>
@@ -611,7 +611,7 @@ function App() {
             </div>
 
             {/* PANEL DERECHO: RESULTADOS Y BENCHMARK */}
-            <div style={{ background: 'white', padding: '3rem', borderRadius: '32px', boxShadow: '0 20px 50px rgba(0,0,0,0.05)', border: '1px solid var(--sage-100)', display: 'flex', flexDirection: 'column' }}>
+            <div className="calculator-card" style={{ background: 'white', padding: '3rem', borderRadius: '32px', boxShadow: '0 20px 50px rgba(0,0,0,0.05)', border: '1px solid var(--sage-100)', display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                 <h3 style={{ fontSize: '1.5rem', margin: 0, color: 'var(--sage-800)' }}>Proyección Detallada</h3>
                 <div style={{ background: selectedPlan === 'liquidez' ? 'rgba(59,130,246,0.1)' : 'rgba(212,175,55,0.1)', color: selectedPlan === 'liquidez' ? '#3b82f6' : 'var(--gold-primary)', padding: '0.4rem 1rem', borderRadius: '50px', fontWeight: 800, fontSize: '0.9rem' }}>

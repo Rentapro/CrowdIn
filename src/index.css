@@ -51,10 +51,22 @@ body {
   padding: 0 2rem;
 }
 
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.25rem;
+  }
+}
+
 .section {
   padding: 6rem 0;
   position: relative;
   z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 0;
+  }
 }
 
 .glass-panel {
@@ -147,6 +159,20 @@ body {
   color: var(--charcoal-mid);
   margin: 0.5rem 0 0 0;
   font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .stats-bar {
+    gap: 1.5rem;
+    justify-content: space-between;
+    text-align: center;
+  }
+  .stat-item h4 {
+    font-size: 1.5rem;
+  }
+  .stat-item p {
+    font-size: 0.75rem;
+  }
 }
 
 /* Calculadora */
@@ -263,4 +289,58 @@ body {
   top: 1rem;
   right: 2rem;
   font-family: 'Outfit', sans-serif;
+}
+
+/* Responsive Overrides */
+@media (max-width: 768px) {
+  .top-banner {
+    display: none !important;
+  }
+  
+  .navbar {
+    padding: 0.8rem 1rem !important;
+    top: 0 !important;
+  }
+  
+  .navbar-logo {
+    font-size: 1.4rem !important;
+  }
+  
+  .navbar-logo img {
+    width: 30px !important;
+    height: 30px !important;
+  }
+  
+  .hero {
+    padding-top: 80px;
+    text-align: center;
+  }
+  
+  .hero-title {
+    font-size: 2.2rem !important;
+    margin-top: 1rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem !important;
+  }
+  
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .steps-grid, .projects-grid, .calculator-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  
+  .calculator-card {
+    padding: 1.5rem !important;
+  }
+  
+  .modal-content {
+    padding: 1.5rem !important;
+    border-radius: 24px !important;
+  }
 }
