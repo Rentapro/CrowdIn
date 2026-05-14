@@ -223,15 +223,15 @@ function App() {
       />
       <ParallaxBackground />
 
-      <nav className="navbar" style={{ position: 'fixed', top: '32px', width: '100%', zIndex: 1000, background: 'rgba(244, 247, 244, 0.9)', backdropFilter: 'blur(15px)', borderBottom: '1px solid rgba(0,0,0,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div className="navbar-logo" style={{ fontFamily: 'Outfit', fontWeight: 800, color: 'var(--sage-800)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <img src="/logo.png" alt="CrowdIn Logo" style={{ borderRadius: '8px' }} />
-          CrowdIn<span style={{ color: 'var(--gold-primary)' }}>.</span>
+      <nav className="navbar">
+        <div className="navbar-logo">
+          <img src="/logo.png" alt="CrowdIn Logo" />
+          CrowdIn<span>.</span>
         </div>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a href="#como-funciona" style={{ textDecoration: 'none', color: 'var(--charcoal)', fontWeight: 600, display: window.innerWidth > 768 ? 'block' : 'none' }}>Mecanismo</a>
-          <a href="#calculadora" style={{ textDecoration: 'none', color: 'var(--charcoal)', fontWeight: 600, display: window.innerWidth > 768 ? 'block' : 'none' }}>Simulador</a>
-          <button onClick={() => { window.location.hash = '#login'; }} className="btn btn-primary" style={{ padding: '0.6rem 2rem', fontSize: '1rem' }}>Ingresar</button>
+        <div className="navbar-actions">
+          <a href="#como-funciona" className="nav-link">Mecanismo</a>
+          <a href="#calculadora" className="nav-link">Simulador</a>
+          <button onClick={() => { window.location.hash = '#login'; }} className="btn btn-primary btn-login">Ingresar</button>
         </div>
       </nav>
 
