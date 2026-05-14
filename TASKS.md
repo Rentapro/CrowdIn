@@ -9,6 +9,7 @@
 - [x] Producción: Subir variables de entorno a Vercel y desplegar Full-Stack.
 - [x] Operaciones: Implementación de Historial y Auditoría de Pagos (+1 Cuota, Logs Legales).
 - [x] UX/UI: Rediseño Premium de la Landing Page (Fondo Condominio, Identidad Visual y Limpieza de Tickers).
+- [x] UX/UI: Optimización Mobile-First (Corrección de desbordamientos, logo y stack vertical del Hero).
 - [ ] Opcional: Integración de notificaciones por Email reales (SendGrid/Resend) para avisos de transferencias de rentabilidad.
 
 ## Fase 4: Automatización de Captación (Lead Gen) 🎯

@@ -237,37 +237,36 @@ function App() {
 
       {/* HERO SECTION (3D Enhancements) */}
       <section className="hero" ref={heroRef} onMouseMove={handleMouseMove}>
-        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="hero-grid" style={{ alignItems: 'center' }}>
+        <div className="container">
+          <div className="hero-grid">
             <div className="hero-content">
-              <div style={{ display: 'inline-block', padding: '0.5rem 1.5rem', background: 'rgba(212, 175, 55, 0.1)', color: 'var(--gold-primary)', border: '1px solid rgba(212,175,55,0.2)', borderRadius: '50px', fontWeight: 800, marginBottom: '2rem', letterSpacing: '1px', textTransform: 'uppercase' }}>
-                <Lock size={14} style={{ display: 'inline', marginRight: '5px' }}/> Wealth Management
+              <div className="hero-badge">
+                <Lock size={14} /> Wealth Management
               </div>
               <h1 className="hero-title">
-                Inversión Inmobiliaria con <span style={{ color: 'var(--gold-primary)' }}>Retorno Único Garantizado.</span>
+                Inversión Inmobiliaria con <span>Retorno Único Garantizado.</span>
               </h1>
               <p className="hero-subtitle">
                 Invierte en el desarrollo de complejos turísticos y flipping, recibe tu <strong>capital + premio</strong> al finalizar el proyecto. Blindado por Notaría.
               </p>
               
-              <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', marginTop: '2rem' }}>
-                <a href="#calculadora" className="btn btn-primary" style={{ padding: '1rem 2rem', fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <div className="hero-buttons">
+                <a href="#calculadora" className="btn btn-primary btn-cta">
                   Proyectar Retornos <ArrowRight size={20} />
                 </a>
-                <a href="#como-funciona" className="btn" style={{ background: 'rgba(255,255,255,0.5)', border: '1px solid rgba(0,0,0,0.1)', color: 'var(--sage-800)', padding: '1rem 2rem', fontSize: '1.1rem', backdropFilter: 'blur(10px)' }}>
+                <a href="#como-funciona" className="btn btn-secondary">
                   Ver Mecanismo
                 </a>
               </div>
 
-              <div className="stats-bar" style={{ borderColor: 'rgba(0,0,0,0.1)' }}>
-                <div className="stat-item"><h4 style={{ color: 'var(--sage-800)' }}>0%</h4><p style={{ color: 'var(--charcoal-mid)' }}>Default Histórico</p></div>
-                <div className="stat-item"><h4 style={{ color: 'var(--sage-800)' }}>20+</h4><p style={{ color: 'var(--charcoal-mid)' }}>Años Experiencia</p></div>
-                <div className="stat-item"><h4 style={{ color: 'var(--gold-primary)' }}>+$500M</h4><p style={{ color: 'var(--charcoal-mid)' }}>Gestionados Anual</p></div>
+              <div className="stats-bar">
+                <div className="stat-item"><h4>0%</h4><p>Default Histórico</p></div>
+                <div className="stat-item"><h4>20+</h4><p>Años Experiencia</p></div>
+                <div className="stat-item highlight"><h4>+$500M</h4><p>Gestionados Anual</p></div>
               </div>
             </div>
             
-            {/* 3D Interactive Card Element */}
-            <div style={{ perspective: '1000px', display: window.innerWidth > 992 ? 'block' : 'none' }}>
+            <div className="hero-visual-3d">
               <div style={{
                 position: 'relative',
                 width: '100%',
