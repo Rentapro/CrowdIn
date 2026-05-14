@@ -24,6 +24,12 @@ body {
   background-color: var(--sage-50);
   color: var(--charcoal);
   overflow-x: hidden;
+  width: 100%;
+}
+
+#root {
+  overflow-x: hidden;
+  width: 100%;
 }
 
 * {
@@ -463,6 +469,12 @@ body {
     align-items: center;
   }
   
+  .hero-buttons {
+    flex-direction: column !important;
+    width: 100%;
+    gap: 1rem !important;
+  }
+
   .btn {
     width: 100%;
     margin-bottom: 0.5rem;
