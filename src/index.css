@@ -169,6 +169,10 @@ body {
   position: relative;
   overflow: hidden;
   padding-top: 100px;
+  background: linear-gradient(rgba(244, 247, 244, 0.4), rgba(244, 247, 244, 0.4)), url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .hero-badge {
@@ -240,11 +244,12 @@ body {
 }
 
 .hero-title {
-  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-size: clamp(2.5rem, 5vw, 4rem);
   line-height: 1.1;
-  color: var(--sage-800);
+  color: var(--sage-900);
   font-family: 'Outfit', sans-serif;
   margin-bottom: 1.5rem;
+  text-shadow: 0 2px 10px rgba(255,255,255,0.5);
 }
 
 .hero-title span {
@@ -253,9 +258,10 @@ body {
 
 .hero-subtitle {
   font-size: 1.2rem;
-  color: var(--charcoal-mid);
+  color: var(--sage-800);
   line-height: 1.6;
   margin-bottom: 2.5rem;
+  max-width: 600px;
 }
 
 .stats-bar {
@@ -548,7 +554,11 @@ body {
 
 /* Global Section Unification */
 section {
-  background-color: var(--sage-50) !important;
+  background-color: var(--sage-50);
+}
+
+section.hero {
+  background-color: transparent !important;
 }
 
 .glass-panel, .calculator-card, .step-card, .projects-grid > div {
