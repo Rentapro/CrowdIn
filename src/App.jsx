@@ -295,9 +295,9 @@ function App() {
                         <span style={{ color: 'var(--charcoal-mid)' }}>Flujo Mensual</span>
                         <span style={{ fontWeight: 800, color: 'var(--success)' }}>{formatCurrency(investment * (investment >= 40000000 ? 0.012 : 0.009))}</span>
                       </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
                         <span style={{ color: 'var(--charcoal-mid)' }}>Respaldo Directo</span>
-                        <span style={{ color: 'var(--gold-primary)', fontWeight: 'bold' }}>Activos Reales</span>
+                        <span style={{ color: 'var(--gold-primary)', fontWeight: 'bold' }}>Patrimonio SpA</span>
                       </div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <span style={{ color: 'var(--sage-800)', fontWeight: 600 }}>Garantía</span>
@@ -399,13 +399,13 @@ function App() {
 
       {/* INVESTMENT SIMULATOR MODAL */}
       {isModalOpen && selectedProject && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(10, 31, 28, 0.8)', backdropFilter: 'blur(10px)', zIndex: 5000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
+        <div className="modal-overlay">
           <motion.div 
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            style={{ background: 'white', width: '100%', maxWidth: '600px', borderRadius: '40px', overflow: 'hidden', boxShadow: '0 40px 100px rgba(0,0,0,0.5)', position: 'relative' }}
+            className="modal-content-glass"
           >
-            <button onClick={() => setIsModalOpen(false)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'var(--sage-50)', border: 'none', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', color: 'var(--sage-800)' }}>
+            <button onClick={() => setIsModalOpen(false)} className="modal-close-btn">
               <X size={24} />
             </button>
 
