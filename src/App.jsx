@@ -82,6 +82,8 @@ function App() {
     }
   });
 
+  const [selectedPlan, setSelectedPlan] = useState('patrimonial'); // 'liquidez' o 'patrimonial'
+
   useEffect(() => {
     const handleHashChange = () => setCurrentRoute(window.location.hash || '#home');
     window.addEventListener('hashchange', handleHashChange);
@@ -153,7 +155,6 @@ function App() {
     { q: "¿Quién administra el dinero transferido?", a: "Los fondos ingresan directamente a la cuenta corriente institucional de la Sociedad por Acciones (SpA) que desarrolla el proyecto." }
   ];
 
-  const [selectedPlan, setSelectedPlan] = useState('patrimonial'); // 'liquidez' o 'patrimonial'
 
   const getTier = (val) => {
     if (selectedPlan === 'liquidez') {
@@ -291,11 +292,14 @@ function App() {
                     <div style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--sage-800)', letterSpacing: '-1px', lineHeight: 1.1 }}>Sociedad por Acciones</div>
                     
                     <div style={{ marginTop: '2rem', background: 'rgba(255,255,255,0.5)', padding: '1.5rem', borderRadius: '16px', border: '1px solid rgba(0,0,0,0.05)' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '0.8rem' }}>
-                        <span style={{ color: 'var(--charcoal-mid)' }}>Flujo Mensual</span>
-                        <span style={{ fontWeight: 800, color: 'var(--success)' }}>{formatCurrency(investment * (investment >= 40000000 ? 0.012 : 0.009))}</span>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.2rem', alignItems: 'center' }}>
+                        <span style={{ color: 'var(--charcoal-mid)' }}>Rentabilidad</span>
+                        <span style={{ fontWeight: 800, color: 'var(--success)', fontSize: '1.2rem' }}>0.9% a 2.5%*</span>
                       </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                      <div style={{ fontSize: '0.65rem', color: 'var(--charcoal-mid)', textAlign: 'right', marginBottom: '0.8rem', borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '0.8rem', lineHeight: '1.2' }}>
+                        *Tasa máx. para institucionales (>500M)
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
                         <span style={{ color: 'var(--charcoal-mid)' }}>Respaldo Directo</span>
                         <span style={{ color: 'var(--gold-primary)', fontWeight: 'bold' }}>Patrimonio SpA</span>
                       </div>
