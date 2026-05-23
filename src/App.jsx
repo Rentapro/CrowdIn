@@ -40,9 +40,9 @@ function App() {
       roi_bullet: 0.15, // 15% único
       roi_mensual: 0.01, // 1.0% mensual (12% total)
       type: '12 MESES',
-      description: 'Adquisición de derechos de cobro de facturas irrevocables emitidas a grandes corporaciones (Walmart, Codelco). Rentabilidad fija garantizada.',
+      description: 'Adquisición de derechos de cobro de facturas irrevocables emitidas a grandes corporaciones (Walmart, Codelco). Rentabilidad fija y liquidez inmediata.',
       tag: 'PAGADOR AAA',
-      garantia: 'Facturas con Mérito Ejecutivo AAA'
+      garantia: 'Facturas Mérito Ejecutivo AAA + Aval'
     },
     {
       id: 'leaseback',
@@ -54,23 +54,23 @@ function App() {
       roi_bullet: 0.27, // 27% único (1.5% mes)
       roi_mensual: 0.012, // 1.2% mensual (21.6% total)
       type: '18 MESES',
-      description: 'Financiamiento privado con garantía real física. Propiedad inscrita a nombre de la SpA en el Conservador con Pacto de Retroventa.',
+      description: 'Financiamiento privado estructurado. Propiedad a nombre de la SpA en el Conservador de Bienes Raíces (CBR) con cláusula de retroventa de primer grado.',
       tag: 'RESPALDO PATRIMONIAL',
-      garantia: 'Primera Hipoteca y Propiedad a Nombre de SpA'
+      garantia: 'Propiedad SpA con Hipoteca de Primer Grado'
     },
     {
       id: 'flipping',
-      title: 'Flipping & Complejos Airbnb',
-      subtitle: 'Plusvalía de Alta Velocidad',
+      title: 'Inversión Inmobiliaria',
+      subtitle: 'Desarrollo & Plusvalía Protegida',
       image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800',
       ticket: 500000000,
       plazo: '18 MESES',
       roi_bullet: 0.30, // 30% único (1.66% mes)
       roi_mensual: 0.0133, // 1.33% mensual (24% total)
       type: '18 MESES',
-      description: 'Compra, remodelación express y venta de propiedades, combinada con construcción de cabañas turísticas. Ejecución directa por constructora.',
-      tag: 'MÁXIMO RETORNO',
-      garantia: 'Activo Inmobiliario Físico en Plusvalización'
+      description: 'Adquisición estratégica, remodelación premium y desarrollo de activos físicos en zonas de alta plusvalía. Respaldado 100% por metros cuadrados reales.',
+      tag: 'ACTIVOS REALES',
+      garantia: 'Respaldo Físico en Metros Cuadrados'
     }
   ];
 
@@ -188,13 +188,13 @@ function App() {
       };
     } else { // flipping
       return {
-        name: 'Flipping & Cabañas Airbnb',
+        name: 'Inversión Inmobiliaria Protegida',
         plazo: '18 Meses',
         tasaAnual: plan === 'bullet' ? '20% (30% Total)' : '16% (24% Total)',
         tasaMensual: plan === 'bullet' ? '1.66%' : '1.33%',
         tasaCalculo: plan === 'bullet' ? 0.30 : 0.24,
         tasaMensualCalculo: plan === 'bullet' ? 0.0166 : 0.0133,
-        garantia: 'Activos Físicos y Plusvalía Garantizada',
+        garantia: 'Respaldo Físico en Metros Cuadrados',
         plazoMeses: 18
       };
     }
@@ -399,18 +399,16 @@ function App() {
                     {project.description}
                   </p>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--success)', fontWeight: 'bold', marginBottom: '1.5rem' }}>
-                    <ShieldCheck size={16}/> Garantía: {project.garantia}
-                  </div>
-
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
-                    <div style={{ background: 'var(--sage-50)', padding: '1.2rem', borderRadius: '16px', border: '1px solid var(--sage-100)' }}>
+                    <div style={{ background: 'var(--sage-50)', padding: '1.2rem', borderRadius: '16px', border: '1px solid var(--sage-100)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                       <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)', fontWeight: 800, textTransform: 'uppercase' }}>Cupo Disponible</div>
-                      <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--sage-900)' }}>{formatCurrency(project.ticket).replace('CLP', '')}</div>
+                      <div style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--sage-900)', marginTop: '0.2rem' }}>{formatCurrency(project.ticket).replace('CLP', '')}</div>
                     </div>
-                    <div style={{ background: 'var(--sage-900)', padding: '1.2rem', borderRadius: '16px', color: 'white' }}>
-                      <div style={{ fontSize: '0.75rem', opacity: 0.8, fontWeight: 800, textTransform: 'uppercase' }}>Gasto Operación</div>
-                      <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--success)' }}>$0 (Cliente)</div>
+                    <div style={{ background: 'var(--sage-900)', padding: '1.2rem', borderRadius: '16px', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--gold-primary)' }}>
+                        <ShieldCheck size={14}/> Garantía Física
+                      </div>
+                      <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'white', lineHeight: '1.2', marginTop: '0.2rem' }}>{project.garantia}</div>
                     </div>
                   </div>
 
@@ -616,7 +614,7 @@ function App() {
                     onClick={() => setSelectedAsset('flipping')}
                     style={{ padding: '0.8rem', borderRadius: '12px', border: 'none', background: selectedAsset === 'flipping' ? 'var(--sage-800)' : 'transparent', color: selectedAsset === 'flipping' ? 'white' : 'var(--charcoal-mid)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.3s' }}
                   >
-                    Línea C: Flipping & Cabañas Airbnb (18 Meses)
+                    Línea C: Inversión Inmobiliaria (18 Meses)
                   </button>
                 </div>
               </div>
