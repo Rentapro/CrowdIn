@@ -670,19 +670,19 @@ function App() {
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
             <div style={{ background: 'rgba(255,255,255,0.05)', padding: '3rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
-            <Scale size={48} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-            <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Mitigación de Riesgo (SPV)</h3>
-            <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>Cada proyecto opera bajo una SpA independiente. Si la gestora falla, el patrimonio inmobiliario permanece bajo propiedad de los accionistas, blindando el capital en activos reales (Tierras/Obras).</p>
+              <Scale size={48} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
+              <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Garantías Reales Preferentes</h3>
+              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>Tus operaciones están respaldadas directamente por colaterales tangibles de alta liquidez: facturas irrevocables con mérito ejecutivo AAA en Factoring, e inscripciones de hipoteca de primer grado a tu favor en el Conservador de Bienes Raíces (CBR) en el caso de Leaseback.</p>
             </div>
             <div style={{ background: 'rgba(255,255,255,0.05)', padding: '3rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
               <Landmark size={48} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-              <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Sobre-Colateralización</h3>
-              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>Solo levantamos capital hasta un 60% del valor proyectado del activo (LTV). Esto genera un margen de seguridad donde, incluso en una liquidación forzosa, el capital del inversionista está cubierto.</p>
+              <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Sobre-Colateralización Real</h3>
+              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>Financiamos solo hasta el 60% del valor comercial de tasación de la propiedad física (LTV máximo de 60%). Esto genera un colchón protector de capital del 40% que resguarda tu inversión ante cualquier escenario o fluctuación del mercado.</p>
             </div>
             <div style={{ background: 'rgba(255,255,255,0.05)', padding: '3rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
               <Building2 size={48} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-              <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Salida vía Retroventa</h3>
-              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>Estructura de salida protocolizada. El retorno no es variable ni depende de especulación; se define por contrato y se liquida preferencialmente tras la maduración del activo.</p>
+              <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Retorno Fijo Contractual</h3>
+              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>El plazo (12 o 18 meses) y la rentabilidad están fijados de origen en la escritura pública notarial o contrato mercantil. Tu ganancia no es variable ni depende de la especulación de las ventas; se liquida de forma preferente y obligatoria.</p>
             </div>
           </div>
         </div>
