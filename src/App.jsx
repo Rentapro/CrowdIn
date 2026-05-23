@@ -358,228 +358,7 @@ function App() {
         </div>
       </section>
 
-      {/* PROJECTS PORTFOLIO SECTION (THE VITRINE) */}
-      <section id="proyectos" style={{ padding: '8rem 0', background: 'var(--sage-50)' }}>
-        <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-            <span style={{ color: 'var(--gold-primary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', fontSize: '1rem' }}>Oportunidades Activas</span>
-            <h2 style={{ fontSize: '3.5rem', color: 'var(--sage-800)', fontFamily: 'Outfit', marginTop: '1rem' }}>Portafolio de Inversión 2026</h2>
-            <p style={{ fontSize: '1.2rem', color: 'var(--charcoal-mid)', maxWidth: '800px', margin: '1rem auto' }}>
-              Proyectos seleccionados por su alta rentabilidad y velocidad de ejecución. Respaldados por activos inmobiliarios tangibles.
-            </p>
-          </div>
-
-          <div className="projects-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2.5rem' }}>
-            {projects.map((project) => (
-              <motion.div 
-                key={project.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                style={{ background: 'white', borderRadius: '32px', overflow: 'hidden', border: '1px solid var(--sage-200)', boxShadow: '0 20px 50px rgba(0,0,0,0.05)' }}
-              >
-                <div style={{ height: '250px', background: `url('${project.image}') center/cover`, position: 'relative' }}>
-                  <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: project.id === 'leaseback' ? 'var(--gold-primary)' : (project.id === 'factoring' ? '#3b82f6' : 'var(--sage-800)'), color: 'white', padding: '0.6rem 1.2rem', borderRadius: '50px', fontWeight: 800, fontSize: '0.8rem', boxShadow: '0 10px 20px rgba(0,0,0,0.1)' }}>{project.tag}</div>
-                </div>
-                <div style={{ padding: '2.5rem' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1.5rem' }}>
-                    <div>
-                      <h3 style={{ margin: 0, color: 'var(--sage-900)', fontSize: '1.8rem', fontFamily: 'Outfit' }}>{project.title}</h3>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginTop: '0.5rem' }}>
-                        {project.id === 'factoring' ? <TrendingUp size={16} /> : (project.id === 'leaseback' ? <Landmark size={16} /> : <Building2 size={16} />)} {project.subtitle}
-                      </div>
-                    </div>
-                    <div style={{ textAlign: 'right', background: 'var(--sage-50)', padding: '0.5rem 1rem', borderRadius: '12px' }}>
-                      <div style={{ fontSize: '0.7rem', color: 'var(--charcoal-mid)', fontWeight: 800, textTransform: 'uppercase' }}>Plazo</div>
-                      <div style={{ color: 'var(--sage-800)', fontWeight: 800, fontSize: '0.9rem' }}>{project.plazo}</div>
-                    </div>
-                  </div>
-                  
-                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1rem', lineHeight: '1.6', marginBottom: '1.5rem', height: '80px', overflow: 'hidden' }}>
-                    {project.description}
-                  </p>
-
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
-                    <div style={{ background: 'var(--sage-50)', padding: '1.2rem', borderRadius: '16px', border: '1px solid var(--sage-100)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)', fontWeight: 800, textTransform: 'uppercase' }}>Cupo Disponible</div>
-                      <div style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--sage-900)', marginTop: '0.2rem' }}>{formatCurrency(project.ticket).replace('CLP', '')}</div>
-                    </div>
-                    <div style={{ background: 'var(--sage-900)', padding: '1.2rem', borderRadius: '16px', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--gold-primary)' }}>
-                        <ShieldCheck size={14}/> Garantía Física
-                      </div>
-                      <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'white', lineHeight: '1.2', marginTop: '0.2rem' }}>{project.garantia}</div>
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1.5rem', borderTop: '1px solid var(--sage-100)' }}>
-                    <div style={{ color: selectedPlan === 'bullet' ? 'var(--success)' : '#3b82f6', fontWeight: 800, fontSize: '1.15rem' }}>
-                      {selectedPlan === 'bullet' ? `+${(project.roi_bullet * 100).toFixed(0)}% Único` : `+${(project.roi_mensual * 100).toFixed(2)}% Mensual`}
-                    </div>
-                    <button onClick={() => handleOpenModal(project)} style={{ background: project.id === 'leaseback' ? 'var(--gold-primary)' : (project.id === 'factoring' ? '#3b82f6' : 'var(--sage-800)'), color: 'white', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '12px', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      Simular <ArrowRight size={18}/>
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* INVESTMENT SIMULATOR MODAL */}
-      {isModalOpen && selectedProject && (
-        <div className="modal-overlay">
-          <motion.div 
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="modal-content-glass"
-          >
-            <button onClick={() => setIsModalOpen(false)} className="modal-close-btn">
-              <X size={24} />
-            </button>
-
-            <div style={{ padding: '3rem' }}>
-              <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-                <span style={{ color: 'var(--gold-primary)', fontWeight: 800, textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '2px' }}>Simulador de Inversión</span>
-                <h3 style={{ fontSize: '2.2rem', color: 'var(--sage-900)', fontFamily: 'Outfit', marginTop: '0.5rem' }}>{selectedProject.title}</h3>
-              </div>
-
-              <div style={{ background: 'var(--sage-50)', padding: '2rem', borderRadius: '24px', marginBottom: '2.5rem', border: '1px solid var(--sage-100)' }}>
-                <label style={{ color: 'var(--charcoal-mid)', fontWeight: 800, textTransform: 'uppercase', fontSize: '0.75rem', display: 'block', marginBottom: '1rem' }}>Monto a Participar</label>
-                <div style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--sage-900)', marginBottom: '1.5rem', fontFamily: 'Outfit' }}>
-                  {formatCurrency(modalAmount)}
-                </div>
-                <input 
-                  type="range" 
-                  min="5000000" 
-                  max={selectedProject.ticket} 
-                  step="5000000"
-                  value={modalAmount}
-                  onChange={(e) => setModalAmount(Number(e.target.value))}
-                  style={{ width: '100%', height: '8px', borderRadius: '5px', background: 'var(--sage-200)', appearance: 'none', cursor: 'pointer' }}
-                />
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem', color: 'var(--charcoal-mid)', fontSize: '0.85rem', fontWeight: 600 }}>
-                  <span>$5M (Mínimo)</span>
-                  <span>{formatCurrency(selectedProject.ticket)} (Proyecto Completo)</span>
-                </div>
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2.5rem' }}>
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.85rem', fontWeight: 600 }}>
-                    {selectedPlan === 'bullet' ? 'Utilidad Única al Cierre' : 'Flujo Mensual Garantizado'}
-                  </div>
-                  <div style={{ fontSize: '1.8rem', fontWeight: 800, color: selectedPlan === 'bullet' ? 'var(--success)' : '#3b82f6' }}>
-                    {selectedPlan === 'bullet' 
-                      ? formatCurrency(modalAmount * selectedProject.roi_bullet)
-                      : formatCurrency(modalAmount * selectedProject.roi_mensual)}
-                  </div>
-                </div>
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.85rem', fontWeight: 600 }}>
-                    Liquidación Total ({selectedProject.plazo})
-                  </div>
-                  <div style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--sage-900)' }}>
-                    {selectedPlan === 'bullet' 
-                      ? formatCurrency(modalAmount * (1 + selectedProject.roi_bullet))
-                      : formatCurrency(modalAmount * (1 + selectedProject.roi_mensual * Number(selectedProject.plazo.replace(' MESES', ''))))}
-                  </div>
-                </div>
-              </div>
-
-              <button 
-                onClick={() => handleWhatsAppRedirect(modalAmount, selectedProject)}
-                style={{ width: '100%', background: 'var(--gold-primary)', color: 'white', border: 'none', padding: '1.2rem', borderRadius: '16px', fontSize: '1.1rem', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', boxShadow: '0 15px 30px rgba(212,175,55,0.3)' }}
-              >
-                Reservar Participación <ArrowRight size={22}/>
-              </button>
-              
-              <p style={{ textAlign: 'center', fontSize: '0.75rem', color: 'var(--charcoal-mid)', marginTop: '1.5rem' }}>
-                *Simulación basada en el {selectedProject.plazo} de plazo del proyecto. Sujeta a contrato notarial.
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      )}
-
-      {/* EXIT STRATEGY & LIQUIDITY SECTION */}
-      <section id="estrategia-salida" style={{ padding: '100px 0', background: 'var(--white)' }}>
-        <div className="container">
-          <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto 4rem' }}>
-            <span style={{ color: 'var(--gold-primary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', fontSize: '1rem' }}>Ciclo de Inversión</span>
-            <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', marginTop: '1rem', color: 'var(--sage-800)', fontFamily: 'Outfit' }}>Liquidez y Estrategia de Salida</h2>
-            <p style={{ fontSize: '1.2rem', color: 'var(--charcoal-mid)', marginTop: '1rem' }}>No invertimos en papel volátil, invertimos en ciclos de activos reales. Tu capital tiene una fecha de retorno contractual, blindada por el Pacto de Retroventa.</p>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem' }}>
-            <div style={{ background: 'var(--sage-50)', padding: '3rem', borderRadius: '32px', border: '1px solid var(--sage-100)', position: 'relative' }}>
-              <div style={{ position: 'absolute', top: '-15px', left: '3rem', background: 'var(--gold-primary)', color: 'white', padding: '0.4rem 1.2rem', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 800 }}>FASE 1: INGRESO</div>
-              <h3 style={{ color: 'var(--sage-800)', marginBottom: '1.5rem', fontSize: '1.4rem' }}>Suscripción de Acciones</h3>
-              <p style={{ color: 'var(--charcoal-mid)', lineHeight: 1.8 }}>Te conviertes en accionista formal de la SpA dueña del proyecto. Tu inversión se registra legalmente y se protocoliza el valor de salida desde el día uno.</p>
-            </div>
-            
-            <div style={{ background: 'var(--sage-50)', padding: '3rem', borderRadius: '32px', border: '1px solid var(--sage-100)', position: 'relative' }}>
-              <div style={{ position: 'absolute', top: '-15px', left: '3rem', background: 'var(--gold-primary)', color: 'white', padding: '0.4rem 1.2rem', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 800 }}>FASE 2: MADURACIÓN</div>
-              <h3 style={{ color: 'var(--sage-800)', marginBottom: '1.5rem', fontSize: '1.4rem' }}>Valorización del Activo</h3>
-              <p style={{ color: 'var(--charcoal-mid)', lineHeight: 1.8 }}>El capital trabaja en la construcción o flipping inmobiliario. El valor de tu participación no fluctúa por noticias, solo crece con el avance real de la obra.</p>
-            </div>
-
-            <div style={{ background: 'var(--sage-900)', padding: '3rem', borderRadius: '32px', border: '1px solid var(--sage-900)', position: 'relative', color: 'white' }}>
-              <div style={{ position: 'absolute', top: '-15px', left: '3rem', background: 'var(--success)', color: 'white', padding: '0.4rem 1.2rem', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 800 }}>FASE 3: LIQUIDEZ</div>
-              <h3 style={{ color: 'white', marginBottom: '1.5rem', fontSize: '1.4rem' }}>Retroventa Pactada</h3>
-              <p style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.8 }}>Al cumplirse el ciclo, CrowdIn recompra tus acciones. Recibes tu <strong>Capital + Premio Acumulado</strong> en un solo pago. Sin buscar compradores, sin esperas.</p>
-            </div>
-          </div>
-
-          <div style={{ marginTop: '4rem', padding: '2rem', background: 'rgba(212,175,55,0.05)', borderRadius: '24px', border: '1px dashed var(--gold-primary)', textAlign: 'center' }}>
-            <p style={{ margin: 0, color: 'var(--sage-800)', fontWeight: 600 }}>
-              <ShieldCheck size={24} style={{ verticalAlign: 'middle', marginRight: '0.8rem', color: 'var(--gold-primary)' }} />
-              <strong>Seguridad Patrimonial:</strong> Al ser Private Equity, tu capital es inmune a las caídas de la bolsa y crisis financieras externas.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* HOW IT WORKS SECTION */}
-      <section className="section" id="como-funciona">
-        <div className="container">
-          <div style={{ textAlign: 'center' }}>
-            <span style={{ color: 'var(--gold-primary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', fontSize: '1rem' }}>Mecanismo de Inversión</span>
-            <h2 style={{ fontSize: 'clamp(3rem, 5vw, 4rem)', marginTop: '1rem', color: 'var(--sage-800)', fontFamily: 'Outfit' }}>Seguridad Institucional</h2>
-          </div>
-
-          <div className="mechanism-wrapper">
-            <div className="steps-grid">
-              <div className="step-card">
-                <div className="step-number">01</div>
-                <div style={{ position: 'relative', zIndex: 2 }}>
-                  <FileText size={40} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-                  <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--sage-800)' }}>Compra de Acción (SpA)</h3>
-                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.05rem', lineHeight: 1.6 }}>Eliges tu volumen de capital. Pasas a ser accionista formal de la Sociedad dueña del activo inmobiliario. Tu inversión está respaldada en metros cuadrados, no en aire.</p>
-                </div>
-              </div>
-              <div className="step-card">
-                <div className="step-number">02</div>
-                <div style={{ position: 'relative', zIndex: 2 }}>
-                  <TrendingUp size={40} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-                  <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--sage-800)' }}>Maduración del Activo</h3>
-                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.05rem', lineHeight: 1.6 }}>Tu capital trabaja en la construcción o adquisición estratégica. No hay retiros intermedios, lo que permite maximizar el interés compuesto y la eficiencia tributaria del proyecto.</p>
-                </div>
-              </div>
-              <div className="step-card">
-                <div className="step-number">03</div>
-                <div style={{ position: 'relative', zIndex: 2 }}>
-                  <RefreshCw size={40} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-                  <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', color: 'var(--sage-800)' }}>Liquidación y Salida</h3>
-                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.05rem', lineHeight: 1.6 }}>Al venderse el activo o cumplirse el plazo (lo que ocurra primero), se ejecuta la retroventa. Recibes tu capital + premio. Si el proyecto se vende en 8 meses, recuperas tu plata en 8 meses.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      {/* SIMULATOR SECTION (MOVED UP FOR MAXIMUM PROMINENCE) */}
       <section className="section calculator-section" id="calculadora" style={{ background: 'var(--sage-50)' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
@@ -589,9 +368,8 @@ function App() {
             </p>
           </div>
 
-          <div className="calculator-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '3rem', alignItems: 'stretch' }}>
-            
-            {/* PANEL IZQUIERDO: CONFIGURACIÓN */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem' }}>
+            {/* PANEL IZQUIERDO: CONFIGURADOR */}
             <div className="calculator-card" style={{ background: 'white', padding: '3rem', borderRadius: '32px', boxShadow: '0 20px 50px rgba(0,0,0,0.05)', border: '1px solid var(--sage-100)', display: 'flex', flexDirection: 'column' }}>
               <h3 style={{ fontSize: '1.5rem', marginBottom: '2rem', color: 'var(--sage-800)', borderBottom: '1px solid var(--sage-50)', paddingBottom: '1rem' }}>Configuración de Ticket</h3>
               
@@ -712,6 +490,153 @@ function App() {
           </div>
         </div>
       </section>
+
+      {/* PROJECTS PORTFOLIO SECTION (THE VITRINE) */}
+      <section id="proyectos" style={{ padding: '8rem 0', background: 'var(--sage-50)' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+            <span style={{ color: 'var(--gold-primary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', fontSize: '1rem' }}>Oportunidades Activas</span>
+            <h2 style={{ fontSize: '3.5rem', color: 'var(--sage-800)', fontFamily: 'Outfit', marginTop: '1rem' }}>Portafolio de Inversión 2026</h2>
+            <p style={{ fontSize: '1.2rem', color: 'var(--charcoal-mid)', maxWidth: '800px', margin: '1rem auto' }}>
+              Proyectos seleccionados por su alta rentabilidad y velocidad de ejecución. Respaldados por activos inmobiliarios tangibles.
+            </p>
+          </div>
+
+          <div className="projects-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2.5rem' }}>
+            {projects.map((project) => (
+              <motion.div 
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                style={{ background: 'white', borderRadius: '32px', overflow: 'hidden', border: '1px solid var(--sage-200)', boxShadow: '0 20px 50px rgba(0,0,0,0.05)' }}
+              >
+                <div style={{ height: '250px', background: `url('${project.image}') center/cover`, position: 'relative' }}>
+                  <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: project.id === 'leaseback' ? 'var(--gold-primary)' : (project.id === 'factoring' ? '#3b82f6' : 'var(--sage-800)'), color: 'white', padding: '0.6rem 1.2rem', borderRadius: '50px', fontWeight: 800, fontSize: '0.8rem', boxShadow: '0 10px 20px rgba(0,0,0,0.1)' }}>{project.tag}</div>
+                </div>
+                <div style={{ padding: '2.5rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1.5rem' }}>
+                    <div>
+                      <h3 style={{ margin: 0, color: 'var(--sage-900)', fontSize: '1.8rem', fontFamily: 'Outfit' }}>{project.title}</h3>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginTop: '0.5rem' }}>
+                        {project.id === 'factoring' ? <TrendingUp size={16} /> : (project.id === 'leaseback' ? <Landmark size={16} /> : <Building2 size={16} />)} {project.subtitle}
+                      </div>
+                    </div>
+                    <div style={{ textAlign: 'right', background: 'var(--sage-50)', padding: '0.5rem 1rem', borderRadius: '12px' }}>
+                      <div style={{ fontSize: '0.7rem', color: 'var(--charcoal-mid)', fontWeight: 800, textTransform: 'uppercase' }}>Plazo</div>
+                      <div style={{ color: 'var(--sage-800)', fontWeight: 800, fontSize: '0.9rem' }}>{project.plazo}</div>
+                    </div>
+                  </div>
+                  
+                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '1.5rem', minHeight: '80px' }}>
+                    {project.description}
+                  </p>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginBottom: '2rem' }}>
+                    <div style={{ background: 'var(--sage-50)', padding: '1rem 1.5rem', borderRadius: '16px', border: '1px solid var(--sage-100)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)', fontWeight: 800, textTransform: 'uppercase' }}>Cupo Disponible</div>
+                      <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--sage-900)' }}>{formatCurrency(project.ticket).replace('CLP', '')}</div>
+                    </div>
+                    <div style={{ background: 'var(--sage-900)', padding: '1rem 1.5rem', borderRadius: '16px', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--gold-primary)' }}>
+                        <ShieldCheck size={16}/> Garantía Física
+                      </div>
+                      <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'white', textAlign: 'right' }}>{project.garantia}</div>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1.5rem', borderTop: '1px solid var(--sage-100)' }}>
+                    <div style={{ color: selectedPlan === 'bullet' ? 'var(--success)' : '#3b82f6', fontWeight: 800, fontSize: '1.15rem' }}>
+                      {selectedPlan === 'bullet' ? `+${(project.roi_bullet * 100).toFixed(0)}% Único` : `+${(project.roi_mensual * 100).toFixed(2)}% Mensual`}
+                    </div>
+                    <button onClick={() => handleOpenModal(project)} style={{ background: project.id === 'leaseback' ? 'var(--gold-primary)' : (project.id === 'factoring' ? '#3b82f6' : 'var(--sage-800)'), color: 'white', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '12px', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      Simular <ArrowRight size={18}/>
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* INVESTMENT SIMULATOR MODAL */}
+      {isModalOpen && selectedProject && (
+        <div className="modal-overlay">
+          <motion.div 
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="modal-content-glass"
+          >
+            <button onClick={() => setIsModalOpen(false)} className="modal-close-btn">
+              <X size={24} />
+            </button>
+
+            <div style={{ padding: '3rem' }}>
+              <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+                <span style={{ color: 'var(--gold-primary)', fontWeight: 800, textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '2px' }}>Simulador de Inversión</span>
+                <h3 style={{ fontSize: '2.2rem', color: 'var(--sage-900)', fontFamily: 'Outfit', marginTop: '0.5rem' }}>{selectedProject.title}</h3>
+              </div>
+
+              <div style={{ background: 'var(--sage-50)', padding: '2rem', borderRadius: '24px', marginBottom: '2.5rem', border: '1px solid var(--sage-100)' }}>
+                <label style={{ color: 'var(--charcoal-mid)', fontWeight: 800, textTransform: 'uppercase', fontSize: '0.75rem', display: 'block', marginBottom: '1rem' }}>Monto a Participar</label>
+                <div style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--sage-900)', marginBottom: '1.5rem', fontFamily: 'Outfit' }}>
+                  {formatCurrency(modalAmount)}
+                </div>
+                <input 
+                  type="range" 
+                  min="5000000" 
+                  max={selectedProject.ticket} 
+                  step="5000000"
+                  value={modalAmount}
+                  onChange={(e) => setModalAmount(Number(e.target.value))}
+                  style={{ width: '100%', height: '8px', borderRadius: '5px', background: 'var(--sage-200)', appearance: 'none', cursor: 'pointer' }}
+                />
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem', color: 'var(--charcoal-mid)', fontSize: '0.85rem', fontWeight: 600 }}>
+                  <span>$5M (Mínimo)</span>
+                  <span>{formatCurrency(selectedProject.ticket)} (Proyecto Completo)</span>
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2.5rem' }}>
+                <div style={{ textAlign: 'center' }}>
+                  <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.85rem', fontWeight: 600 }}>
+                    {selectedPlan === 'bullet' ? 'Utilidad Única al Cierre' : 'Flujo Mensual Garantizado'}
+                  </div>
+                  <div style={{ fontSize: '1.8rem', fontWeight: 800, color: selectedPlan === 'bullet' ? 'var(--success)' : '#3b82f6' }}>
+                    {selectedPlan === 'bullet' 
+                      ? formatCurrency(modalAmount * selectedProject.roi_bullet)
+                      : formatCurrency(modalAmount * selectedProject.roi_mensual)}
+                  </div>
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                  <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.85rem', fontWeight: 600 }}>
+                    Liquidación Total ({selectedProject.plazo})
+                  </div>
+                  <div style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--sage-900)' }}>
+                    {selectedPlan === 'bullet' 
+                      ? formatCurrency(modalAmount * (1 + selectedProject.roi_bullet))
+                      : formatCurrency(modalAmount * (1 + selectedProject.roi_mensual * Number(selectedProject.plazo.replace(' MESES', ''))))}
+                  </div>
+                </div>
+              </div>
+
+              <button 
+                onClick={() => handleWhatsAppRedirect(modalAmount, selectedProject)}
+                style={{ width: '100%', background: 'var(--gold-primary)', color: 'white', border: 'none', padding: '1.2rem', borderRadius: '16px', fontSize: '1.1rem', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', boxShadow: '0 15px 30px rgba(212,175,55,0.3)' }}
+              >
+                Reservar Participación <ArrowRight size={22}/>
+              </button>
+              
+              <p style={{ textAlign: 'center', fontSize: '0.75rem', color: 'var(--charcoal-mid)', marginTop: '1.5rem' }}>
+                *Simulación basada en el {selectedProject.plazo} de plazo del proyecto. Sujeta a contrato notarial.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      )}
+
+
 
       {/* FAQ SECTION */}
       <section className="section" style={{ background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(10px)' }}>

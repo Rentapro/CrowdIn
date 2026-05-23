@@ -11,6 +11,9 @@
 - [x] UX/UI: Rediseño Premium de la Landing Page (Fondo Condominio, Identidad Visual y Limpieza de Tickers).
 - [x] UX/UI: Optimización Mobile-First (Corrección de desbordamientos, logo y stack vertical del Hero).
 - [x] UX/UI: Reestructuración de Landing y Simulador para el Portafolio Real (Factoring 15%, Leaseback 27%, Flipping 30%) con opción Bullet y Flujo Mensual.
+- [x] UX/UI: Reubicación del Simulador Elite arriba (bajo Badges de Confianza) para protagonismo prioritario.
+- [x] UX/UI: Eliminación de secciones obsoletas basadas en suscripción de acciones y mecanismos de fases SpA.
+- [x] UX/UI: Corrección de desbordamientos en tarjetas de vitrina, rediseño premium apilado de "Cupo Disponible" y "Garantía Física" (100% libre de cortes).
 - [ ] Opcional: Integración de notificaciones por Email reales (SendGrid/Resend) para avisos de transferencias de rentabilidad.
 
 ## Fase 4: Automatización de Captación (Lead Gen) 🎯
