@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta Privada de Inversión - CrowdIn SpA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0F172A;
+            --primary-light: #1E293B;
+            --accent: #B45309; /* Oro viejo / Ámbar oscuro */
+            --accent-light: #F59E0B;
+            --text-dark: #1E293B;
+            --text-light: #64748B;
+            --bg-light: #F8FAFC;
+            --border-color: #E2E8F0;
+            --gold-border: #D97706;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: #E2E8F0;
+            padding: 40px 20px;
+        }
+
+        .no-print-bar {
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--primary);
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .no-print-bar p {
+            color: #F8FAFC;
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+
+        .print-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .print-btn:hover {
+            background-color: #92400E;
+        }
+
+        /* Contenedor del documento A4 */
+        .document-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 60px 80px;
+            border-radius: 4px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        /* Encabezado y Portada */
+        .header-logo {
+            text-align: right;
+            margin-bottom: 50px;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 15px;
+        }
+
+        .header-logo h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .header-logo span {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .confidential-tag {
+            display: inline-block;
+            border: 1px solid #DC2626;
+            color: #DC2626;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            border-radius: 3px;
+        }
+
+        h1.doc-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            color: var(--primary);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .doc-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            font-weight: 300;
+            border-left: 3px solid var(--accent);
+            padding-left: 15px;
+        }
+
+        /* Secciones del Documento */
+        .doc-section {
+            margin-bottom: 45px;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 18px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title span {
+            color: var(--accent);
+            font-weight: 400;
+            font-size: 1.2rem;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--text-dark);
+            font-size: 1rem;
+            text-align: justify;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Tablas Financieras */
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+
+        .financial-table th {
+            background-color: var(--primary);
+            color: white;
+            text-align: left;
+            padding: 12px 16px;
+            font-weight: 500;
+            border: 1px solid var(--primary);
+        }
+
+        .financial-table td {
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .financial-table tr:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+
+        .financial-table tr.total-row {
+            font-weight: 700;
+            background-color: #FEF3C7 !important;
+            border-top: 2px solid var(--accent);
+        }
+
+        .financial-table tr.total-row td {
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        /* Cajas de Alerta/Información Destacada */
+        .alert-box {
+            background-color: var(--bg-light);
+            border-left: 4px solid var(--accent);
+            padding: 20px 25px;
+            margin: 25px 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .alert-box h4 {
+            font-size: 1.05rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .alert-box p {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            margin-bottom: 0;
+        }
+
+        .highlight-number {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+            margin-top: 5px;
+        }
+
+        /* Listas con Estilo */
+        .styled-list {
+            list-style: none;
+            margin: 15px 0 25px 0;
+        }
+
+        .styled-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            text-align: justify;
+        }
+
+        .styled-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* Firmas */
+        .signature-section {
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            page-break-inside: avoid;
+        }
+
+        .signature-block {
+            text-align: center;
+            border-top: 1px solid var(--text-light);
+            padding-top: 15px;
+            margin-top: 40px;
+        }
+
+        .signature-block p.name {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 2px;
+        }
+
+        .signature-block p.title {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Footer del Documento */
+        .doc-footer {
+            margin-top: 80px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Reglas de Impresión */
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+                color: black;
+            }
+
+            .no-print-bar {
+                display: none !important;
+            }
+
+            .document-container {
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .page-break {
+                display: block;
+                page-break-before: always;
+            }
+
+            p, li {
+                orphans: 3;
+                widows: 3;
+            }
+
+            .financial-table th {
+                background-color: #0F172A !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .financial-table tr.total-row {
+                background-color: #FEF3C7 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de control superior (No imprimible) -->
+    <div class="no-print-bar">
+        <p><strong>Vista Previa de la Propuesta de Inversión</strong> | Lista para exportar o imprimir en papel.</p>
+        <button class="print-btn" onclick="window.print()">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="display:inline-block;vertical-align:middle;">
+                <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+                <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
+            </svg>
+            Imprimir o Guardar como PDF
+        </button>
+    </div>
+
+    <!-- Contenedor Principal del Documento -->
+    <div class="document-container">
+        
+        <!-- CABECERA -->
+        <div class="header-logo">
+            <h2>CROWDIN SpA</h2>
+            <span>Fondo de Respaldo Inmobiliario y Financiero</span>
+        </div>
+
+        <div class="confidential-tag">Estrictamente Confidencial</div>
+
+        <h1 class="doc-title">Propuesta Privada de Inversión Financiera</h1>
+        <div class="doc-subtitle">
+            Estructuración de Financiamiento Privado mediante Contrato de Mutuo con Respaldo e Inscripción Hipotecaria en Primer Grado.
+        </div>
+
+        <!-- SECCIÓN 1: RESUMEN EJECUTIVO -->
+        <div class="doc-section">
+            <h3 class="section-title"><span>I.</span> Resumen Ejecutivo</h3>
+            <p>
+                La presente propuesta tiene como finalidad formalizar una alianza de financiamiento privado de alta seguridad con <strong>CrowdIn SpA</strong>. El capital solicitado de <strong>$2.000.000.000 (Dos mil millones de pesos chilenos)</strong> se utilizará exclusivamente para la colocación en tres líneas de negocios consolidadas y altamente líquidas: Leaseback Habitacional/Comercial, Flipping Inmobiliario de rápida rotación y Factoring Corporativo de categoría Triple A.
+            </p>
+            <p>
+                Este instrumento está diseñado bajo la figura legal de <strong>Mutuo de Dinero</strong>, lo que permite al inversionista actuar como acreedor preferente del holding familiar, garantizando el retorno íntegro de su capital más una rentabilidad anual garantizada, totalmente blindada mediante **hipotecas reales inscritas a su nombre**.
+            </p>
+
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th>Término del Instrumento</th>
+                        <th>Detalle y Condiciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Monto de Inversión</strong></td>
+                        <td>$2.000.000.000 CLP (Dos mil millones de pesos)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Plazo de Operación</strong></td>
+                        <td>18 meses (Plazo fijo no extendible)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tasa de Rentabilidad Fija</strong></td>
+                        <td><strong>20% Anual</strong> (30% total de rentabilidad al término del periodo)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Garantía Principal</strong></td>
+                        <td>Hipoteca de Primer Grado inscrita en el Conservador de Bienes Raíces (CBR)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Estructuración Legal</strong></td>
+                        <td>Escritura Pública Notarial de Mutuo de Dinero</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SECCIÓN 2: ESTRUCTURA DE RETORNO -->
+        <div class="doc-section">
+            <h3 class="section-title"><span>II.</span> Modalidades de Retorno (Flujo de Caja)</h3>
+            <p>
+                Entendiendo las necesidades de diversificación y flujo del inversionista, proponemos dos modalidades de pago totalmente flexibles y garantizadas a elección:
+            </p>
+
+            <div class="alert-box">
+                <h4>Opción A: Renta Mensual Estable (Flujo Constante)</h4>
+                <p>El inversionista recibe abonos mensuales fijos de intereses directos en su cuenta bancaria. Esta opción es ideal para contar con liquidez líquida inmediata mes a mes.</p>
+                <span class="highlight-number">$33.333.333 CLP mensuales (por 18 meses)</span>
+                <p style="font-size:0.85rem; color:var(--text-light); margin-top:8px;">*En el mes 18 se realiza la devolución total del capital inicial de $2.000.000.000 CLP.</p>
+            </div>
+
+            <div class="alert-box">
+                <h4>Opción B: Retorno Bullet (Capitalización Acumulativa)</h4>
+                <p>El capital inicial y la totalidad de los intereses devengados se abonan en un único pago al vencimiento del plazo de 18 meses.</p>
+                <span class="highlight-number">$2.600.000.000 CLP al vencimiento</span>
+                <p style="font-size:0.85rem; color:var(--text-light); margin-top:8px;">*Retorno neto equivalente al 30% real sobre el capital aportado.</p>
+            </div>
+        </div>
+
+        <!-- SALTO DE PÁGINA PARA IMPRESIÓN LIMPIA -->
+        <div class="page-break"></div>
+
+        <!-- SECCIÓN 3: ESTRUCTURA DE SEGURIDAD (EL BLINDAJE) -->
+        <div class="doc-section" style="margin-top:20px;">
+            <h3 class="section-title"><span>III.</span> Red de Seguridad y Garantía Real (CBR)</h3>
+            <p>
+                A diferencia de los instrumentos bancarios tradicionales o los fondos de renta variable, esta inversión está blindada físicamente por activos inmobiliarios. La operación se estructura de la siguiente forma para otorgar **máxima tranquilidad jurídica**:
+            </p>
+            <ul class="styled-list">
+                <li>
+                    <strong>Hipoteca de Primer Grado en el CBR:</strong> El 100% de la inversión estará respaldado por bienes raíces urbanos consolidados. Se constituirá una hipoteca de primer grado a favor del inversionista, la cual quedará inscrita de forma oficial en el Conservador de Bienes Raíces (CBR) respectivo.
+                </li>
+                <li>
+                    <strong>Relación de Respaldo Inmobiliario (LTV 60%):</strong> No sobrepasamos un ratio de préstamo-valor (LTV) del 60%. Esto significa que el inversionista cuenta con un respaldo inmobiliario real de **$1.66 pesos en ladrillo físico por cada $1.00 peso invertido** en el fondo.
+                </li>
+                <li>
+                    <strong>Escritura Pública y Pagaré Notarial:</strong> El contrato de mutuo se eleva a Escritura Pública, otorgando un título ejecutivo de cobro inmediato en caso de cualquier eventualidad. Esto reduce los tiempos legales y simplifica la ejecución a favor del acreedor.
+                </li>
+                <li>
+                    <strong>Patrimonio del Holding Familiar:</strong> CrowdIn SpA respalda de forma corporativa e ilimitada el cumplimiento del mutuo con la totalidad de sus activos vigentes, incluyendo negocios tradicionales de flujo de caja diario como nuestro Minimarket consolidado y el portafolio de cabañas de arriendo.
+                </li>
+            </ul>
+        </div>
+
+        <!-- SECCIÓN 4: COLOCACIÓN Y DIVERSIFICACIÓN -->
+        <div class="doc-section">
+            <h3 class="section-title"><span>IV.</span> Destino del Capital (El Motor de Negocios)</h3>
+            <p>
+                Los $2.000 Millones de pesos se diversifican de manera estratégica para mitigar el riesgo sistémico y optimizar los ciclos de velocidad del dinero en tres frentes:
+            </p>
+
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th>Línea de Colocación</th>
+                        <th>Participación</th>
+                        <th>Monto Asignado</th>
+                        <th>Mecanismo de Seguridad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Leaseback Habitacional</strong></td>
+                        <td>50%</td>
+                        <td>$1.000.000.000 CLP</td>
+                        <td>Inscripción de propiedades a nombre del holding con descuento de arriendo pagado el día 1.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Flipping Inmobiliario</strong></td>
+                        <td>25%</td>
+                        <td>$500.000.000 CLP</td>
+                        <td>Compra de viviendas a precio de liquidación judicial. Remodelación con constructora propia.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Factoring Corporativo</strong></td>
+                        <td>25%</td>
+                        <td>$500.000.000 CLP</td>
+                        <td>Descuento exclusivo de facturas de corporaciones multinacionales y mineras de categoría Triple A.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p style="margin-top: 15px;">
+                <strong>Calce y Liquidez del Plazo:</strong> El plazo de 18 meses del mutuo nos proporciona una ventaja de **6 meses de holgura (colchón financiero)** sobre nuestros vencimientos operativos estándar, los cuales están pactados estrictamente a 12 meses. Esto asegura que la SpA recupere la totalidad de las colocaciones en efectivo con amplia anticipación antes de la fecha de vencimiento acordada con el inversionista.
+            </p>
+        </div>
+
+        <!-- SECCIÓN 5: CONCLUSIÓN Y FIRMA -->
+        <div class="doc-section">
+            <h3 class="section-title"><span>V.</span> Próximos Pasos</h3>
+            <p>
+                Si la estructura descrita en este documento es de su agrado e interés financiero, le invitamos formalmente a coordinar una **reunión privada de cierre** en nuestras oficinas o en su domicilio. En dicha sesión, se presentará el portafolio de activos reales disponibles para la constitución de las garantías y el borrador de la Escritura Pública para la revisión de su equipo legal.
+            </p>
+
+            <div class="signature-section">
+                <div class="signature-block">
+                    <p class="name">Representante Legal</p>
+                    <p class="title">Director de Finanzas | CrowdIn SpA</p>
+                </div>
+                <div class="signature-block">
+                    <p class="name">Inversionista Premium</p>
+                    <p class="title">Acreedor Preferente</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="doc-footer">
+            <span>Propuesta de Inversión Privada 2026</span>
+            <span>Estrictamente Confidencial</span>
+            <span>CrowdIn SpA</span>
+        </div>
+
+    </div>
+
+</body>
+</html>
