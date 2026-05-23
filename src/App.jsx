@@ -153,7 +153,7 @@ function App() {
     { q: "¿Qué sucede si un deudor de Leaseback incumple el contrato?", a: "Al constituirse el contrato original vía escritura pública, se inscriben las autorizaciones notariales de liquidación de la propiedad. En caso de mora prolongada, CrowdIn ejecuta las garantías notariales pre-firmadas para liquidar el activo y restituir tu capital más el sobreprecio acumulado, sin que tengas que realizar trámites o asistir nuevamente a notaría." },
     { q: "¿Qué ocurre si una factura de Factoring Corporativo no es pagada a tiempo?", a: "Las facturas adquiridas gozan de mérito ejecutivo por ley, lo que permite un cobro judicial expedito al gran pagador corporativo (empresas AAA tipo Walmart o Codelco). Adicionalmente, las operaciones cuentan con avales solidarios comerciales para mitigar el riesgo de crédito." },
     { q: "¿Cuál es el plazo de las inversiones y puedo retirar mi capital de forma anticipada?", a: "Los plazos de nuestras líneas de inversión están definidos contractualmente a 12 meses en Factoring y 18 meses en Leaseback e Inversión Inmobiliaria. Dado que los fondos se inyectan en activos reales y operaciones activas, no se permiten retiros anticipados para asegurar la liquidez y continuidad de las obras." },
-    { q: "¿Bajo qué figura legal se pagan mis retornos de tasa fija?", a: "Los retornos no constituyen intereses de un préstamo tradicional. Se estructuran y liquidan como un sobreprecio comercial o premio de retroventa establecido contractualmente en la compra de activos, regulado bajo el Código de Comercio y el Código Civil chileno." },
+    { q: "¿Bajo qué figura legal se pagan mis retornos de tasa fija?", a: "Los retornos no constituyen intereses de un préstamo tradicional. Se estructuran y liquidan como un sobreprecio comercial o ganancia establecida contractualmente en la compra de activos (regulado legalmente como premio de retroventa bajo el Código de Comercio y el Código Civil chileno)." },
     { q: "¿Cómo y cuándo recibo las ganancias de mi inversión?", a: "Dispones de dos modalidades según tu estrategia: Flujo Mensual, donde recibes el pago de tus beneficios de forma constante mes a mes, o Modalidad Bullet, donde recibes tu capital y todo el sobreprecio acumulado en un único pago al término del plazo." },
     { q: "¿Dónde se realiza la firma de los contratos?", a: "Todas las escrituras públicas y contratos comerciales se firman de forma presencial en Notaría Pública o mediante plataformas certificadas de Firma Electrónica Avanzada (FEA) plenamente válidas bajo la legislación chilena." }
   ];
@@ -268,7 +268,7 @@ function App() {
                 Inversión Inmobiliaria con <span>Retorno Único Garantizado.</span>
               </h1>
               <p className="hero-subtitle">
-                Invierte en el desarrollo de complejos turísticos y flipping, recibe tu <strong>capital + premio</strong> al finalizar el proyecto. Blindado por Notaría.
+                Invierte en el desarrollo de complejos turísticos y flipping, recibe tu <strong>capital + ganancia</strong> al finalizar el proyecto. Blindado por Notaría.
               </p>
               
               <div className="hero-buttons">
@@ -411,7 +411,7 @@ function App() {
                 </div>
                 <p style={{ marginTop: '0.75rem', fontSize: '0.8rem', color: 'var(--charcoal-mid)', lineHeight: 1.4, minHeight: '3rem' }}>
                   {selectedPlan === 'bullet' 
-                    ? `* Modalidad Bullet: Recibe el 100% de tu capital más el premio de ${currentAsset.tasaAnual} en un solo pago al finalizar el plazo de ${currentAsset.plazo}.`
+                    ? `* Modalidad Bullet: Recibe el 100% de tu capital más la ganancia pactada de ${currentAsset.tasaAnual} en un solo pago al finalizar el plazo de ${currentAsset.plazo}.`
                     : `* Modalidad Flujo Mensual: Recibe rentabilidades fijas de ${currentAsset.tasaMensual} mensual (${formatCurrency(monthlyPayout)}) y recupera tu capital de forma líquida al vencimiento.`}
                 </p>
               </div>
