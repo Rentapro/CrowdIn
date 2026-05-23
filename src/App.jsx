@@ -308,8 +308,8 @@ function App() {
                   </div>
 
                   <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                    <div style={{ color: 'var(--charcoal-mid)', fontSize: '1rem', marginBottom: '0.5rem' }}>Estructura Societaria</div>
-                    <div style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--sage-800)', letterSpacing: '-1px', lineHeight: 1.1 }}>Sociedad por Acciones</div>
+                    <div style={{ color: 'var(--charcoal-mid)', fontSize: '1rem', marginBottom: '0.5rem' }}>Modelo de Respaldo</div>
+                    <div style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--sage-800)', letterSpacing: '-1px', lineHeight: 1.1 }}>Garantías Reales</div>
                     
                     <div style={{ marginTop: '2rem', background: 'rgba(255,255,255,0.5)', padding: '1.5rem', borderRadius: '16px', border: '1px solid rgba(0,0,0,0.05)' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.2rem', alignItems: 'center' }}>
@@ -321,7 +321,7 @@ function App() {
                       </div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
                         <span style={{ color: 'var(--charcoal-mid)' }}>Respaldo Directo</span>
-                        <span style={{ color: 'var(--gold-primary)', fontWeight: 'bold' }}>Patrimonio SpA</span>
+                        <span style={{ color: 'var(--gold-primary)', fontWeight: 'bold' }}>Activos Tangibles</span>
                       </div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <span style={{ color: 'var(--sage-800)', fontWeight: 600 }}>Garantía</span>
@@ -412,7 +412,7 @@ function App() {
                 <p style={{ marginTop: '0.75rem', fontSize: '0.8rem', color: 'var(--charcoal-mid)', lineHeight: 1.4, minHeight: '3rem' }}>
                   {selectedPlan === 'bullet' 
                     ? `* Modalidad Bullet: Recibe el 100% de tu capital más el premio de ${currentAsset.tasaAnual} en un solo pago al finalizar el plazo de ${currentAsset.plazo}.`
-                    : `* Modalidad Flujo Mensual: Recibe intereses fijos de ${currentAsset.tasaMensual} mensual (${formatCurrency(monthlyPayout)}) y recupera tu capital de forma líquida al vencimiento.`}
+                    : `* Modalidad Flujo Mensual: Recibe rentabilidades fijas de ${currentAsset.tasaMensual} mensual (${formatCurrency(monthlyPayout)}) y recupera tu capital de forma líquida al vencimiento.`}
                 </p>
               </div>
 
@@ -661,7 +661,7 @@ function App() {
       </section>
 
       {/* GUARANTEES SECTION */}
-      <section className="section" style={{ background: 'var(--sage-900)' }}>
+      <section className="section" id="como-funciona" style={{ background: 'var(--sage-900)' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <span style={{ color: 'var(--gold-primary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', fontSize: '1rem' }}>Seguridad y Cumplimiento</span>
