@@ -202,6 +202,13 @@ function App() {
   const monthlyPayout = investment * currentAsset.tasaMensualCalculo;
 
   const formatCurrency = (val) => new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 }).format(val);
+  const formatUF = (clpVal) => {
+    const ufVal = clpVal / 37500;
+    if (ufVal >= 1000) {
+      return new Intl.NumberFormat('es-CL', { maximumFractionDigits: 0 }).format(Math.round(ufVal)) + ' UF';
+    }
+    return new Intl.NumberFormat('es-CL', { maximumFractionDigits: 1 }).format(ufVal) + ' UF';
+  };
 
   const handleWhatsAppRedirect = (amount = investment, project = null) => {
     let message = "";
@@ -418,8 +425,13 @@ function App() {
 
               <div style={{ marginBottom: '1.25rem' }}>
                 <label style={{ display: 'block', color: 'var(--charcoal-mid)', fontWeight: 600, marginBottom: '0.75rem', fontSize: '0.85rem', textTransform: 'uppercase' }}>Volumen de Inversión</label>
-                <div style={{ fontSize: '2.25rem', fontWeight: 800, color: 'var(--sage-900)', marginBottom: '1rem', fontFamily: 'Outfit' }}>
-                  {formatCurrency(investment)}
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.8rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
+                  <div style={{ fontSize: '2.25rem', fontWeight: 800, color: 'var(--sage-900)', fontFamily: 'Outfit' }}>
+                    {formatCurrency(investment)}
+                  </div>
+                  <div style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--gold-primary)' }}>
+                    (≈ {formatUF(investment)})
+                  </div>
                 </div>
                 <input 
                   type="range" min="0" max={tierValues.length - 1} step="1"
@@ -447,16 +459,22 @@ function App() {
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
-                <div style={{ background: 'var(--sage-50)', padding: '1rem', borderRadius: '12px' }}>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)', textTransform: 'uppercase', marginBottom: '0.4rem', fontWeight: 700 }}>{selectedPlan === 'bullet' ? 'Utilidad al Cierre' : 'Flujo Mensual'}</div>
+                <div style={{ background: 'var(--sage-50)', padding: '1.2rem 1rem', borderRadius: '12px', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)', textTransform: 'uppercase', fontWeight: 700 }}>{selectedPlan === 'bullet' ? 'Utilidad al Cierre' : 'Flujo Mensual'}</div>
                   <div style={{ fontSize: '1.25rem', fontWeight: 800, color: selectedPlan === 'bullet' ? 'var(--success)' : '#3b82f6' }}>
                     {selectedPlan === 'bullet' ? formatCurrency(interestEarned) : formatCurrency(monthlyPayout)}
                   </div>
+                  <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--charcoal-mid)' }}>
+                    ≈ {selectedPlan === 'bullet' ? formatUF(interestEarned) : formatUF(monthlyPayout)}
+                  </div>
                 </div>
-                <div style={{ background: 'var(--sage-100)', padding: '1rem', borderRadius: '12px', color: 'var(--sage-900)', border: '1px solid var(--sage-300)' }}>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)', textTransform: 'uppercase', marginBottom: '0.4rem', fontWeight: 700 }}>Liquidación Total</div>
+                <div style={{ background: 'var(--sage-100)', padding: '1.2rem 1rem', borderRadius: '12px', color: 'var(--sage-900)', border: '1px solid var(--sage-300)', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)', textTransform: 'uppercase', fontWeight: 700 }}>Liquidación Total</div>
                   <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--sage-900)' }}>
                     {formatCurrency(totalReturn)}
+                  </div>
+                  <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--gold-primary)' }}>
+                    ≈ {formatUF(totalReturn)}
                   </div>
                 </div>
               </div>
@@ -527,7 +545,10 @@ function App() {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginBottom: '2rem' }}>
                     <div style={{ background: 'var(--sage-50)', padding: '1rem 1.5rem', borderRadius: '16px', border: '1px solid var(--sage-100)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)', fontWeight: 800, textTransform: 'uppercase' }}>Cupo Disponible</div>
-                      <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--sage-900)' }}>{formatCurrency(project.ticket).replace('CLP', '')}</div>
+                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+                        <div style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--sage-900)' }}>{formatCurrency(project.ticket).replace('CLP', '')}</div>
+                        <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--gold-primary)', marginTop: '0.1rem' }}>≈ {formatUF(project.ticket)}</div>
+                      </div>
                     </div>
                     <div style={{ background: 'var(--sage-100)', padding: '1rem 1.5rem', borderRadius: '16px', border: '1px solid var(--sage-300)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--gold-primary)' }}>
