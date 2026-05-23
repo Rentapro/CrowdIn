@@ -258,10 +258,11 @@ body {
 
 .hero-subtitle {
   font-size: 1.2rem;
-  color: var(--sage-800);
+  color: #16221a; /* Bosque-carboncillo profundo para máxima legibilidad */
   line-height: 1.6;
   margin-bottom: 2.5rem;
   max-width: 600px;
+  text-shadow: 0 1px 8px rgba(255, 255, 255, 0.95); /* Halo de luz posterior para evitar colisiones con el fondo claro */
 }
 
 .stats-bar {
@@ -274,15 +275,17 @@ body {
 
 .stat-item h4 {
   font-size: 2rem;
-  color: var(--sage-800);
+  color: var(--sage-900); /* Mayor profundidad y contraste */
   margin: 0;
   font-family: 'Outfit', sans-serif;
+  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.85);
 }
 
 .stat-item p {
-  color: var(--charcoal-mid);
+  color: var(--charcoal); /* Mayor legibilidad */
   margin: 0.5rem 0 0 0;
   font-size: 0.9rem;
+  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.85);
 }
 
 @media (max-width: 768px) {
