@@ -228,20 +228,6 @@ function App() {
           <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}><Activity size={12} color="var(--gold-primary)"/> Activos 2026</span>
         </div>
       </div>
-
-      <motion.div
-        style={{
-          scaleX,
-          position: 'fixed',
-          top: '28px',
-          left: 0,
-          right: 0,
-          height: '4px',
-          background: 'var(--gold-primary)',
-          transformOrigin: '0%',
-          zIndex: 2000
-        }}
-      />
       <ParallaxBackground />
 
       <nav className="navbar">
@@ -254,6 +240,20 @@ function App() {
           <a href="#calculadora" className="nav-link">Simulador</a>
           <button onClick={() => { window.location.hash = '#login'; }} className="btn btn-primary btn-login">Ingresar</button>
         </div>
+        {/* Borde inferior interactivo que indica el progreso de lectura de la pagina */}
+        <motion.div
+          style={{
+            scaleX,
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: '3px',
+            background: 'var(--gold-primary)',
+            transformOrigin: '0%',
+            zIndex: 1001
+          }}
+        />
       </nav>
 
       {/* HERO SECTION (3D Enhancements) */}
