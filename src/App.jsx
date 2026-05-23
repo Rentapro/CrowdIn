@@ -359,70 +359,70 @@ function App() {
       </section>
 
       {/* SIMULATOR SECTION (MOVED UP FOR MAXIMUM PROMINENCE) */}
-      <section className="section calculator-section" id="calculadora" style={{ background: 'var(--sage-50)' }}>
+      <section className="section calculator-section" id="calculadora" style={{ background: 'var(--sage-50)', padding: '4rem 0' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: 'var(--sage-800)', fontFamily: 'Outfit', marginBottom: '1rem' }}>Simulador de Inversión Elite</h2>
-            <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.2rem', maxWidth: '800px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+            <h2 style={{ fontSize: 'clamp(2.25rem, 4vw, 3.25rem)', color: 'var(--sage-800)', fontFamily: 'Outfit', marginBottom: '0.75rem' }}>Simulador de Inversión Elite</h2>
+            <p style={{ color: 'var(--charcoal-mid)', fontSize: '1.1rem', maxWidth: '800px', margin: '0 auto' }}>
               Compara tu rentabilidad proyectada frente a la banca tradicional y elige tu estrategia de salida.
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', maxWidth: '1000px', margin: '0 auto' }}>
             {/* PANEL IZQUIERDO: CONFIGURADOR */}
-            <div className="calculator-card" style={{ background: 'white', padding: '3rem', borderRadius: '32px', boxShadow: '0 20px 50px rgba(0,0,0,0.05)', border: '1px solid var(--sage-100)', display: 'flex', flexDirection: 'column' }}>
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '2rem', color: 'var(--sage-800)', borderBottom: '1px solid var(--sage-50)', paddingBottom: '1rem' }}>Configuración de Ticket</h3>
+            <div className="calculator-card" style={{ background: 'white', padding: '2rem', borderRadius: '24px', boxShadow: '0 15px 35px rgba(0,0,0,0.03)', border: '1px solid var(--sage-100)', display: 'flex', flexDirection: 'column' }}>
+              <h3 style={{ fontSize: '1.25rem', marginBottom: '1.25rem', color: 'var(--sage-800)', borderBottom: '1px solid var(--sage-50)', paddingBottom: '0.75rem' }}>Configuración de Ticket</h3>
               
-              <div style={{ marginBottom: '2rem' }}>
-                <label style={{ display: 'block', color: 'var(--charcoal-mid)', fontWeight: 600, marginBottom: '1rem', fontSize: '0.9rem', textTransform: 'uppercase' }}>Línea de Inversión</label>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.5rem', background: 'var(--sage-50)', padding: '0.4rem', borderRadius: '16px' }}>
+              <div style={{ marginBottom: '1.25rem' }}>
+                <label style={{ display: 'block', color: 'var(--charcoal-mid)', fontWeight: 600, marginBottom: '0.75rem', fontSize: '0.85rem', textTransform: 'uppercase' }}>Línea de Inversión</label>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.4rem', background: 'var(--sage-50)', padding: '0.3rem', borderRadius: '12px' }}>
                   <button 
                     onClick={() => setSelectedAsset('factoring')}
-                    style={{ padding: '0.8rem', borderRadius: '12px', border: 'none', background: selectedAsset === 'factoring' ? '#3b82f6' : 'transparent', color: selectedAsset === 'factoring' ? 'white' : 'var(--charcoal-mid)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.3s' }}
+                    style={{ padding: '0.6rem', borderRadius: '8px', border: 'none', background: selectedAsset === 'factoring' ? '#3b82f6' : 'transparent', color: selectedAsset === 'factoring' ? 'white' : 'var(--charcoal-mid)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.3s', fontSize: '0.9rem' }}
                   >
                     Línea A: Factoring Corporativo (12 Meses)
                   </button>
                   <button 
                     onClick={() => setSelectedAsset('leaseback')}
-                    style={{ padding: '0.8rem', borderRadius: '12px', border: 'none', background: selectedAsset === 'leaseback' ? 'var(--gold-primary)' : 'transparent', color: selectedAsset === 'leaseback' ? 'white' : 'var(--charcoal-mid)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.3s' }}
+                    style={{ padding: '0.6rem', borderRadius: '8px', border: 'none', background: selectedAsset === 'leaseback' ? 'var(--gold-primary)' : 'transparent', color: selectedAsset === 'leaseback' ? 'white' : 'var(--charcoal-mid)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.3s', fontSize: '0.9rem' }}
                   >
                     Línea B: Leaseback Inmobiliario (18 Meses)
                   </button>
                   <button 
                     onClick={() => setSelectedAsset('flipping')}
-                    style={{ padding: '0.8rem', borderRadius: '12px', border: 'none', background: selectedAsset === 'flipping' ? 'var(--sage-800)' : 'transparent', color: selectedAsset === 'flipping' ? 'white' : 'var(--charcoal-mid)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.3s' }}
+                    style={{ padding: '0.6rem', borderRadius: '8px', border: 'none', background: selectedAsset === 'flipping' ? 'var(--sage-800)' : 'transparent', color: selectedAsset === 'flipping' ? 'white' : 'var(--charcoal-mid)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.3s', fontSize: '0.9rem' }}
                   >
                     Línea C: Inversión Inmobiliaria (18 Meses)
                   </button>
                 </div>
               </div>
 
-              <div style={{ marginBottom: '2rem' }}>
-                <label style={{ display: 'block', color: 'var(--charcoal-mid)', fontWeight: 600, marginBottom: '1rem', fontSize: '0.9rem', textTransform: 'uppercase' }}>Modalidad de Pago</label>
-                <div style={{ display: 'flex', background: 'var(--sage-50)', padding: '0.4rem', borderRadius: '16px', gap: '0.4rem' }}>
+              <div style={{ marginBottom: '1.25rem' }}>
+                <label style={{ display: 'block', color: 'var(--charcoal-mid)', fontWeight: 600, marginBottom: '0.75rem', fontSize: '0.85rem', textTransform: 'uppercase' }}>Modalidad de Pago</label>
+                <div style={{ display: 'flex', background: 'var(--sage-50)', padding: '0.3rem', borderRadius: '12px', gap: '0.3rem' }}>
                   <button 
                     onClick={() => setSelectedPlan('bullet')}
-                    style={{ flex: 1, padding: '0.8rem', borderRadius: '12px', border: 'none', background: selectedPlan === 'bullet' ? 'var(--success)' : 'transparent', color: selectedPlan === 'bullet' ? 'white' : 'var(--charcoal-mid)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.3s' }}
+                    style={{ flex: 1, padding: '0.6rem', borderRadius: '8px', border: 'none', background: selectedPlan === 'bullet' ? 'var(--success)' : 'transparent', color: selectedPlan === 'bullet' ? 'white' : 'var(--charcoal-mid)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.3s', fontSize: '0.9rem' }}
                   >
                     Único al Cierre
                   </button>
                   <button 
                     onClick={() => setSelectedPlan('mensual')}
-                    style={{ flex: 1, padding: '0.8rem', borderRadius: '12px', border: 'none', background: selectedPlan === 'mensual' ? '#3b82f6' : 'transparent', color: selectedPlan === 'mensual' ? 'white' : 'var(--charcoal-mid)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.3s' }}
+                    style={{ flex: 1, padding: '0.6rem', borderRadius: '8px', border: 'none', background: selectedPlan === 'mensual' ? '#3b82f6' : 'transparent', color: selectedPlan === 'mensual' ? 'white' : 'var(--charcoal-mid)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.3s', fontSize: '0.9rem' }}
                   >
                     Mensual Garantizado
                   </button>
                 </div>
-                <p style={{ marginTop: '1rem', fontSize: '0.85rem', color: 'var(--charcoal-mid)', lineHeight: 1.5, minHeight: '3.5rem' }}>
+                <p style={{ marginTop: '0.75rem', fontSize: '0.8rem', color: 'var(--charcoal-mid)', lineHeight: 1.4, minHeight: '3rem' }}>
                   {selectedPlan === 'bullet' 
                     ? `* Modalidad Bullet: Recibe el 100% de tu capital más el premio de ${currentAsset.tasaAnual} en un solo pago al finalizar el plazo de ${currentAsset.plazo}.`
                     : `* Modalidad Flujo Mensual: Recibe intereses fijos de ${currentAsset.tasaMensual} mensual (${formatCurrency(monthlyPayout)}) y recupera tu capital de forma líquida al vencimiento.`}
                 </p>
               </div>
 
-              <div style={{ marginBottom: '2rem' }}>
-                <label style={{ display: 'block', color: 'var(--charcoal-mid)', fontWeight: 600, marginBottom: '1.5rem', fontSize: '0.9rem', textTransform: 'uppercase' }}>Volumen de Inversión</label>
-                <div style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--sage-900)', marginBottom: '2rem', fontFamily: 'Outfit' }}>
+              <div style={{ marginBottom: '1.25rem' }}>
+                <label style={{ display: 'block', color: 'var(--charcoal-mid)', fontWeight: 600, marginBottom: '0.75rem', fontSize: '0.85rem', textTransform: 'uppercase' }}>Volumen de Inversión</label>
+                <div style={{ fontSize: '2.25rem', fontWeight: 800, color: 'var(--sage-900)', marginBottom: '1rem', fontFamily: 'Outfit' }}>
                   {formatCurrency(investment)}
                 </div>
                 <input 
@@ -430,45 +430,45 @@ function App() {
                   value={sliderIndex} onChange={(e) => setSliderIndex(Number(e.target.value))}
                   className="calc-slider"
                 />
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem', fontSize: '0.8rem', color: 'var(--charcoal-mid)', fontWeight: 600 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.75rem', fontSize: '0.75rem', color: 'var(--charcoal-mid)', fontWeight: 600 }}>
                   <span>$5M</span>
                   <span>$500M</span>
                 </div>
               </div>
 
-              <button onClick={() => handleWhatsAppRedirect()} className="btn btn-primary" style={{ width: '100%', marginTop: '1rem', background: selectedPlan === 'bullet' ? 'var(--success)' : '#3b82f6' }}>
+              <button onClick={() => handleWhatsAppRedirect()} className="btn btn-primary" style={{ width: '100%', marginTop: '0.75rem', background: selectedPlan === 'bullet' ? 'var(--success)' : '#3b82f6', padding: '0.75rem' }}>
                 Iniciar Estructuración Legal
               </button>
             </div>
 
             {/* PANEL DERECHO: RESULTADOS Y BENCHMARK */}
-            <div className="calculator-card" style={{ background: 'white', padding: '3rem', borderRadius: '32px', boxShadow: '0 20px 50px rgba(0,0,0,0.05)', border: '1px solid var(--sage-100)', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-                <h3 style={{ fontSize: '1.5rem', margin: 0, color: 'var(--sage-800)' }}>Proyección Detallada</h3>
-                <div style={{ background: selectedPlan === 'bullet' ? 'rgba(46,125,50,0.1)' : 'rgba(59,130,246,0.1)', color: selectedPlan === 'bullet' ? 'var(--success)' : '#3b82f6', padding: '0.4rem 1rem', borderRadius: '50px', fontWeight: 800, fontSize: '0.9rem' }}>
+            <div className="calculator-card" style={{ background: 'white', padding: '2rem', borderRadius: '24px', boxShadow: '0 15px 35px rgba(0,0,0,0.03)', border: '1px solid var(--sage-100)', display: 'flex', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+                <h3 style={{ fontSize: '1.25rem', margin: 0, color: 'var(--sage-800)' }}>Proyección Detallada</h3>
+                <div style={{ background: selectedPlan === 'bullet' ? 'rgba(46,125,50,0.1)' : 'rgba(59,130,246,0.1)', color: selectedPlan === 'bullet' ? 'var(--success)' : '#3b82f6', padding: '0.3rem 0.8rem', borderRadius: '50px', fontWeight: 800, fontSize: '0.8rem' }}>
                   Retorno: {selectedPlan === 'bullet' ? currentAsset.tasaAnual : `${currentAsset.tasaMensual} / Mes`}
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2.5rem' }}>
-                <div style={{ background: 'var(--sage-50)', padding: '1.5rem', borderRadius: '16px' }}>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--charcoal-mid)', textTransform: 'uppercase', marginBottom: '0.5rem', fontWeight: 700 }}>{selectedPlan === 'bullet' ? 'Utilidad al Cierre' : 'Flujo Mensual'}</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 800, color: selectedPlan === 'bullet' ? 'var(--success)' : '#3b82f6' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
+                <div style={{ background: 'var(--sage-50)', padding: '1rem', borderRadius: '12px' }}>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)', textTransform: 'uppercase', marginBottom: '0.4rem', fontWeight: 700 }}>{selectedPlan === 'bullet' ? 'Utilidad al Cierre' : 'Flujo Mensual'}</div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: selectedPlan === 'bullet' ? 'var(--success)' : '#3b82f6' }}>
                     {selectedPlan === 'bullet' ? formatCurrency(interestEarned) : formatCurrency(monthlyPayout)}
                   </div>
                 </div>
-                <div style={{ background: 'var(--sage-900)', padding: '1.5rem', borderRadius: '16px', color: 'white' }}>
-                  <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', marginBottom: '0.5rem', fontWeight: 700 }}>Liquidación Total</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 800 }}>
+                <div style={{ background: 'var(--sage-900)', padding: '1rem', borderRadius: '12px', color: 'white' }}>
+                  <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', marginBottom: '0.4rem', fontWeight: 700 }}>Liquidación Total</div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800 }}>
                     {formatCurrency(totalReturn)}
                   </div>
                 </div>
               </div>
 
               {/* BENCHMARK INTEGRADO */}
-              <div style={{ borderTop: '1px solid var(--sage-50)', paddingTop: '2rem', flex: 1 }}>
-                <h4 style={{ fontSize: '1rem', color: 'var(--sage-800)', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700 }}>Comparativa Bancaria ({currentAsset.plazo})</h4>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{ borderTop: '1px solid var(--sage-50)', paddingTop: '1.25rem', flex: 1 }}>
+                <h4 style={{ fontSize: '0.85rem', color: 'var(--sage-800)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700 }}>Comparativa Bancaria ({currentAsset.plazo})</h4>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                   {[
                     { name: 'CrowdIn', gain: interestEarned, highlight: true },
                     { name: 'Banco Estado (DAP)', gain: investment * 0.0045 * currentAsset.plazoMeses },
@@ -476,13 +476,13 @@ function App() {
                     { name: 'Banco Santander', gain: investment * 0.0047 * currentAsset.plazoMeses },
                     { name: 'Itaú Personal Bank', gain: investment * 0.0050 * currentAsset.plazoMeses }
                   ].map((bank, i) => (
-                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 0', borderBottom: i === 4 ? 'none' : '1px solid var(--sage-50)' }}>
+                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.6rem 0', borderBottom: i === 4 ? 'none' : '1px solid var(--sage-50)', fontSize: '0.9rem' }}>
                       <span style={{ fontWeight: bank.highlight ? 800 : 500, color: bank.highlight ? (selectedPlan === 'bullet' ? 'var(--success)' : '#3b82f6') : 'var(--charcoal-mid)' }}>{bank.name}</span>
                       <span style={{ fontWeight: 700, color: bank.highlight ? 'var(--success)' : 'var(--sage-800)' }}>{formatCurrency(bank.gain)}</span>
                     </div>
                   ))}
                 </div>
-                <p style={{ marginTop: '1.5rem', fontSize: '0.75rem', color: 'rgba(0,0,0,0.4)', fontStyle: 'italic', lineHeight: 1.4 }}>
+                <p style={{ marginTop: '1rem', fontSize: '0.7rem', color: 'rgba(0,0,0,0.4)', fontStyle: 'italic', lineHeight: 1.3 }}>
                   * Valores referenciales proyectados a {currentAsset.plazo}. Información obtenida de los simuladores web oficiales de cada institución al 12/05/2026. La rentabilidad de CrowdIn es fija y garantizada contractualmente.
                 </p>
               </div>
