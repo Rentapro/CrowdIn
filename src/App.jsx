@@ -524,10 +524,6 @@ function App() {
                     </div>
                   </div>
                   
-                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '1.5rem', minHeight: '80px' }}>
-                    {project.description}
-                  </p>
-
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginBottom: '2rem' }}>
                     <div style={{ background: 'var(--sage-50)', padding: '1rem 1.5rem', borderRadius: '16px', border: '1px solid var(--sage-100)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)', fontWeight: 800, textTransform: 'uppercase' }}>Cupo Disponible</div>
@@ -543,7 +539,7 @@ function App() {
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1.5rem', borderTop: '1px solid var(--sage-100)' }}>
                     <div style={{ color: selectedPlan === 'bullet' ? 'var(--success)' : '#3b82f6', fontWeight: 800, fontSize: '1.15rem' }}>
-                      {selectedPlan === 'bullet' ? `+${(project.roi_bullet * 100).toFixed(0)}% Único` : `+${(project.roi_mensual * 100).toFixed(2)}% Mensual`}
+                      {selectedPlan === 'bullet' ? `Hasta ${(project.roi_bullet * 100).toFixed(0)}% Único` : `Hasta ${(project.roi_mensual * 100).toFixed(2)}% Mensual`}
                     </div>
                     <button onClick={() => handleOpenModal(project)} style={{ background: project.id === 'leaseback' ? 'var(--gold-primary)' : (project.id === 'factoring' ? '#3b82f6' : 'var(--sage-800)'), color: 'white', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '12px', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                       Simular <ArrowRight size={18}/>
