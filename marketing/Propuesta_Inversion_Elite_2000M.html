@@ -315,9 +315,12 @@
 
         /* Estilos de Impresión */
         @media print {
+            @page {
+                margin: 0; /* Elimina automáticamente fecha, hora, título y URL de las cabeceras del navegador */
+            }
             body {
                 background-color: white;
-                padding: 0;
+                padding: 2cm; /* Agrega margen interno de seguridad física en el papel */
                 color: black;
             }
 
