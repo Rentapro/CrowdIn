@@ -453,9 +453,9 @@ function App() {
                     {selectedPlan === 'bullet' ? formatCurrency(interestEarned) : formatCurrency(monthlyPayout)}
                   </div>
                 </div>
-                <div style={{ background: 'var(--sage-900)', padding: '1rem', borderRadius: '12px', color: 'white' }}>
-                  <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', marginBottom: '0.4rem', fontWeight: 700 }}>Liquidación Total</div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 800 }}>
+                <div style={{ background: 'var(--sage-100)', padding: '1rem', borderRadius: '12px', color: 'var(--sage-900)', border: '1px solid var(--sage-300)' }}>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)', textTransform: 'uppercase', marginBottom: '0.4rem', fontWeight: 700 }}>Liquidación Total</div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--sage-900)' }}>
                     {formatCurrency(totalReturn)}
                   </div>
                 </div>
@@ -529,11 +529,11 @@ function App() {
                       <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)', fontWeight: 800, textTransform: 'uppercase' }}>Cupo Disponible</div>
                       <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--sage-900)' }}>{formatCurrency(project.ticket).replace('CLP', '')}</div>
                     </div>
-                    <div style={{ background: 'var(--sage-900)', padding: '1rem 1.5rem', borderRadius: '16px', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ background: 'var(--sage-100)', padding: '1rem 1.5rem', borderRadius: '16px', border: '1px solid var(--sage-300)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--gold-primary)' }}>
                         <ShieldCheck size={16}/> Garantía Física
                       </div>
-                      <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'white', textAlign: 'right' }}>{project.garantia}</div>
+                      <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--sage-900)', textAlign: 'right' }}>{project.garantia}</div>
                     </div>
                   </div>
 
@@ -661,52 +661,52 @@ function App() {
       </section>
 
       {/* GUARANTEES SECTION */}
-      <section className="section" id="como-funciona" style={{ background: 'var(--sage-900)' }}>
+      <section className="section" id="como-funciona" style={{ background: 'var(--sage-100)' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <span style={{ color: 'var(--gold-primary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', fontSize: '1rem' }}>Seguridad y Cumplimiento</span>
-            <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 4rem)', marginTop: '1rem', color: 'var(--white)', fontFamily: 'Outfit' }}>Blindaje Jurídico de tu Capital</h2>
+            <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 4rem)', marginTop: '1rem', color: 'var(--sage-900)', fontFamily: 'Outfit' }}>Blindaje Jurídico de tu Capital</h2>
           </div>
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
-            <div style={{ background: 'rgba(255,255,255,0.05)', padding: '3rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <div style={{ background: 'white', padding: '3rem', borderRadius: '24px', border: '1px solid var(--sage-300)', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
               <Scale size={48} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-              <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Garantías Reales Preferentes</h3>
-              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>Tus operaciones están respaldadas directamente por colaterales tangibles de alta liquidez: facturas irrevocables con mérito ejecutivo AAA en Factoring, e inscripciones de hipoteca de primer grado a tu favor en el Conservador de Bienes Raíces (CBR) en el caso de Leaseback.</p>
+              <h3 style={{ color: 'var(--sage-900)', fontSize: '1.5rem', marginBottom: '1rem' }}>Garantías Reales Preferentes</h3>
+              <p style={{ color: 'var(--charcoal-mid)', lineHeight: 1.6 }}>Tus operaciones están respaldadas directamente por colaterales tangibles de alta liquidez: facturas irrevocables con mérito ejecutivo AAA en Factoring, e inscripciones de hipoteca de primer grado a tu favor en el Conservador de Bienes Raíces (CBR) en el caso de Leaseback.</p>
             </div>
-            <div style={{ background: 'rgba(255,255,255,0.05)', padding: '3rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <div style={{ background: 'white', padding: '3rem', borderRadius: '24px', border: '1px solid var(--sage-300)', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
               <Landmark size={48} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-              <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Sobre-Colateralización Real</h3>
-              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>Financiamos solo hasta el 60% del valor comercial de tasación de la propiedad física (LTV máximo de 60%). Esto genera un colchón protector de capital del 40% que resguarda tu inversión ante cualquier escenario o fluctuación del mercado.</p>
+              <h3 style={{ color: 'var(--sage-900)', fontSize: '1.5rem', marginBottom: '1rem' }}>Sobre-Colateralización Real</h3>
+              <p style={{ color: 'var(--charcoal-mid)', lineHeight: 1.6 }}>Financiamos solo hasta el 60% del valor comercial de tasación de la propiedad física (LTV máximo de 60%). Esto genera un colchón protector de capital del 40% que resguarda tu inversión ante cualquier escenario o fluctuación del mercado.</p>
             </div>
-            <div style={{ background: 'rgba(255,255,255,0.05)', padding: '3rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <div style={{ background: 'white', padding: '3rem', borderRadius: '24px', border: '1px solid var(--sage-300)', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
               <Building2 size={48} color="var(--gold-primary)" style={{ marginBottom: '1.5rem' }} />
-              <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', marginBottom: '1rem' }}>Retorno Fijo Contractual</h3>
-              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>El plazo (12 o 18 meses) y la rentabilidad están fijados de origen en la escritura pública notarial o contrato mercantil. Tu ganancia no es variable ni depende de la especulación de las ventas; se liquida de forma preferente y obligatoria.</p>
+              <h3 style={{ color: 'var(--sage-900)', fontSize: '1.5rem', marginBottom: '1rem' }}>Retorno Fijo Contractual</h3>
+              <p style={{ color: 'var(--charcoal-mid)', lineHeight: 1.6 }}>El plazo (12 o 18 meses) y la rentabilidad están fijados de origen en la escritura pública notarial o contrato mercantil. Tu ganancia no es variable ni depende de la especulación de las ventas; se liquida de forma preferente y obligatoria.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <footer style={{ background: 'var(--sage-800)', color: 'rgba(255,255,255,0.6)', padding: '5rem 0 2rem 0', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+      <footer style={{ background: 'var(--sage-100)', color: 'var(--charcoal-mid)', padding: '5rem 0 2rem 0', borderTop: '1px solid var(--sage-300)' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '4rem', marginBottom: '2rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', borderBottom: '1px solid var(--sage-300)', paddingBottom: '4rem', marginBottom: '2rem' }}>
             <div>
-              <div style={{ fontFamily: 'Outfit', fontWeight: 800, fontSize: '2.5rem', color: 'var(--white)', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+              <div style={{ fontFamily: 'Outfit', fontWeight: 800, fontSize: '2.5rem', color: 'var(--sage-900)', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
                 <img src="/logo.png" alt="CrowdIn Logo" style={{ width: '32px', height: '32px', borderRadius: '6px' }} />
                 CrowdIn<span style={{ color: 'var(--gold-primary)' }}>.</span>
               </div>
-              <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'rgba(255,255,255,0.8)' }}>Firma privada de inversión inmobiliaria. Rentabilidad fija mediante estructuras notariales.</p>
+              <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'var(--charcoal)' }}>Firma privada de inversión inmobiliaria. Rentabilidad fija mediante estructuras notariales.</p>
             </div>
             <div>
-              <h4 style={{ color: 'var(--white)', fontSize: '1.2rem', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Contacto Institucional</h4>
+              <h4 style={{ color: 'var(--sage-900)', fontSize: '1.2rem', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Contacto Institucional</h4>
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <li><a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', transition: 'color 0.3s' }}>Asesoría Privada</a></li>
-                <li><a href="#" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', transition: 'color 0.3s' }}>Términos del Pacto de Retroventa</a></li>
+                <li><a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer" style={{ color: 'var(--charcoal)', textDecoration: 'none', transition: 'color 0.3s' }}>Asesoría Privada</a></li>
+                <li><a href="#" style={{ color: 'var(--charcoal)', textDecoration: 'none', transition: 'color 0.3s' }}>Términos del Pacto de Retroventa</a></li>
               </ul>
             </div>
           </div>
-          <div style={{ textAlign: 'center', fontSize: '1rem', color: 'rgba(255,255,255,0.4)' }}>
+          <div style={{ textAlign: 'center', fontSize: '1rem', color: 'var(--charcoal-mid)' }}>
             <p>&copy; 2026 CrowdIn Capital. La información aquí presentada constituye una simulación matemática; los retornos son contractuales tras la materialización de los mandatos.</p>
           </div>
         </div>

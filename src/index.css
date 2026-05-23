@@ -1,21 +1,21 @@
 :root {
-  --sage-50: #f4f7f4;
-  --sage-100: #e3ebe3;
-  --sage-300: #c1d2c1;
-  --sage-500: #8ba78b;
-  --sage-700: #556c55;
-  --sage-800: #2d3b2d;
-  --sage-900: #1a251a;
+  --sage-50: #f3f8f4; /* Suave verde menta pastel ultra elegante */
+  --sage-100: #e0ece2; /* Verde pastel suave para contrastes y bordes */
+  --sage-300: #badcbf; /* Tono pastel intermedio */
+  --sage-500: #8bb392; /* Verde suave intermedio */
+  --sage-700: #5d8f68; /* Verde elegante suave */
+  --sage-800: #406b4d; /* Verde pastel elegante de alta visibilidad para botones principales */
+  --sage-900: #263e2e; /* Verde oscuro pastel ultra refinado para textos principales y títulos */
   
-  --gold-primary: #D4AF37;
-  --gold-light: #F3E5AB;
+  --gold-primary: #856126; /* Oro bronce refinado con excelente legibilidad y gran contraste */
+  --gold-light: #e6ce9e; /* Oro pastel suave para decoraciones secundarias */
   
-  --charcoal: #1c1c1c;
-  --charcoal-mid: #4a4a4a;
+  --charcoal: #202b23; /* Carboncillo con matiz verde para el texto, muy fino y legible */
+  --charcoal-mid: #4a544c; /* Gris medio elegante para subtítulos */
   --white: #ffffff;
   
-  --success: #10b981;
-  --danger: #ef4444;
+  --success: #3c9d70; /* Verde pastel de éxito */
+  --danger: #d9534f;
 }
 
 body {
@@ -450,10 +450,20 @@ body {
     display: none !important;
   }
   
+  .parallax-bg {
+    background-attachment: scroll !important;
+    position: absolute !important;
+    height: 100% !important;
+    width: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
+
   .hero {
     padding-top: 120px !important;
     min-height: auto !important;
     padding-bottom: 4rem;
+    background-attachment: scroll !important;
   }
 
   .hero-grid {
