@@ -492,7 +492,10 @@ function App() {
                   ].map((bank, i) => (
                     <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.6rem 0', borderBottom: i === 4 ? 'none' : '1px solid var(--sage-50)', fontSize: '0.9rem' }}>
                       <span style={{ fontWeight: bank.highlight ? 800 : 500, color: bank.highlight ? (selectedPlan === 'bullet' ? 'var(--success)' : '#3b82f6') : 'var(--charcoal-mid)' }}>{bank.name}</span>
-                      <span style={{ fontWeight: 700, color: bank.highlight ? 'var(--success)' : 'var(--sage-800)' }}>{formatCurrency(bank.gain)}</span>
+                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+                        <span style={{ fontWeight: 700, color: bank.highlight ? 'var(--success)' : 'var(--sage-800)' }}>{formatCurrency(bank.gain)}</span>
+                        <span style={{ fontSize: '0.75rem', fontWeight: 700, color: bank.highlight ? 'var(--gold-primary)' : 'var(--charcoal-mid)' }}>≈ {formatUF(bank.gain)}</span>
+                      </div>
                     </div>
                   ))}
                 </div>
