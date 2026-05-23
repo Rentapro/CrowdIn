@@ -10,6 +10,7 @@
 - [x] Operaciones: Implementación de Historial y Auditoría de Pagos (+1 Cuota, Logs Legales).
 - [x] UX/UI: Rediseño Premium de la Landing Page (Fondo Condominio, Identidad Visual y Limpieza de Tickers).
 - [x] UX/UI: Optimización Mobile-First (Corrección de desbordamientos, logo y stack vertical del Hero).
+- [x] UX/UI: Reestructuración de Landing y Simulador para el Portafolio Real (Factoring 15%, Leaseback 27%, Flipping 30%) con opción Bullet y Flujo Mensual.
 - [ ] Opcional: Integración de notificaciones por Email reales (SendGrid/Resend) para avisos de transferencias de rentabilidad.
 
 ## Fase 4: Automatización de Captación (Lead Gen) 🎯

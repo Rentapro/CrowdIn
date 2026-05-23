@@ -31,40 +31,46 @@ function App() {
 
   const projects = [
     {
-      id: 'flipping-express',
-      title: 'Flipping Express',
-      subtitle: 'Liquidez de Corto Plazo',
-      image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800',
-      ticket: 500000000,
-      plazo: '6 MESES',
-      roi: 0.012, 
-      type: 'PAGO MENSUAL',
-      description: 'Modelo diseñado para inversionistas que buscan flujo de caja inmediato. Recibe intereses mensuales y recupera tu capital en solo 6 meses.',
-      tag: 'LIQUIDEZ PREFERENTE'
-    },
-    {
-      id: 'zapallar',
-      title: 'Laguna de Zapallar',
-      subtitle: 'Resort & Spa de Lujo',
-      image: '/zapallar.png',
+      id: 'factoring',
+      title: 'Factoring Corporativo AAA',
+      subtitle: 'Liquidez a Corto Plazo',
+      image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800',
       ticket: 500000000,
       plazo: '12 MESES',
-      roi: 0.12,
-      type: 'PAGO ÚNICO',
-      description: 'Desarrollo de 10 casas de lujo con spa privado. Modelo patrimonial de alta plusvalía con respaldo en tierra premium.',
-      tag: 'RESGUARDO VALOR'
+      roi_bullet: 0.15, // 15% único
+      roi_mensual: 0.01, // 1.0% mensual (12% total)
+      type: '12 MESES',
+      description: 'Adquisición de derechos de cobro de facturas irrevocables emitidas a grandes corporaciones (Walmart, Codelco). Rentabilidad fija garantizada.',
+      tag: 'PAGADOR AAA',
+      garantia: 'Facturas con Mérito Ejecutivo AAA'
     },
     {
-      id: 'limache',
-      title: 'Altura Limache',
-      subtitle: 'Condominio Vertical',
-      image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800',
-      ticket: 2000000000,
-      plazo: '24 MESES',
-      roi: 0.18,
-      type: 'PAGO ÚNICO',
-      description: 'Desarrollo de edificios residenciales en zona de expansión. Proyecto institucional de largo aliento con CIP aprobado.',
-      tag: 'INSTITUCIONAL'
+      id: 'leaseback',
+      title: 'Leaseback Patrimonial',
+      subtitle: 'Seguridad Inmobiliaria',
+      image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800',
+      ticket: 1000000000,
+      plazo: '18 MESES',
+      roi_bullet: 0.27, // 27% único (1.5% mes)
+      roi_mensual: 0.012, // 1.2% mensual (21.6% total)
+      type: '18 MESES',
+      description: 'Financiamiento privado con garantía real física. Propiedad inscrita a nombre de la SpA en el Conservador con Pacto de Retroventa.',
+      tag: 'RESPALDO PATRIMONIAL',
+      garantia: 'Primera Hipoteca y Propiedad a Nombre de SpA'
+    },
+    {
+      id: 'flipping',
+      title: 'Flipping & Complejos Airbnb',
+      subtitle: 'Plusvalía de Alta Velocidad',
+      image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800',
+      ticket: 500000000,
+      plazo: '18 MESES',
+      roi_bullet: 0.30, // 30% único (1.66% mes)
+      roi_mensual: 0.0133, // 1.33% mensual (24% total)
+      type: '18 MESES',
+      description: 'Compra, remodelación express y venta de propiedades, combinada con construcción de cabañas turísticas. Ejecución directa por constructora.',
+      tag: 'MÁXIMO RETORNO',
+      garantia: 'Activo Inmobiliario Físico en Plusvalización'
     }
   ];
 
@@ -82,7 +88,8 @@ function App() {
     }
   });
 
-  const [selectedPlan, setSelectedPlan] = useState('patrimonial'); // 'liquidez' o 'patrimonial'
+  const [selectedPlan, setSelectedPlan] = useState('bullet'); // 'bullet' (Único) o 'mensual' (Mensual)
+  const [selectedAsset, setSelectedAsset] = useState('leaseback'); // 'factoring', 'leaseback', 'flipping'
 
   useEffect(() => {
     const handleHashChange = () => setCurrentRoute(window.location.hash || '#home');
@@ -156,42 +163,59 @@ function App() {
   ];
 
 
-  const getTier = (val) => {
-    if (selectedPlan === 'liquidez') {
-      if (val >= 100000000) return { name: 'Tramo Preferente', roi: 0.012 };
-      return { name: 'Tramo Inicial', roi: 0.009 };
+  const getAssetRates = (asset, plan) => {
+    if (asset === 'factoring') {
+      return {
+        name: 'Factoring Corporativo',
+        plazo: '12 Meses',
+        tasaAnual: plan === 'bullet' ? '15%' : '12%',
+        tasaMensual: plan === 'bullet' ? '1.25%' : '1.0%',
+        tasaCalculo: plan === 'bullet' ? 0.15 : 0.12,
+        tasaMensualCalculo: plan === 'bullet' ? 0.0125 : 0.01,
+        garantia: 'Facturas con Mérito Ejecutivo AAA',
+        plazoMeses: 12
+      };
+    } else if (asset === 'leaseback') {
+      return {
+        name: 'Leaseback Patrimonial',
+        plazo: '18 Meses',
+        tasaAnual: plan === 'bullet' ? '18% (27% Total)' : '14.4% (21.6% Total)',
+        tasaMensual: plan === 'bullet' ? '1.50%' : '1.20%',
+        tasaCalculo: plan === 'bullet' ? 0.27 : 0.216,
+        tasaMensualCalculo: plan === 'bullet' ? 0.015 : 0.012,
+        garantia: 'Primera Hipoteca y Propiedad a Nombre de SpA',
+        plazoMeses: 18
+      };
+    } else { // flipping
+      return {
+        name: 'Flipping & Cabañas Airbnb',
+        plazo: '18 Meses',
+        tasaAnual: plan === 'bullet' ? '20% (30% Total)' : '16% (24% Total)',
+        tasaMensual: plan === 'bullet' ? '1.66%' : '1.33%',
+        tasaCalculo: plan === 'bullet' ? 0.30 : 0.24,
+        tasaMensualCalculo: plan === 'bullet' ? 0.0166 : 0.0133,
+        garantia: 'Activos Físicos y Plusvalía Garantizada',
+        plazoMeses: 18
+      };
     }
-    // Plan Patrimonial (Escala técnica ajustada para protección de utilidad)
-    if (val >= 500000000) return { name: 'Tramo Institucional', roi: 0.022 };
-    if (val >= 100000000) return { name: 'Tramo Senior', roi: 0.018 };
-    if (val >= 40000000) return { name: 'Tramo Base', roi: 0.015 };
-    return { name: 'Tramo Entrada', roi: 0.012 };
   };
 
-  const currentTier = getTier(investment);
-  
-  // Calculo de retornos
-  const monthlyEquivalent = currentTier.roi;
-  const totalReturnPremium = selectedPlan === 'liquidez' 
-    ? (investment * monthlyEquivalent * 6) 
-    : (investment * monthlyEquivalent * 12);
-  const totalReturn = investment + totalReturnPremium;
-
+  const currentAsset = getAssetRates(selectedAsset, selectedPlan);
+  const interestEarned = investment * currentAsset.tasaCalculo;
+  const totalReturn = investment + interestEarned;
+  const monthlyPayout = investment * currentAsset.tasaMensualCalculo;
 
   const formatCurrency = (val) => new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 }).format(val);
 
   const handleWhatsAppRedirect = (amount = investment, project = null) => {
     let message = "";
     if (project) {
-      if (project.type === 'PAGO MENSUAL') {
-        const monthly = amount * project.roi;
-        message = `Hola equipo CrowdIn.\n\nHe simulado una inversión de *LIQUIDEZ* (0.9%-1.2% mensual) para el proyecto *${project.title}*.\n\n*Monto:* ${formatCurrency(amount)}\n*Plazo:* ${project.plazo}\n*Flujo Mensual:* ${formatCurrency(monthly)}\n*Retorno Total:* ${formatCurrency(amount + (monthly * 6))}\n\nSolicito validación de cupo.`;
-      } else {
-        const gain = amount * project.roi;
-        message = `Hola equipo CrowdIn.\n\nHe simulado una inversión *PREMIUM* para el proyecto *${project.title}*.\n\n*Monto:* ${formatCurrency(amount)}\n*Plazo:* ${project.plazo}\n*Ganancia Proyectada:* ${formatCurrency(gain)}\n*Total a recibir:* ${formatCurrency(amount + gain)}\n\nSolicito el borrador del Pacto de Retroventa.`;
-      }
+      const isBullet = selectedPlan === 'bullet';
+      const roi = isBullet ? project.roi_bullet : (project.roi_mensual * Number(project.plazo.replace(' MESES', '')));
+      const gain = amount * roi;
+      message = `Hola equipo CrowdIn.\n\nHe simulado una inversión en *${project.title}*.\n\n*Monto:* ${formatCurrency(amount)}\n*Modalidad:* ${selectedPlan === 'bullet' ? 'Pago Único al Vencimiento' : 'Flujo Mensual Garantizado'}\n*Plazo:* ${project.plazo}\n*Retorno Estimado:* ${formatCurrency(gain)}\n*Total a recibir:* ${formatCurrency(amount + gain)}\n\nSolicito información de cupos.`;
     } else {
-      message = `Hola equipo CrowdIn.\nQuiero estructurar un ticket bajo el *PLAN ${selectedPlan.toUpperCase()}* por *${formatCurrency(investment)}*.\n\nEntiendo que mi ${selectedPlan === 'liquidez' ? 'flujo mensual' : 'premio final'} será de aproximadamente *${formatCurrency(selectedPlan === 'liquidez' ? investment * currentTier.roi : totalReturnPremium)}*.\n\nSolicito información de cupos.`;
+      message = `Hola equipo CrowdIn.\nQuiero estructurar un ticket en la línea *${currentAsset.name}* por *${formatCurrency(investment)}*.\n\n*Modalidad:* ${selectedPlan === 'bullet' ? 'Pago Único' : 'Pago Mensual'}\n*Plazo:* ${currentAsset.plazo}\n*Retorno Esperado:* ${formatCurrency(interestEarned)}\n*Total a Liquidar:* ${formatCurrency(totalReturn)}\n\nSolicito información de cupos.`;
     }
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
@@ -294,10 +318,10 @@ function App() {
                     <div style={{ marginTop: '2rem', background: 'rgba(255,255,255,0.5)', padding: '1.5rem', borderRadius: '16px', border: '1px solid rgba(0,0,0,0.05)' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.2rem', alignItems: 'center' }}>
                         <span style={{ color: 'var(--charcoal-mid)' }}>Rentabilidad</span>
-                        <span style={{ fontWeight: 800, color: 'var(--success)', fontSize: '1.2rem' }}>0.9% a 2.5%*</span>
+                        <span style={{ fontWeight: 800, color: 'var(--success)', fontSize: '1.2rem' }}>15% a 30%*</span>
                       </div>
                       <div style={{ fontSize: '0.65rem', color: 'var(--charcoal-mid)', textAlign: 'right', marginBottom: '0.8rem', borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '0.8rem', lineHeight: '1.2' }}>
-                        *Tasa máx. para institucionales (>500M)
+                        *Retorno contractual con Garantía Real
                       </div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
                         <span style={{ color: 'var(--charcoal-mid)' }}>Respaldo Directo</span>
@@ -355,42 +379,46 @@ function App() {
                 style={{ background: 'white', borderRadius: '32px', overflow: 'hidden', border: '1px solid var(--sage-200)', boxShadow: '0 20px 50px rgba(0,0,0,0.05)' }}
               >
                 <div style={{ height: '250px', background: `url('${project.image}') center/cover`, position: 'relative' }}>
-                  <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: project.id === 'zapallar' ? 'var(--gold-primary)' : (project.id === 'flipping-express' ? '#3b82f6' : 'var(--charcoal)'), color: 'white', padding: '0.6rem 1.2rem', borderRadius: '50px', fontWeight: 800, fontSize: '0.8rem', boxShadow: '0 10px 20px rgba(0,0,0,0.1)' }}>{project.tag}</div>
+                  <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: project.id === 'leaseback' ? 'var(--gold-primary)' : (project.id === 'factoring' ? '#3b82f6' : 'var(--sage-800)'), color: 'white', padding: '0.6rem 1.2rem', borderRadius: '50px', fontWeight: 800, fontSize: '0.8rem', boxShadow: '0 10px 20px rgba(0,0,0,0.1)' }}>{project.tag}</div>
                 </div>
                 <div style={{ padding: '2.5rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1.5rem' }}>
                     <div>
                       <h3 style={{ margin: 0, color: 'var(--sage-900)', fontSize: '1.8rem', fontFamily: 'Outfit' }}>{project.title}</h3>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--charcoal-mid)', fontSize: '0.9rem', marginTop: '0.5rem' }}>
-                        {project.id === 'zapallar' ? <MapPin size={16} /> : (project.id === 'flipping-express' ? <TrendingUp size={16} /> : <Building2 size={16} />)} {project.subtitle}
+                        {project.id === 'factoring' ? <TrendingUp size={16} /> : (project.id === 'leaseback' ? <Landmark size={16} /> : <Building2 size={16} />)} {project.subtitle}
                       </div>
                     </div>
                     <div style={{ textAlign: 'right', background: 'var(--sage-50)', padding: '0.5rem 1rem', borderRadius: '12px' }}>
-                      <div style={{ fontSize: '0.7rem', color: 'var(--charcoal-mid)', fontWeight: 800, textTransform: 'uppercase' }}>Modelo</div>
-                      <div style={{ color: 'var(--sage-800)', fontWeight: 800, fontSize: '0.9rem' }}>{project.type}</div>
+                      <div style={{ fontSize: '0.7rem', color: 'var(--charcoal-mid)', fontWeight: 800, textTransform: 'uppercase' }}>Plazo</div>
+                      <div style={{ color: 'var(--sage-800)', fontWeight: 800, fontSize: '0.9rem' }}>{project.plazo}</div>
                     </div>
                   </div>
                   
-                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1rem', lineHeight: '1.6', marginBottom: '2rem', height: '80px', overflow: 'hidden' }}>
+                  <p style={{ color: 'var(--charcoal-mid)', fontSize: '1rem', lineHeight: '1.6', marginBottom: '1.5rem', height: '80px', overflow: 'hidden' }}>
                     {project.description}
                   </p>
 
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--success)', fontWeight: 'bold', marginBottom: '1.5rem' }}>
+                    <ShieldCheck size={16}/> Garantía: {project.garantia}
+                  </div>
+
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
                     <div style={{ background: 'var(--sage-50)', padding: '1.2rem', borderRadius: '16px', border: '1px solid var(--sage-100)' }}>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)', fontWeight: 800, textTransform: 'uppercase' }}>Ticket Proyecto</div>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--charcoal-mid)', fontWeight: 800, textTransform: 'uppercase' }}>Cupo Disponible</div>
                       <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--sage-900)' }}>{formatCurrency(project.ticket).replace('CLP', '')}</div>
                     </div>
                     <div style={{ background: 'var(--sage-900)', padding: '1.2rem', borderRadius: '16px', color: 'white' }}>
-                      <div style={{ fontSize: '0.75rem', opacity: 0.8, fontWeight: 800, textTransform: 'uppercase' }}>Plazo Retorno</div>
-                      <div style={{ fontSize: '1.4rem', fontWeight: 800 }}>{project.plazo}</div>
+                      <div style={{ fontSize: '0.75rem', opacity: 0.8, fontWeight: 800, textTransform: 'uppercase' }}>Gasto Operación</div>
+                      <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--success)' }}>$0 (Cliente)</div>
                     </div>
                   </div>
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1.5rem', borderTop: '1px solid var(--sage-100)' }}>
-                    <div style={{ color: project.type === 'PAGO MENSUAL' ? '#3b82f6' : 'var(--success)', fontWeight: 800, fontSize: '1.2rem' }}>
-                      {project.type === 'PAGO MENSUAL' ? `+${(project.roi * 100).toFixed(1)}% Mensual` : `+${(project.roi * 100).toFixed(0)}% Final`}
+                    <div style={{ color: selectedPlan === 'bullet' ? 'var(--success)' : '#3b82f6', fontWeight: 800, fontSize: '1.15rem' }}>
+                      {selectedPlan === 'bullet' ? `+${(project.roi_bullet * 100).toFixed(0)}% Único` : `+${(project.roi_mensual * 100).toFixed(2)}% Mensual`}
                     </div>
-                    <button onClick={() => handleOpenModal(project)} style={{ background: project.id === 'zapallar' ? 'var(--gold-primary)' : (project.type === 'PAGO MENSUAL' ? '#3b82f6' : 'var(--sage-800)'), color: 'white', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '12px', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <button onClick={() => handleOpenModal(project)} style={{ background: project.id === 'leaseback' ? 'var(--gold-primary)' : (project.id === 'factoring' ? '#3b82f6' : 'var(--sage-800)'), color: 'white', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '12px', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                       Simular <ArrowRight size={18}/>
                     </button>
                   </div>
@@ -442,22 +470,22 @@ function App() {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2.5rem' }}>
                 <div style={{ textAlign: 'center' }}>
                   <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.85rem', fontWeight: 600 }}>
-                    {selectedProject.type === 'PAGO MENSUAL' ? 'Flujo Mensual' : 'Premio Acumulado'}
+                    {selectedPlan === 'bullet' ? 'Utilidad Única al Cierre' : 'Flujo Mensual Garantizado'}
                   </div>
-                  <div style={{ fontSize: '1.8rem', fontWeight: 800, color: selectedProject.type === 'PAGO MENSUAL' ? '#3b82f6' : 'var(--success)' }}>
-                    {selectedProject.type === 'PAGO MENSUAL' 
-                      ? formatCurrency(modalAmount * (modalAmount >= 100000000 ? 0.012 : 0.009))
-                      : formatCurrency(modalAmount * selectedProject.roi)}
+                  <div style={{ fontSize: '1.8rem', fontWeight: 800, color: selectedPlan === 'bullet' ? 'var(--success)' : '#3b82f6' }}>
+                    {selectedPlan === 'bullet' 
+                      ? formatCurrency(modalAmount * selectedProject.roi_bullet)
+                      : formatCurrency(modalAmount * selectedProject.roi_mensual)}
                   </div>
                 </div>
                 <div style={{ textAlign: 'center' }}>
                   <div style={{ color: 'var(--charcoal-mid)', fontSize: '0.85rem', fontWeight: 600 }}>
-                    {selectedProject.type === 'PAGO MENSUAL' ? 'Retorno Total (6m)' : 'Retorno Total'}
+                    Liquidación Total ({selectedProject.plazo})
                   </div>
                   <div style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--sage-900)' }}>
-                    {selectedProject.type === 'PAGO MENSUAL' 
-                      ? formatCurrency(modalAmount + (modalAmount * (modalAmount >= 100000000 ? 0.012 : 0.009) * 6))
-                      : formatCurrency(modalAmount + (modalAmount * selectedProject.roi))}
+                    {selectedPlan === 'bullet' 
+                      ? formatCurrency(modalAmount * (1 + selectedProject.roi_bullet))
+                      : formatCurrency(modalAmount * (1 + selectedProject.roi_mensual * Number(selectedProject.plazo.replace(' MESES', ''))))}
                   </div>
                 </div>
               </div>
@@ -569,26 +597,50 @@ function App() {
             <div className="calculator-card" style={{ background: 'white', padding: '3rem', borderRadius: '32px', boxShadow: '0 20px 50px rgba(0,0,0,0.05)', border: '1px solid var(--sage-100)', display: 'flex', flexDirection: 'column' }}>
               <h3 style={{ fontSize: '1.5rem', marginBottom: '2rem', color: 'var(--sage-800)', borderBottom: '1px solid var(--sage-50)', paddingBottom: '1rem' }}>Configuración de Ticket</h3>
               
-              <div style={{ marginBottom: '3rem', flex: 1 }}>
-                <label style={{ display: 'block', color: 'var(--charcoal-mid)', fontWeight: 600, marginBottom: '1rem', fontSize: '0.9rem', textTransform: 'uppercase' }}>Estrategia de Retorno</label>
-                <div style={{ display: 'flex', background: 'var(--sage-50)', padding: '0.4rem', borderRadius: '16px', gap: '0.4rem' }}>
+              <div style={{ marginBottom: '2rem' }}>
+                <label style={{ display: 'block', color: 'var(--charcoal-mid)', fontWeight: 600, marginBottom: '1rem', fontSize: '0.9rem', textTransform: 'uppercase' }}>Línea de Inversión</label>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.5rem', background: 'var(--sage-50)', padding: '0.4rem', borderRadius: '16px' }}>
                   <button 
-                    onClick={() => setSelectedPlan('liquidez')}
-                    style={{ flex: 1, padding: '1rem', borderRadius: '12px', border: 'none', background: selectedPlan === 'liquidez' ? '#3b82f6' : 'transparent', color: selectedPlan === 'liquidez' ? 'white' : 'var(--charcoal-mid)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.3s' }}
+                    onClick={() => setSelectedAsset('factoring')}
+                    style={{ padding: '0.8rem', borderRadius: '12px', border: 'none', background: selectedAsset === 'factoring' ? '#3b82f6' : 'transparent', color: selectedAsset === 'factoring' ? 'white' : 'var(--charcoal-mid)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.3s' }}
                   >
-                    Liquidez
+                    Línea A: Factoring Corporativo (12 Meses)
                   </button>
                   <button 
-                    onClick={() => setSelectedPlan('patrimonial')}
-                    style={{ flex: 1, padding: '1rem', borderRadius: '12px', border: 'none', background: selectedPlan === 'patrimonial' ? 'var(--gold-primary)' : 'transparent', color: selectedPlan === 'patrimonial' ? 'white' : 'var(--charcoal-mid)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.3s' }}
+                    onClick={() => setSelectedAsset('leaseback')}
+                    style={{ padding: '0.8rem', borderRadius: '12px', border: 'none', background: selectedAsset === 'leaseback' ? 'var(--gold-primary)' : 'transparent', color: selectedAsset === 'leaseback' ? 'white' : 'var(--charcoal-mid)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.3s' }}
                   >
-                    Patrimonial
+                    Línea B: Leaseback Inmobiliario (18 Meses)
+                  </button>
+                  <button 
+                    onClick={() => setSelectedAsset('flipping')}
+                    style={{ padding: '0.8rem', borderRadius: '12px', border: 'none', background: selectedAsset === 'flipping' ? 'var(--sage-800)' : 'transparent', color: selectedAsset === 'flipping' ? 'white' : 'var(--charcoal-mid)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.3s' }}
+                  >
+                    Línea C: Flipping & Cabañas Airbnb (18 Meses)
                   </button>
                 </div>
-                <p style={{ marginTop: '1rem', fontSize: '0.85rem', color: 'var(--charcoal-mid)', lineHeight: 1.5, minHeight: '3rem' }}>
-                  {selectedPlan === 'liquidez' 
-                    ? `* Plan Liquidez: Retiro mensual de utilidad. Ejemplo: Inviertes ${formatCurrency(investment)}, recibes ${formatCurrency(investment * currentTier.roi)} cada mes por 6 meses.` 
-                    : `* Plan Patrimonial: Hasta liquidación del proyecto (12-24 meses). Capital + Premio en un solo pago al cierre.`}
+              </div>
+
+              <div style={{ marginBottom: '2rem' }}>
+                <label style={{ display: 'block', color: 'var(--charcoal-mid)', fontWeight: 600, marginBottom: '1rem', fontSize: '0.9rem', textTransform: 'uppercase' }}>Modalidad de Pago</label>
+                <div style={{ display: 'flex', background: 'var(--sage-50)', padding: '0.4rem', borderRadius: '16px', gap: '0.4rem' }}>
+                  <button 
+                    onClick={() => setSelectedPlan('bullet')}
+                    style={{ flex: 1, padding: '0.8rem', borderRadius: '12px', border: 'none', background: selectedPlan === 'bullet' ? 'var(--success)' : 'transparent', color: selectedPlan === 'bullet' ? 'white' : 'var(--charcoal-mid)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.3s' }}
+                  >
+                    Único al Cierre
+                  </button>
+                  <button 
+                    onClick={() => setSelectedPlan('mensual')}
+                    style={{ flex: 1, padding: '0.8rem', borderRadius: '12px', border: 'none', background: selectedPlan === 'mensual' ? '#3b82f6' : 'transparent', color: selectedPlan === 'mensual' ? 'white' : 'var(--charcoal-mid)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.3s' }}
+                  >
+                    Mensual Garantizado
+                  </button>
+                </div>
+                <p style={{ marginTop: '1rem', fontSize: '0.85rem', color: 'var(--charcoal-mid)', lineHeight: 1.5, minHeight: '3.5rem' }}>
+                  {selectedPlan === 'bullet' 
+                    ? `* Modalidad Bullet: Recibe el 100% de tu capital más el premio de ${currentAsset.tasaAnual} en un solo pago al finalizar el plazo de ${currentAsset.plazo}.`
+                    : `* Modalidad Flujo Mensual: Recibe intereses fijos de ${currentAsset.tasaMensual} mensual (${formatCurrency(monthlyPayout)}) y recupera tu capital de forma líquida al vencimiento.`}
                 </p>
               </div>
 
@@ -608,7 +660,7 @@ function App() {
                 </div>
               </div>
 
-              <button onClick={() => handleWhatsAppRedirect()} className="btn btn-primary" style={{ width: '100%', marginTop: '2rem', background: selectedPlan === 'liquidez' ? '#3b82f6' : 'var(--gold-primary)' }}>
+              <button onClick={() => handleWhatsAppRedirect()} className="btn btn-primary" style={{ width: '100%', marginTop: '1rem', background: selectedPlan === 'bullet' ? 'var(--success)' : '#3b82f6' }}>
                 Iniciar Estructuración Legal
               </button>
             </div>
@@ -617,45 +669,45 @@ function App() {
             <div className="calculator-card" style={{ background: 'white', padding: '3rem', borderRadius: '32px', boxShadow: '0 20px 50px rgba(0,0,0,0.05)', border: '1px solid var(--sage-100)', display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                 <h3 style={{ fontSize: '1.5rem', margin: 0, color: 'var(--sage-800)' }}>Proyección Detallada</h3>
-                <div style={{ background: selectedPlan === 'liquidez' ? 'rgba(59,130,246,0.1)' : 'rgba(212,175,55,0.1)', color: selectedPlan === 'liquidez' ? '#3b82f6' : 'var(--gold-primary)', padding: '0.4rem 1rem', borderRadius: '50px', fontWeight: 800, fontSize: '0.9rem' }}>
-                  {currentTier.name} • {((investment >= 100000000 ? 0.012 : 0.009) * 100).toFixed(1)}% Mes
+                <div style={{ background: selectedPlan === 'bullet' ? 'rgba(46,125,50,0.1)' : 'rgba(59,130,246,0.1)', color: selectedPlan === 'bullet' ? 'var(--success)' : '#3b82f6', padding: '0.4rem 1rem', borderRadius: '50px', fontWeight: 800, fontSize: '0.9rem' }}>
+                  Retorno: {selectedPlan === 'bullet' ? currentAsset.tasaAnual : `${currentAsset.tasaMensual} / Mes`}
                 </div>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2.5rem' }}>
                 <div style={{ background: 'var(--sage-50)', padding: '1.5rem', borderRadius: '16px' }}>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--charcoal-mid)', textTransform: 'uppercase', marginBottom: '0.5rem', fontWeight: 700 }}>{selectedPlan === 'liquidez' ? 'Flujo Mensual' : 'Utilidad al Cierre'}</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 800, color: selectedPlan === 'liquidez' ? '#3b82f6' : 'var(--gold-primary)' }}>
-                    {selectedPlan === 'liquidez' ? formatCurrency(investment * (investment >= 100000000 ? 0.012 : 0.009)) : formatCurrency(investment * currentTier.roi * 12)}
+                  <div style={{ fontSize: '0.8rem', color: 'var(--charcoal-mid)', textTransform: 'uppercase', marginBottom: '0.5rem', fontWeight: 700 }}>{selectedPlan === 'bullet' ? 'Utilidad al Cierre' : 'Flujo Mensual'}</div>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 800, color: selectedPlan === 'bullet' ? 'var(--success)' : '#3b82f6' }}>
+                    {selectedPlan === 'bullet' ? formatCurrency(interestEarned) : formatCurrency(monthlyPayout)}
                   </div>
                 </div>
                 <div style={{ background: 'var(--sage-900)', padding: '1.5rem', borderRadius: '16px', color: 'white' }}>
                   <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', marginBottom: '0.5rem', fontWeight: 700 }}>Liquidación Total</div>
                   <div style={{ fontSize: '1.5rem', fontWeight: 800 }}>
-                    {selectedPlan === 'liquidez' ? formatCurrency(investment + (investment * (investment >= 100000000 ? 0.012 : 0.009) * 6)) : formatCurrency(investment + (investment * currentTier.roi * 12))}
+                    {formatCurrency(totalReturn)}
                   </div>
                 </div>
               </div>
 
               {/* BENCHMARK INTEGRADO */}
               <div style={{ borderTop: '1px solid var(--sage-50)', paddingTop: '2rem', flex: 1 }}>
-                <h4 style={{ fontSize: '1rem', color: 'var(--sage-800)', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700 }}>Comparativa Bancaria (12 Meses)</h4>
+                <h4 style={{ fontSize: '1rem', color: 'var(--sage-800)', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700 }}>Comparativa Bancaria ({currentAsset.plazo})</h4>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                   {[
-                    { name: 'CrowdIn', gain: investment * currentTier.roi * 12, highlight: true },
-                    { name: 'Banco Estado (DAP)', gain: investment * 0.0045 * 12 },
-                    { name: 'Banco BICE', gain: investment * 0.0048 * 12 },
-                    { name: 'Banco Santander', gain: investment * 0.0047 * 12 },
-                    { name: 'Itaú Personal Bank', gain: investment * 0.0050 * 12 }
+                    { name: 'CrowdIn', gain: interestEarned, highlight: true },
+                    { name: 'Banco Estado (DAP)', gain: investment * 0.0045 * currentAsset.plazoMeses },
+                    { name: 'Banco BICE', gain: investment * 0.0048 * currentAsset.plazoMeses },
+                    { name: 'Banco Santander', gain: investment * 0.0047 * currentAsset.plazoMeses },
+                    { name: 'Itaú Personal Bank', gain: investment * 0.0050 * currentAsset.plazoMeses }
                   ].map((bank, i) => (
                     <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 0', borderBottom: i === 4 ? 'none' : '1px solid var(--sage-50)' }}>
-                      <span style={{ fontWeight: bank.highlight ? 800 : 500, color: bank.highlight ? (selectedPlan === 'liquidez' ? '#3b82f6' : 'var(--gold-primary)') : 'var(--charcoal-mid)' }}>{bank.name}</span>
+                      <span style={{ fontWeight: bank.highlight ? 800 : 500, color: bank.highlight ? (selectedPlan === 'bullet' ? 'var(--success)' : '#3b82f6') : 'var(--charcoal-mid)' }}>{bank.name}</span>
                       <span style={{ fontWeight: 700, color: bank.highlight ? 'var(--success)' : 'var(--sage-800)' }}>{formatCurrency(bank.gain)}</span>
                     </div>
                   ))}
                 </div>
                 <p style={{ marginTop: '1.5rem', fontSize: '0.75rem', color: 'rgba(0,0,0,0.4)', fontStyle: 'italic', lineHeight: 1.4 }}>
-                  * Valores referenciales proyectados a 12 meses. Información obtenida de los simuladores web oficiales de cada institución al 12/05/2026. La rentabilidad de CrowdIn es fija y garantizada contractualmente.
+                  * Valores referenciales proyectados a {currentAsset.plazo}. Información obtenida de los simuladores web oficiales de cada institución al 12/05/2026. La rentabilidad de CrowdIn es fija y garantizada contractualmente.
                 </p>
               </div>
             </div>
