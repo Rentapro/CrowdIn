@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe de Inversión Privada - CrowdIn SpA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0F172A;
+            --primary-light: #1E293B;
+            --accent: #B45309; /* Oro viejo */
+            --accent-light: #F59E0B;
+            --text-dark: #1E293B;
+            --text-light: #64748B;
+            --bg-light: #F8FAFC;
+            --border-color: #E2E8F0;
+            --gold-border: #D97706;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: #E2E8F0;
+            padding: 40px 20px;
+        }
+
+        .no-print-bar {
+            max-width: 850px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--primary);
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .no-print-bar p {
+            color: #F8FAFC;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        .print-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .print-btn:hover {
+            background-color: #92400E;
+        }
+
+        /* Contenedor del documento A4 */
+        .document-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 70px 85px;
+            border-radius: 4px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        /* Encabezado */
+        .header-logo {
+            text-align: right;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 15px;
+        }
+
+        .header-logo h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .header-logo span {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .confidential-tag {
+            display: inline-block;
+            border: 1px solid #DC2626;
+            color: #DC2626;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            border-radius: 3px;
+        }
+
+        h1.doc-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            line-height: 1.25;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .doc-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            font-weight: 300;
+            border-left: 3px solid var(--accent);
+            padding-left: 15px;
+            text-align: justify;
+        }
+
+        /* Secciones */
+        .doc-section {
+            margin-bottom: 40px;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 18px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title span {
+            color: var(--accent);
+            font-weight: 400;
+            font-size: 1.15rem;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            text-align: justify;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Tablas */
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+
+        .financial-table th {
+            background-color: var(--primary);
+            color: white;
+            text-align: left;
+            padding: 10px 14px;
+            font-weight: 500;
+            border: 1px solid var(--primary);
+        }
+
+        .financial-table td {
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+        }
+
+        .financial-table tr:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+
+        .financial-table tr.total-row {
+            font-weight: 700;
+            background-color: #FEF3C7 !important;
+            border-top: 2px solid var(--accent);
+        }
+
+        .financial-table tr.total-row td {
+            color: var(--primary);
+        }
+
+        /* Cajas de Información */
+        .alert-box {
+            background-color: var(--bg-light);
+            border-left: 4px solid var(--accent);
+            padding: 18px 22px;
+            margin: 20px 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .alert-box.danger-style {
+            border-left-color: #DC2626;
+            background-color: #FEF2F2;
+        }
+
+        .alert-box h4 {
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .alert-box p {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            margin-bottom: 0;
+        }
+
+        .highlight-number {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+            margin-top: 5px;
+        }
+
+        /* Listas */
+        .styled-list {
+            list-style: none;
+            margin: 15px 0 25px 0;
+        }
+
+        .styled-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            text-align: justify;
+        }
+
+        .styled-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        /* Firmas */
+        .signature-section {
+            margin-top: 50px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            page-break-inside: avoid;
+        }
+
+        .signature-block {
+            text-align: center;
+            border-top: 1px solid var(--text-light);
+            padding-top: 15px;
+            margin-top: 30px;
+        }
+
+        .signature-block p.name {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 2px;
+            font-size: 0.9rem;
+        }
+
+        .signature-block p.title {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        .doc-footer {
+            margin-top: 60px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Estilos de Impresión */
+        @media print {
+            @page {
+                margin: 0; /* Elimina automáticamente fecha, hora, título y URL de las cabeceras del navegador */
+            }
+            body {
+                background-color: white;
+                padding: 2cm; /* Agrega margen interno de seguridad física en el papel */
+                color: black;
+            }
+
+            .no-print-bar {
+                display: none !important;
+            }
+
+            .document-container {
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .page-break {
+                display: block;
+                page-break-before: always;
+            }
+
+            p, li {
+                orphans: 3;
+                widows: 3;
+            }
+
+            .financial-table th {
+                background-color: #0F172A !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .financial-table tr.total-row {
+                background-color: #FEF3C7 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de control superior (No imprimible) -->
+    <div class="no-print-bar">
+        <p><strong>Borrador de Propuesta de Inversión</strong> | Protegiendo reservas profesionales y alineado con la web.</p>
+        <button class="print-btn" onclick="window.print()">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="display:inline-block;vertical-align:middle;">
+                <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+                <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
+            </svg>
+            Imprimir / Guardar PDF
+        </button>
+    </div>
+
+    <!-- Contenedor Principal -->
+    <div class="document-container">
+        
+        <!-- CABECERA -->
+        <div class="header-logo">
+            <h2>CROWDIN SpA</h2>
+            <span>Holding de Inversiones de Respaldo Inmobiliario</span>
+        </div>
+
+        <div class="confidential-tag">Propuesta Privada de Inversión</div>
+
+        <h1 class="doc-title">Plan Modular de Inversión y Respaldo Institucional</h1>
+        <div class="doc-subtitle">
+            Estructuración de participación en capital de operaciones reales con blindaje legal escalonado (Pagarés Notariales e Hipotecas en Primer Grado) para inversionistas de perfil patrimonial.
+        </div>
+
+        <!-- SECCIÓN 1: INTRODUCCIÓN Y TRANSPARENCIA -->
+        <div class="doc-section">
+            <h3 class="section-title"><span>I.</span> Perfil del Holding y Seguridad del Capital</h3>
+            <p>
+                Como pilar fundamental de nuestra solidez institucional, CrowdIn SpA opera estrictamente sobre activos reales de alta liquidez. Nuestro enfoque rechaza la especulación en proyectos de construcción "en verde" de largo plazo, concentrando el capital en operaciones inmediatas, blindadas legalmente y con flujos de caja verificables desde el primer mes.
+            </p>
+            <p>
+                Con el fin de proteger de forma absoluta el capital de nuestros aportantes, el holding ha estructurado la colocación de fondos exclusivamente hacia sus <strong>cuatro líneas operativas de mercado real</strong>. Este modelo financiero entrega una rentabilidad superior al mercado tradicional, respaldado por colaterales físicos inmediatos e instrumentos ejecutivos notariales debidamente configurados.
+            </p>
+        </div>
+
+        <!-- SECCIÓN 2: TÉRMINOS Y PLAZOS OFICIALES -->
+        <div class="doc-section">
+            <h3 class="section-title"><span>II.</span> Resumen Técnico de Opciones de Inversión</h3>
+            <p>
+                El holding ofrece la posibilidad de integrarse financieramente a través de un <strong>Contrato de Mutuo de Dinero</strong>, permitiendo a inversionistas particulares ingresar a operaciones institucionales a partir de <strong>$5.000.000 CLP</strong>. La inversión puede ser distribuida de manera modular según la preferencia de liquidez, bajo la siguiente estructura de tasas de mercado:
+            </p>
+
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th>Término del Instrumento</th>
+                        <th>Línea A: Factoring AAA</th>
+                        <th>Línea B: Leaseback Patrimonial</th>
+                        <th>Línea C: Inversión Inmobiliaria</th>
+                        <th>Línea D: Obras y Licitaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Cupo del Proyecto</strong></td>
+                        <td>$500.000.000 CLP</td>
+                        <td>$1.000.000.000 CLP</td>
+                        <td>$500.000.000 CLP</td>
+                        <td>$500.000.000 CLP</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Participación Mínima</strong></td>
+                        <td>$5.000.000 CLP</td>
+                        <td>$5.000.000 CLP</td>
+                        <td>$5.000.000 CLP</td>
+                        <td>$5.000.000 CLP</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Plazo Operativo</strong></td>
+                        <td>12 Meses</td>
+                        <td>18 Meses</td>
+                        <td>18 Meses</td>
+                        <td>12 Meses</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tasa Bullet (Único)</strong></td>
+                        <td><strong>1.25% mes (15.0% Total)</strong></td>
+                        <td><strong>1.50% mes (27.0% Total)</strong></td>
+                        <td><strong>1.66% mes (30.0% Total)</strong></td>
+                        <td><strong>1.55% mes (18.6% Total)</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tasa Renta / Amortizable</strong></td>
+                        <td><strong>1.00% mes (12.0% Total)</strong></td>
+                        <td><strong>1.20% mes (21.6% Total)</strong></td>
+                        <td><strong>1.33% mes (24.0% Total)</strong></td>
+                        <td><strong>1.35% mes (16.2% Total)</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert-box" style="margin-top:20px;">
+                <h4>Flexibilidad y Tramos Modulares</h4>
+                <p><strong>• Ticket Mínimo de Ingreso ($5.000.000 CLP):</strong> Permite diversificar el capital inicial en cualquiera de nuestras líneas (Factoring, Leaseback, Inmobiliaria u Obras).</p>
+                <p><strong>• Escalamiento Patrimonial:</strong> El inversionista puede reinvertir sus retornos o ingresar capital adicional (tramos sucesivos) a medida que comprueba la eficiencia operativa y el cobro puntual de sus intereses mensuales o a término.</p>
+            </div>
+        </div>
+
+        <!-- SALTO DE PÁGINA PARA IMPRESIÓN LIMPIA -->
+        <div class="page-break"></div>
+
+        <!-- SECCIÓN 3: EVALUACIÓN ECONÓMICA DE PROYECTOS -->
+        <div class="doc-section" style="margin-top:20px;">
+            <h3 class="section-title"><span>III.</span> Mapeo del Negocio y Ventaja Competitiva</h3>
+            <p>
+                Los fondos del tramo preferente serán inyectados directamente en el plan de adquisiciones del holding. CrowdIn SpA cuenta con un equipo consultor y contactos estratégicos que garantizan el óptimo uso de los recursos:
+            </p>
+
+            <div class="alert-box">
+                <h4>1. Línea A: Factoring Corporativo AAA</h4>
+                <p>
+                    <strong>Mapeo del Negocio:</strong> Compra con descuento de facturas comerciales aceptadas irrevocablemente con mérito ejecutivo emitidas a multinacionales y corporaciones con clasificación de riesgo AAA (Walmart, Codelco, CMPC). Plazos de liquidación fijos de 90 días por ciclo.
+                </p>
+                <p style="margin-top:8px;">
+                    <strong>Evaluación Financiera:</strong> Las operaciones se estructuran con tasas de descuento fijas a corto plazo, lo que genera una rentabilidad neta anual que respalda el <strong>1.25% mensual (15% total a 12 meses)</strong>. Es ideal para diversificar liquidez de muy corto plazo.
+                </p>
+            </div>
+
+            <div class="alert-box">
+                <h4>2. Línea B: Leaseback Inmobiliario y Patrimonial</h4>
+                <p>
+                    <strong>Mapeo del Negocio:</strong> Financiamiento corporativo estructurado a deudores solventes que requieren liquidez inmediata y que cuentan con un patrimonio inmobiliario saneado. CrowdIn SpA adquiere la propiedad en garantía inscribiéndola de forma oficial en el Conservador de Bienes Raíces (CBR) mediante escritura pública con cláusula de retroventa y opción de compra a 18 meses.
+                </p>
+                <p style="margin-top:8px;">
+                    <strong>Ventaja Competitiva:</strong> Mantenemos una <strong>red de intermediación y originación de operaciones corporativas</strong> con altos estándares de calificación comercial. Esto nos permite filtrar y captar los deudores más estables, estructurando arriendos mensuales que dan plena cobertura al pago mensual del <strong>1.20% de renta mensual</strong> o a la acumulación del <strong>1.50% mensual (27% total)</strong>.
+                </p>
+            </div>
+
+            <div class="alert-box">
+                <h4>3. Línea C: Inversión Inmobiliaria (Flipping y Pequeño Desarrollo)</h4>
+                <p>
+                    <strong>Mapeo del Negocio:</strong> Adquisición de viviendas residenciales a valor de liquidación, remodelación completa utilizando nuestro equipo constructor para optimizar costos de obra, y reventa rápida en el mercado formal.
+                </p>
+                <p style="margin-top:8px;">
+                    <strong>Ventaja Competitiva:</strong> <strong>Aplicamos un riguroso proceso de debida diligencia legal y comercial, monitoreando y analizando el mercado de manera constante</strong> para la adquisición de facturas corporativas y propiedades bajo necesidad de liquidez inmediata o carteras de liquidación judicial. Esto nos permite capturar excelentes oportunidades bajo estrictos estándares de mitigación de riesgo, adquiriendo activos clave con descuentos sustanciales sobre su tasación comercial real, acelerando los tiempos de rotación y asegurando las tasas del <strong>1.66% mensual</strong> (Bullet) o <strong>1.33% mensual</strong> (Mensual).
+                </p>
+            </div>
+
+            <div class="alert-box">
+                <h4>4. Línea D: Liquidez Operativa y Financiamiento Puente para Contratos de Obra (Project Bridge)</h4>
+                <p>
+                    <strong>Mapeo del Negocio:</strong> Suministro de capital de trabajo y soporte logístico a constructoras con licitaciones de obra civil y edificación ya adjudicadas (públicas/privadas) que requieran liquidez para la fase de instalación de faenas y primeras compras de materiales.
+                </p>
+                <p style="margin-top:8px;">
+                    <strong>Ventaja Competitiva y Respaldo:</strong> Actuamos como co-gestor financiero y supervisor técnico (ITO) de la obra. La operación está respaldada por un Seguro de Caución de Fiel Cumplimiento de compañía aseguradora calificada de primer nivel y la Cesión Notarial e Irrevocable de los Derechos de Cobro sobre los Estados de Pago. Esto significa que los flujos de dinero provenientes del mandante (SERVIU, MOP, etc.) ingresan directamente a la cuenta controlada de CrowdIn SpA antes de ser distribuidos, asegurando el repago de los intereses del inversionista con tasas preferenciales del <strong>1.55% mensual</strong> (Bullet) o <strong>1.35% mensual</strong> (Amortizable) sobre saldos.
+                </p>
+            </div>
+        </div>
+
+        <!-- SALTO DE PÁGINA PARA IMPRESIÓN LIMPIA -->
+        <div class="page-break"></div>
+
+        <!-- SECCIÓN 4: ORIGEN DE LOS FONDOS DE REPAGO -->
+        <div class="doc-section" style="margin-top:20px;">
+            <h3 class="section-title"><span>IV.</span> Origen Técnico de los Fondos de Repago y Destino del Capital</h3>
+            <p>
+                El capital del mutuo ingresado a la SpA es de <strong>libre disposición operativa</strong>, permitiendo al holding ejecutar con agilidad su plan de expansión patrimonial de acuerdo a la liberación programática de los tramos. El repago del inversionista está estructurado mediante un calce de flujos reales:
+            </p>
+            
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th>Origen del Repago</th>
+                        <th>Modalidad: Renta / Amortizable</th>
+                        <th>Modalidad: Bullet (Único al Cierre)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Intereses Mensuales</strong></td>
+                        <td>
+                            Proviene del <strong>flujo de caja constante mensual</strong> cobrado por concepto de canon de arriendo en Leaseback, retornos de Factoring AAA, e intereses recurrentes del financiamiento puente de obras adjudicadas (Línea D).
+                        </td>
+                        <td>
+                            Se acumulan y capitalizan mensualmente, manteniéndose en la cuenta del holding SpA para su liquidación al vencimiento contratado.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Capital Original</strong></td>
+                        <td>
+                            Proviene de la <strong>recaudación por retrocompra</strong> obligatoria en Leaseback, retornos de Factoring, y la <strong>amortización programada secuencial</strong> según la recaudación directa de los Estados de Pago de la obra (Línea D).
+                        </td>
+                        <td>
+                            Proviene de la recaudación consolidada al término de los plazos de colocación (retrocompra de propiedades y liquidación final del contrato de obra).
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p style="margin-top: 15px;">
+                <strong>Soporte Operativo de Liquidez del Holding:</strong> Parte del capital de libre disposición se asignará estratégicamente al desarrollo de activos comerciales recurrentes (como la adquisición de un minimarket preseleccionado con alta rotación y la construcción de cabañas en terrenos propios). Estos activos complementarios fortalecen el balance de CrowdIn SpA y aseguran una caja líquida constante que soporta todos los gastos operativos del holding.
+            </p>
+        </div>
+
+        <!-- SECCIÓN 5: ESQUEMA DE GARANTÍAS ESCALONADAS -->
+        <div class="doc-section">
+            <h3 class="section-title"><span>V.</span> Esquema de Garantías y Blindaje Patrimonial</h3>
+            <p>
+                CrowdIn SpA no levanta capital ofreciendo acciones que diluyan el control societario. Operamos mediante <strong>Mutuos de Dinero respaldados</strong>, lo que nos permite ofrecerle al inversionista una cobertura sólida, directa e inamovible para su capital invertido, estructurada según el tamaño de su participación:
+            </p>
+            <ul class="styled-list">
+                <li>
+                    <strong>Inversiones entre $5.000.000 y $50.000.000 (Pagaré Notarial y Mutuo):</strong> El capital se respalda mediante un Mutuo de Dinero Notarial y la emisión de un Pagaré a la Vista suscrito por la sociedad y avalado personal y solidariamente por su representante legal, otorgando mérito ejecutivo inmediato para el cobro legal en caso de ser necesario.
+                </li>
+                <li>
+                    <strong>Inversiones sobre $50.000.000 (Garantía Hipotecaria):</strong> Para tramos mayores, además del Mutuo y Pagaré, la sociedad inscribe formalmente una <strong>Hipoteca de Primer Grado</strong> sobre propiedades inmobiliarias saneadas del holding a favor del inversionista en el Conservador de Bienes Raíces (CBR), brindando cobertura total y real sobre el dinero aportado.
+                </li>
+                <li>
+                    <strong>Blindaje Tripartito (Obras Licitadas):</strong> Toda inversión dirigida a la Línea D cuenta adicionalmente con (1) Cesión Notarial Irrevocable de Derechos de Cobro de los Estados de Pago del Mandante directo a las cuentas de CrowdIn, y (2) Póliza de Seguro de Fiel Cumplimiento emitida por aseguradora, aislando el capital de cualquier riesgo constructivo directo.
+                </li>
+            </ul>
+        </div>
+
+        <!-- SECCIÓN 6: SOCIOS Y DIRECTORIO -->
+        <div class="doc-section">
+            <h3 class="section-title"><span>VI.</span> Gobernanza y Asesoría Directiva</h3>
+            <p>
+                CrowdIn SpA opera bajo una estructura de administración centralizada y transparente, liderada directamente por su socio fundador y asistida de manera externa por un staff de consultores calificados de amplia trayectoria:
+            </p>
+            <ul class="styled-list">
+                <li>
+                    <strong>Dirección General y Liderazgo (Socio Fundador):</strong> A cargo directo de la conducción ejecutiva, planificación y adjudicación de las operaciones comerciales, aportando la experiencia técnica en terreno de obras y licitaciones activas.
+                </li>
+                <li>
+                    <strong>Staff Jurídico y Corporativo (Consultores Externos):</strong> Abogados y contadores de alto perfil especializados en la estructuración de contratos de mutuo, estudios de títulos en el Conservador de Bienes Raíces y cumplimiento de gobernanza tributaria.
+                </li>
+                <li>
+                    <strong>Comité de Inversiones y Auditoría (Asesores Externos):</strong> Panel de profesionales independientes encargados de auditar y validar técnica y financieramente cada adquisición de activos o adjudicación de financiamiento antes de la liberación de los fondos.
+                </li>
+            </ul>
+        </div>
+
+        <!-- SECCIÓN 7: PRÓXIMOS PASOS -->
+        <div class="doc-section">
+            <h3 class="section-title"><span>VII.</span> Próximos Pasos y Mesa de Trabajo</h3>
+            <p>
+                Entendiendo la naturaleza sofisticada de esta colocación, proponemos coordinar una <strong>reunión personal en su oficina, domicilio o lugar a convenir</strong> con el fin de establecer una mesa de trabajo técnica. El objetivo de esta sesión es estructurar a la medida los siguientes parámetros de mutuo acuerdo:
+            </p>
+            <ul class="styled-list">
+                <li>
+                    <strong>Distribución de Capital (Asset Allocation):</strong> Definir el porcentaje del fondo a asignar en cada línea de negocio (Factoring, Leaseback, Obras) según sus preferencias específicas de liquidez y rentabilidad.
+                </li>
+                <li>
+                    <strong>Estructuración de Garantías y LTV:</strong> Acordar los límites de Loan-to-Value (LTV) para las colocaciones inmobiliarias y validar los esquemas de garantías líquidas (pólizas de caución y cesiones notarias de contratos) para las líneas operativas financieras.
+                </li>
+            </ul>
+
+
+        </div>
+
+        <!-- FOOTER -->
+        <div class="doc-footer">
+            <span>Propuesta Técnico-Financiera 2026</span>
+            <span>Estrictamente Confidencial</span>
+            <span>CrowdIn SpA</span>
+        </div>
+
+    </div>
+
+</body>
+</html>
